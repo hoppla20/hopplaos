@@ -8,20 +8,25 @@
         // {flake-utils-plus = inputs.flake-utils-plus.lib;}
         // {digga = inputs.digga.lib;};
     };
+
+    inherit
+      (inputs.flake-parts.lib)
+      mkFlake
+      ;
   in
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+    mkFlake {inherit inputs;} {
       imports = [
         inputs.devshell.flakeModule
+        ./pkgs
+        ./nixos
+        ./home
       ];
-
-      debug = true;
 
       systems = ["x86_64-linux"];
 
-      flake = {
-        lib = lib;
-        nixosModules = lib.exportModulesRecursive ./modules;
-      };
+      debug = true;
+
+      flake.lib = lib;
 
       perSystem = {
         config,
@@ -34,6 +39,7 @@
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
 
+          imports = [(inputs.digga.lib.importOverlays ./overlays)];
           config = {
             allowUnfree = true;
           };
@@ -43,9 +49,6 @@
                 hopplaos = lib;
               });
             })
-            (final: prev: {
-              nix-direnv = prev.nix-direnv.override {enableFlakes = true;};
-            })
           ];
         };
 
@@ -54,6 +57,8 @@
           packages = [
             pkgs.alejandra
             pkgs.git
+            pkgs.nixos-generators
+            self'.packages.repl
           ];
         };
 
@@ -76,16 +81,14 @@
       inputs.flake-utils.follows = "flake-utils";
     };
 
-    haumea = {
-      url = "github:nix-community/haumea/v0.2.2";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     digga = {
       url = "github:divnix/digga/v0.11.0";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.latest.follows = "unstable";
     };
+
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+    nixos-generators.url = "github:nix-community/nixos-generators";
 
     devshell = {
       url = "github:numtide/devshell";

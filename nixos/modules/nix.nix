@@ -2,9 +2,11 @@
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }: {
   nix = {
+    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
     settings = {
       sandbox = true;
       auto-optimise-store = true;

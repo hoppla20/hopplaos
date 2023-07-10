@@ -10,6 +10,13 @@ nix develop
 direnv allow
 ```
 
+## Build Test VM
+
+```bash
+nix build .#nixosConfigurations.$HOSTNAME.config.formats.vm-bootloader
+./result/bin/run-nixos-vm
+```
+
 ## Builds Upon
 
 ### Flake Parts

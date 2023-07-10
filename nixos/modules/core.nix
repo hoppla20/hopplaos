@@ -13,14 +13,20 @@
   };
 
   console = {
-    keyMap = "us";
+    keyMap = lib.mkDefault "us";
     useXkbConfig = true;
+  };
+
+  services.xserver = {
+    layout = "us";
+    xkbVariant = "altgr-intl";
+    xkbOptions = "caps:escape";
   };
 
   time.timeZone = lib.mkDefault "Europe/Berlin";
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    supportedLocale = ["de_DE.UTF-8/UTF-8"];
+    supportedLocales = ["de_DE.UTF-8/UTF-8"];
   };
 
   hardware.opengl = {
