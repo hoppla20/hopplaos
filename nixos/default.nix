@@ -19,7 +19,7 @@ in {
           inherit system;
           specialArgs = {
             inherit inputs inputs';
-            homeUsers = self.homeConfigurations;
+            homeUsers = self.homeManagerConfigurations;
           };
           modules =
             builtins.attrValues nixosModules

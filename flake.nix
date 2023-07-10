@@ -15,6 +15,8 @@
       ;
   in
     mkFlake {inherit inputs;} {
+      debug = true;
+
       imports = [
         inputs.devshell.flakeModule
         ./pkgs
@@ -23,8 +25,6 @@
       ];
 
       systems = ["x86_64-linux"];
-
-      debug = true;
 
       flake.lib = lib;
 

@@ -50,7 +50,7 @@
       host = builtins.attrNames hosts;
     });
 in {
-  flake.homeConfigurations = withSystem "x86_64-linux" ({
+  flake.homeManagerConfigurations = withSystem "x86_64-linux" ({
     pkgs,
     inputs',
     self',
