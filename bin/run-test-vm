@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+
+set -o nounset
+set -o errexit
+set -o pipefail
+
+POS_ARGS=()
+CLEAR_TMP=1
+INSTALL_ONLY=0
+
+usage() {
+  cat <<-EOF
+Usage: run-test-vm [-h] [-i] [-n] [configuration].
+
+Flags:
+  -h : Show this usage.
+  -i : Only run \`virt-install\`
+  -n : Do not destroy previous disk.
+
+Arguments:
+  configuration : Name of the nixosConfiguration defined in \`flake.nix\`.
+EOF
+}
+
+parse_args() {
+  while [ "$OPTIND" -le "$#" ]; do
+    if getopts "hni" flag; then
+      case "$flag" in
+        n) CLEAR_TMP=0;;
+        i) INSTALL_ONLY=1;;
+        h | *) usage && exit 0;;
+      esac
+    else
+      POS_ARGS+=("${!OPTIND}")
+      ((OPTIND++))
+    fi
+  done
+
+  if [ "${#POS_ARGS[@]}" -ne 1 ]; then
+    echo "ERROR: Exactly one positional argument is expected. Got ${#POS_ARGS[@]}."
+    exit 1
+  fi
+}
+
+main() {
+  parse_args "$@"
+
+  VM_NAME=${POS_ARGS[0]}
+  VM_DIR="$PROJ_ROOT/.tmp/vms/$VM_NAME"
+
+  if [ "$INSTALL_ONLY" -eq 0 ]; then
+    virsh -c qemu:///system destroy "$VM_NAME" 2>/dev/null || true
+    virsh -c qemu:///system undefine --nvram "$VM_NAME" 2>/dev/null || true
+    if [ ! "$CLEAR_TMP" -eq 0 ]; then
+      rm -rf "$VM_DIR"
+    fi
+    mkdir -p "$VM_DIR"
+
+    nix build \
+      -o "$PROJ_ROOT/result"  \
+      "$PROJ_ROOT#nixosConfigurations.$VM_NAME.config.formats.qcow"
+    cp "$PROJ_ROOT/result/"* "$VM_DIR"
+  fi
+
+  virt-install --connect qemu:///system \
+    --name "$VM_NAME" \
+    --boot "loader=/run/libvirt/nix-ovmf/OVMF_CODE.fd,loader.readonly=yes,loader.type=pflash,nvram=$VM_DIR/efi-vars.fd,nvram.template=/run/libvirt/nix-ovmf/OVMF_VARS.fd,loader_secure=no" \
+    --machine "pc-i440fx-8.0" \
+    --features "vmport.state=off" \
+    --memory "4096" \
+    --cpu "host" \
+    --vcpus "4" \
+    --network "network=default,model.type=virtio" \
+    --osinfo "nixos-unknown" \
+    --disk "$VM_DIR/nixos.qcow2,device=disk,bus=virtio" \
+    --graphics "spice,listen=none,image.compression=off,gl.enable=true" \
+    --video "virtio,model.acceleration.accel3d=yes" \
+    --input "tablet,bus=usb" \
+    --input "mouse,bus=ps2" \
+    --input "keyboard,bus=ps2" \
+    --import
+}
+
+main "$@"

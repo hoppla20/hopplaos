@@ -2,31 +2,38 @@
   pkgs,
   config,
   lib,
+  modulesPath,
   ...
 }: let
   cfg = config.hopplaos.generators.test-vm;
 
   inherit
     (lib)
-    mkEnableOption
+    types
+    mkOption
+    mkForce
     ;
 in {
   options = {
     hopplaos.generators.test-vm = {
-      headlessMode = mkEnableOption "Test VM - headless mode";
-      useEfiBoot = mkEnableOption "Test VM - efi boot" // {default = true;};
+      diskSize = mkOption {
+        type = types.int;
+        default = 10240;
+      };
     };
   };
 
   config = {
-    formatConfigs.vm-bootloader = {config, ...}: {
-      virtualisation = {
-        cores = 2;
-        memorySize = 2048;
-        diskSize = 10240;
-        graphics = ! cfg.headlessMode;
-        useEFIBoot = cfg.useEfiBoot;
-      };
+    formatConfigs.qcow = {config, ...}: {
+      system.build.qcow = mkForce (import "${toString modulesPath}/../lib/make-disk-image.nix" {
+        inherit lib config pkgs;
+        diskSize = cfg.diskSize;
+        format = "qcow2";
+        partitionTableType = "efi";
+        touchEFIVars = true;
+        #postVM = '''';
+      });
+      services.qemuGuest.enable = true;
     };
   };
 }

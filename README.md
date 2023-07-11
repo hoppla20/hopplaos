@@ -10,11 +10,10 @@ nix develop
 direnv allow
 ```
 
-## Build Test VM
+## Build and run test VM for nixosConfiguration
 
 ```bash
-nix build .#nixosConfigurations.$HOSTNAME.config.formats.vm-bootloader
-./result/bin/run-nixos-vm
+run-test-vm $CONFIGURATION_NAME
 ```
 
 ## Builds Upon

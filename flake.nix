@@ -17,12 +17,14 @@
     mkFlake {inherit inputs;} {
       debug = true;
 
-      imports = [
-        inputs.devshell.flakeModule
-        ./pkgs
-        ./nixos
-        ./home
-      ];
+      imports =
+        [
+          inputs.devshell.flakeModule
+          ./pkgs
+          ./nixos
+          ./home
+        ]
+        ++ builtins.attrValues (lib.exportModulesRecursive ./overlays);
 
       systems = ["x86_64-linux"];
 
@@ -36,20 +38,26 @@
         system,
         ...
       }: {
-        _module.args.pkgs = import inputs.nixpkgs {
+        imports = [
+          {_module.args.pkgs = config.legacyPackages;}
+        ];
+
+        legacyPackages = import inputs.nixpkgs {
           inherit system;
 
-          imports = [(inputs.digga.lib.importOverlays ./overlays)];
           config = {
             allowUnfree = true;
           };
-          overlays = [
-            (final: prev: {
-              lib = prev.lib.extend (final: prev: {
-                hopplaos = lib;
-              });
-            })
-          ];
+
+          overlays =
+            [
+              (final: prev: {
+                lib = prev.lib.extend (final: prev: {
+                  hopplaos = lib;
+                });
+              })
+            ]
+            ++ builtins.attrValues inputs.self.overlays;
         };
 
         devshells.default = {

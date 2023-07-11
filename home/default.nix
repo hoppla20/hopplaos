@@ -19,10 +19,6 @@
     (inputs.flake-utils-plus.lib.internal)
     genAttrs'
     ;
-  inherit
-    (inputs.home-manager.lib)
-    homeManagerConfiguration
-    ;
 
   homeModules = exportModulesRecursive ./modules;
   extraModules = [
@@ -50,12 +46,16 @@
       host = builtins.attrNames hosts;
     });
 in {
-  flake.homeManagerConfigurations = withSystem "x86_64-linux" ({
-    pkgs,
-    inputs',
-    self',
-    system,
-    ...
-  }:
-    homeConfigs);
+  flake = {
+    homeConfigurations = withSystem "x86_64-linux" ({
+      pkgs,
+      inputs',
+      self',
+      system,
+      ...
+    }:
+      homeConfigs);
+
+    homeModules = homeModules;
+  };
 }

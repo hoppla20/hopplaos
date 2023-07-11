@@ -18,16 +18,17 @@ in {
         inputs.nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit inputs inputs';
-            homeUsers = self.homeManagerConfigurations;
+            inherit inputs inputs' self';
+            homeUsers = self.homeConfigurations;
           };
           modules =
             builtins.attrValues nixosModules
             ++ [
+              {networking.hostName = name;}
               inputs.nixos-generators.nixosModules.all-formats
               inputs.home-manager.nixosModules.default
+              inputs.hyprland.nixosModules.default
               dir
-              {networking.hostName = name;}
             ];
         };
     in

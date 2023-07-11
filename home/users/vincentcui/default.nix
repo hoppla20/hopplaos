@@ -15,5 +15,14 @@
       };
       zsh.enable = true;
     };
+
+    desktop = {
+      enable = true;
+      music.enable = true;
+      wayland = {
+        sway.enable = true;
+        hyprland.enable = true;
+      };
+    };
   };
 }
