@@ -10,7 +10,6 @@
             file = "~/.config/wallpapers/wallpaper.jpg";
             mode = "fill";
           };
-          transform = "90";
         };
       }
     ];

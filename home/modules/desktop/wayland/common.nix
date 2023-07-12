@@ -28,6 +28,10 @@
       (readDir ./.));
 in {
   config = mkIf (isNull (findFirst (wm: (cfg wm).enable) null wms)) {
+    xdg.portal = {
+      xdgOpenUsePortal = true;
+    };
+
     home.packages =
       (attrValues {
         inherit

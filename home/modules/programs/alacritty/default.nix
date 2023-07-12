@@ -29,20 +29,36 @@ in {
       enable = true;
 
       settings = {
+        env = {
+          WINIT_X11_SCALE_FACTOR = "1";
+        };
+
         window.padding = {
           x = 10;
           y = 10;
         };
 
-        font = {
+        scrolling.history = 50000;
+
+        font = let
+          family = "JetBrainsMono Nerd Font";
+        in {
           size = 10;
           normal = {
-            family = "FiraCode Nerd Font Mono";
+            family = family;
             style = "Regular";
           };
           bold = {
-            family = "FiraCode Nerd Font Mono";
+            family = family;
             style = "Bold";
+          };
+          italic = {
+            family = family;
+            style = "Italic";
+          };
+          bold_italic = {
+            family = family;
+            style = "Bold Italic";
           };
         };
 
@@ -111,9 +127,6 @@ in {
             cyan = "0x59dffc";
             white = "0xe6e6d1";
           };
-        };
-        env = {
-          WINIT_X11_SCALE_FACTOR = "1";
         };
       };
     };

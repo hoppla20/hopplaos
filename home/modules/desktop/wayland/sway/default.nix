@@ -68,12 +68,13 @@ in {
         modifier = "Mod4";
 
         fonts = {
-          names = ["FiraCode Nerd Font Mono"];
+          names = ["FiraCode Nerd Font"];
           style = "Regular";
           size = 12.0;
         };
 
         window = {
+          titlebar = false;
           border = 2;
         };
 

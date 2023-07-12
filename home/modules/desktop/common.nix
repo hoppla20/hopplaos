@@ -14,13 +14,6 @@
     mkIf
     ;
 in {
-  imports = [
-    ./music
-    ./wayland/hyprland
-    ./wayland/sway
-    ./wayland/common.nix
-  ];
-
   options = {
     hopplaos.desktop = {
       enable = mkEnableOption "HopplaOS Desktop";
@@ -55,6 +48,21 @@ in {
         brave
         ;
     };
+
+    fonts.fontconfig.enable = true;
+    gtk = {
+      enable = true;
+      theme = {
+        name = "Orchis-Purple-Dark";
+        package = pkgs.orchis-theme;
+      };
+      iconTheme = {
+        name = "Papirus-Dark";
+        package = pkgs.papirus-icon-theme;
+      };
+    };
+
+    services.gnome-keyring.enable = true;
 
     xdg.configFile = {
       "wallpapers/wallpaper.jpg".source = ./wallpaper.jpg;
