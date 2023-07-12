@@ -6,10 +6,7 @@
 }: {
   fonts = {
     fonts = [
-      (pkgs.nerdfonts.override
-        {
-          fonts = ["FiraCode" "JetBrainsMono" "Iosevka"];
-        })
+      pkgs.custom-nerdfonts
     ];
   };
 }

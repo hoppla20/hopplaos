@@ -11,6 +11,9 @@
     ;
   inherit
     (desktopCfg)
+    polkitAgent
+    systemCommands
+    appLauncherCommand
     terminalCommand
     browserCommand
     editorCommand
@@ -22,24 +25,6 @@
   hardwareCfg = config.hopplaos.hardware;
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.wayland.sway;
-
-  rofi = "${pkgs.rofi}/bin/rofi";
-
-  schema = pkgs.gsettings-desktop-schemas;
-  datadir = "${schema}/share/gsettings-schemas/${schema.name}";
-
-  configure-gtk = pkgs.writeTextFile {
-    name = "configure-gtk";
-    destination = "/bin/configure-gtk";
-    executable = true;
-
-    text = ''
-      export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
-      gnome_schema=org.gnome.desktop.interface
-      gsettings set $gnome_schema gtk-theme 'Orchis-Purple-Dark'
-      gsettings set $gnome_schema icon-theme 'Papirus-Dark'
-    '';
-  };
 
   system-control-mode = "(e)xit_(l)ock_(s)uspend_(h)ibernate_(S)hutdown_(r)eboot";
 in {
@@ -58,10 +43,6 @@ in {
       # use system package
       package = null;
       systemdIntegration = true;
-
-      extraSessionCommands = ''
-        configure-gtk
-      '';
 
       config = {
         modifier = "Mod4";
@@ -130,9 +111,6 @@ in {
           outer = 2;
         };
 
-        terminal = terminalCommand;
-        menu = "${pkgs.rofi} -show drun";
-
         modes = {
           resize = {
             Escape = "mode \"default\"";
@@ -145,11 +123,11 @@ in {
           "${system-control-mode}" = {
             Escape = "mode \"default\"";
             e = "exit, mode \"default\"";
-            l = "exec ${pkgs.systemd}/bin/loginctl lock-session, mode \"default\"";
-            s = "exec systemctl suspend, mode \"default\"";
-            h = "exec systemctl hibernate, mode \"default\"";
-            r = "exec reboot, mode \"default\"";
-            "Shift+s" = "exec poweroff, mode \"default\"";
+            l = "exec ${systemCommands.lock}, mode \"default\"";
+            s = "exec ${systemCommands.suspend}, mode \"default\"";
+            h = "exec ${systemCommands.hibernate}, mode \"default\"";
+            r = "exec ${systemCommands.reboot}, mode \"default\"";
+            "Shift+s" = "exec ${systemCommands.poweroff}, mode \"default\"";
           };
         };
 
@@ -160,7 +138,7 @@ in {
           "Mod4+F3" = "exec ${fileManagerCommand}";
           "Mod4+Return" = "exec ${terminalCommand}";
           "Mod4+Shift+m" = "exec ${audio.managerCommand}";
-          "Mod4+w" = "exec ${rofi} -show drun";
+          "Mod4+w" = "exec ${appLauncherCommand}";
 
           "Mod1+Tab" = "workspace next";
           "Mod1+Shift+Tab" = "workspace prev";
@@ -293,7 +271,10 @@ in {
 
         startup = [
           {
-            command = "/run/current-system/sw/libexec/polkit-gnome-authentication-agent-1";
+            command = polkitAgent;
+          }
+          {
+            command = "wl-configure-gtk";
           }
         ];
 
@@ -349,18 +330,9 @@ in {
       '';
     };
 
-    home.packages =
-      (builtins.attrValues {
-        inherit
-          (pkgs)
-          playerctl
-          wdisplays
-          ;
-      })
-      ++ [
-        configure-gtk
-        (pkgs.writeShellScriptBin "sway-focused-window-geometry" "swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | \"\\(.x),\\(.y) \\(.width)x\\(.height)\"'")
-        (pkgs.writeShellScriptBin "screenshot-window" "mkdir -p ~/Pictures/Screenshots && grim -g \"$(sway-focused-window-geometry)\" ~/Pictures/Screenshots/$(date -u +\"%Y-%m-%d_%H-%M-%S_grim.png\")")
-      ];
+    home.packages = [
+      (pkgs.writeShellScriptBin "sway-focused-window-geometry" "swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | \"\\(.x),\\(.y) \\(.width)x\\(.height)\"'")
+      (pkgs.writeShellScriptBin "screenshot-window" "mkdir -p ~/Pictures/Screenshots && grim -g \"$(sway-focused-window-geometry)\" ~/Pictures/Screenshots/$(date -u +\"%Y-%m-%d_%H-%M-%S_grim.png\")")
+    ];
   };
 }

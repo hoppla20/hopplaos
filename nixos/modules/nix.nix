@@ -3,6 +3,7 @@
   config,
   lib,
   inputs,
+  self,
   ...
 }: {
   nix = {
@@ -24,5 +25,8 @@
     '';
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = builtins.attrValues self.overlays;
+  };
 }

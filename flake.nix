@@ -40,20 +40,6 @@
         system,
         ...
       }: {
-        imports = [
-          {_module.args.pkgs = config.legacyPackages;}
-        ];
-
-        legacyPackages = import inputs.nixpkgs {
-          inherit system;
-
-          config = {
-            allowUnfree = true;
-          };
-
-          overlays = builtins.attrValues inputs.self.overlays;
-        };
-
         devshells.default = {
           name = "hopplaos";
           packages = [

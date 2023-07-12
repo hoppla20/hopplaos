@@ -25,6 +25,8 @@ in {
   };
 
   config = mkIf (desktopCfg.enable && cfg.enable) {
+    hopplaos.desktop.appLauncherCommand = "${config.programs.rofi.package}/bin/rofi -show drun";
+
     programs.rofi = {
       enable = true;
       package =
