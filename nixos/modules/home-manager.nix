@@ -3,14 +3,13 @@
   config,
   lib,
   inputs,
-  inputs',
-  self',
+  self,
   ...
 }: {
   home-manager = {
     useGlobalPkgs = true;
     extraSpecialArgs = {
-      inherit inputs inputs' self';
+      inherit inputs self;
     };
   };
 }

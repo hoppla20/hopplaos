@@ -18,7 +18,7 @@ in {
         inputs.nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit inputs inputs' self';
+            inherit inputs inputs' self self';
             homeUsers = self.homeConfigurations;
           };
           modules =

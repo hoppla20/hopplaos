@@ -11,16 +11,17 @@
     mkMerge
     ;
 
-  cfg = config.hopplaos.desktop.hyprland;
+  desktopCfg = config.hopplaos.desktop;
+  cfg = desktopCfg.wayland.hyprland;
 in {
   options = {
-    hopplaos.desktop.hyprland = {
+    hopplaos.desktop.wayland.hyprland = {
       enable = mkEnableOption "HopplaOS Wayland";
       nvidia = mkEnableOption "Wayland - Nvidia patches";
     };
   };
 
-  config = mkIf (config.hopplaos.desktop.enable && cfg.enable) {
+  config = mkIf (desktopCfg.enable && cfg.enable) {
     programs.hyprland = {
       enable = true;
       nvidiaPatches = cfg.nvidia;

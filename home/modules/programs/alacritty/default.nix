@@ -8,6 +8,7 @@
     (lib)
     mkEnableOption
     mkIf
+    mkMerge
     ;
 
   cfg = config.hopplaos.programs.alacritty;

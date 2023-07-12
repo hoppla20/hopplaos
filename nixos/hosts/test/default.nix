@@ -2,8 +2,6 @@
   pkgs,
   config,
   lib,
-  inputs,
-  inputs',
   ...
 }: {
   imports = [
@@ -16,8 +14,10 @@
     desktop = {
       enable = true;
       thunar.enable = true;
-      hyprland.enable = true;
-      sway.enable = true;
+      wayland = {
+        hyprland.enable = true;
+        sway.enable = true;
+      };
     };
   };
 }

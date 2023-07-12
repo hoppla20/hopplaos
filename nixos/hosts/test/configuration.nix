@@ -2,8 +2,6 @@
   pkgs,
   config,
   lib,
-  inputs,
-  inputs',
   ...
 }: {
   boot = {

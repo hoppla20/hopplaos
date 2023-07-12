@@ -2,6 +2,7 @@
   pkgs,
   config,
   lib,
+  self,
   ...
 }: let
   inherit
@@ -11,27 +12,35 @@
     attrNames
     attrValues
     isNull
+    any
     ;
   inherit
     (lib)
     mkIf
+    mkEnableOption
     filterAttrs
     findFirst
     ;
+  inherit
+    (self.lib)
+    listDirectoryModules
+    ;
 
-  cfg = wm: config.hopplaos.desktop.wayland.${wm};
+  desktopCfg = config.hopplaos.desktop;
+  cfg = desktopCfg.wayland;
 
-  wms =
-    attrNames
-    (filterAttrs
-      (name: type: type == "directory" && pathExists (./. + "/${name}/default.nix"))
-      (readDir ./.));
+  wms = attrNames (listDirectoryModules ./windowManagers);
 in {
-  config = mkIf (isNull (findFirst (wm: (cfg wm).enable) null wms)) {
-    xdg.portal = {
-      xdgOpenUsePortal = true;
-    };
+  options = {
+    hopplaos.desktop.wayland.enable =
+      mkEnableOption "Wayland"
+      // {
+        readOnly = true;
+        default = any (wm: cfg.${wm}.enable) wms;
+      };
+  };
 
+  config = mkIf (desktopCfg.enable && cfg.enable) {
     home.packages =
       (attrValues {
         inherit

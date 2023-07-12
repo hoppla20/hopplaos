@@ -47,15 +47,7 @@
     });
 in {
   flake = {
-    homeConfigurations = withSystem "x86_64-linux" ({
-      pkgs,
-      inputs',
-      self',
-      system,
-      ...
-    }:
-      homeConfigs);
-
     homeModules = homeModules;
+    homeConfigurations = homeConfigs;
   };
 }

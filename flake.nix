@@ -1,18 +1,20 @@
 {
   description = "HopplaOS";
 
-  outputs = inputs: let
-    lib = import ./lib {
-      lib =
-        inputs.nixpkgs.lib
-        // {flake-utils-plus = inputs.flake-utils-plus.lib;}
-        // {digga = inputs.digga.lib;};
-    };
-
+  outputs = inputs @ {self, ...}: let
     inherit
       (inputs.flake-parts.lib)
       mkFlake
       ;
+
+    lib = import ./lib {
+      lib =
+        inputs.nixpkgs.lib
+        // {
+          flake-utils-plus = inputs.flake-utils-plus.lib;
+          digga = inputs.digga.lib;
+        };
+    };
   in
     mkFlake {inherit inputs;} {
       debug = true;
@@ -49,15 +51,7 @@
             allowUnfree = true;
           };
 
-          overlays =
-            [
-              (final: prev: {
-                lib = prev.lib.extend (final: prev: {
-                  hopplaos = lib;
-                });
-              })
-            ]
-            ++ builtins.attrValues inputs.self.overlays;
+          overlays = builtins.attrValues inputs.self.overlays;
         };
 
         devshells.default = {

@@ -11,11 +11,12 @@
     (lib)
     types
     mkOption
-    mkForce
+    mkEnableOption
     ;
 in {
   options = {
     hopplaos.generators.test-vm = {
+      headless = mkEnableOption "Test VM headless";
       diskSize = mkOption {
         type = types.int;
         default = 10240;
@@ -24,16 +25,26 @@ in {
   };
 
   config = {
-    formatConfigs.qcow = {config, ...}: {
-      system.build.qcow = mkForce (import "${toString modulesPath}/../lib/make-disk-image.nix" {
-        inherit lib config pkgs;
+    formatConfigs.vm-bootloader = {config, ...}: {
+      virtualisation = {
+        cores = 4;
+        memorySize = 4096;
         diskSize = cfg.diskSize;
-        format = "qcow2";
-        partitionTableType = "efi";
-        touchEFIVars = true;
-        #postVM = '''';
-      });
-      services.qemuGuest.enable = true;
+        useEFIBoot = true;
+        graphics = ! cfg.headless;
+        resolution = {
+          x = 1280;
+          y = 800;
+        };
+        qemu = {
+          guestAgent.enable = true;
+          options = [
+            # 3d acceleration
+            "-device virtio-vga-gl"
+            "-display gtk,gl=on"
+          ];
+        };
+      };
     };
   };
 }

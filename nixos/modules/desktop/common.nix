@@ -13,11 +13,6 @@
 
   cfg = config.hopplaos.desktop;
 in {
-  imports = [
-    ./wayland/hyprland.nix
-    ./wayland/sway.nix
-  ];
-
   options = {
     hopplaos.desktop = {
       enable = mkEnableOption "HopplaOS Desktop";
@@ -49,6 +44,9 @@ in {
           libinput.enable = true;
           displayManager.gdm.enable = true;
         };
+      };
+      xdg.portal = {
+        xdgOpenUsePortal = true;
       };
     }
     (mkIf cfg.thunar.enable {

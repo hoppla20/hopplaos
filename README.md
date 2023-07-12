@@ -16,6 +16,14 @@ direnv allow
 run-test-vm $CONFIGURATION_NAME
 ```
 
+## Troubleshooting
+
+### Test VM crashes after bootloader
+
+[Bug](https://gitlab.com/qemu-project/qemu/-/issues/1727) in qemu virtio-gpu-gl.
+Switch between virtio-vga and virtio-vga-gl to work around this issue
+(ctrl-alt-2, ctrl-alt-1).
+
 ## Builds Upon
 
 ### Flake Parts

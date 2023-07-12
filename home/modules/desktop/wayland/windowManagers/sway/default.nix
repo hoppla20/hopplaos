@@ -15,18 +15,15 @@
     browserCommand
     editorCommand
     fileManagerCommand
+    brightnessControlCommands
+    audio
     ;
 
   hardwareCfg = config.hopplaos.hardware;
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.wayland.sway;
 
-  pavucontrol = "${pkgs.pavucontrol}/bin/pavucontrol";
-  light = "${pkgs.light}/bin/light";
-  spotify = "${pkgs.spotify}/bin/spotify";
   rofi = "${pkgs.rofi}/bin/rofi";
-  pulseaudio-control = "pulseaudio-control";
-  playerctl = "${pkgs.playerctl}/bin/playerctl";
 
   schema = pkgs.gsettings-desktop-schemas;
   datadir = "${schema}/share/gsettings-schemas/${schema.name}";
@@ -53,6 +50,8 @@ in {
   };
 
   config = mkIf (desktopCfg.enable && cfg.enable) {
+    hopplaos.desktop.wayland.waybar.systemd.targets = ["sway-session.target"];
+
     wayland.windowManager.sway = {
       enable = true;
 
@@ -156,11 +155,11 @@ in {
 
         keybindings = {
           "Mod4+F1" = "exec ${editorCommand}";
-          "Mod4+F10" = "exec ${spotify}";
+          "Mod4+F10" = "exec ${audio.playerCommand}";
           "Mod4+F2" = "exec ${browserCommand}";
           "Mod4+F3" = "exec ${fileManagerCommand}";
           "Mod4+Return" = "exec ${terminalCommand}";
-          "Mod4+Shift+m" = "exec ${pavucontrol}";
+          "Mod4+Shift+m" = "exec ${audio.managerCommand}";
           "Mod4+w" = "exec ${rofi} -show drun";
 
           "Mod1+Tab" = "workspace next";
@@ -234,17 +233,17 @@ in {
 
           "Mod4+Shift+r" = "reload";
 
-          "XF86AudioRaiseVolume" = "exec \"${pulseaudio-control} --volume-max 150 --volume-step 5 up\"";
-          "XF86AudioLowerVolume" = "exec \"${pulseaudio-control} --volume-max 150 --volume-step 5 down\"";
-          "XF86AudioMute" = "exec \"${pulseaudio-control} togmute\"";
+          "XF86AudioRaiseVolume" = "exec ${audio.controlCommands.raise}";
+          "XF86AudioLowerVolume" = "exec ${audio.controlCommands.lower}";
+          "XF86AudioMute" = "exec ${audio.controlCommands.mute}";
 
-          "XF86AudioNext" = "exec ${playerctl} next";
-          "XF86AudioPlay" = "exec ${playerctl} play-pause";
-          "XF86AudioPrev" = "exec ${playerctl} previous";
-          "XF86AudioStop" = "exec ${playerctl} stop";
+          "XF86AudioNext" = "exec playerctl next";
+          "XF86AudioPlay" = "exec playerctl play-pause";
+          "XF86AudioPrev" = "exec playerctl previous";
+          "XF86AudioStop" = "exec playerctl stop";
 
-          "XF86MonBrightnessDown" = "exec ${light} -U 10";
-          "XF86MonBrightnessUp" = "exec ${light} -A 10";
+          "XF86MonBrightnessDown" = "exec ${brightnessControlCommands.lower}";
+          "XF86MonBrightnessUp" = "exec ${brightnessControlCommands.raise}";
 
           "Control+Shift+period" = "exec dunstctl context";
           "Control+Shift+comma" = "exec dunstctl close";
@@ -295,22 +294,6 @@ in {
         startup = [
           {
             command = "/run/current-system/sw/libexec/polkit-gnome-authentication-agent-1";
-          }
-          {
-            command = "sleep 5; systemctl restart --user network-manager-applet";
-            always = true;
-          }
-          {
-            command = "sleep 5; systemctl restart --user blueman-applet";
-            always = true;
-          }
-          {
-            command = "sleep 5; systemctl restart --user nextcloud-client";
-            always = true;
-          }
-          {
-            command = "sleep 5; systemctl restart --user dunst";
-            always = true;
           }
         ];
 

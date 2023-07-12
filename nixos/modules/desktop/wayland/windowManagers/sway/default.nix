@@ -11,15 +11,16 @@
     mkIf
     ;
 
-  cfg = config.hopplaos.desktop.sway;
+  desktopCfg = config.hopplaos.desktop;
+  cfg = desktopCfg.wayland.sway;
 in {
   options = {
-    hopplaos.desktop.sway = {
+    hopplaos.desktop.wayland.sway = {
       enable = mkEnableOption "Wayland - Sway";
     };
   };
 
-  config = mkIf (config.hopplaos.desktop.enable && cfg.enable) {
+  config = mkIf (desktopCfg.enable && cfg.enable) {
     programs.sway = {
       enable = true;
       wrapperFeatures = {
@@ -27,17 +28,12 @@ in {
         gtk = true;
       };
       extraSessionCommands = ''
-        export WLR_NO_HARDWARE_CURSORS=1
-
-        export MOZ_ENABLE_WAYLAND=1;
-        export MOZ_USE_XINPUT2=1;
-
         export SDL_VIDEODRIVER=wayland
 
         # needs qt5.qtwayland in systemPackages
         export QT_QPA_PLATFORM=wayland
-        export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
         export QT_THEME_OVERRIDE=adwaita-dark
+        export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
         # Fix for some Java AWT applications (e.g. Android Studio),
         # use this if they aren't displayed properly:

@@ -13,6 +13,8 @@
     mkEnableOption
     mkIf
     ;
+
+  brightnessStep = 10;
 in {
   options = {
     hopplaos.desktop = {
@@ -36,16 +38,30 @@ in {
         readOnly = true;
         default = "thunar";
       };
+
+      brightnessControlCommands = {
+        raise = mkOption {
+          type = types.str;
+          readOnly = true;
+          default = "light -A ${toString brightnessStep}";
+        };
+        lower = mkOption {
+          type = types.str;
+          readOnly = true;
+          default = "light -U ${toString brightnessStep}";
+        };
+      };
     };
   };
 
-  config = {
+  config = mkIf cfg.enable {
     hopplaos.desktop.browserCommand = "${pkgs.brave}/bin/brave --use-angle=vulkan --use-cmd-decoder=passthrough";
 
     home.packages = builtins.attrValues {
       inherit
         (pkgs)
         brave
+        light
         ;
     };
 
