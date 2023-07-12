@@ -1,9 +1,4 @@
 {
-  pkgs,
-  config,
-  lib,
-  ...
-}: {
   boot = {
     kernelParams = ["console=ttyS0"];
     kernelModules = ["kvm-amd"];
