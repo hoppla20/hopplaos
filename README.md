@@ -1,5 +1,16 @@
 # HopplaOS
 
+## Quick Start Installation
+
+```bash
+git clone https://gitlab.vincentcui.de/vincent.cui/hopplaos.git /etc/nixos
+cd /etc/nixos
+# if a disko configuration is available
+nix build .#nixosConfigurations.$CONFIGURATION_NAME.config.system.build.diskoScript
+./result
+nixos-install --flake .#$CONFIGURATION_NAME
+```
+
 ## Environment Setup
 
 Enable devshell:
