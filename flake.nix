@@ -47,7 +47,7 @@
             pkgs.git
             pkgs.nixos-generators
             self'.packages.repl
-            inputs'.disko.packages
+            inputs'.disko.packages.default
           ];
         };
 
