@@ -27,7 +27,7 @@ in {
       grub = {
         enable = true;
         efiSupport = true;
-        efiInstallAsRemovable = true;
+        efiInstallAsRemovable = cfg.vmConfig;
         device = "nodev";
         useOSProber = cfg.osProber;
       };
