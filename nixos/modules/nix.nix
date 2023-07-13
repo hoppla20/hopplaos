@@ -13,7 +13,6 @@
       auto-optimise-store = true;
       allowed-users = ["@wheel"];
       trusted-users = ["@wheel"];
-      system-features = ["nixos-test" "benchmark" "big-parallel" "kvm"];
     };
     gc.automatic = true;
     optimise.automatic = true;
@@ -22,6 +21,7 @@
       keep-outputs = true
       keep-derivations = true
       fallback = true
+      experimental-features = nix-command flakes
     '';
   };
 
