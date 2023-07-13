@@ -69,15 +69,15 @@
         pciutils
         usbutils
         # utils
-
+        
         htop
         bottom
         # system monitoring
-
+        
         parted
         gptfdisk
         # partitioning
-
+        
         bat
         curl
         direnv
@@ -89,11 +89,12 @@
         neovim
         pv
         ripgrep
+        killall
         # useful tools
-
+        
         niv
         # nix tools
-
+        
         ;
     };
 
