@@ -2,18 +2,18 @@
   hopplaos.hardware = {
     monitors = [
       {
-        name = "DP-1";
+        name = "DP-2";
         value = {
           resolution = "1920x1080";
           refreshRate = 60;
           position = {
-            x = 1080;
+            x = 1920;
             y = 0;
           };
         };
       }
       {
-        name = "DP-2";
+        name = "DP-3";
         value = {
           resolution = "1920x1080";
           refreshRate = 60;
