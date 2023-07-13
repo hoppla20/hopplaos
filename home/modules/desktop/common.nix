@@ -59,11 +59,11 @@ in {
       browserCommand = mkOption {
         type = types.str;
         readOnly = true;
+        default = "${pkgs.brave}/bin/brave --use-angle=vulkan --use-cmd-decoder=passthrough --enable-webrtc-pipewire-capturer";
       };
       editorCommand = mkOption {
         type = types.str;
         readOnly = true;
-        default = "true";
       };
       fileManagerCommand = mkOption {
         type = types.str;
@@ -86,24 +86,32 @@ in {
   };
 
   config = mkIf cfg.enable {
-    hopplaos.desktop.browserCommand = "${pkgs.brave}/bin/brave --use-angle=vulkan --use-cmd-decoder=passthrough";
+    home = {
+      packages = builtins.attrValues {
+        inherit
+          (pkgs)
+          xdg-utils
+          glib
+          brave
+          light
+          ;
 
-    home.packages = builtins.attrValues {
-      inherit
-        (pkgs)
-        xdg-utils
-        glib
-        brave
-        light
-        ;
+        inherit
+          (pkgs.xorg)
+          xhost
+          ;
+      };
 
-      inherit
-        (pkgs.xorg)
-        xhost
-        ;
+      pointerCursor = {
+        name = "Bibata-Modern-Ice";
+        size = 16;
+        package = pkgs.bibata-cursors;
+        gtk.enable = true;
+      };
     };
 
     fonts.fontconfig.enable = true;
+
     gtk = {
       enable = true;
       font = {
@@ -117,10 +125,6 @@ in {
       iconTheme = {
         name = "Papirus-Dark";
         package = pkgs.papirus-icon-theme;
-      };
-      cursorTheme = {
-        name = "Bibata-Modern-Ice";
-        package = pkgs.bibata-cursors;
       };
     };
 

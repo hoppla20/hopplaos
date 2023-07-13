@@ -48,6 +48,7 @@ in {
       (attrValues {
         inherit
           (pkgs)
+          xwayland
           wl-clipboard
           grim
           slurp

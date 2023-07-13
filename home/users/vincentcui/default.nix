@@ -14,6 +14,7 @@
         };
       };
       zsh.enable = true;
+      vscode.enable = true;
     };
 
     desktop = {

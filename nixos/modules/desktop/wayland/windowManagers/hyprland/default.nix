@@ -30,5 +30,7 @@ in {
         hidpi = false;
       };
     };
+
+    environment.sessionVariables.NIXOS_OZONE_WL = "";
   };
 }

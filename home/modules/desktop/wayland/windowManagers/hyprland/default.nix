@@ -32,7 +32,7 @@
 
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.wayland.hyprland;
-in let
+
   transformList = {
     "90" = 1;
     "180" = 2;
@@ -62,6 +62,8 @@ in let
             "${toString transformList.${monitorCfg.transform}}"
           ]))
       (listToAttrs config.hopplaos.hardware.monitors));
+
+  cursor = config.home.pointerCursor;
 in {
   options = {
     hopplaos.desktop.wayland.hyprland = {
@@ -75,11 +77,14 @@ in {
     wayland.windowManager.hyprland = {
       enable = true;
       systemdIntegration = true;
-      recommendedEnvironment = true;
+      recommendedEnvironment = false;
 
       # use system package
       package = null;
       extraConfig = ''
+        # Set cursor
+        exec-once = hyprctl setcursor ${cursor.name} ${toString cursor.size}
+
         # Host specific monitors
         ${monitors}
         # Automatically add new monitors to the RIGHT
@@ -89,28 +94,21 @@ in {
         input {
           kb_layout = us
           kb_variant = altgr-intl
-          kb_model = caps:escape
-          kb_options =
-          kb_rules =
-
-          follow_mouse = 0
-
+          kb_options = caps:escape
+          follow_mouse = 2
           touchpad {
               natural_scroll = true
           }
-
           sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
         }
 
         general {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
-
           gaps_in = 5
-          gaps_out = 20
-          border_size = 2
+          gaps_out = 5
+          border_size = 1
           col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
           col.inactive_border = rgba(595959aa)
-
           layout = master
         }
 
@@ -152,7 +150,7 @@ in {
 
         master {
           # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-          new_is_master = true
+          new_is_master = false
         }
 
         gestures {
@@ -182,7 +180,7 @@ in {
         bind = SHIFT, S, exec, ${systemCommands.poweroff}
         bind = , ESCAPE, submap, reset
         bind = CONTROL, C, submap, reset
-        submap = system
+        submap = reset
 
         bind = SUPER, RETURN, exec, ${terminalCommand}
         bind = SUPER_SHIFT, Q, killactive,
@@ -196,7 +194,7 @@ in {
         bind = SUPER, F2, exec, ${browserCommand}
         bind = SUPER, F3, exec, ${fileManagerCommand}
         bind = SUPER, F10, exec, ${audio.playerCommand}
-        bind = SUPER_SHIFT, M, exec ${audio.managerCommand}
+        bind = SUPER_SHIFT, M, exec, ${audio.managerCommand}
         bind = SUPER, W, exec, ${appLauncherCommand}
 
         # Move focus
@@ -273,8 +271,8 @@ in {
         bindm = SUPER, mouse:273, resizewindow
 
         # Autostart
-        exec-once = ${polkitAgent}
         exec-once = wl-configure-gtk
+        exec-once = ${polkitAgent}
       '';
     };
   };
