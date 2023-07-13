@@ -47,6 +47,7 @@
             pkgs.git
             pkgs.nixos-generators
             self'.packages.repl
+            inputs'.disko.packages
           ];
         };
 
@@ -77,6 +78,8 @@
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixos-generators.url = "github:nix-community/nixos-generators";
+
+    disko.url = "github:nix-community/disko";
 
     devshell = {
       url = "github:numtide/devshell";

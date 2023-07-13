@@ -28,6 +28,7 @@ in {
               inputs.nixos-generators.nixosModules.all-formats
               inputs.home-manager.nixosModules.default
               inputs.hyprland.nixosModules.default
+              inputs.disko.nixosModules.default
               dir
             ];
         };

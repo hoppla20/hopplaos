@@ -16,6 +16,14 @@ direnv allow
 run-test-vm $CONFIGURATION_NAME
 ```
 
+## Disko usage
+
+```bash
+# SCRIPT: formatScript, mountScript, diskoScript (format + mount)
+nix build .#nixosConfigurations.$CONFIGURATION_NAME.config.system.build.$SCRIPT
+./result
+```
+
 ## Troubleshooting
 
 ### Test VM crashes after bootloader
