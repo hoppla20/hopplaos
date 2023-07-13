@@ -6,7 +6,7 @@
 
   hopplaos = {
     hardware = {
-      cpu.manufacturer = "intel";
+      cpu.manufacturer = "amd";
     };
     users.vincentcui.enable = true;
     desktop = {
@@ -20,10 +20,7 @@
     boot = {
       enable = true;
       kernelModules.kvm.enable = true;
-      grub = {
-        enable = true;
-        osProber = true;
-      };
+      grub.enable = true;
     };
   };
 }

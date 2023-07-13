@@ -1,4 +1,6 @@
 {
+  #boot.initrd.availableKernelModules = [];
+
   networking.interfaces.enp4s0.useDHCP = true;
 
   fileSystems = {

@@ -1,8 +1,13 @@
 {
-  boot.initrd = {
-    kernelModules = [];
-    availableKernelModules = ["vmd" "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
-  };
+  boot.initrd.availableKernelModules = [
+    "vmd"
+    "xhci_pci"
+    "ahci"
+    "nvme"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+  ];
 
   networking.interfaces.enp0s31f6.useDHCP = true;
 
