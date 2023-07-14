@@ -16,9 +16,9 @@
 	// 	"description": "Log output to console"
 	// }
 	
-	"nixosModule": {
+	"sNixosModule": {
 		"scope": "nix",
-		"prefix": "nixosModule",
+		"prefix": "sNixosModule",
 		"body": [
 			"{",
 			"  pkgs,",
@@ -46,6 +46,13 @@
 			"  };",
 			"}",
 			"",
+		],
+	},
+	"sEnableOption": {
+		"scope": "nix",
+		"prefix": "sEnableOption",
+		"body": [
+			"enable = mkEnableOption \"$1\"$0;"
 		],
 	},
 }
