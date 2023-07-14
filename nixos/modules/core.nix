@@ -29,12 +29,6 @@
     supportedLocales = ["de_DE.UTF-8/UTF-8"];
   };
 
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
-
   programs = {
     zsh = {
       enable = true;
@@ -49,7 +43,7 @@
   users.defaultUserShell = pkgs.zsh;
 
   # https://github.com/NixOS/nixpkgs/issues/180175
-  systemd.services.NetworkManager-wait-online.enable = true;
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   environment = {
     pathsToLink = [
