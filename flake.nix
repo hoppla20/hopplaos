@@ -46,8 +46,12 @@
             pkgs.alejandra
             pkgs.git
             pkgs.nixos-generators
-            self'.packages.repl
             inputs'.disko.packages.default
+            self'.packages.repl
+            self'.packages.install-system
+            (pkgs.writeShellScriptBin "build-installer" ''
+              nix build .#nixosConfigurations.installer.config.formats.custom-iso
+            '')
           ];
         };
 

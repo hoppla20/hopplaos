@@ -1,0 +1,3 @@
+{
+  hopplaos.hardware.monitors = [];
+}

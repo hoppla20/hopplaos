@@ -278,7 +278,7 @@ in {
           }
         ];
 
-        workspaceOutputAssign = let
+        workspaceOutputAssign = mkIf ((builtins.length hardwareCfg.monitors) > 0) (let
           monitor0 = (builtins.elemAt hardwareCfg.monitors 0).name;
           monitor1 =
             if ((builtins.length hardwareCfg.monitors) > 1)
@@ -321,7 +321,7 @@ in {
             workspace = "9";
             output = monitor1;
           }
-        ];
+        ]);
       };
 
       extraConfig = ''

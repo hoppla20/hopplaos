@@ -3,7 +3,10 @@
 ## Quick Start Installation
 
 ```bash
-nix run git+https://gitlab.vincentcui.de/vincent.cui/hopplaos#packages.x86_64-linux.install-system -- -h
+# Enable nix-command and flakes
+mkdir -p ~/.config/nix
+echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
+nix run "git+https://gitlab.vincentcui.de/vincent.cui/hopplaos#packages.x86_64-linux.install-system" -- -h
 ```
 
 ## Environment Setup
@@ -11,9 +14,9 @@ nix run git+https://gitlab.vincentcui.de/vincent.cui/hopplaos#packages.x86_64-li
 Enable devshell:
 
 ```bash
-nix develop
+nix [--extra-experimental-features "nix-command flakes"] develop
 # or
-direnv allow
+direnv allow # requires nix-direnv
 ```
 
 ## Build and run test VM for nixosConfiguration
@@ -26,7 +29,7 @@ run-test-vm $CONFIGURATION_NAME
 
 ```bash
 # SCRIPT: formatScript, mountScript, diskoScript (format + mount)
-nix build .#nixosConfigurations.$CONFIGURATION_NAME.config.system.build.$SCRIPT
+nix build ".#nixosConfigurations.$CONFIGURATION_NAME.config.system.build.$SCRIPT"
 ./result
 ```
 

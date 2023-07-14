@@ -7,25 +7,28 @@
 }: let
   inherit
     (lib)
-    mkForce
+    mkImageMediaOverride
+    mkEnableOption
+    mkIf
     ;
+
+  cfg = config.hopplaos.installer;
 in {
-  formatConfigs.custom-iso = {
-    config,
-    modulesPath,
-    ...
-  }: {
-    imports = [
-      "${toString modulesPath}/installer/cd-dvd/installation-cd-base.nix"
-    ];
+  options.hopplaos.installer = {
+    enable = mkEnableOption "Installer Configuration";
+  };
 
-    hopplaos.boot.enable = mkForce false;
-    boot.kernelPackages = mkForce options.boot.kernelPackages.default;
-    networking.wireless.enable = lib.mkImageMediaOverride false;
+  config = mkIf cfg.enable {
+    formatConfigs.custom-iso = {modulesPath, ...}: {
+      imports = [
+        "${toString modulesPath}/installer/cd-dvd/installation-cd-base.nix"
+      ];
 
-    disko.devices = mkForce options.disko.devices.default;
+      boot.kernelPackages = mkImageMediaOverride options.boot.kernelPackages.default;
+      networking.wireless.enable = mkImageMediaOverride false;
 
-    formatAttr = "isoImage";
-    filename = "*.iso";
+      formatAttr = "isoImage";
+      filename = "*.iso";
+    };
   };
 }
