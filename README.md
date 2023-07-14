@@ -3,12 +3,7 @@
 ## Quick Start Installation
 
 ```bash
-git clone https://gitlab.vincentcui.de/vincent.cui/hopplaos.git
-cd hopplaos
-# if a disko configuration is available
-nix --extra-experimental-features "flakes nix-command" develop
-sudo disko --mode disko ./nixos/hosts/$CONFIGURATION_NAME/disko.nix
-sudo nixos-install --flake .#$CONFIGURATION_NAME
+nix run git+https://gitlab.vincentcui.de/vincent.cui/hopplaos#packages.x86_64-linux.install-system -- -h
 ```
 
 ## Environment Setup
