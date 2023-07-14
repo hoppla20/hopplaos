@@ -1,13 +1,12 @@
 {
   imports = [
-    ./configuration.nix
-    ./hardware-configuration.nix
     ./disko.nix
   ];
 
   hopplaos = {
     hardware = {
       cpu.manufacturer = "amd";
+      gpu.manufacturer = "amd";
     };
     users.vincentcui.enable = true;
     desktop = {
@@ -24,4 +23,6 @@
       grub.enable = true;
     };
   };
+
+  boot.initrd.availableKernelModules = ["nvme" "ehci_pci" "xhci_pci" "rtsx_pci_sdmmc"];
 }

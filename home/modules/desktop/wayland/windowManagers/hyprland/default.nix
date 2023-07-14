@@ -196,7 +196,7 @@ in {
         bind = SUPER, F2, exec, ${browserCommand}
         bind = SUPER, F3, exec, ${fileManagerCommand}
         bind = SUPER, F10, exec, ${audio.playerCommand}
-        bind = SUPER_SHIFT, M, exec ${audio.managerCommand}
+        bind = SUPER_SHIFT, M, exec, ${audio.managerCommand}
         bind = SUPER, W, exec, ${appLauncherCommand}
 
         # Move focus

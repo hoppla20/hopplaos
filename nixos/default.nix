@@ -30,7 +30,8 @@ in {
               inputs.hyprland.nixosModules.default
               inputs.disko.nixosModules.default
               dir
-            ];
+            ]
+            ++ import (dir + "/hardware-modules.nix") {inherit inputs;};
         };
     in
       inputs.nixpkgs.lib.mapAttrs mkHost (self.lib.listDirectoryModules ./hosts));

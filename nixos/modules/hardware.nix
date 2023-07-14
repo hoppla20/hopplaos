@@ -2,6 +2,7 @@
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }: let
   inherit
@@ -15,10 +16,7 @@
 
   cfg = config.hopplaos.hardware;
 
-  gpuDriversMap = {
-    amd = "amdgpu";
-    nvidia = "nvidia";
-  };
+  nixosHardware = inputs.nixos-hardware.nixosModules;
 in {
   options.hopplaos.hardware = {
     enable = mkEnableOption "Hardware";
@@ -32,9 +30,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    boot.initrd.kernelModules = [gpuDriversMap.${cfg.gpu.manufacturer}];
-    services.xserver.videoDrivers = [gpuDriversMap.${cfg.gpu.manufacturer}];
-
     hardware = {
       enableRedistributableFirmware = true;
       opengl = {
@@ -42,7 +37,6 @@ in {
         driSupport = true;
         driSupport32Bit = true;
       };
-      cpu.amd.updateMicrocode = true;
     };
   };
 }

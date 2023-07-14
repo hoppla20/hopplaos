@@ -95,5 +95,10 @@
     };
   };
 
+  documentation = {
+    man.enable = true;
+    doc.enable = false;
+  };
+
   system.stateVersion = lib.mkDefault "23.05";
 }

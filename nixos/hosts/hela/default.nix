@@ -1,12 +1,8 @@
 {
-  imports = [
-    ./configuration.nix
-    ./hardware-configuration.nix
-  ];
-
   hopplaos = {
     hardware = {
       cpu.manufacturer = "intel";
+      gpu.manufacturer = "intel";
     };
     users.vincentcui.enable = true;
     desktop = {
@@ -26,4 +22,21 @@
       };
     };
   };
+
+  boot.initrd.availableKernelModules = ["vmd" "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
+
+  networking.interfaces.enp0s31f6.useDHCP = true;
+
+  fileSystems = {
+    "/" = {
+      label = "nixos";
+      fsType = "ext4";
+    };
+    "/boot" = {
+      label = "ESP";
+      fsType = "vfat";
+    };
+  };
+
+  swapDevices = [{label = "swap";}];
 }
