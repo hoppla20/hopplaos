@@ -151,6 +151,7 @@ in {
         master {
           # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
           new_is_master = false
+          no_gaps_when_only = true
         }
 
         gestures {
