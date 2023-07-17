@@ -95,11 +95,14 @@ in {
           kb_layout = us
           kb_variant = altgr-intl
           kb_options = caps:escape
+
           follow_mouse = 2
+          accel_profile = flat
+          sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+
           touchpad {
               natural_scroll = true
           }
-          sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
         }
 
         general {
