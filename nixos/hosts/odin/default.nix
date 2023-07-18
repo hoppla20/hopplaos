@@ -5,6 +5,7 @@
 
   hopplaos = {
     hardware = {
+      enable = true;
       cpu.manufacturer = "amd";
       gpu.manufacturer = "amd";
     };

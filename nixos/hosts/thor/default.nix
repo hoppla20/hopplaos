@@ -1,6 +1,11 @@
 {
+  imports = [
+    ./disko.nix
+  ];
+
   hopplaos = {
     hardware = {
+      enable = true;
       cpu.manufacturer = "amd";
       gpu.manufacturer = "amd";
     };
@@ -41,6 +46,4 @@
       fsType = "ext4";
     };
   };
-
-  swapDevices = [{label = "swap";}];
 }

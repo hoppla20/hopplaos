@@ -1,6 +1,7 @@
 {
   hopplaos = {
     hardware = {
+      enable = true;
       cpu.manufacturer = "intel";
       gpu.manufacturer = "intel";
     };
