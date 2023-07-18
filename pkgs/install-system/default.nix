@@ -50,7 +50,7 @@ pkgs.writeShellScriptBin "install-system" ''
     configuration_name="''${pos_args[0]}"
 
     if [ $disko_enable -eq 1 ]; then
-      sudo ${inputs'.disko.packages.default}/bin/disko --mode "$disko_mode" "${../../nixos/hosts}/$configuration_name/disko.nix"
+      sudo ${inputs'.disko.packages.default}/bin/disko --mode "$disko_mode" --flake "$hopplaos_flake#$configuration_name"
     fi
 
     sudo nixos-install \

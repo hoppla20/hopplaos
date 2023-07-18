@@ -35,8 +35,11 @@ run-test-vm $CONFIGURATION_NAME
 
 ```bash
 # SCRIPT: formatScript, mountScript, diskoScript (format + mount)
-nix build ".#nixosConfigurations.$CONFIGURATION_NAME.config.system.build.$SCRIPT"
+
+nix build ./nixos/hosts/$CONFIGURATION_NAME/disko.nix
 ./result
+# or
+disko -m {format,mount,disko} "git+https://gitlab.vincentcui.de/vincent.cui/hopplaos#$CONFIGURATION_NAME"
 ```
 
 ## Troubleshooting
