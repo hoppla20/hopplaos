@@ -17,11 +17,13 @@
     gc.automatic = true;
     optimise.automatic = true;
     extraOptions = ''
-      min-free = 536870912
+      experimental-features = nix-command flakes
+
       keep-outputs = true
       keep-derivations = true
+
+      min-free = 536870912
       fallback = true
-      experimental-features = nix-command flakes
     '';
   };
 
