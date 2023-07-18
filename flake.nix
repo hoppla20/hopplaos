@@ -49,6 +49,7 @@
           packages = [
             pkgs.alejandra
             pkgs.git
+            pkgs.neovim
           ];
           commands = [
             {package = self'.packages.repl;}
