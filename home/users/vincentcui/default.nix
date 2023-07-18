@@ -16,6 +16,7 @@
       zsh.enable = true;
       vscode.enable = true;
       keepassxc.enable = true;
+      office.enable = true;
     };
 
     desktop = {
