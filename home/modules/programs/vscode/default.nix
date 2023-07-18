@@ -35,7 +35,6 @@
       kamadorueda.alejandra
       stkb.rewrap
       valentjn.vscode-ltex
-      arrterian.nix-env-selector
       editorconfig.editorconfig
       hashicorp.terraform
       mkhl.direnv
@@ -67,6 +66,7 @@ in {
         "editor.stickyScroll.enabled" = true;
 
         # behavior
+        "editor.tabSize" = 2;
         "update.mode" = "none";
         "keyboard.dispatch" = "keyCode";
         "editor.acceptSuggestionOnEnter" = "off";
@@ -74,6 +74,9 @@ in {
         "explorer.autoReveal" = false;
         "git.confirmSync" = false;
         "extensions.autoUpdate" = false;
+        "terminal.integrated.commandsToSkipShell" = [
+          "-workbench.action.quickOpen"
+        ];
 
         # plugin settings
         "vscode-neovim.neovimExecutablePaths.linux" = "/run/current-system/sw/bin/nvim";
