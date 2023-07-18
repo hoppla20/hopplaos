@@ -3,6 +3,18 @@
 
   outputs = inputs @ {self, ...}: let
     inherit
+      (builtins)
+      pathExists
+      readDir
+      ;
+
+    inherit
+      (inputs.nixpkgs.lib)
+      filterAttrs
+      mapAttrs
+      ;
+
+    inherit
       (inputs.flake-parts.lib)
       mkFlake
       ;
@@ -30,7 +42,14 @@
 
       systems = ["x86_64-linux"];
 
-      flake.lib = lib;
+      flake = {
+        lib = lib;
+        diskoConfigurations = let
+          hostsDir = ./nixos/hosts;
+          hostsWithDisko = filterAttrs (name: type: type == "directory" && pathExists (hostsDir + "/${name}/disko.nix")) (readDir hostsDir);
+        in
+          mapAttrs (name: _: import (hostsDir + "/${name}/disko.nix")) hostsWithDisko;
+      };
 
       perSystem = {
         config,
@@ -50,6 +69,7 @@
             pkgs.alejandra
             pkgs.git
             pkgs.neovim
+            inputs'.disko.packages.default
           ];
           commands = [
             {package = self'.packages.repl;}
@@ -62,6 +82,11 @@
               help = "run-test-vm [-h] [-n] [configuration]";
             }
             {package = build-installer;}
+            {
+              name = "disko";
+              package = pkgs.hello;
+              help = "nix build \".#nixosConfigurations.$CONFIGURATION_NAME.config.system.build.{format,mount,disko}Script\"";
+            }
           ];
         };
 
@@ -105,14 +130,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "unstable";
+    };
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    eww = {
-      url = "github:elkowar/eww";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
