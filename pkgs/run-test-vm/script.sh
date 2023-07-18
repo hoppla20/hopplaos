@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 set -o nounset
 set -o errexit
 set -o pipefail
@@ -10,7 +8,7 @@ INSTALL_ONLY=0
 
 usage() {
   cat <<-EOF
-Usage: run-test-vm [-h] [-i] [-n] [configuration].
+Usage: run-test-vm [-h] [-n] [configuration].
 
 Flags:
   -h : Show this usage.

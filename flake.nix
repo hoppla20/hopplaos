@@ -40,18 +40,27 @@
         system,
         ...
       }: {
-        devshells.default = {
+        devshells.default = let
+          build-installer = pkgs.writeShellScriptBin "build-installer" ''
+            nix build .#nixosConfigurations.installer.config.formats.custom-iso
+          '';
+        in {
           name = "hopplaos";
           packages = [
             pkgs.alejandra
             pkgs.git
-            pkgs.nixos-generators
-            inputs'.disko.packages.default
-            self'.packages.repl
-            self'.packages.install-system
-            (pkgs.writeShellScriptBin "build-installer" ''
-              nix build .#nixosConfigurations.installer.config.formats.custom-iso
-            '')
+          ];
+          commands = [
+            {package = self'.packages.repl;}
+            {
+              package = self'.packages.install-system;
+              help = "install-system [-h] [-d] [-m] [name]";
+            }
+            {
+              package = self'.packages.run-test-vm;
+              help = "run-test-vm [-h] [-n] [configuration]";
+            }
+            {package = build-installer;}
           ];
         };
 
