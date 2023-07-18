@@ -176,10 +176,13 @@ in {
         submap = reset
 
         submap = system
-        bind = , E, exit,
         bind = , L, exec, ${systemCommands.lock}
+        bind = , L, submap, reset
         bind = , S, exec, ${systemCommands.suspend}
+        bind = , S, submap, reset
         bind = , H, exec, ${systemCommands.hibernate}
+        bind = , H, submap, reset
+        bind = , E, exit,
         bind = , R, exec, ${systemCommands.reboot}
         bind = SHIFT, S, exec, ${systemCommands.poweroff}
         bind = , ESCAPE, submap, reset
