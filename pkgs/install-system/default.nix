@@ -13,6 +13,7 @@ pkgs.writeShellScriptBin "install-system" ''
   pos_args=()
   disko_enable=0
   disko_mode="disko"
+  hopplaos_flake="git+https://gitlab.vincentcui.de/vincent.cui/hopplaos"
 
   usage() {
     cat <<-EOF
