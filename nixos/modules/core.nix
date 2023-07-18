@@ -104,6 +104,12 @@
       "...." = "cd ../../..";
       "....." = "cd ../../../../";
     };
+
+    interactiveShellInit = ''
+      mkcd() {
+        mkdir -p "$@" && cd "$@"
+      }
+    '';
   };
 
   system.stateVersion = lib.mkDefault "23.05";
