@@ -50,23 +50,32 @@ in {
     {
       programs.waybar = {
         enable = true;
-
+        package = pkgs.waybar-experimental;
         systemd.enable = false;
 
+        style = ./style.css;
         settings = {
           main = {
             layer = "top";
             position = "top";
+            spacing = 5;
 
-            modules-left = ["cpu" "memory" "tray" "sway/mode" "hyprland/submap"];
-            modules-center = ["sway/workspaces" "hyprland/workspaces"];
+            margin-top = 5;
+            margin-bottom = 5;
+            margin-left = 5;
+            margin-right = 5;
+
+            modules-left = ["cpu" "memory" "idle_inhibitor" "sway/mode" "hyprland/submap" "tray"];
+            modules-center = ["sway/workspaces" "wlr/workspaces"];
             modules-right = ["backlight" "pulseaudio" "clock" "battery"];
 
             "sway/workspaces" = {
               disable-scroll = true;
             };
-            "hyprland/workspaces" = {
-              disable-scroll = true;
+            "wlr/workspaces" = {
+              format = "{name}";
+              on-click = "activate";
+              sort-by-number = true;
             };
             "wireplumber" = {
               tooltip = false;
@@ -129,9 +138,15 @@ in {
               format = " {}%";
               max-length = 10;
             };
+            "idle_inhibitor" = {
+              format = "{icon}";
+              format-icons = {
+                deactivated = "󱠛";
+                activated = "󱤱";
+              };
+            };
           };
         };
-        style = ./style.css;
       };
 
       services = {

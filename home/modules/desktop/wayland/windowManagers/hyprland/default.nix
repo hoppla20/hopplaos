@@ -32,7 +32,7 @@
 
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.wayland.hyprland;
-in let
+
   transformList = {
     "90" = 1;
     "180" = 2;
@@ -62,6 +62,8 @@ in let
             "${toString transformList.${monitorCfg.transform}}"
           ]))
       (listToAttrs config.hopplaos.hardware.monitors));
+
+  cursor = config.home.pointerCursor;
 in {
   options = {
     hopplaos.desktop.wayland.hyprland = {
@@ -75,11 +77,14 @@ in {
     wayland.windowManager.hyprland = {
       enable = true;
       systemdIntegration = true;
-      recommendedEnvironment = true;
+      recommendedEnvironment = false;
 
       # use system package
       package = null;
       extraConfig = ''
+        # Set cursor
+        exec-once = hyprctl setcursor ${cursor.name} ${toString cursor.size}
+
         # Host specific monitors
         ${monitors}
         # Automatically add new monitors to the RIGHT
@@ -89,28 +94,24 @@ in {
         input {
           kb_layout = us
           kb_variant = altgr-intl
-          kb_model = caps:escape
-          kb_options =
-          kb_rules =
+          kb_options = caps:escape
 
-          follow_mouse = 0
+          follow_mouse = 2
+          accel_profile = flat
+          sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
 
           touchpad {
               natural_scroll = true
           }
-
-          sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
         }
 
         general {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
-
           gaps_in = 5
-          gaps_out = 20
-          border_size = 2
+          gaps_out = 5
+          border_size = 1
           col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
           col.inactive_border = rgba(595959aa)
-
           layout = master
         }
 
@@ -152,7 +153,8 @@ in {
 
         master {
           # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-          new_is_master = true
+          new_is_master = false
+          no_gaps_when_only = true
         }
 
         gestures {
@@ -174,19 +176,22 @@ in {
         submap = reset
 
         submap = system
-        bind = , E, exit,
         bind = , L, exec, ${systemCommands.lock}
+        bind = , L, submap, reset
         bind = , S, exec, ${systemCommands.suspend}
+        bind = , S, submap, reset
         bind = , H, exec, ${systemCommands.hibernate}
+        bind = , H, submap, reset
+        bind = , E, exit,
         bind = , R, exec, ${systemCommands.reboot}
         bind = SHIFT, S, exec, ${systemCommands.poweroff}
         bind = , ESCAPE, submap, reset
         bind = CONTROL, C, submap, reset
-        submap = system
+        submap = reset
 
         bind = SUPER, RETURN, exec, ${terminalCommand}
         bind = SUPER_SHIFT, Q, killactive,
-        bind = SUPER_SHIFFT, SPACE, togglefloating,
+        bind = SUPER_SHIFT, SPACE, togglefloating,
         bind = SUPER, F, fullscreen,
         bind = SUPER, 0, submap, system
         bind = SUPER, R, submap, resize
@@ -219,23 +224,23 @@ in {
         bind = SUPER_SHIFT, K, movewindow, u
         bind = SUPER_SHIFT, J, movewindow, d
 
-        # Move focused window into/outo groUP
-        bind = SUPER, G, togglegroUP,
-        bind = SUPER_CONTROL, LEFT, changegroUPactive, b
-        bind = SUPER_CONTROL, RIGHT, changegroUPactive, f
-        bind = SUPER_CONTROL, H, changegroUPactive, b
-        bind = SUPER_CONTROL, L, changegroUPactive, f
-        bind = SUPER_CONTROL, LEFT, moveintogroUP, l
-        bind = SUPER_CONTROL, RIGHT, moveintogroUP, r
-        bind = SUPER_CONTROL, UP, moveintogroUP, u
-        bind = SUPER_CONTROL, DOWN, moveintogroUP, d
-        bind = SUPER_CONTROL, H, moveintogroUP, l
-        bind = SUPER_CONTROL, L, moveintogroUP, r
-        bind = SUPER_CONTROL, K, moveintogroUP, u
-        bind = SUPER_CONTROL, J, moveintogroUP, d
+        # Move focused window into/outo group
+        bind = SUPER, G, togglegroup,
+        bind = SUPER_CONTROL, LEFT, changegroupactive, b
+        bind = SUPER_CONTROL, RIGHT, changegroupactive, f
+        bind = ALT, TAB, changegroupactive, f
+        bind = ALT_SHIFT, TAB, changegroupactive, b
+        bind = SUPER_CONTROL, LEFT, moveintogroup, l
+        bind = SUPER_CONTROL, RIGHT, moveintogroup, r
+        bind = SUPER_CONTROL, UP, moveintogroup, u
+        bind = SUPER_CONTROL, DOWN, moveintogroup, d
+        bind = SUPER_CONTROL, H, moveintogroup, l
+        bind = SUPER_CONTROL, L, moveintogroup, r
+        bind = SUPER_CONTROL, K, moveintogroup, u
+        bind = SUPER_CONTROL, J, moveintogroup, d
 
         # Switch workspaces
-        bind = ALT, TAB, workspace, previous
+        bind = SUPER, TAB, workspace, previous
         bind = SUPER, 1, workspace, 1
         bind = SUPER, 2, workspace, 2
         bind = SUPER, 3, workspace, 3
@@ -273,8 +278,8 @@ in {
         bindm = SUPER, mouse:273, resizewindow
 
         # Autostart
-        exec-once = ${polkitAgent}
         exec-once = wl-configure-gtk
+        exec-once = ${polkitAgent}
       '';
     };
   };

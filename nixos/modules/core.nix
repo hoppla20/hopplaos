@@ -26,7 +26,11 @@
   time.timeZone = lib.mkDefault "Europe/Berlin";
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    supportedLocales = ["de_DE.UTF-8/UTF-8"];
+    supportedLocales = [
+      "C.UTF-8/UTF-8"
+      "en_US.UTF-8/UTF-8"
+      "de_DE.UTF-8/UTF-8"
+    ];
   };
 
   programs = {
@@ -70,8 +74,6 @@
         
         bat
         curl
-        direnv
-        nix-direnv
         wget
         git
         jq
@@ -79,9 +81,11 @@
         neovim
         pv
         ripgrep
+        killall
         # useful tools
         
         niv
+        alejandra
         # nix tools
         
         ;
@@ -93,6 +97,12 @@
       "...." = "cd ../../..";
       "....." = "cd ../../../../";
     };
+
+    interactiveShellInit = ''
+      mkcd() {
+        mkdir -p "$@" && cd "$@"
+      }
+    '';
   };
 
   documentation = {

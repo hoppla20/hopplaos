@@ -271,10 +271,10 @@ in {
 
         startup = [
           {
-            command = polkitAgent;
+            command = "wl-configure-gtk";
           }
           {
-            command = "wl-configure-gtk";
+            command = polkitAgent;
           }
         ];
 

@@ -113,6 +113,7 @@
   };
 
   nixConfig = {
+    extra-experimental-features = "nix-command flakes";
     extra-substituters = [
       "https://nix-community.cachix.org"
       "https://hyprland.cachix.org"
