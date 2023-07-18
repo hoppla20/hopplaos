@@ -9,12 +9,18 @@
 
   inherit
     (lib)
+    types
+    mkOption
     mkEnableOption
     mkIf
     ;
 in {
-  options = {
-    hopplaos.users.vincentcui.enable = mkEnableOption "Users: Vincent Cui";
+  options.hopplaos.users.vincentcui = {
+    enable = mkEnableOption "Users: Vincent Cui";
+    hmUser = mkOption {
+      type = types.str;
+      default = "vincentcui@${config.networking.hostName}";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -36,7 +42,7 @@ in {
       openssh.authorizedKeys.keyFiles = lib.filesystem.listFilesRecursive ./ssh;
     };
 
-    home-manager.users.vincentcui = homeUsers."vincentcui@${config.networking.hostName}";
+    home-manager.users.vincentcui = homeUsers.${cfg.hmUser};
 
     security.sudo.extraRules = [
       {

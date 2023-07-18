@@ -9,6 +9,12 @@ echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
 nix run "git+https://gitlab.vincentcui.de/vincent.cui/hopplaos#packages.x86_64-linux.install-system" -- -h
 ```
 
+When using the provided installer, the package is included:
+
+```bash
+install-system -h
+```
+
 ## Environment Setup
 
 Enable devshell:

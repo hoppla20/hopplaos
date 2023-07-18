@@ -52,7 +52,10 @@ pkgs.writeShellScriptBin "install-system" ''
       sudo ${inputs'.disko.packages.default}/bin/disko --mode "$disko_mode" "${../../nixos/hosts}/$configuration_name/disko.nix"
     fi
 
-    sudo nixos-install --flake "git+https://gitlab.vincentcui.de/vincent.cui/hopplaos#$configuration_name"
+    sudo nixos-install \
+      --flake "$hopplaos_flake#$configuration_name" \
+      --no-channel-copy \
+      --no-root-password
   }
 
   main "$@"

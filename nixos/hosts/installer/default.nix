@@ -1,6 +1,9 @@
-{
+{self', ...}: {
   hopplaos = {
-    users.vincentcui.enable = true;
+    users.vincentcui = {
+      enable = true;
+      hmUser = "installer@installer";
+    };
     desktop = {
       enable = true;
       thunar.enable = true;
@@ -10,4 +13,8 @@
     };
     installer.enable = true;
   };
+
+  environment.systemPackages = [
+    self'.packages.install-system
+  ];
 }
