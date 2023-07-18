@@ -221,23 +221,23 @@ in {
         bind = SUPER_SHIFT, K, movewindow, u
         bind = SUPER_SHIFT, J, movewindow, d
 
-        # Move focused window into/outo groUP
-        bind = SUPER, G, togglegroUP,
-        bind = SUPER_CONTROL, LEFT, changegroUPactive, b
-        bind = SUPER_CONTROL, RIGHT, changegroUPactive, f
-        bind = SUPER_CONTROL, H, changegroUPactive, b
-        bind = SUPER_CONTROL, L, changegroUPactive, f
-        bind = SUPER_CONTROL, LEFT, moveintogroUP, l
-        bind = SUPER_CONTROL, RIGHT, moveintogroUP, r
-        bind = SUPER_CONTROL, UP, moveintogroUP, u
-        bind = SUPER_CONTROL, DOWN, moveintogroUP, d
-        bind = SUPER_CONTROL, H, moveintogroUP, l
-        bind = SUPER_CONTROL, L, moveintogroUP, r
-        bind = SUPER_CONTROL, K, moveintogroUP, u
-        bind = SUPER_CONTROL, J, moveintogroUP, d
+        # Move focused window into/outo group
+        bind = SUPER, G, togglegroup,
+        bind = SUPER_CONTROL, LEFT, changegroupactive, b
+        bind = SUPER_CONTROL, RIGHT, changegroupactive, f
+        bind = ALT, TAB, changegroupactive, f
+        bind = ALT_SHIFT, TAB, changegroupactive, b
+        bind = SUPER_CONTROL, LEFT, moveintogroup, l
+        bind = SUPER_CONTROL, RIGHT, moveintogroup, r
+        bind = SUPER_CONTROL, UP, moveintogroup, u
+        bind = SUPER_CONTROL, DOWN, moveintogroup, d
+        bind = SUPER_CONTROL, H, moveintogroup, l
+        bind = SUPER_CONTROL, L, moveintogroup, r
+        bind = SUPER_CONTROL, K, moveintogroup, u
+        bind = SUPER_CONTROL, J, moveintogroup, d
 
         # Switch workspaces
-        bind = ALT, TAB, workspace, previous
+        bind = SUPER, TAB, workspace, previous
         bind = SUPER, 1, workspace, 1
         bind = SUPER, 2, workspace, 2
         bind = SUPER, 3, workspace, 3
