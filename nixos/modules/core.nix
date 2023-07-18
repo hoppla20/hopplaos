@@ -80,8 +80,6 @@
         
         bat
         curl
-        direnv
-        nix-direnv
         wget
         git
         jq
@@ -93,6 +91,7 @@
         # useful tools
         
         niv
+        alejandra
         # nix tools
         
         ;
