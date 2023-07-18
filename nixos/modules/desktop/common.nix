@@ -30,6 +30,14 @@ in {
           ;
       };
       services = {
+        printing = {
+          enable = true;
+          drivers = [
+            pkgs.gutenprint
+            pkgs.canon-cups-ufr2
+          ];
+        };
+
         blueman.enable = true;
         dbus.enable = true;
         gnome.gnome-keyring.enable = true;
