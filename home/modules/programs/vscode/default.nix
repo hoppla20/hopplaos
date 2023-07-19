@@ -30,7 +30,6 @@
       esbenp.prettier-vscode
       gruntfuggly.todo-tree
       asvetliakov.vscode-neovim
-      arrterian.nix-env-selector
       editorconfig.editorconfig
       kamadorueda.alejandra
       stkb.rewrap
