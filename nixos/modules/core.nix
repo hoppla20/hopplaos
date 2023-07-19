@@ -81,6 +81,8 @@
         neovim
         pv
         ripgrep
+        gawk
+        gnused
         killall
         # useful tools
         
