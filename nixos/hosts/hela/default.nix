@@ -14,6 +14,10 @@
         sway.enable = true;
       };
     };
+    wibu = {
+      enable = true;
+      share.enable = true;
+    };
     boot = {
       enable = true;
       kernelModules.kvm.enable = true;
