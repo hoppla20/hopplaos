@@ -1,30 +1,18 @@
 {
   hopplaos = {
-    hardware = {
-      enable = true;
-      cpu.manufacturer = "intel";
-      gpu.manufacturer = "intel";
+    profiles = {
+      desktop = true;
     };
     users.vincentcui.enable = true;
-    desktop = {
-      enable = true;
-      thunar.enable = true;
-      wayland = {
-        hyprland.enable = true;
-        sway.enable = true;
-      };
-    };
     wibu = {
       enable = true;
       share.enable = true;
     };
-    boot = {
+    boot.grub.osProber = true;
+    hardware = {
       enable = true;
-      kernelModules.kvm.enable = true;
-      grub = {
-        enable = true;
-        osProber = true;
-      };
+      cpu.manufacturer = "intel";
+      gpu.manufacturer = "intel";
     };
   };
 

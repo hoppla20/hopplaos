@@ -5,8 +5,8 @@
       enable = true;
       thunar.enable = true;
       wayland = {
+        sway.enable = false;
         hyprland.enable = true;
-        sway.enable = true;
       };
     };
     boot = {

@@ -24,10 +24,7 @@
       enable = true;
       audio.enable = true;
       rofi.enable = true;
-      wayland = {
-        sway.enable = true;
-        hyprland.enable = true;
-      };
+      wayland.hyprland.enable = true;
     };
   };
 }
