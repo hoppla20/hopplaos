@@ -35,8 +35,6 @@ in {
   };
 
   config = mkIf (desktopCfg.enable && cfg.enable) {
-    hopplaos.desktop.wayland.waybar.systemd.targets = ["sway-session.target"];
-
     wayland.windowManager.sway = {
       enable = true;
 

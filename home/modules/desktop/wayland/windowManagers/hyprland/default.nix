@@ -13,9 +13,11 @@
     mkEnableOption
     mkIf
     mapAttrsToList
+    concatStrings
     concatStringsSep
     optionals
     optionalString
+    unique
     ;
   inherit
     (desktopCfg)
@@ -26,7 +28,7 @@
     browserCommand
     editorCommand
     fileManagerCommand
-    bRIGHTnessControlCommands
+    brightnessControlCommands
     audio
     ;
 
@@ -63,6 +65,13 @@
           ]))
       (listToAttrs config.hopplaos.hardware.monitors));
 
+  wallpapers = unique (map
+    (monitor:
+      if isNull monitor.value.background
+      then "~/.config/wallpapers/wallpaper.jpg"
+      else monitor.value.background)
+    config.hopplaos.hardware.monitors);
+
   cursor = config.home.pointerCursor;
 in {
   options = {
@@ -72,8 +81,6 @@ in {
   };
 
   config = mkIf (desktopCfg.enable && cfg.enable) {
-    hopplaos.desktop.wayland.waybar.systemd.targets = ["hyprland-session.target"];
-
     wayland.windowManager.hyprland = {
       enable = true;
       systemdIntegration = true;
@@ -154,7 +161,6 @@ in {
         master {
           # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
           new_is_master = false
-          no_gaps_when_only = true
         }
 
         gestures {
@@ -205,6 +211,28 @@ in {
         bind = SUPER, R, submap, resize
         bind = SUPER, E, layoutmsg, orientationnext
         bind = SUPER_SHIFT, E, layoutmsg, orientationprev
+        bind = SUPER_SHIFT, R, exec, hyprctl reload
+
+        bind = , XF86AudioRaiseVolume, exec, ${audio.controlCommands.raise}
+        bind = , XF86AudioLowerVolume, exec, ${audio.controlCommands.lower}
+        bind = , XF86AudioMute, exec, ${audio.controlCommands.mute}
+        bind = , XF86AudioNext, exec, playerctl next
+        bind = , XF86AudioPlay, exec, playerctl play-pause
+        bind = , XF86AudioPrev, exec, playerctl previous
+        bind = , XF86AudioStop, exec, playerctl stop
+        bind = , XF86MonBrightnessDown, exec, ${brightnessControlCommands.lower}
+        bind = , XF86MonBrightnessUp, exec, ${brightnessControlCommands.raise}
+
+        bind = CONTROL_SHIFT, PERIOD, exec, dunstctl context
+        bind = CONTROL_SHIFT, COMMA, exec, dunstctl close
+        bind = CONTROL_SHIFT, MINUS, exec, dunstctl history-pop
+
+        bind = , PRINT, exec, screenshot
+        bind = CONTROL, PRINT, exec, screenshot-select
+        bind = SUPER, PRINT, exec, screenshot-window
+        bind = SHIFT, PRINT, exec, screenshot-clip
+        bind = CONTROL_SHIFT, PRINT, exec, screenshot-select-clip
+        bind = SUPER_SHIFT, PRINT, exec, screenshot-window-clip
 
         # Application bindings
         bind = SUPER, F1, exec, ${editorCommand}
@@ -288,9 +316,24 @@ in {
         bindm = SUPER, mouse:273, resizewindow
 
         # Autostart
+        exec = bash ${desktopCfg.wayland.waybar.launchCommand}
         exec-once = wl-configure-gtk
         exec-once = ${polkitAgent}
+        exec-once = hyprpaper
       '';
     };
+
+    home.packages = [pkgs.hyprpaper];
+    xdg.configFile."hypr/hyprpaper.conf".text = ''
+      ${concatStrings (map (wallpaper: "preload = ${wallpaper}") wallpapers)}
+      ${concatStrings (map
+        (monitor: "wallpaper = ${monitor.name}, ${
+          if isNull monitor.value.background
+          then "~/.config/wallpapers/wallpaper.jpg"
+          else monitor.value.background
+        }")
+        config.hopplaos.hardware.monitors)}
+      wallpaper = , ~/.config/wallpapers/wallpaper.jpg
+    '';
   };
 }

@@ -14,6 +14,7 @@ window#waybar {
 #workspaces,
 #network,
 #pulseaudio,
+#wireplumber,
 #battery,
 #backlight,
 #clock,
@@ -53,7 +54,8 @@ window#waybar {
 	background: #bd93f9;
 }
 
-#pulseaudio {
+#pulseaudio,
+#wireplumber {
 	color: #1A1826;
 	background: #FAE3B0;
 }
