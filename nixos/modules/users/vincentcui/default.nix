@@ -25,6 +25,7 @@ in {
 
   config = mkIf cfg.enable {
     users.users.vincentcui = {
+      uid = 1000;
       hashedPassword = "$6$rounds=4096$BGIzgpigyvSnrnak$dOv/C2.bZjDqWYvPTic/rf6nIrvUDFmBuOmvQLzTNjSdm28xQBF7JSnIxlXTpdauAuPZQbSxRvJ18grEmg/Pd0";
       description = "Vincent Cui";
       isNormalUser = true;

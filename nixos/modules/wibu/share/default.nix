@@ -15,6 +15,9 @@
   cfg = config.hopplaos.wibu.share;
 
   shareCredentialsFile = "/etc/wibu/smbcredentials";
+
+  ownerUid = config.users.users.vincentcui.uid;
+  groupUid = config.users.groups.${config.users.users.vincentcui.group}.gid;
 in {
   options = {
     hopplaos.wibu.share = {
@@ -49,7 +52,7 @@ in {
           #       Please don't use blank spaces to separate the equal sign from the
           #       user account name or password.
           creds=${shareCredentialsFile}
-          mountopts="-fstype=cifs"
+          mountopts="-fstype=cifs,file_mode=0644,dir_mode=0755,uid=${toString ownerUid},gid=${toString groupUid}"
           if [ -f "$creds" ]; then
               opts="$mountopts,credentials=$creds"
               smbopts="-A $creds"
