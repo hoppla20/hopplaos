@@ -162,6 +162,14 @@ in {
           workspace_swipe = false
         }
 
+        misc {
+          disable_autoreload = true
+        }
+
+        binds {
+          allow_workspace_cycles = true
+        }
+
         submap = resize
         binde = , LEFT, resizeactive, 10 0
         binde = , RIGHT, resizeactive, -10 0
@@ -195,6 +203,8 @@ in {
         bind = SUPER, F, fullscreen,
         bind = SUPER, 0, submap, system
         bind = SUPER, R, submap, resize
+        bind = SUPER, E, layoutmsg, orientationnext
+        bind = SUPER_SHIFT, E, layoutmsg, orientationprev
 
         # Application bindings
         bind = SUPER, F1, exec, ${editorCommand}
