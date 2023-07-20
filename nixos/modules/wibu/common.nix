@@ -20,6 +20,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    security.pki.certificateFiles = lib.filesystem.listFilesRecursive ./certificates;
+
     environment.systemPackages = [pkgs.vmware-workstation];
   };
 }
