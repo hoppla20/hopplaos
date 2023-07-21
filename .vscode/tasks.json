@@ -10,6 +10,16 @@
           "kind": "build",
           "isDefault": true
         }
+      },
+      {
+        "command": "build-installer",
+        "label": "build-installer",
+        "type": "shell",
+        "problemMatcher": [],
+        "group": {
+          "kind": "build",
+          "isDefault": false
+        }
       }
     ]
 }

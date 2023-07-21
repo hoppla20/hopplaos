@@ -1,9 +1,9 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: let
+{ pkgs
+, config
+, lib
+, ...
+}:
+let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.hopplaos.programs.vscode;
@@ -34,10 +34,11 @@
       mkhl.direnv
     ])
     ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace
-    (import ./marketplaceExtensions.nix);
-in {
+      (import ./marketplaceExtensions.nix);
+in
+{
   options = {
-    hopplaos.programs.vscode = {enable = mkEnableOption "VSCode";};
+    hopplaos.programs.vscode = { enable = mkEnableOption "VSCode"; };
   };
 
   config = mkIf cfg.enable {
@@ -58,7 +59,7 @@ in {
           else "Catppuccin Latte";
         "editor.fontFamily" = "'FiraCode Nerd Font Mono', 'feather', 'monospace'";
         "editor.minimap.enabled" = false;
-        "editor.rulers" = [80];
+        "editor.rulers" = [ 80 ];
         "editor.stickyScroll.enabled" = true;
 
         # behavior
@@ -70,7 +71,7 @@ in {
         "explorer.autoReveal" = false;
         "git.confirmSync" = false;
         "extensions.autoUpdate" = false;
-        "terminal.integrated.commandsToSkipShell" = ["-workbench.action.quickOpen"];
+        "terminal.integrated.commandsToSkipShell" = [ "-workbench.action.quickOpen" ];
 
         # plugin settings
         "vscode-neovim.neovimExecutablePaths.linux" = "/run/current-system/sw/bin/nvim";
@@ -78,13 +79,13 @@ in {
         "latex-workshop.view.pdf.viewer" = "tab";
         "latex-workshop.synctex.synctexjs.enabled" = true;
         "hediet.vscode-drawio.theme" = "atlas";
-        "vs-kubernetes" = {"vs-kubernetes.crd-code-completion" = "enabled";};
+        "vs-kubernetes" = { "vs-kubernetes.crd-code-completion" = "enabled"; };
         "nix.serverPath" = "rnix-lsp";
         "nix.formatterPath" = "nixpkgs-fmt";
 
         # language settings
-        "[jsonc]" = {"editor.defaultFormatter" = "esbenp.prettier-vscode";};
-        "[yaml]" = {"editor.defaultFormatter" = "esbenp.prettier-vscode";};
+        "[jsonc]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
+        "[yaml]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
       };
     };
   };

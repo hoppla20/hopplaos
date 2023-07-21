@@ -1,4 +1,9 @@
-{ pkgs, config, lib, inputs, ... }:
+{ pkgs
+, config
+, lib
+, inputs
+, ...
+}:
 let
   cfg = config.hopplaos.desktop;
 
@@ -10,15 +15,16 @@ in
   options = {
     hopplaos.desktop = {
       enable = mkEnableOption "HopplaOS Desktop";
-      darkTheme = mkEnableOption "System wide dark theme" // {
-        default = true;
-      };
+      darkTheme =
+        mkEnableOption "System wide dark theme"
+        // {
+          default = true;
+        };
 
       polkitAgent = mkOption {
         type = types.str;
         readOnly = true;
-        default =
-          "/run/current-system/sw/libexec/polkit-gnome-authentication-agent-1";
+        default = "/run/current-system/sw/libexec/polkit-gnome-authentication-agent-1";
       };
 
       systemCommands = {
@@ -54,8 +60,7 @@ in
       browserCommand = mkOption {
         type = types.str;
         readOnly = true;
-        default =
-          "${pkgs.brave}/bin/brave --use-angle=vulkan --use-cmd-decoder=passthrough --enable-webrtc-pipewire-capturer";
+        default = "${pkgs.brave}/bin/brave --use-angle=vulkan --use-cmd-decoder=passthrough --enable-webrtc-pipewire-capturer";
       };
       editorCommand = mkOption {
         type = types.str;
@@ -122,6 +127,8 @@ in
 
     services.gnome-keyring.enable = true;
 
-    xdg.configFile = { "wallpapers/wallpaper.jpg".source = ./wallpaper.jpg; };
+    xdg.configFile = {
+      "wallpapers".source = ./wallpapers;
+    };
   };
 }
