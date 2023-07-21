@@ -143,6 +143,8 @@
       url = "github:mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixvim.url = "github:nix-community/nixvim/nixos-23.05";
   };
 
   nixConfig = {
