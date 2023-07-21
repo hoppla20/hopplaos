@@ -1,27 +1,30 @@
 {
   description = "HopplaOS";
 
-  outputs = inputs@{ self, ... }:
-    let
-      inherit (builtins) pathExists readDir;
+  outputs = inputs @ {self, ...}: let
+    inherit (builtins) pathExists readDir;
 
-      inherit (inputs.nixpkgs.lib) filterAttrs mapAttrs;
+    inherit (inputs.nixpkgs.lib) filterAttrs mapAttrs;
 
-      inherit (inputs.flake-parts.lib) mkFlake;
+    inherit (inputs.flake-parts.lib) mkFlake;
 
-      lib = import ./lib {
-        lib = inputs.nixpkgs.lib // {
+    lib = import ./lib {
+      lib =
+        inputs.nixpkgs.lib
+        // {
           flake-utils-plus = inputs.flake-utils-plus.lib;
           digga = inputs.digga.lib;
         };
-      };
-    in mkFlake { inherit inputs; } {
+    };
+  in
+    mkFlake {inherit inputs;} {
       debug = true;
 
-      imports = [ inputs.devshell.flakeModule ./pkgs ./nixos ./home ]
+      imports =
+        [inputs.devshell.flakeModule ./pkgs ./nixos ./home]
         ++ builtins.attrValues (lib.exportModulesRecursive ./overlays);
 
-      systems = [ "x86_64-linux" ];
+      systems = ["x86_64-linux"];
 
       flake = {
         lib = lib;
@@ -29,22 +32,35 @@
           hostsDir = ./nixos/hosts;
           hostsWithDisko = filterAttrs (name: type:
             type == "directory" && pathExists (hostsDir + "/${name}/disko.nix"))
-            (readDir hostsDir);
-        in mapAttrs (name: _: import (hostsDir + "/${name}/disko.nix"))
-        hostsWithDisko;
+          (readDir hostsDir);
+        in
+          mapAttrs (name: _: import (hostsDir + "/${name}/disko.nix"))
+          hostsWithDisko;
       };
 
-      perSystem = { config, self', inputs', pkgs, system, ... }: {
+      perSystem = {
+        config,
+        self',
+        inputs',
+        pkgs,
+        system,
+        ...
+      }: {
         devshells.default = let
           build-installer = pkgs.writeShellScriptBin "build-installer" ''
             nix build .#nixosConfigurations.installer.config.formats.custom-iso
           '';
         in {
           name = "hopplaos";
-          packages =
-            [ pkgs.nixfmt pkgs.git pkgs.neovim inputs'.disko.packages.default ];
+          packages = [
+            pkgs.nixpkgs-fmt
+            pkgs.git
+            pkgs.neovim
+            pkgs.rnix-lsp
+            inputs'.disko.packages.default
+          ];
           commands = [
-            { package = self'.packages.repl; }
+            {package = self'.packages.repl;}
             {
               package = self'.packages.install-system;
               help = "install-system [-h] [-d] [-m] [name]";
@@ -53,7 +69,7 @@
               package = self'.packages.run-test-vm;
               help = "run-test-vm [-h] [-n] [configuration]";
             }
-            { package = build-installer; }
+            {package = build-installer;}
             {
               name = "disko";
               package = pkgs.hello;
@@ -63,7 +79,7 @@
           ];
         };
 
-        formatter = pkgs.nixfmt;
+        formatter = pkgs.nixpkgs-fmt;
       };
     };
 
@@ -99,8 +115,7 @@
     };
 
     home-manager = {
-      url =
-        "git+file:///home/vincentcui/Workspace/nix/home-manager?ref=release-23.05";
+      url = "git+file:///home/vincentcui/Workspace/nix/home-manager?ref=release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     #home-manager = {
@@ -141,8 +156,7 @@
 
   nixConfig = {
     extra-experimental-features = "nix-command flakes";
-    extra-substituters =
-      [ "https://nix-community.cachix.org" "https://hyprland.cachix.org" ];
+    extra-substituters = ["https://nix-community.cachix.org" "https://hyprland.cachix.org"];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="

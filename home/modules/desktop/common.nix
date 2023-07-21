@@ -81,9 +81,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    scheme = if cfg.darkTheme
-      then "${inputs.base16-schemes}/catppuccin-macchiato.yaml"
-      else "${inputs.base16-schemes}/catppuccin-latte.yaml";
+    scheme = if cfg.darkTheme then
+      "${inputs.base16-schemes}/catppuccin-macchiato.yaml"
+    else
+      "${inputs.base16-schemes}/catppuccin-latte.yaml";
 
     home = {
       packages = builtins.attrValues {
