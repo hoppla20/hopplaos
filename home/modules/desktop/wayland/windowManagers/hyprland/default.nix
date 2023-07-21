@@ -125,6 +125,15 @@ in
           layout = master
         }
 
+        misc {
+          disable_hyprland_logo = true;
+          disable_autoreload = true
+          groupbar_gradients = false
+          groupbar_titles_font_size = 10
+          groupbar_text_color = rgb(${config.scheme.base05})
+          vrr = 1
+        }
+
         decoration {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
@@ -171,13 +180,6 @@ in
           workspace_swipe = false
         }
 
-        misc {
-          disable_autoreload = true
-          groupbar_gradients = false
-          groupbar_titles_font_size = 10
-          groupbar_text_color = rgb(${config.scheme.base05})
-        }
-
         binds {
           allow_workspace_cycles = true
         }
@@ -216,8 +218,8 @@ in
         bind = SUPER, F, fullscreen,
         bind = SUPER, 0, submap, system
         bind = SUPER, R, submap, resize
-        bind = SUPER, E, layoutmsg, orientationnext
-        bind = SUPER_SHIFT, E, layoutmsg, orientationprev
+        bind = SUPER, SEMICOLON, layoutmsg, orientationnext
+        bind = SUPER_SHIFT, SEMICOLON, layoutmsg, orientationprev
         bind = SUPER_SHIFT, R, exec, hyprctl reload
         bind = SUPER, T, exec, ${config.hopplaos.programs.theme-switcher.package}/bin/theme-switcher
 

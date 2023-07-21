@@ -99,11 +99,13 @@ in
       else
         "${inputs.base16-schemes}/catppuccin-latte.yaml";
 
+    xsession.enable = true;
+
     home = {
       packages = builtins.attrValues {
         inherit (pkgs) xdg-utils glib brave light;
-
         inherit (pkgs.xorg) xhost;
+        inherit (pkgs.gnome) seahorse;
       };
 
       pointerCursor = {
@@ -145,7 +147,10 @@ in
       platformTheme = "gtk";
     };
 
-    services.gnome-keyring.enable = true;
+    services.gnome-keyring = {
+      enable = false;
+      components = ["pkcs11" "secrets" "ssh"];
+    };
 
     xdg.configFile = {
       "wallpapers".source = ./wallpapers;

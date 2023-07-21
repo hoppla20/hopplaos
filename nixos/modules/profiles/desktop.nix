@@ -15,10 +15,15 @@ in
         grub.enable = true;
         plymouth.enable = true;
       };
+
       desktop = {
         enable = true;
         thunar.enable = true;
         wayland.hyprland.enable = true;
+      };
+
+      services = {
+        gnome-keyring.enable = true;
       };
     };
   };
