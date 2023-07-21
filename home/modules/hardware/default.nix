@@ -64,10 +64,7 @@ with lib; let
           };
         });
         default = {
-          file =
-            if config.hopplaos.desktop.darkTheme
-            then "~/.config/wallpapers/wallpaper-dark.jpg"
-            else "~/.config/wallpapers/wallpaper-light.jpg";
+          file = config.hopplaos.desktop.defaultWallpaper;
           mode = "fill";
         };
       };

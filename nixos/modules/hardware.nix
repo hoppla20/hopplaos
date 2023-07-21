@@ -1,10 +1,8 @@
 { pkgs, config, lib, inputs, ... }:
 let
-  inherit (lib) types mkOption mkEnableOption mkIf mkMerge;
+  inherit (lib) types mkOption mkEnableOption mkIf;
 
   cfg = config.hopplaos.hardware;
-
-  nixosHardware = inputs.nixos-hardware.nixosModules;
 in
 {
   options.hopplaos.hardware = {

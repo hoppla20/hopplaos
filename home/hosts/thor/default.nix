@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   hopplaos.hardware = {
     monitors = [
       {
@@ -22,6 +22,7 @@
             x = 2560;
             y = 0;
           };
+          background.file = "~/.config/wallpapers/wallpaper-${if config.hopplaos.desktop.darkTheme then "dark" else "light"}-90.jpg";
         };
       }
     ];

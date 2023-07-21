@@ -20,6 +20,12 @@ in
         // {
           default = true;
         };
+      defaultWallpaper = mkOption {
+        type = types.str;
+        default = if cfg.darkTheme
+          then "~/.config/wallpapers/wallpaper-dark.jpg"
+          else "~/.config/wallpapers/wallpaper-light.jpg";
+      };
 
       polkitAgent = mkOption {
         type = types.str;

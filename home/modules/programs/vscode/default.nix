@@ -13,7 +13,6 @@ let
       catppuccin.catppuccin-vsc
 
       jnoortheen.nix-ide
-      b4dm4n.vscode-nixpkgs-fmt
       redhat.vscode-yaml
       ms-python.python
       yzhang.markdown-all-in-one

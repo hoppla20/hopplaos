@@ -68,6 +68,12 @@ let
     config.hopplaos.hardware.monitors);
 
   cursor = config.home.pointerCursor;
+
+  launchHyprpaper = pkgs.writeShellScript "launch_hyprpaper" ''
+    ${pkgs.killall}/bin/killall -q -r hyprpaper || true
+    while ${pkgs.procps}/bin/pgrep -u $UID -x hyprpaper >/dev/null; do sleep 1; done
+    ${pkgs.hyprpaper}/bin/hyprpaper
+  '';
 in
 {
   options = {
@@ -311,9 +317,9 @@ in
 
         # Autostart
         exec = bash ${desktopCfg.wayland.waybar.launchCommand}
+        exec = bash ${launchHyprpaper}
         exec-once = wl-configure-gtk
         exec-once = ${polkitAgent}
-        exec-once = hyprpaper
 
         ${lib.optionalString (builtins.length hardwareCfg.monitors > 0) (let
           monitor0 = (builtins.elemAt hardwareCfg.monitors 0).name;
@@ -335,12 +341,16 @@ in
     };
 
     home.packages = [ pkgs.hyprpaper ];
-    xdg.configFile."hypr/hyprpaper.conf".text = ''
-      ${concatStrings (map (wallpaper: "preload = ${wallpaper}") wallpapers)}
-      ${concatStrings (map
-        (monitor: "wallpaper = ${monitor.name}, ${monitor.value.background.file}")
-        config.hopplaos.hardware.monitors)}
-      wallpaper = , ~/.config/wallpapers/wallpaper.jpg
-    '';
+    xdg.configFile."hypr/hyprpaper.conf"= {
+      text = ''
+        ${concatStringsSep "\n" (map (wallpaper: "preload = ${wallpaper}") wallpapers)}
+        ${concatStringsSep "\n" (map
+          (monitor: "wallpaper = ${monitor.name}, ${monitor.value.background.file}")
+          config.hopplaos.hardware.monitors)}
+        ${desktopCfg.defaultWallpaper}
+      '';
+      onChange = mkIf (!config.wayland.windowManager.hyprland.disableAutoreload)
+        "bash ${launchHyprpaper}&!";
+    };
   };
 }
