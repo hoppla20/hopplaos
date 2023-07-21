@@ -55,20 +55,21 @@ with lib; let
           options = {
             file = mkOption {
               type = types.str;
-              default =
-                if config.hopplaos.desktop.darkTheme
-                then "~/.config/wallpapers/wallpaper-dark"
-                else "~/.config/wallpapers/wallpaper-light";
               example = "~/.config/wallpapers/wallpaper.jpg";
             };
             mode = mkOption {
               type = types.str;
-              default = null;
               example = "fill";
             };
           };
         });
-        default = null;
+        default = {
+          file =
+            if config.hopplaos.desktop.darkTheme
+            then "~/.config/wallpapers/wallpaper-dark.jpg"
+            else "~/.config/wallpapers/wallpaper-light.jpg";
+          mode = "fill";
+        };
       };
     };
   };

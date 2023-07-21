@@ -18,6 +18,22 @@
         "type": "github"
       }
     },
+    "base16-alacritty": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1674275109,
+        "narHash": "sha256-Adwx9yP70I6mJrjjODOgZJjt4OPPe8gJu7UuBboXO4M=",
+        "owner": "aarowill",
+        "repo": "base16-alacritty",
+        "rev": "63d8ae5dfefe5db825dd4c699d0cdc2fc2c3eaf7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aarowill",
+        "repo": "base16-alacritty",
+        "type": "github"
+      }
+    },
     "base16-dunst": {
       "flake": false,
       "locked": {
@@ -773,6 +789,7 @@
     "root": {
       "inputs": {
         "base16": "base16",
+        "base16-alacritty": "base16-alacritty",
         "base16-dunst": "base16-dunst",
         "base16-schemes": "base16-schemes",
         "base16-waybar": "base16-waybar",

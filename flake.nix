@@ -29,12 +29,14 @@
 
       flake = {
         lib = lib;
-        diskoConfigurations = let
-          hostsDir = ./nixos/hosts;
-          hostsWithDisko = filterAttrs (name: type:
-            type == "directory" && pathExists (hostsDir + "/${name}/disko.nix"))
-          (readDir hostsDir);
-        in
+        diskoConfigurations =
+          let
+            hostsDir = ./nixos/hosts;
+            hostsWithDisko = filterAttrs
+              (name: type:
+                type == "directory" && pathExists (hostsDir + "/${name}/disko.nix"))
+              (readDir hostsDir);
+          in
           mapAttrs (name: _: import (hostsDir + "/${name}/disko.nix"))
             hostsWithDisko;
       };
@@ -57,7 +59,7 @@
               name = "hopplaos";
               packages = [
                 pkgs.nixpkgs-fmt
-                pkgs.rnix-lsp
+                pkgs.nil
                 inputs'.disko.packages.default
               ];
               commands = [
@@ -151,6 +153,10 @@
     };
     base16-waybar = {
       url = "github:mnussbaum/base16-waybar";
+      flake = false;
+    };
+    base16-alacritty = {
+      url = "github:aarowill/base16-alacritty";
       flake = false;
     };
   };

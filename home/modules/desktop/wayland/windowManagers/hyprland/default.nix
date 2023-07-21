@@ -29,6 +29,7 @@ let
     audio
     ;
 
+  hardwareCfg = config.hopplaos.hardware;
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.wayland.hyprland;
 
@@ -63,7 +64,7 @@ let
     (listToAttrs config.hopplaos.hardware.monitors));
 
   wallpapers = unique (map
-    (monitor: monitor.value.background)
+    (monitor: monitor.value.background.file)
     config.hopplaos.hardware.monitors);
 
   cursor = config.home.pointerCursor;
@@ -112,8 +113,10 @@ in
           gaps_in = 5
           gaps_out = 5
           border_size = 1
-          col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
-          col.inactive_border = rgba(595959aa)
+          col.inactive_border = rgba(${config.scheme.base02}ee)
+          col.active_border = rgba(${config.scheme.base0E}ee)
+          col.group_border = rgba(${config.scheme.base02}ee)
+          col.group_border_active = rgba(${config.scheme.base0E}ee)
           layout = master
         }
 
@@ -165,6 +168,9 @@ in
 
         misc {
           disable_autoreload = true
+          groupbar_gradients = false
+          groupbar_titles_font_size = 10
+          groupbar_text_color = rgb(${config.scheme.base05})
         }
 
         binds {
@@ -176,10 +182,11 @@ in
         binde = , RIGHT, resizeactive, -10 0
         binde = , UP, resizeactive, 0 -10
         binde = , DOWN, resizeactive, 0 10
-        binde = , H, resizeactive, 10 0
-        binde = , L, resizeactive, -10 0
-        binde = , K, resizeactive, 0 -10
-        binde = , J, resizeactive, 0 10
+        binde = , H, resizeactive, -10 0
+        binde = , L, resizeactive, 10 0
+        binde = , K, resizeactive, 0 10
+        binde = , J, resizeactive, 0 -10
+        bind = , RETURN, submap, reset
         bind = , ESCAPE, submap, reset
         bind = CONTROL, C, submap, reset
         submap = reset
@@ -263,14 +270,6 @@ in
         bind = SUPER_CONTROL, RIGHT, changegroupactive, f
         bind = ALT, TAB, changegroupactive, f
         bind = ALT_SHIFT, TAB, changegroupactive, b
-        bind = SUPER_CONTROL, LEFT, moveintogroup, l
-        bind = SUPER_CONTROL, RIGHT, moveintogroup, r
-        bind = SUPER_CONTROL, UP, moveintogroup, u
-        bind = SUPER_CONTROL, DOWN, moveintogroup, d
-        bind = SUPER_CONTROL, H, moveintogroup, l
-        bind = SUPER_CONTROL, L, moveintogroup, r
-        bind = SUPER_CONTROL, K, moveintogroup, u
-        bind = SUPER_CONTROL, J, moveintogroup, d
 
         # Switch workspaces
         bind = SUPER, TAB, workspace, previous
@@ -315,6 +314,23 @@ in
         exec-once = wl-configure-gtk
         exec-once = ${polkitAgent}
         exec-once = hyprpaper
+
+        ${lib.optionalString (builtins.length hardwareCfg.monitors > 0) (let
+          monitor0 = (builtins.elemAt hardwareCfg.monitors 0).name;
+          monitor1 = if (builtins.length hardwareCfg.monitors > 1)
+            then (builtins.elemAt hardwareCfg.monitors 1).name
+            else monitor0;
+        in ''
+          workspace = 1, monitor:${monitor0}
+          workspace = 2, monitor:${monitor0}
+          workspace = 3, monitor:${monitor0}
+          workspace = 4, monitor:${monitor0}
+          workspace = 5, monitor:${monitor0}
+          workspace = 6, monitor:${monitor1}
+          workspace = 7, monitor:${monitor1}
+          workspace = 8, monitor:${monitor1}
+          workspace = 9, monitor:${monitor1}
+        '')}
       '';
     };
 
@@ -322,7 +338,7 @@ in
     xdg.configFile."hypr/hyprpaper.conf".text = ''
       ${concatStrings (map (wallpaper: "preload = ${wallpaper}") wallpapers)}
       ${concatStrings (map
-        (monitor: "wallpaper = ${monitor.name}, ${monitor.value.background}")
+        (monitor: "wallpaper = ${monitor.name}, ${monitor.value.background.file}")
         config.hopplaos.hardware.monitors)}
       wallpaper = , ~/.config/wallpapers/wallpaper.jpg
     '';

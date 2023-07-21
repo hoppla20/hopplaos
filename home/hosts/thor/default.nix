@@ -17,7 +17,7 @@
         value = {
           resolution = "1920x1080";
           refreshRate = 60;
-          transform = "90";
+          transform = "270";
           position = {
             x = 2560;
             y = 0;

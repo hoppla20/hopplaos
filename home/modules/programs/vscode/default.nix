@@ -13,6 +13,7 @@ let
       catppuccin.catppuccin-vsc
 
       jnoortheen.nix-ide
+      b4dm4n.vscode-nixpkgs-fmt
       redhat.vscode-yaml
       ms-python.python
       yzhang.markdown-all-in-one
@@ -57,7 +58,7 @@ in
           if config.hopplaos.desktop.darkTheme
           then "Catppuccin Macchiato"
           else "Catppuccin Latte";
-        "editor.fontFamily" = "'FiraCode Nerd Font Mono', 'feather', 'monospace'";
+        "editor.fontFamily" = "'FiraCode Nerd Font Mono'";
         "editor.minimap.enabled" = false;
         "editor.rulers" = [ 80 ];
         "editor.stickyScroll.enabled" = true;
@@ -80,7 +81,15 @@ in
         "latex-workshop.synctex.synctexjs.enabled" = true;
         "hediet.vscode-drawio.theme" = "atlas";
         "vs-kubernetes" = { "vs-kubernetes.crd-code-completion" = "enabled"; };
-        "nix.serverPath" = "rnix-lsp";
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "nil";
+        "nix.serverSettings" = {
+          "nil" = {
+            "formatting" = {
+              "command" = [ "nixpkgs-fmt" ];
+            };
+          };
+        };
         "nix.formatterPath" = "nixpkgs-fmt";
 
         # language settings
