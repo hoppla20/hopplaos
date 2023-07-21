@@ -3,7 +3,8 @@ let
   cfg = config.hopplaos.users.vincentcui;
 
   inherit (lib) types mkOption mkEnableOption mkIf;
-in {
+in
+{
   options.hopplaos.users.vincentcui = {
     enable = mkEnableOption "Users: Vincent Cui";
     hmUser = mkOption {

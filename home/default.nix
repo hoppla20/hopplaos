@@ -15,15 +15,18 @@ let
   users = listDirectoryModules ./users;
   hosts = listDirectoryModules ./hosts;
 
-  homeConfigs = genAttrs' (combination:
-    nameValuePair "${combination.user}@${combination.host}" {
-      imports = [ users.${combination.user} hosts.${combination.host} ]
-        ++ builtins.attrValues homeModules ++ extraModules;
-    }) (cartesianProductOfSets {
+  homeConfigs = genAttrs'
+    (combination:
+      nameValuePair "${combination.user}@${combination.host}" {
+        imports = [ users.${combination.user} hosts.${combination.host} ]
+          ++ builtins.attrValues homeModules ++ extraModules;
+      })
+    (cartesianProductOfSets {
       user = builtins.attrNames users;
       host = builtins.attrNames hosts;
     });
-in {
+in
+{
   flake = {
     homeModules = homeModules;
     homeConfigurations = homeConfigs;

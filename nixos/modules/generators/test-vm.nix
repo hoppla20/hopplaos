@@ -3,7 +3,8 @@ let
   cfg = config.hopplaos.generators.test-vm;
 
   inherit (lib) types mkOption mkEnableOption;
-in {
+in
+{
   options = {
     hopplaos.generators.test-vm = {
       headless = mkEnableOption "Test VM headless";

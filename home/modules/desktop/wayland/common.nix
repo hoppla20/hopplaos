@@ -11,7 +11,8 @@ let
 
   gtkSchema = pkgs.gsettings-desktop-schemas;
   gtkDataDir = "${gtkSchema}/share/gsettings-schemas/${gtkSchema.name}";
-in {
+in
+{
   options = {
     hopplaos.desktop.wayland.enable = mkEnableOption "Wayland" // {
       readOnly = true;

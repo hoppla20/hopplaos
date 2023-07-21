@@ -5,7 +5,8 @@ let
   cfg = config.hopplaos.hardware;
 
   nixosHardware = inputs.nixos-hardware.nixosModules;
-in {
+in
+{
   options.hopplaos.hardware = {
     enable = mkEnableOption "Hardware";
 

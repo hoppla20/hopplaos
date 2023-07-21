@@ -3,7 +3,8 @@ let
   inherit (lib) mkEnableOption mkMerge mkIf;
 
   cfg = config.hopplaos.desktop;
-in {
+in
+{
   options = {
     hopplaos.desktop = {
       enable = mkEnableOption "HopplaOS Desktop";

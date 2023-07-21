@@ -4,7 +4,8 @@ let
 
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.wayland.hyprland;
-in {
+in
+{
   options = {
     hopplaos.desktop.wayland.hyprland = {
       enable = mkEnableOption "HopplaOS Wayland";

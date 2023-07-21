@@ -4,7 +4,8 @@ let
 
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.wayland.sway;
-in {
+in
+{
   options = {
     hopplaos.desktop.wayland.sway = {
       enable = mkEnableOption "Wayland - Sway";

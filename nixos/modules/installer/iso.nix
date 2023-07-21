@@ -3,7 +3,8 @@ let
   inherit (lib) mkImageMediaOverride mkEnableOption mkIf;
 
   cfg = config.hopplaos.installer;
-in {
+in
+{
   options.hopplaos.installer = {
     enable = mkEnableOption "Installer Configuration";
   };

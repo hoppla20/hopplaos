@@ -66,7 +66,8 @@ let
       };
     };
   };
-in {
+in
+{
   options = {
     hopplaos.hardware = {
       monitors = mkOption {

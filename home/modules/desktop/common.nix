@@ -5,7 +5,8 @@ let
   inherit (lib) types mkOption mkEnableOption mkIf;
 
   brightnessStep = 10;
-in {
+in
+{
   options = {
     hopplaos.desktop = {
       enable = mkEnableOption "HopplaOS Desktop";

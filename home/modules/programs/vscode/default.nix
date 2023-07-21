@@ -80,7 +80,7 @@ in {
         "hediet.vscode-drawio.theme" = "atlas";
         "vs-kubernetes" = {"vs-kubernetes.crd-code-completion" = "enabled";};
         "nix.serverPath" = "rnix-lsp";
-        "nix.formatterPath" = ["nix" "fmt" "--" "-"];
+        "nix.formatterPath" = "nixpkgs-fmt";
 
         # language settings
         "[jsonc]" = {"editor.defaultFormatter" = "esbenp.prettier-vscode";};

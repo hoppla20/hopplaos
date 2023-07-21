@@ -4,7 +4,8 @@ let
 
   cfg = config.hopplaos.boot;
   hardwareCfg = config.hopplaos.hardware;
-in {
+in
+{
   options.hopplaos.boot = {
     enable = mkEnableOption "Boot";
     kernelModules.kvm.enable =

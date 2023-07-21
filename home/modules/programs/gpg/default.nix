@@ -3,7 +3,8 @@ let
   cfg = config.hopplaos.programs.gpg;
 
   inherit (lib) mkEnableOption mkIf mkMerge;
-in {
+in
+{
   options = {
     hopplaos.programs.gpg = {
       enable = mkEnableOption "Programs - gpg";

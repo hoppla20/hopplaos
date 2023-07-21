@@ -11,7 +11,8 @@ let
 
   system-control-mode =
     "(e)xit_(l)ock_(s)uspend_(h)ibernate_(S)hutdown_(r)eboot";
-in {
+in
+{
   options = {
     hopplaos.desktop.wayland.sway = { enable = mkEnableOption "Sway"; };
   };
@@ -237,72 +238,78 @@ in {
           };
         };
 
-        output = builtins.mapAttrs (name: value: {
-          mode = lib.mkIf (!(builtins.isNull value.resolution))
-            "${value.resolution}${
+        output = builtins.mapAttrs
+          (name: value: {
+            mode = lib.mkIf (!(builtins.isNull value.resolution))
+              "${value.resolution}${
               if !(builtins.isNull value.refreshRate) then
                 "@${toString value.refreshRate}Hz"
               else
                 ""
             }";
-          background = lib.mkIf (!(builtins.isNull value.background))
-            "${value.background.file} ${value.background.mode}";
-          transform = lib.mkIf (!(builtins.isNull value.transform))
-            (toString value.transform);
-          position = lib.mkIf (!(builtins.isNull value.position))
-            "${toString value.position.x} ${toString value.position.y}";
-        }) (builtins.listToAttrs hardwareCfg.monitors);
+            background = lib.mkIf (!(builtins.isNull value.background))
+              "${value.background.file} ${value.background.mode}";
+            transform = lib.mkIf (!(builtins.isNull value.transform))
+              (toString value.transform);
+            position = lib.mkIf (!(builtins.isNull value.position))
+              "${toString value.position.x} ${toString value.position.y}";
+          })
+          (builtins.listToAttrs hardwareCfg.monitors);
 
         bars = [ ];
 
         startup =
-          [ { command = "wl-configure-gtk"; } { command = polkitAgent; } ];
+          [{ command = "wl-configure-gtk"; } { command = polkitAgent; }];
 
         workspaceOutputAssign =
-          mkIf ((builtins.length hardwareCfg.monitors) > 0) (let
-            monitor0 = (builtins.elemAt hardwareCfg.monitors 0).name;
-            monitor1 = if ((builtins.length hardwareCfg.monitors) > 1) then
-              (builtins.elemAt hardwareCfg.monitors 1).name
-            else
-              (builtins.elemAt hardwareCfg.monitors 0).name;
-          in [
-            {
-              workspace = "1";
-              output = monitor0;
-            }
-            {
-              workspace = "2";
-              output = monitor0;
-            }
-            {
-              workspace = "3";
-              output = monitor0;
-            }
-            {
-              workspace = "4";
-              output = monitor0;
-            }
-            {
-              workspace = "5";
-              output = monitor0;
-            }
-            {
-              workspace = "6";
-              output = monitor1;
-            }
-            {
-              workspace = "7";
-              output = monitor1;
-            }
-            {
-              workspace = "8";
-              output = monitor1;
-            }
-            {
-              workspace = "9";
-              output = monitor1;
-            }
-          ]);
+          mkIf ((builtins.length hardwareCfg.monitors) > 0) (
+            let
+              monitor0 = (builtins.elemAt hardwareCfg.monitors 0).name;
+              monitor1 =
+                if ((builtins.length hardwareCfg.monitors) > 1) then
+                  (builtins.elemAt hardwareCfg.monitors 1).name
+                else
+                  (builtins.elemAt hardwareCfg.monitors 0).name;
+            in
+            [
+              {
+                workspace = "1";
+                output = monitor0;
+              }
+              {
+                workspace = "2";
+                output = monitor0;
+              }
+              {
+                workspace = "3";
+                output = monitor0;
+              }
+              {
+                workspace = "4";
+                output = monitor0;
+              }
+              {
+                workspace = "5";
+                output = monitor0;
+              }
+              {
+                workspace = "6";
+                output = monitor1;
+              }
+              {
+                workspace = "7";
+                output = monitor1;
+              }
+              {
+                workspace = "8";
+                output = monitor1;
+              }
+              {
+                workspace = "9";
+                output = monitor1;
+              }
+            ]
+          );
       };
 
       extraConfig = ''

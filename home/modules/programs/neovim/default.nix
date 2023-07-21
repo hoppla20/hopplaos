@@ -3,7 +3,8 @@ let
   inherit (lib) types mkOption mkEnableOption mkIf mkMerge;
 
   cfg = config.hopplaos.programs.neovim;
-in {
+in
+{
   options.hopplaos.programs.neovim = { enable = mkEnableOption "Neovim"; };
 
   config = mkIf cfg.enable {

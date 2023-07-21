@@ -3,7 +3,8 @@ let
   cfg = config.hopplaos.programs.ssh;
 
   inherit (lib) types mkOption mkEnableOption mkIf;
-in {
+in
+{
   options = {
     hopplaos.programs.ssh = {
       enable = mkEnableOption "Programs - ssh";

@@ -3,7 +3,8 @@ let
   cfg = config.hopplaos.programs.zsh;
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options = { hopplaos.programs.zsh.enable = mkEnableOption "Programs - zsh"; };
 
   config = mkIf cfg.enable {

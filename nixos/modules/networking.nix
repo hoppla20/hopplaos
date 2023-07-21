@@ -3,7 +3,8 @@ let
   cfg = config.hopplaos.networking;
 
   inherit (lib) types mkIf mkOption mkEnableOption;
-in {
+in
+{
   options = {
     hopplaos.networking = {
       enable = mkEnableOption "HopplaOS Networking" // { default = true; };

@@ -3,7 +3,8 @@ let
   inherit (lib) mkEnableOption mkIf mkMerge;
 
   cfg = config.hopplaos.programs.alacritty;
-in {
+in
+{
   options = {
     hopplaos.programs.alacritty = {
       enable = mkEnableOption "Alacritty" // {
@@ -36,26 +37,27 @@ in {
             chars = "\\x1b\\x7f";
           }];
 
-          font = let family = "JetBrainsMono Nerd Font";
-          in {
-            size = 10;
-            normal = {
-              family = family;
-              style = "Regular";
+          font =
+            let family = "JetBrainsMono Nerd Font";
+            in {
+              size = 10;
+              normal = {
+                family = family;
+                style = "Regular";
+              };
+              bold = {
+                family = family;
+                style = "Bold";
+              };
+              italic = {
+                family = family;
+                style = "Italic";
+              };
+              bold_italic = {
+                family = family;
+                style = "Bold Italic";
+              };
             };
-            bold = {
-              family = family;
-              style = "Bold";
-            };
-            italic = {
-              family = family;
-              style = "Italic";
-            };
-            bold_italic = {
-              family = family;
-              style = "Bold Italic";
-            };
-          };
 
           colors = {
             primary = {

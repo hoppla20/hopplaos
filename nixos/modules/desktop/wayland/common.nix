@@ -8,7 +8,8 @@ let
   cfg = desktopCfg.wayland;
 
   wms = attrNames (listDirectoryModules ./windowManagers);
-in {
+in
+{
   options = {
     hopplaos.desktop.wayland.enable = mkEnableOption "Wayland" // {
       readOnly = true;

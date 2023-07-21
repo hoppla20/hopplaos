@@ -4,7 +4,8 @@ let
 
   bootCfg = config.hopplaos.boot;
   cfg = bootCfg.plymouth;
-in {
+in
+{
   options.hopplaos.boot.plymouth = {
     enable = mkEnableOption "Plymouth boot splashscreen";
   };

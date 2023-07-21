@@ -54,15 +54,15 @@
         pciutils
         usbutils
         # utils
-        
+
         htop
         bottom
         # system monitoring
-        
+
         parted
         gptfdisk
         # partitioning
-        
+
         bat
         curl
         wget
@@ -76,11 +76,11 @@
         gnused
         killall
         # useful tools
-        
+
         niv
         nixpkgs-fmt
         # nix tools
-        
+
         ;
     };
 

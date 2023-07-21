@@ -7,7 +7,8 @@ let
 
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.audio;
-in {
+in
+{
   options = {
     hopplaos.desktop = {
       audio = {

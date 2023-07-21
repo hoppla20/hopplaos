@@ -7,7 +7,8 @@ let
 
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.wayland.waybar;
-in {
+in
+{
   options = {
     hopplaos.desktop.wayland.waybar = {
       enable = mkEnableOption "Waybar" // {

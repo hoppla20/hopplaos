@@ -4,7 +4,8 @@ let
 
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.dunst;
-in {
+in
+{
   options = {
     hopplaos.desktop.dunst = {
       enable = mkEnableOption "Dunst" // { default = desktopCfg.enable; };

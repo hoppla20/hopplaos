@@ -5,7 +5,8 @@ let
   inherit (pkgs) fetchurl;
 
   cfg = config.hopplaos.wibu;
-in {
+in
+{
   options.hopplaos.wibu = { enable = mkEnableOption "WIBU"; };
 
   config = mkIf cfg.enable {

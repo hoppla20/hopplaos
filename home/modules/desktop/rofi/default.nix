@@ -4,7 +4,8 @@ let
 
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.rofi;
-in {
+in
+{
   options = {
     hopplaos.desktop.rofi = {
       enable = mkEnableOption "Rofi";
