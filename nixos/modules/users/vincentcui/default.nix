@@ -38,10 +38,25 @@ in
 
     security.sudo.extraRules = [{
       users = [ "vincentcui" ];
-      commands = [{
-        command = "${pkgs.nixos-rebuild}/bin/nixos-rebuild";
-        options = [ "SETENV" "NOPASSWD" ];
-      }];
+      commands = [
+        {
+          command = "${pkgs.nixos-rebuild}/bin/nixos-rebuild";
+          options = [ "SETENV" "NOPASSWD" ];
+        }
+        {
+          command = "/nix/var/nix/profiles/system/specialisation/*/bin/switch-to-configuration";
+          options = [ "SETENV" "NOPASSWD" ];
+        }
+      ];
     }];
+
+    specialisation = {
+      dark.configuration = {
+        home-manager.users.vincentcui.hopplaos.desktop.darkTheme = true;
+      };
+      light.configuration = {
+        home-manager.users.vincentcui.hopplaos.desktop.darkTheme = false;
+      };
+    };
   };
 }

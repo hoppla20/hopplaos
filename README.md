@@ -56,3 +56,11 @@ Switch between virtio-vga and virtio-vga-gl to work around this issue
 
 - [GitHub](https://github.com/hercules-ci/flake-parts)
 - [Docs](https://flake.parts)
+
+# Tips & Tricks
+
+## Switch between dark and light theme
+
+```bash
+nix-specialisation-switch [dark,light]
+```

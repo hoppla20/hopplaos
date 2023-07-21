@@ -47,21 +47,22 @@
     systemPackages = builtins.attrValues {
       inherit
         (pkgs)
+        # utils
         coreutils
         dnsutils
         iputils
         pciutils
         usbutils
-        # utils
 
+        # system monitoring
         htop
         bottom
-        # system monitoring
 
+        # partitioning
         parted
         gptfdisk
-        # partitioning
 
+        # useful tools
         bat
         curl
         wget
@@ -74,14 +75,16 @@
         gawk
         gnused
         killall
-        # useful tools
 
+        # nix tools
         niv
         nixpkgs-fmt
-        # nix tools
-
         ;
-    };
+    } ++ [
+      (pkgs.writeShellScriptBin "nix-specialisation-switcher" ''
+        sudo "/nix/var/nix/profiles/system/specialisation/$1/bin/switch-to-configuration" switch
+      '')
+    ];
 
     shellAliases = {
       ".." = "cd ..";
