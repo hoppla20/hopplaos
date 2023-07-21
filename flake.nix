@@ -133,6 +133,10 @@
       url = "github:tinted-theming/base16-dunst";
       flake = false;
     };
+    base16-waybar = {
+      url = "github:mnussbaum/base16-waybar";
+      flake = false;
+    };
   };
 
   nixConfig = {

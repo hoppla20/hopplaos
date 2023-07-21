@@ -50,6 +50,22 @@
         "type": "github"
       }
     },
+    "base16-waybar": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1546831770,
+        "narHash": "sha256-ehb4CLLPJ/SjMz53/inuP9ine2CfIpexp2O1lVHihM0=",
+        "owner": "mnussbaum",
+        "repo": "base16-waybar",
+        "rev": "d2f943b1abb9c9f295e4c6760b7bdfc2125171d2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mnussbaum",
+        "repo": "base16-waybar",
+        "type": "github"
+      }
+    },
     "beautysh": {
       "inputs": {
         "nixpkgs": [
@@ -759,6 +775,7 @@
         "base16": "base16",
         "base16-dunst": "base16-dunst",
         "base16-schemes": "base16-schemes",
+        "base16-waybar": "base16-waybar",
         "devshell": "devshell",
         "digga": "digga",
         "disko": "disko",

@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, inputs, ... }:
 let
   inherit (lib)
     types mkOption mkEnableOption mkIf mkDefault mkMerge optional
@@ -32,7 +32,10 @@ in {
       package = pkgs.waybar-experimental;
       systemd.enable = false;
 
-      style = ./style.css;
+      style = pkgs.writeText "style.css"
+        (builtins.readFile (config.scheme inputs.base16-waybar)
+          + builtins.readFile ./style.css);
+
       settings = {
         main = {
           layer = "top";

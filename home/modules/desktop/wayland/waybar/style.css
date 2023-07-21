@@ -6,7 +6,7 @@
 
 window#waybar {
   background: transparent;
-  color: white;
+  color: @base00;
   font-family: FiraCode Nerd Font;
   font-size: 12px;
 }
@@ -28,41 +28,38 @@ window#waybar {
 }
 
 #workspaces {
-	background: #161320;
+	background: #4c4f69;
 }
 
 /* sway */
 #workspaces button.focused {
-	color: #BD93F9;
+	color: @base0E;
 }
 
 /* hyprland */
 #workspaces button.active {
-	color: #BD93F9;
+	color: @base0E;
 }
 
 #workspaces button:hover {
-	color: #E8A2AF;
+	color: @base07;
 }
 
 #workspaces button.urgent {
-	color: #E0727C;
+	color: @base08;
 }
 
 #network {
-	color: #161320;
-	background: #bd93f9;
+	background: @base0D;
 }
 
 #pulseaudio,
 #wireplumber {
-	color: #1A1826;
-	background: #FAE3B0;
+	background: @base0F;
 }
 
 #battery {
-	color: #161320;
-	background: #B5E8E0;
+	background: @base0B;
 }
 
 #battery.critical:not(.charging) {
@@ -75,41 +72,33 @@ window#waybar {
 
 @keyframes blink {
     to {
-        color: #B5E8E0;
-        background: #BF616A;
+        background: @base08;
     }
 }
 
 #backlight {
-	color: #161320;
-	background: #F8BD96;
+	background: @base0A;
 }
 #clock {
-	color: #161320;
-	background: #ABE9B3;
+	background: @base0C;
 }
 
 #memory {
-	color: #161320;
-	background: #DDB6F2;
+	background: @base0E;
 }
 #cpu {
-	color: #161320;
-	background: #96CDFB;
+	background: @base07;
 }
 
 #tray {
-	color: #B5E8E0;
-	background: #161320;
+	background: #4c4f69;
 }
 
 #idle_inhibitor {
-	color: #161320;
-	background: #f6a967;
+	background: @base09;
 }
 
 #mode,
 #submap {
-	color: #161320;
-	background: #F28FAD;
+	background: @base08;
 }
