@@ -17,6 +17,11 @@
       office.enable = true;
     };
 
+    services = {
+      syncthing.enable = true;
+      nextcloud-client.enable = true;
+    };
+
     desktop = {
       enable = true;
       audio.enable = true;
