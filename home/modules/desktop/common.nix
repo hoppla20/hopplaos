@@ -134,6 +134,11 @@ in
       };
     };
 
+    qt = {
+      enable = true;
+      platformTheme = "gtk";
+    };
+
     services.gnome-keyring.enable = true;
 
     xdg.configFile = {

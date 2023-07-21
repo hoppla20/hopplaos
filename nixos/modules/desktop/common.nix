@@ -14,8 +14,6 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     {
-      environment.systemPackages =
-        builtins.attrValues { inherit (pkgs) adwaita-qt adwaita-qt6; };
       services = {
         printing = {
           enable = true;
