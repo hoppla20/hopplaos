@@ -9,14 +9,14 @@
           format = "gpt";
           partitions = [
             {
-              name = "BOOT";
+              name = "ESP";
               start = "1MiB";
               end = "1GiB";
               bootable = true;
               content = {
                 type = "filesystem";
                 format = "vfat";
-                mountpoint = "/boot/efi";
+                mountpoint = "/boot";
                 mountOptions = [ "defaults" ];
               };
             }
