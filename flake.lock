@@ -454,18 +454,18 @@
         ]
       },
       "locked": {
-        "lastModified": 1689934658,
-        "narHash": "sha256-BaU1MrtaRBs5jqRnRmFzhT2GyPSFI1Kb0cYceQcJtrw=",
-        "ref": "release-23.05",
-        "rev": "692f1ec4f7b1f76f4511e5c8ac41d463751d5b9c",
-        "revCount": 2777,
-        "type": "git",
-        "url": "file:///home/vincentcui/Workspace/nix/home-manager"
+        "lastModified": 1689937347,
+        "narHash": "sha256-m0Qbw440kHBn2SO6JxyrLabmvpcXsqpjF8X6M8Qrpyg=",
+        "owner": "hoppla20",
+        "repo": "home-manager",
+        "rev": "560dcf45d0c2bfdc61266b5154f742e947d7037b",
+        "type": "github"
       },
       "original": {
+        "owner": "hoppla20",
         "ref": "release-23.05",
-        "type": "git",
-        "url": "file:///home/vincentcui/Workspace/nix/home-manager"
+        "repo": "home-manager",
+        "type": "github"
       }
     },
     "hyprland": {
