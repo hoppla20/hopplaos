@@ -115,7 +115,7 @@
     };
 
     home-manager = {
-      url = "git+file:///home/vincentcui/Workspace/nix/home-manager?ref=release-23.05";
+      url = "github:hopplaos/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     #home-manager = {
