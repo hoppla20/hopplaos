@@ -36,6 +36,15 @@ in
         };
       };
       xdg.portal = { xdgOpenUsePortal = true; };
+
+      specialisation = {
+        dark.configuration = {
+          home-manager.users.vincentcui.hopplaos.desktop.darkTheme = true;
+        };
+        light.configuration = {
+          home-manager.users.vincentcui.hopplaos.desktop.darkTheme = false;
+        };
+      };
     }
     (mkIf cfg.thunar.enable {
       programs = {

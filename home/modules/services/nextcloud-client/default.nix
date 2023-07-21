@@ -24,5 +24,7 @@ in {
       enable = true;
       startInBackground = true;
     };
+
+    systemd.user.services.nextcloud-client.Unit.Requires = ["tray.target"];
   };
 }

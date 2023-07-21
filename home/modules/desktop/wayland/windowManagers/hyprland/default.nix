@@ -219,6 +219,7 @@ in
         bind = SUPER, E, layoutmsg, orientationnext
         bind = SUPER_SHIFT, E, layoutmsg, orientationprev
         bind = SUPER_SHIFT, R, exec, hyprctl reload
+        bind = SUPER, T, exec, ${config.hopplaos.programs.theme-switcher.package}/bin/theme-switcher
 
         bindle = , XF86AudioRaiseVolume, exec, ${audio.controlCommands.raise}
         bindle = , XF86AudioLowerVolume, exec, ${audio.controlCommands.lower}

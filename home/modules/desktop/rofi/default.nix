@@ -1,6 +1,6 @@
 { pkgs, config, lib, ... }:
 let
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) types mkOption mkEnableOption mkIf;
 
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.rofi;
@@ -18,6 +18,8 @@ in
   config = mkIf (desktopCfg.enable && cfg.enable) {
     hopplaos.desktop.appLauncherCommand =
       "${config.programs.rofi.package}/bin/rofi -show drun";
+
+    xdg.dataFile."rofi/themes/theme-alt.rasi".source = ./theme-alt.rasi;
 
     programs.rofi = {
       enable = true;
