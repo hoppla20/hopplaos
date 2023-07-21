@@ -115,7 +115,7 @@
     };
 
     home-manager = {
-      url = "github:hopplaos/home-manager/release-23.05";
+      url = "github:hoppla20/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     #home-manager = {
