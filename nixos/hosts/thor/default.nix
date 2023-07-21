@@ -7,6 +7,7 @@
     boot.grub.osProber = true;
     hardware = {
       enable = true;
+      bluetooth = true;
       cpu.manufacturer = "amd";
       gpu.manufacturer = "amd";
     };

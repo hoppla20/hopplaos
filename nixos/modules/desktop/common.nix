@@ -21,7 +21,7 @@ in {
           drivers = [ pkgs.gutenprint pkgs.canon-cups-ufr2 ];
         };
 
-        blueman.enable = true;
+        blueman.enable = config.hopplaos.hardware.bluetooth;
         dbus.enable = true;
         gnome.gnome-keyring.enable = true;
         pipewire = {
