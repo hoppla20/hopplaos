@@ -12,7 +12,7 @@
     (with pkgs.vscode-extensions; [
       catppuccin.catppuccin-vsc
 
-      bbenoist.nix
+      jnoortheen.nix-ide
       redhat.vscode-yaml
       ms-python.python
       yzhang.markdown-all-in-one
@@ -27,7 +27,6 @@
       gruntfuggly.todo-tree
       asvetliakov.vscode-neovim
       editorconfig.editorconfig
-      brettm12345.nixfmt-vscode
       stkb.rewrap
       valentjn.vscode-ltex
       editorconfig.editorconfig
@@ -53,7 +52,8 @@ in {
       extensions = extensions;
       userSettings = {
         # appearance
-        "workbench.colorTheme" = if config.hopplaos.desktop.darkTheme
+        "workbench.colorTheme" =
+          if config.hopplaos.desktop.darkTheme
           then "Catppuccin Macchiato"
           else "Catppuccin Latte";
         "editor.fontFamily" = "'FiraCode Nerd Font Mono', 'feather', 'monospace'";
@@ -79,6 +79,8 @@ in {
         "latex-workshop.synctex.synctexjs.enabled" = true;
         "hediet.vscode-drawio.theme" = "atlas";
         "vs-kubernetes" = {"vs-kubernetes.crd-code-completion" = "enabled";};
+        "nix.serverPath" = "rnix-lsp";
+        "nix.formatterPath" = ["nix" "fmt" "--" "-"];
 
         # language settings
         "[jsonc]" = {"editor.defaultFormatter" = "esbenp.prettier-vscode";};
