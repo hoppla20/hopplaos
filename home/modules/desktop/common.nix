@@ -9,6 +9,9 @@ in {
   options = {
     hopplaos.desktop = {
       enable = mkEnableOption "HopplaOS Desktop";
+      darkTheme = mkEnableOption "System wide dark theme" // {
+        default = true;
+      };
 
       polkitAgent = mkOption {
         type = types.str;
@@ -78,7 +81,9 @@ in {
   };
 
   config = mkIf cfg.enable {
-    scheme = "${inputs.base16-schemes}/catppuccin-macchiato.yaml";
+    scheme = if cfg.darkTheme
+      then "${inputs.base16-schemes}/catppuccin-macchiato.yaml"
+      else "${inputs.base16-schemes}/catppuccin-latte.yaml";
 
     home = {
       packages = builtins.attrValues {

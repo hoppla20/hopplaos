@@ -1,43 +1,48 @@
-{ pkgs, config, lib, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.hopplaos.programs.vscode;
 
-  extensions = (with pkgs.vscode-extensions; [
-    dracula-theme.theme-dracula
+  extensions =
+    (with pkgs.vscode-extensions; [
+      catppuccin.catppuccin-vsc
 
-    bbenoist.nix
-    redhat.vscode-yaml
-    ms-python.python
-    yzhang.markdown-all-in-one
-    ms-vscode.cpptools
-    james-yu.latex-workshop
+      bbenoist.nix
+      redhat.vscode-yaml
+      ms-python.python
+      yzhang.markdown-all-in-one
+      ms-vscode.cpptools
+      james-yu.latex-workshop
 
-    ms-azuretools.vscode-docker
-    ms-kubernetes-tools.vscode-kubernetes-tools
-    ms-vscode-remote.remote-ssh
-    donjayamanne.githistory
-    esbenp.prettier-vscode
-    gruntfuggly.todo-tree
-    asvetliakov.vscode-neovim
-    editorconfig.editorconfig
-    brettm12345.nixfmt-vscode
-    stkb.rewrap
-    valentjn.vscode-ltex
-    editorconfig.editorconfig
-    hashicorp.terraform
-    mkhl.direnv
-  ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace
+      ms-azuretools.vscode-docker
+      ms-kubernetes-tools.vscode-kubernetes-tools
+      ms-vscode-remote.remote-ssh
+      donjayamanne.githistory
+      esbenp.prettier-vscode
+      gruntfuggly.todo-tree
+      asvetliakov.vscode-neovim
+      editorconfig.editorconfig
+      brettm12345.nixfmt-vscode
+      stkb.rewrap
+      valentjn.vscode-ltex
+      editorconfig.editorconfig
+      hashicorp.terraform
+      mkhl.direnv
+    ])
+    ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace
     (import ./marketplaceExtensions.nix);
 in {
   options = {
-    hopplaos.programs.vscode = { enable = mkEnableOption "VSCode"; };
+    hopplaos.programs.vscode = {enable = mkEnableOption "VSCode";};
   };
 
   config = mkIf cfg.enable {
-    hopplaos.desktop.editorCommand =
-      "${config.programs.vscode.package}/bin/codium";
+    hopplaos.desktop.editorCommand = "${config.programs.vscode.package}/bin/codium";
 
     programs.vscode = {
       enable = true;
@@ -48,11 +53,12 @@ in {
       extensions = extensions;
       userSettings = {
         # appearance
-        "workbench.colorTheme" = "Dracula";
-        "editor.fontFamily" =
-          "'FiraCode Nerd Font Mono', 'feather', 'monospace'";
+        "workbench.colorTheme" = if config.hopplaos.desktop.darkTheme
+          then "Catppuccin Macchiato"
+          else "Catppuccin Latte";
+        "editor.fontFamily" = "'FiraCode Nerd Font Mono', 'feather', 'monospace'";
         "editor.minimap.enabled" = false;
-        "editor.rulers" = [ 80 ];
+        "editor.rulers" = [80];
         "editor.stickyScroll.enabled" = true;
 
         # behavior
@@ -64,21 +70,19 @@ in {
         "explorer.autoReveal" = false;
         "git.confirmSync" = false;
         "extensions.autoUpdate" = false;
-        "terminal.integrated.commandsToSkipShell" =
-          [ "-workbench.action.quickOpen" ];
+        "terminal.integrated.commandsToSkipShell" = ["-workbench.action.quickOpen"];
 
         # plugin settings
-        "vscode-neovim.neovimExecutablePaths.linux" =
-          "/run/current-system/sw/bin/nvim";
+        "vscode-neovim.neovimExecutablePaths.linux" = "/run/current-system/sw/bin/nvim";
         "redhat.telemetry.enabled" = false;
         "latex-workshop.view.pdf.viewer" = "tab";
         "latex-workshop.synctex.synctexjs.enabled" = true;
         "hediet.vscode-drawio.theme" = "atlas";
-        "vs-kubernetes" = { "vs-kubernetes.crd-code-completion" = "enabled"; };
+        "vs-kubernetes" = {"vs-kubernetes.crd-code-completion" = "enabled";};
 
         # language settings
-        "[jsonc]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
-        "[yaml]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
+        "[jsonc]" = {"editor.defaultFormatter" = "esbenp.prettier-vscode";};
+        "[yaml]" = {"editor.defaultFormatter" = "esbenp.prettier-vscode";};
       };
     };
   };
