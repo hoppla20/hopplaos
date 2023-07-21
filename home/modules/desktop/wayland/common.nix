@@ -3,6 +3,7 @@ let
   inherit (builtins) readDir pathExists attrNames attrValues isNull any;
   inherit (lib) mkIf mkEnableOption filterAttrs findFirst;
   inherit (self.lib) listDirectoryModules;
+  inherit (desktopCfg) systemCommands;
 
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.wayland;
@@ -42,5 +43,38 @@ in
       (pkgs.writeShellScriptBin "screenshot-window-clip"
         ''grim -g "$(sway-focused-window-geometry)" - | wl-copy'')
     ];
+
+    programs.swaylock = {
+      enable = true;
+      settings = {
+        image = desktopCfg.defaultWallpaper;
+        indicator-caps-lock = true;
+        show-failed-attempts = true;
+      };
+    };
+    services.swayidle = {
+      enable = true;
+      systemdTarget = "hyprland-session.target";
+      events = [
+        {
+          event = "before-sleep";
+          command = "${pkgs.systemd}/bin/loginctl lock-session";
+        }
+        {
+          event = "lock";
+          command = "${config.programs.swaylock.package}/bin/swaylock";
+        }
+      ];
+      timeouts = [
+        {
+          timeout = 240;
+          command = "${pkgs.dunst}/bin/dunstify 'Inactivity Notice' 'This machine will lock in 1 minute due to inactivity.'";
+        }
+        {
+          timeout = 300;
+          command = systemCommands.suspend;
+        }
+      ];
+    };
   };
 }

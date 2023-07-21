@@ -18,6 +18,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    security.pam.services.swaylock = {};
     environment.systemPackages = attrValues {
       inherit (pkgs) polkit_gnome;
       inherit (pkgs.qt6) qtwayland;
