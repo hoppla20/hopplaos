@@ -1,6 +1,6 @@
-{ pkgs, config, lib, inputs, self, ... }: {
+{ pkgs, config, lib, inputs, self, inputs', self', ... }: {
   home-manager = {
     useGlobalPkgs = true;
-    extraSpecialArgs = { inherit inputs self; };
+    extraSpecialArgs = { inherit inputs self inputs' self'; };
   };
 }

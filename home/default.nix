@@ -10,6 +10,7 @@ let
     inputs.hyprland.homeManagerModules.default
     inputs.nixvim.homeManagerModules.nixvim
     inputs.base16.homeManagerModule
+    inputs.spicetify-nix.homeManagerModules.default
   ];
 
   users = listDirectoryModules ./users;

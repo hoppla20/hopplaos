@@ -28,7 +28,7 @@ window#waybar {
 }
 
 #workspaces {
-	background: #4c4f69;
+	background: @base02;
 }
 
 /* sway */

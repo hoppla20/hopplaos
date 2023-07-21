@@ -1,8 +1,8 @@
 { pkgs, config, lib, inputs, ... }:
 let
   inherit (lib)
-    types mkOption mkEnableOption mkIf mkDefault mkMerge optional
-    concatStringsSep;
+    types mkOption mkEnableOption mkIf
+    mkForce;
   inherit (desktopCfg) audio brightnessControlCommands;
 
   desktopCfg = config.hopplaos.desktop;
@@ -145,5 +145,8 @@ in
       ExecStart =
         lib.mkForce "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator";
     };
+
+    xdg.configFile."waybar/config".onChange = mkForce "";
+    xdg.configFile."waybar/style.css".onChange = mkForce "";
   };
 }

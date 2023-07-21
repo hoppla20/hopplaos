@@ -142,6 +142,8 @@
 
     nixvim.url = "github:nix-community/nixvim/nixos-23.05";
 
+    spicetify-nix.url = "github:the-argus/spicetify-nix";
+
     base16.url = "github:SenchoPens/base16.nix";
     base16-schemes = {
       url = "github:base16-project/base16-schemes";

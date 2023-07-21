@@ -10,7 +10,6 @@ let
     mkEnableOption
     mkIf
     mapAttrsToList
-    concatStrings
     concatStringsSep
     optionals
     optionalString
@@ -221,15 +220,15 @@ in
         bind = SUPER_SHIFT, E, layoutmsg, orientationprev
         bind = SUPER_SHIFT, R, exec, hyprctl reload
 
-        bind = , XF86AudioRaiseVolume, exec, ${audio.controlCommands.raise}
-        bind = , XF86AudioLowerVolume, exec, ${audio.controlCommands.lower}
-        bind = , XF86AudioMute, exec, ${audio.controlCommands.mute}
-        bind = , XF86AudioNext, exec, playerctl next
-        bind = , XF86AudioPlay, exec, playerctl play-pause
-        bind = , XF86AudioPrev, exec, playerctl previous
-        bind = , XF86AudioStop, exec, playerctl stop
-        bind = , XF86MonBrightnessDown, exec, ${brightnessControlCommands.lower}
-        bind = , XF86MonBrightnessUp, exec, ${brightnessControlCommands.raise}
+        bindle = , XF86AudioRaiseVolume, exec, ${audio.controlCommands.raise}
+        bindle = , XF86AudioLowerVolume, exec, ${audio.controlCommands.lower}
+        bindle = , XF86AudioMute, exec, ${audio.controlCommands.mute}
+        bindle = , XF86AudioNext, exec, playerctl next
+        bindle = , XF86AudioPlay, exec, playerctl play-pause
+        bindle = , XF86AudioPrev, exec, playerctl previous
+        bindle = , XF86AudioStop, exec, playerctl stop
+        bindle = , XF86MonBrightnessDown, exec, ${brightnessControlCommands.lower}
+        bindle = , XF86MonBrightnessUp, exec, ${brightnessControlCommands.raise}
 
         bind = CONTROL_SHIFT, PERIOD, exec, dunstctl context
         bind = CONTROL_SHIFT, COMMA, exec, dunstctl close
@@ -316,8 +315,8 @@ in
         bindm = SUPER, mouse:273, resizewindow
 
         # Autostart
-        exec = bash ${desktopCfg.wayland.waybar.launchCommand}
         exec = bash ${launchHyprpaper}
+        exec = bash ${desktopCfg.wayland.waybar.launchCommand}
         exec-once = wl-configure-gtk
         exec-once = ${polkitAgent}
 

@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, inputs', ... }:
 let
   inherit (lib) types mkOption mkEnableOption mkIf;
 
@@ -46,7 +46,7 @@ in
         playerCommand = mkOption {
           type = types.str;
           readOnly = true;
-          default = "${pkgs.spotify}/bin/spotify";
+          default = "${config.programs.spicetify.spicedSpotify}/bin/spotify";
         };
       };
     };
@@ -54,6 +54,20 @@ in
 
   config = mkIf (desktopCfg.enable && cfg.enable) {
     home.packages =
-      builtins.attrValues { inherit (pkgs) pavucontrol playerctl spotify; };
+      builtins.attrValues { inherit (pkgs) pavucontrol playerctl; };
+
+    programs.spicetify = let
+      spicePkgs = inputs'.spicetify-nix.packages.default;
+    in {
+      enable = true;
+      theme = spicePkgs.themes.${"catppuccin-" + (if config.hopplaos.desktop.darkTheme then "macchiato" else "latte")};
+      enabledExtensions = builtins.attrValues {
+        inherit
+          (spicePkgs.extensions)
+          keyboardShortcut
+          groupSession
+          ;
+      };
+    };
   };
 }
