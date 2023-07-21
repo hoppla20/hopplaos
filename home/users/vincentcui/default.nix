@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   hopplaos = {
     programs = {
       gpg = {
@@ -7,11 +7,7 @@
       };
       ssh = {
         enable = true;
-        matchBlocks = {
-          "gitlab-ssh.vincentcui.de" = {
-            port = 9022;
-          };
-        };
+        matchBlocks = { "gitlab-ssh.vincentcui.de" = { port = 9022; }; };
       };
       zsh.enable = true;
       direnv.enable = true;

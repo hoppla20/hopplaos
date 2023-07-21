@@ -1,16 +1,6 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: let
-  inherit
-    (lib)
-    types
-    mkOption
-    mkEnableOption
-    mkIf
-    ;
+{ pkgs, config, lib, ... }:
+let
+  inherit (lib) types mkOption mkEnableOption mkIf;
 
   audioLimit = 150;
   audioStep = 5;
@@ -21,22 +11,24 @@ in {
   options = {
     hopplaos.desktop = {
       audio = {
-        enable =
-          mkEnableOption "HopplaOS Audio"
-          // {
-            default = desktopCfg.enable;
-          };
+        enable = mkEnableOption "HopplaOS Audio" // {
+          default = desktopCfg.enable;
+        };
 
         controlCommands = {
           raise = mkOption {
             type = types.str;
             readOnly = true;
-            default = "wpctl set-volume -l ${toString audioLimit} @DEFAULT_AUDIO_SINK@ ${toString audioStep}%+";
+            default = "wpctl set-volume -l ${
+                toString audioLimit
+              } @DEFAULT_AUDIO_SINK@ ${toString audioStep}%+";
           };
           lower = mkOption {
             type = types.str;
             readOnly = true;
-            default = "wpctl set-volume -l ${toString audioLimit} @DEFAULT_AUDIO_SINK@ ${toString audioStep}%-";
+            default = "wpctl set-volume -l ${
+                toString audioLimit
+              } @DEFAULT_AUDIO_SINK@ ${toString audioStep}%-";
           };
           mute = mkOption {
             type = types.str;
@@ -60,13 +52,7 @@ in {
   };
 
   config = mkIf (desktopCfg.enable && cfg.enable) {
-    home.packages = builtins.attrValues {
-      inherit
-        (pkgs)
-        pavucontrol
-        playerctl
-        spotify
-        ;
-    };
+    home.packages =
+      builtins.attrValues { inherit (pkgs) pavucontrol playerctl spotify; };
   };
 }

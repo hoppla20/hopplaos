@@ -1,36 +1,12 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: let
-  inherit
-    (builtins)
-    listToAttrs
-    ;
-  inherit
-    (lib)
-    mkEnableOption
-    mkIf
-    mapAttrsToList
-    concatStrings
-    concatStringsSep
-    optionals
-    optionalString
-    unique
-    ;
-  inherit
-    (desktopCfg)
-    polkitAgent
-    systemCommands
-    appLauncherCommand
-    terminalCommand
-    browserCommand
-    editorCommand
-    fileManagerCommand
-    brightnessControlCommands
-    audio
-    ;
+{ pkgs, config, lib, ... }:
+let
+  inherit (builtins) listToAttrs;
+  inherit (lib)
+    mkEnableOption mkIf mapAttrsToList concatStrings concatStringsSep optionals
+    optionalString unique;
+  inherit (desktopCfg)
+    polkitAgent systemCommands appLauncherCommand terminalCommand browserCommand
+    editorCommand fileManagerCommand brightnessControlCommands audio;
 
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.wayland.hyprland;
@@ -45,32 +21,27 @@
     "flipped-270" = 7;
   };
 
-  monitors =
-    concatStringsSep "\n"
-    (mapAttrsToList
-      (name: monitorCfg:
-        concatStringsSep ", " ([
-            "monitor = ${name}"
-            (monitorCfg.resolution + (optionalString (! (isNull monitorCfg.refreshRate)) "@${toString monitorCfg.refreshRate}"))
-            (
-              if (isNull monitorCfg.position)
-              then "auto"
-              else "${toString monitorCfg.position.x}x${toString monitorCfg.position.y}"
-            )
-            (toString monitorCfg.scale)
-          ]
-          ++ optionals (! (isNull monitorCfg.transform)) [
-            "transform"
-            "${toString transformList.${monitorCfg.transform}}"
-          ]))
-      (listToAttrs config.hopplaos.hardware.monitors));
+  monitors = concatStringsSep "\n" (mapAttrsToList (name: monitorCfg:
+    concatStringsSep ", " ([
+      "monitor = ${name}"
+      (monitorCfg.resolution
+        + (optionalString (!(isNull monitorCfg.refreshRate))
+          "@${toString monitorCfg.refreshRate}"))
+      (if (isNull monitorCfg.position) then
+        "auto"
+      else
+        "${toString monitorCfg.position.x}x${toString monitorCfg.position.y}")
+      (toString monitorCfg.scale)
+    ] ++ optionals (!(isNull monitorCfg.transform)) [
+      "transform"
+      "${toString transformList.${monitorCfg.transform}}"
+    ])) (listToAttrs config.hopplaos.hardware.monitors));
 
-  wallpapers = unique (map
-    (monitor:
-      if isNull monitor.value.background
-      then "~/.config/wallpapers/wallpaper.jpg"
-      else monitor.value.background)
-    config.hopplaos.hardware.monitors);
+  wallpapers = unique (map (monitor:
+    if isNull monitor.value.background then
+      "~/.config/wallpapers/wallpaper.jpg"
+    else
+      monitor.value.background) config.hopplaos.hardware.monitors);
 
   cursor = config.home.pointerCursor;
 in {
@@ -323,16 +294,16 @@ in {
       '';
     };
 
-    home.packages = [pkgs.hyprpaper];
+    home.packages = [ pkgs.hyprpaper ];
     xdg.configFile."hypr/hyprpaper.conf".text = ''
       ${concatStrings (map (wallpaper: "preload = ${wallpaper}") wallpapers)}
-      ${concatStrings (map
-        (monitor: "wallpaper = ${monitor.name}, ${
-          if isNull monitor.value.background
-          then "~/.config/wallpapers/wallpaper.jpg"
-          else monitor.value.background
-        }")
-        config.hopplaos.hardware.monitors)}
+      ${concatStrings (map (monitor:
+        "wallpaper = ${monitor.name}, ${
+          if isNull monitor.value.background then
+            "~/.config/wallpapers/wallpaper.jpg"
+          else
+            monitor.value.background
+        }") config.hopplaos.hardware.monitors)}
       wallpaper = , ~/.config/wallpapers/wallpaper.jpg
     '';
   };

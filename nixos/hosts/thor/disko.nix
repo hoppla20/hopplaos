@@ -17,7 +17,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot/efi";
-                mountOptions = ["defaults"];
+                mountOptions = [ "defaults" ];
               };
             }
             {
@@ -37,7 +37,7 @@
                 type = "filesystem";
                 format = "ext4";
                 mountpoint = "/";
-                mountOptions = ["defaults"];
+                mountOptions = [ "defaults" ];
               };
             }
             {
@@ -48,7 +48,7 @@
                 type = "filesystem";
                 format = "ext4";
                 mountpoint = "/storage";
-                mountOptions = ["defaults"];
+                mountOptions = [ "defaults" ];
               };
             }
           ];

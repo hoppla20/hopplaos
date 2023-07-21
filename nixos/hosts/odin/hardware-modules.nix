@@ -1,3 +1,2 @@
-{inputs, ...}: [
-  inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
-]
+{ inputs, ... }:
+[ inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1 ]

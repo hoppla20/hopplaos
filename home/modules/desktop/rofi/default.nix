@@ -1,14 +1,6 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: let
-  inherit
-    (lib)
-    mkEnableOption
-    mkIf
-    ;
+{ pkgs, config, lib, ... }:
+let
+  inherit (lib) mkEnableOption mkIf;
 
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.rofi;
@@ -16,23 +8,19 @@ in {
   options = {
     hopplaos.desktop.rofi = {
       enable = mkEnableOption "Rofi";
-      wayland =
-        mkEnableOption "Rofi wayland fork"
-        // {
-          default = desktopCfg.wayland.enable;
-        };
+      wayland = mkEnableOption "Rofi wayland fork" // {
+        default = desktopCfg.wayland.enable;
+      };
     };
   };
 
   config = mkIf (desktopCfg.enable && cfg.enable) {
-    hopplaos.desktop.appLauncherCommand = "${config.programs.rofi.package}/bin/rofi -show drun";
+    hopplaos.desktop.appLauncherCommand =
+      "${config.programs.rofi.package}/bin/rofi -show drun";
 
     programs.rofi = {
       enable = true;
-      package =
-        if cfg.wayland
-        then pkgs.rofi-wayland
-        else pkgs.rofi;
+      package = if cfg.wayland then pkgs.rofi-wayland else pkgs.rofi;
       font = "FiraCode Nerd Font 10";
       cycle = true;
       terminal = desktopCfg.terminalCommand;
@@ -51,7 +39,8 @@ in {
         parse-known-hosts = false;
         drun-categories = "";
         drun-match-fields = "name,generic,exec,categories,keywords";
-        drun-display-format = "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
+        drun-display-format =
+          "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
         drun-show-actions = false;
         drun-url-launcher = "xdg-open";
         drun-use-desktop-cache = false;

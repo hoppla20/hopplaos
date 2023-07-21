@@ -1,16 +1,6 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: let
-  inherit
-    (lib)
-    types
-    mkOption
-    mkEnableOption
-    mkIf
-    ;
+{ pkgs, config, lib, ... }:
+let
+  inherit (lib) types mkOption mkEnableOption mkIf;
 
   cfg = config.hopplaos.wibu.share;
 
@@ -30,10 +20,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [
-      pkgs.cifs-utils
-      pkgs.samba
-    ];
+    environment.systemPackages = [ pkgs.cifs-utils pkgs.samba ];
 
     services.autofs = {
       enable = true;
@@ -52,7 +39,9 @@ in {
           #       Please don't use blank spaces to separate the equal sign from the
           #       user account name or password.
           creds=${shareCredentialsFile}
-          mountopts="-fstype=cifs,file_mode=0644,dir_mode=0755,uid=${toString ownerUid},gid=${toString groupUid}"
+          mountopts="-fstype=cifs,file_mode=0644,dir_mode=0755,uid=${
+            toString ownerUid
+          },gid=${toString groupUid}"
           if [ -f "$creds" ]; then
               opts="$mountopts,credentials=$creds"
               smbopts="-A $creds"

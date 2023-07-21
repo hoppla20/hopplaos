@@ -1,14 +1,6 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: let
-  inherit
-    (lib)
-    mkEnableOption
-    mkIf
-    ;
+{ pkgs, config, lib, ... }:
+let
+  inherit (lib) mkEnableOption mkIf;
 
   cfg = config.hopplaos.programs.direnv;
 in {

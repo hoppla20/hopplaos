@@ -1,15 +1,6 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: let
-  inherit
-    (lib)
-    mkEnableOption
-    mkMerge
-    mkIf
-    ;
+{ pkgs, config, lib, ... }:
+let
+  inherit (lib) mkEnableOption mkMerge mkIf;
 
   cfg = config.hopplaos.desktop;
 in {
@@ -22,20 +13,12 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      environment.systemPackages = builtins.attrValues {
-        inherit
-          (pkgs)
-          adwaita-qt
-          adwaita-qt6
-          ;
-      };
+      environment.systemPackages =
+        builtins.attrValues { inherit (pkgs) adwaita-qt adwaita-qt6; };
       services = {
         printing = {
           enable = true;
-          drivers = [
-            pkgs.gutenprint
-            pkgs.canon-cups-ufr2
-          ];
+          drivers = [ pkgs.gutenprint pkgs.canon-cups-ufr2 ];
         };
 
         blueman.enable = true;
@@ -53,20 +36,14 @@ in {
           displayManager.gdm.enable = true;
         };
       };
-      xdg.portal = {
-        xdgOpenUsePortal = true;
-      };
+      xdg.portal = { xdgOpenUsePortal = true; };
     }
     (mkIf cfg.thunar.enable {
       programs = {
         thunar = {
           enable = true;
           plugins = builtins.attrValues {
-            inherit
-              (pkgs.xfce)
-              thunar-archive-plugin
-              thunar-volman
-              ;
+            inherit (pkgs.xfce) thunar-archive-plugin thunar-volman;
           };
         };
         file-roller.enable = true;

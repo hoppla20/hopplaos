@@ -1,22 +1,10 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: let
-  inherit
-    (lib)
-    types
-    mkOption
-    mkEnableOption
-    mkIf
-    mkMerge
-    ;
+{ pkgs, config, lib, ... }:
+let
+  inherit (lib) types mkOption mkEnableOption mkIf mkMerge;
 
   cfg = config.hopplaos.profiles.desktop;
 in {
-  options.hopplaos.profiles.desktop =
-    mkEnableOption "Desktop Profile";
+  options.hopplaos.profiles.desktop = mkEnableOption "Desktop Profile";
 
   config = mkIf cfg {
     hopplaos = {

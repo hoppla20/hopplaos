@@ -1,18 +1,11 @@
-{
-  pkgs,
-  config,
-  lib,
-  inputs,
-  self,
-  ...
-}: {
+{ pkgs, config, lib, inputs, self, ... }: {
   nix = {
-    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     settings = {
       sandbox = true;
       auto-optimise-store = true;
-      allowed-users = ["@wheel"];
-      trusted-users = ["@wheel"];
+      allowed-users = [ "@wheel" ];
+      trusted-users = [ "@wheel" ];
     };
     gc.automatic = true;
     optimise.automatic = true;

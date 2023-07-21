@@ -1,39 +1,27 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: let
-  inherit
-    (lib)
-    mkEnableOption
-    mkIf
-    mkMerge
-    ;
+{ pkgs, config, lib, ... }:
+let
+  inherit (lib) mkEnableOption mkIf mkMerge;
 
   cfg = config.hopplaos.programs.alacritty;
 in {
   options = {
     hopplaos.programs.alacritty = {
-      enable =
-        mkEnableOption "Alacritty"
-        // {
-          default = config.hopplaos.desktop.enable;
-        };
+      enable = mkEnableOption "Alacritty" // {
+        default = config.hopplaos.desktop.enable;
+      };
     };
   };
 
   config = mkIf (config.hopplaos.desktop.enable && cfg.enable) (mkMerge [
     {
-      hopplaos.desktop.terminalCommand = "${config.programs.alacritty.package}/bin/alacritty";
+      hopplaos.desktop.terminalCommand =
+        "${config.programs.alacritty.package}/bin/alacritty";
 
       programs.alacritty = {
         enable = true;
 
         settings = {
-          env = {
-            WINIT_X11_SCALE_FACTOR = "1";
-          };
+          env = { WINIT_X11_SCALE_FACTOR = "1"; };
 
           window.padding = {
             x = 10;
@@ -42,16 +30,13 @@ in {
 
           scrolling.history = 50000;
 
-          key_bindings = [
-            {
-              mods = "Command";
-              key = "Back";
-              chars = "\\x1b\\x7f";
-            }
-          ];
+          key_bindings = [{
+            mods = "Command";
+            key = "Back";
+            chars = "\\x1b\\x7f";
+          }];
 
-          font = let
-            family = "JetBrainsMono Nerd Font";
+          font = let family = "JetBrainsMono Nerd Font";
           in {
             size = 10;
             normal = {
@@ -143,11 +128,7 @@ in {
     }
     (mkIf config.hopplaos.programs.ssh.enable {
       hopplaos.programs.ssh.matchBlocks = {
-        "*" = {
-          setEnv = {
-            TERM = "xterm-256color";
-          };
-        };
+        "*" = { setEnv = { TERM = "xterm-256color"; }; };
       };
     })
   ]);

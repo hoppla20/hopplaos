@@ -1,18 +1,8 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: let
+{ pkgs, config, lib, inputs, ... }:
+let
   cfg = config.hopplaos.desktop;
 
-  inherit
-    (lib)
-    types
-    mkOption
-    mkEnableOption
-    mkIf
-    ;
+  inherit (lib) types mkOption mkEnableOption mkIf;
 
   brightnessStep = 10;
 in {
@@ -23,7 +13,8 @@ in {
       polkitAgent = mkOption {
         type = types.str;
         readOnly = true;
-        default = "/run/current-system/sw/libexec/polkit-gnome-authentication-agent-1";
+        default =
+          "/run/current-system/sw/libexec/polkit-gnome-authentication-agent-1";
       };
 
       systemCommands = {
@@ -59,7 +50,8 @@ in {
       browserCommand = mkOption {
         type = types.str;
         readOnly = true;
-        default = "${pkgs.brave}/bin/brave --use-angle=vulkan --use-cmd-decoder=passthrough --enable-webrtc-pipewire-capturer";
+        default =
+          "${pkgs.brave}/bin/brave --use-angle=vulkan --use-cmd-decoder=passthrough --enable-webrtc-pipewire-capturer";
       };
       editorCommand = mkOption {
         type = types.str;
@@ -86,20 +78,13 @@ in {
   };
 
   config = mkIf cfg.enable {
+    scheme = "${inputs.base16-schemes}/catppuccin-macchiato.yaml";
+
     home = {
       packages = builtins.attrValues {
-        inherit
-          (pkgs)
-          xdg-utils
-          glib
-          brave
-          light
-          ;
+        inherit (pkgs) xdg-utils glib brave light;
 
-        inherit
-          (pkgs.xorg)
-          xhost
-          ;
+        inherit (pkgs.xorg) xhost;
       };
 
       pointerCursor = {
@@ -130,8 +115,6 @@ in {
 
     services.gnome-keyring.enable = true;
 
-    xdg.configFile = {
-      "wallpapers/wallpaper.jpg".source = ./wallpaper.jpg;
-    };
+    xdg.configFile = { "wallpapers/wallpaper.jpg".source = ./wallpaper.jpg; };
   };
 }

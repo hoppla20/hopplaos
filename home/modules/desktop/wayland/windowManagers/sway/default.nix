@@ -1,37 +1,19 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: let
-  inherit
-    (lib)
-    mkEnableOption
-    mkIf
-    ;
-  inherit
-    (desktopCfg)
-    polkitAgent
-    systemCommands
-    appLauncherCommand
-    terminalCommand
-    browserCommand
-    editorCommand
-    fileManagerCommand
-    brightnessControlCommands
-    audio
-    ;
+{ pkgs, config, lib, ... }:
+let
+  inherit (lib) mkEnableOption mkIf;
+  inherit (desktopCfg)
+    polkitAgent systemCommands appLauncherCommand terminalCommand browserCommand
+    editorCommand fileManagerCommand brightnessControlCommands audio;
 
   hardwareCfg = config.hopplaos.hardware;
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.wayland.sway;
 
-  system-control-mode = "(e)xit_(l)ock_(s)uspend_(h)ibernate_(S)hutdown_(r)eboot";
+  system-control-mode =
+    "(e)xit_(l)ock_(s)uspend_(h)ibernate_(S)hutdown_(r)eboot";
 in {
   options = {
-    hopplaos.desktop.wayland.sway = {
-      enable = mkEnableOption "Sway";
-    };
+    hopplaos.desktop.wayland.sway = { enable = mkEnableOption "Sway"; };
   };
 
   config = mkIf (desktopCfg.enable && cfg.enable) {
@@ -46,7 +28,7 @@ in {
         modifier = "Mod4";
 
         fonts = {
-          names = ["FiraCode Nerd Font"];
+          names = [ "FiraCode Nerd Font" ];
           style = "Regular";
           size = 12.0;
         };
@@ -111,21 +93,21 @@ in {
 
         modes = {
           resize = {
-            Escape = "mode \"default\"";
-            Return = "mode \"default\"";
+            Escape = ''mode "default"'';
+            Return = ''mode "default"'';
             h = "resize shrink width 10 px or 10 ppt";
             j = "resize shrink height 10px or 10 ppt";
             k = "resize grow height 10 px or 10 ppt";
             l = "resize grow width 10 px or 10 ppt";
           };
           "${system-control-mode}" = {
-            Escape = "mode \"default\"";
-            e = "exit, mode \"default\"";
-            l = "exec ${systemCommands.lock}, mode \"default\"";
-            s = "exec ${systemCommands.suspend}, mode \"default\"";
-            h = "exec ${systemCommands.hibernate}, mode \"default\"";
-            r = "exec ${systemCommands.reboot}, mode \"default\"";
-            "Shift+s" = "exec ${systemCommands.poweroff}, mode \"default\"";
+            Escape = ''mode "default"'';
+            e = ''exit, mode "default"'';
+            l = ''exec ${systemCommands.lock}, mode "default"'';
+            s = ''exec ${systemCommands.suspend}, mode "default"'';
+            h = ''exec ${systemCommands.hibernate}, mode "default"'';
+            r = ''exec ${systemCommands.reboot}, mode "default"'';
+            "Shift+s" = ''exec ${systemCommands.poweroff}, mode "default"'';
           };
         };
 
@@ -151,7 +133,7 @@ in {
           "Mod4+8" = "workspace 8";
           "Mod4+9" = "workspace 9";
 
-          "Mod4+0" = "mode \"${system-control-mode}\"";
+          "Mod4+0" = ''mode "${system-control-mode}"'';
 
           "Mod4+Shift+1" = "move container to workspace 1; workspace 1";
           "Mod4+Shift+2" = "move container to workspace 2; workspace 2";
@@ -197,11 +179,11 @@ in {
           "Mod4+a" = "focus parent";
           "Mod4+f" = "fullscreen toggle";
           "Mod4+q" = "split toggle";
-          "Mod4+r" = "mode \"resize\"";
+          "Mod4+r" = ''mode "resize"'';
           "Mod4+space" = "focus mode_toggle";
 
           "Mod4+m" = "mark %s' -l 1 -P 'Mark: ";
-          "Mod4+g" = "[con_mark=\"%s\"] focus' -l 1 -P 'Goto: ";
+          "Mod4+g" = ''[con_mark="%s"] focus' -l 1 -P 'Goto: '';
 
           "Mod4+s" = "layout stacking";
           "Mod4+t" = "layout tabbed";
@@ -249,77 +231,78 @@ in {
             tap = "enabled";
             natural_scroll = "enabled";
             dwt = "enabled";
-            accel_profile = "adaptive"; # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
+            accel_profile =
+              "adaptive"; # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
             pointer_accel = "0.3"; # set mouse sensitivity (between -1 and 1)
           };
         };
 
         output = builtins.mapAttrs (name: value: {
-          mode = lib.mkIf (!(builtins.isNull value.resolution)) "${value.resolution}${
-            if !(builtins.isNull value.refreshRate)
-            then "@${toString value.refreshRate}Hz"
-            else ""
-          }";
-          background = lib.mkIf (!(builtins.isNull value.background)) "${value.background.file} ${value.background.mode}";
-          transform = lib.mkIf (!(builtins.isNull value.transform)) (toString value.transform);
-          position = lib.mkIf (!(builtins.isNull value.position)) "${toString value.position.x} ${toString value.position.y}";
+          mode = lib.mkIf (!(builtins.isNull value.resolution))
+            "${value.resolution}${
+              if !(builtins.isNull value.refreshRate) then
+                "@${toString value.refreshRate}Hz"
+              else
+                ""
+            }";
+          background = lib.mkIf (!(builtins.isNull value.background))
+            "${value.background.file} ${value.background.mode}";
+          transform = lib.mkIf (!(builtins.isNull value.transform))
+            (toString value.transform);
+          position = lib.mkIf (!(builtins.isNull value.position))
+            "${toString value.position.x} ${toString value.position.y}";
         }) (builtins.listToAttrs hardwareCfg.monitors);
 
-        bars = [];
+        bars = [ ];
 
-        startup = [
-          {
-            command = "wl-configure-gtk";
-          }
-          {
-            command = polkitAgent;
-          }
-        ];
+        startup =
+          [ { command = "wl-configure-gtk"; } { command = polkitAgent; } ];
 
-        workspaceOutputAssign = mkIf ((builtins.length hardwareCfg.monitors) > 0) (let
-          monitor0 = (builtins.elemAt hardwareCfg.monitors 0).name;
-          monitor1 =
-            if ((builtins.length hardwareCfg.monitors) > 1)
-            then (builtins.elemAt hardwareCfg.monitors 1).name
-            else (builtins.elemAt hardwareCfg.monitors 0).name;
-        in [
-          {
-            workspace = "1";
-            output = monitor0;
-          }
-          {
-            workspace = "2";
-            output = monitor0;
-          }
-          {
-            workspace = "3";
-            output = monitor0;
-          }
-          {
-            workspace = "4";
-            output = monitor0;
-          }
-          {
-            workspace = "5";
-            output = monitor0;
-          }
-          {
-            workspace = "6";
-            output = monitor1;
-          }
-          {
-            workspace = "7";
-            output = monitor1;
-          }
-          {
-            workspace = "8";
-            output = monitor1;
-          }
-          {
-            workspace = "9";
-            output = monitor1;
-          }
-        ]);
+        workspaceOutputAssign =
+          mkIf ((builtins.length hardwareCfg.monitors) > 0) (let
+            monitor0 = (builtins.elemAt hardwareCfg.monitors 0).name;
+            monitor1 = if ((builtins.length hardwareCfg.monitors) > 1) then
+              (builtins.elemAt hardwareCfg.monitors 1).name
+            else
+              (builtins.elemAt hardwareCfg.monitors 0).name;
+          in [
+            {
+              workspace = "1";
+              output = monitor0;
+            }
+            {
+              workspace = "2";
+              output = monitor0;
+            }
+            {
+              workspace = "3";
+              output = monitor0;
+            }
+            {
+              workspace = "4";
+              output = monitor0;
+            }
+            {
+              workspace = "5";
+              output = monitor0;
+            }
+            {
+              workspace = "6";
+              output = monitor1;
+            }
+            {
+              workspace = "7";
+              output = monitor1;
+            }
+            {
+              workspace = "8";
+              output = monitor1;
+            }
+            {
+              workspace = "9";
+              output = monitor1;
+            }
+          ]);
       };
 
       extraConfig = ''
@@ -329,8 +312,10 @@ in {
     };
 
     home.packages = [
-      (pkgs.writeShellScriptBin "sway-focused-window-geometry" "swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | \"\\(.x),\\(.y) \\(.width)x\\(.height)\"'")
-      (pkgs.writeShellScriptBin "screenshot-window" "mkdir -p ~/Pictures/Screenshots && grim -g \"$(sway-focused-window-geometry)\" ~/Pictures/Screenshots/$(date -u +\"%Y-%m-%d_%H-%M-%S_grim.png\")")
+      (pkgs.writeShellScriptBin "sway-focused-window-geometry"
+        "swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | \"\\(.x),\\(.y) \\(.width)x\\(.height)\"'")
+      (pkgs.writeShellScriptBin "screenshot-window" ''
+        mkdir -p ~/Pictures/Screenshots && grim -g "$(sway-focused-window-geometry)" ~/Pictures/Screenshots/$(date -u +"%Y-%m-%d_%H-%M-%S_grim.png")'')
     ];
   };
 }

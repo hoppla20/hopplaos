@@ -1,15 +1,6 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: let
-  inherit
-    (lib)
-    mkEnableOption
-    mkIf
-    mkMerge
-    ;
+{ pkgs, config, lib, ... }:
+let
+  inherit (lib) mkEnableOption mkIf mkMerge;
 
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.wayland.hyprland;

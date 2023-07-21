@@ -1,28 +1,12 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: let
-  inherit
-    (lib)
-    types
-    mkOption
-    mkEnableOption
-    mkIf
-    mkMerge
-    ;
+{ pkgs, config, lib, ... }:
+let
+  inherit (lib) types mkOption mkEnableOption mkIf mkMerge;
 
-  inherit
-    (pkgs)
-    fetchurl
-    ;
+  inherit (pkgs) fetchurl;
 
   cfg = config.hopplaos.wibu;
 in {
-  options.hopplaos.wibu = {
-    enable = mkEnableOption "WIBU";
-  };
+  options.hopplaos.wibu = { enable = mkEnableOption "WIBU"; };
 
   config = mkIf cfg.enable {
     security.pki.certificateFiles = [
@@ -36,6 +20,6 @@ in {
       })
     ];
 
-    environment.systemPackages = [pkgs.vmware-workstation];
+    environment.systemPackages = [ pkgs.vmware-workstation ];
   };
 }

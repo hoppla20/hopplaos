@@ -1,16 +1,6 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: let
-  inherit
-    (lib)
-    mkOption
-    mkEnableOption
-    mkIf
-    mkMerge
-    ;
+{ pkgs, config, lib, ... }:
+let
+  inherit (lib) mkOption mkEnableOption mkIf mkMerge;
 
   cfg = config.hopplaos.boot.grub;
   bootCfg = config.hopplaos.boot;
@@ -23,7 +13,7 @@ in {
 
   config = mkIf (bootCfg.enable && cfg.enable) {
     boot.loader = {
-      efi.canTouchEfiVariables = ! cfg.vmConfig;
+      efi.canTouchEfiVariables = !cfg.vmConfig;
       grub = {
         enable = true;
         efiSupport = true;

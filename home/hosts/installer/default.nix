@@ -1,3 +1,1 @@
-{
-  hopplaos.hardware.monitors = [];
-}
+{ hopplaos.hardware.monitors = [ ]; }

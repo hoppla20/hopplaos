@@ -1,12 +1,8 @@
 {
-  imports = [
-    ./disko.nix
-  ];
+  imports = [ ./disko.nix ];
 
   hopplaos = {
-    profiles = {
-      desktop = true;
-    };
+    profiles = { desktop = true; };
     users.vincentcui.enable = true;
     hardware = {
       enable = true;
@@ -15,5 +11,6 @@
     };
   };
 
-  boot.initrd.availableKernelModules = ["nvme" "ehci_pci" "xhci_pci" "rtsx_pci_sdmmc"];
+  boot.initrd.availableKernelModules =
+    [ "nvme" "ehci_pci" "xhci_pci" "rtsx_pci_sdmmc" ];
 }

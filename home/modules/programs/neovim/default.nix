@@ -1,23 +1,10 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: let
-  inherit
-    (lib)
-    types
-    mkOption
-    mkEnableOption
-    mkIf
-    mkMerge
-    ;
+{ pkgs, config, lib, ... }:
+let
+  inherit (lib) types mkOption mkEnableOption mkIf mkMerge;
 
   cfg = config.hopplaos.programs.neovim;
 in {
-  options.hopplaos.programs.neovim = {
-    enable = mkEnableOption "Neovim";
-  };
+  options.hopplaos.programs.neovim = { enable = mkEnableOption "Neovim"; };
 
   config = mkIf cfg.enable {
     programs.nixvim = {
@@ -27,9 +14,7 @@ in {
         relativenumber = true;
         shiftwidth = 2; # tab width
       };
-      globals = {
-        mapleader = ",";
-      };
+      globals = { mapleader = ","; };
       extraConfigLua = ''
         if vim.g.vscode then
         else
@@ -37,7 +22,7 @@ in {
       '';
 
       # see https://github.com/nix-community/nixvim#key-mappingndes
-      maps = {};
+      maps = { };
     };
   };
 }

@@ -1,10 +1,6 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}:
-with lib; let
+{ pkgs, config, lib, ... }:
+with lib;
+let
   cfg = config.hopplaos.hardware;
 
   monitorModule = types.submodule {
@@ -39,7 +35,15 @@ with lib; let
         default = 1;
       };
       transform = mkOption {
-        type = types.nullOr (types.enum ["90" "180" "270" "flipped" "flipped-90" "flipped-180" "flipped-270"]);
+        type = types.nullOr (types.enum [
+          "90"
+          "180"
+          "270"
+          "flipped"
+          "flipped-90"
+          "flipped-180"
+          "flipped-270"
+        ]);
         default = null;
         example = "90";
       };
@@ -74,11 +78,11 @@ in {
             };
             value = mkOption {
               type = monitorModule;
-              default = {};
+              default = { };
             };
           };
         });
-        default = [];
+        default = [ ];
       };
     };
   };

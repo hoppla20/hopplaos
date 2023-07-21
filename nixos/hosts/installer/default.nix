@@ -1,4 +1,4 @@
-{self', ...}: {
+{ self', ... }: {
   hopplaos = {
     users.vincentcui = {
       enable = true;
@@ -7,14 +7,10 @@
     desktop = {
       enable = true;
       thunar.enable = true;
-      wayland = {
-        hyprland.enable = true;
-      };
+      wayland = { hyprland.enable = true; };
     };
     installer.enable = true;
   };
 
-  environment.systemPackages = [
-    self'.packages.install-system
-  ];
+  environment.systemPackages = [ self'.packages.install-system ];
 }

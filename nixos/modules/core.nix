@@ -1,15 +1,8 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: {
+{ pkgs, config, lib, ... }: {
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
-    supportedFilesystems = ["ntfs"];
-    kernel.sysctl = {
-      "vm.swappiness" = 10;
-    };
+    supportedFilesystems = [ "ntfs" ];
+    kernel.sysctl = { "vm.swappiness" = 10; };
   };
 
   console = {
@@ -26,11 +19,8 @@
   time.timeZone = lib.mkDefault "Europe/Berlin";
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    supportedLocales = [
-      "C.UTF-8/UTF-8"
-      "en_US.UTF-8/UTF-8"
-      "de_DE.UTF-8/UTF-8"
-    ];
+    supportedLocales =
+      [ "C.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" "de_DE.UTF-8/UTF-8" ];
   };
 
   programs = {
@@ -50,47 +40,25 @@
   systemd.services.NetworkManager-wait-online.enable = false;
 
   environment = {
-    pathsToLink = [
-      "/share/nix-direnv"
-      "/share/zsh"
-    ];
+    pathsToLink = [ "/share/nix-direnv" "/share/zsh" ];
     systemPackages = builtins.attrValues {
-      inherit
-        (pkgs)
-        coreutils
-        dnsutils
-        iputils
-        pciutils
-        usbutils
+      inherit (pkgs)
+        coreutils dnsutils iputils pciutils usbutils
         # utils
-        
-        htop
-        bottom
+
+        htop bottom
         # system monitoring
-        
-        parted
-        gptfdisk
+
+        parted gptfdisk
         # partitioning
-        
-        bat
-        curl
-        wget
-        git
-        jq
-        yq
-        neovim
-        pv
-        ripgrep
-        gawk
-        gnused
-        killall
+
+        bat curl wget git jq yq neovim pv ripgrep gawk gnused killall
         # useful tools
-        
-        niv
-        alejandra
+
+        niv nixfmt
         # nix tools
-        
-        ;
+
+      ;
     };
 
     shellAliases = {

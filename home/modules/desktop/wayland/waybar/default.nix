@@ -1,36 +1,18 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: let
-  inherit
-    (lib)
-    types
-    mkOption
-    mkEnableOption
-    mkIf
-    mkDefault
-    mkMerge
-    optional
-    concatStringsSep
-    ;
-  inherit
-    (desktopCfg)
-    audio
-    brightnessControlCommands
-    ;
+{ pkgs, config, lib, ... }:
+let
+  inherit (lib)
+    types mkOption mkEnableOption mkIf mkDefault mkMerge optional
+    concatStringsSep;
+  inherit (desktopCfg) audio brightnessControlCommands;
 
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.wayland.waybar;
 in {
   options = {
     hopplaos.desktop.wayland.waybar = {
-      enable =
-        mkEnableOption "Waybar"
-        // {
-          default = desktopCfg.wayland.enable;
-        };
+      enable = mkEnableOption "Waybar" // {
+        default = desktopCfg.wayland.enable;
+      };
 
       launchCommand = mkOption {
         type = types.package;
@@ -62,13 +44,19 @@ in {
           margin-left = 5;
           margin-right = 5;
 
-          modules-left = ["cpu" "memory" "idle_inhibitor" "sway/mode" "hyprland/submap" "tray"];
-          modules-center = ["sway/workspaces" "wlr/workspaces"];
-          modules-right = ["backlight" "network" "wireplumber" "clock" "battery"];
+          modules-left = [
+            "cpu"
+            "memory"
+            "idle_inhibitor"
+            "sway/mode"
+            "hyprland/submap"
+            "tray"
+          ];
+          modules-center = [ "sway/workspaces" "wlr/workspaces" ];
+          modules-right =
+            [ "backlight" "network" "wireplumber" "clock" "battery" ];
 
-          "sway/workspaces" = {
-            disable-scroll = true;
-          };
+          "sway/workspaces" = { disable-scroll = true; };
           "wlr/workspaces" = {
             format = "{name}";
             on-click = "activate";
@@ -83,7 +71,7 @@ in {
 
             format = "{icon} {volume}%";
             format-muted = "󰝟 muted";
-            format-icons = ["" "" ""];
+            format-icons = [ "" "" "" ];
           };
           "network" = {
             tooltip = false;
@@ -111,7 +99,7 @@ in {
             format = "{icon}  {capacity}%";
             format-charging = " {capacity}%";
             format-plugged = " {capacity}%";
-            format-icons = ["" "" "" "" ""];
+            format-icons = [ "" "" "" "" "" ];
           };
           "tray" = {
             tooltip = false;
@@ -150,7 +138,8 @@ in {
     };
 
     systemd.user.services.network-manager-applet.Service = {
-      ExecStart = lib.mkForce "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator";
+      ExecStart =
+        lib.mkForce "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator";
     };
   };
 }
