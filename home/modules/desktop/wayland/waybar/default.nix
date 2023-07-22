@@ -78,7 +78,7 @@ in
             on-click = audio.controlCommands.mute;
             on-click-right = audio.managerCommand;
 
-            format = "{icon} {volume}%";
+            format = "{icon}  {volume}%";
             format-muted = "󰝟 muted";
             format-icons = [ "" "" "" ];
           };
