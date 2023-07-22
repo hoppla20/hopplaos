@@ -123,6 +123,7 @@ in
           col.group_border = rgba(${config.scheme.base02}ee)
           col.group_border_active = rgba(${config.scheme.base0E}ee)
           layout = master
+          resize_on_border = true
         }
 
         misc {

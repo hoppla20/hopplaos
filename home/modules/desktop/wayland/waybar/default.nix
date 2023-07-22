@@ -106,8 +106,8 @@ in
             full-at = 79;
 
             format = "{icon}  {capacity}%";
-            format-charging = " {capacity}%";
-            format-plugged = " {capacity}%";
+            format-charging = "  {capacity}%";
+            format-plugged = "  {capacity}%";
             format-icons = [ "" "" "" "" "" ];
           };
           "tray" = {
@@ -118,7 +118,7 @@ in
           "clock" = {
             tooltip = false;
             interval = 15;
-            format = "{: %H:%M 󰃭 %d.%m.%Y}";
+            format = "{:  %H:%M 󰃭  %d.%m.%Y}";
           };
           "cpu" = {
             interval = 10;

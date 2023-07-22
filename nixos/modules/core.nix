@@ -75,6 +75,8 @@
         gawk
         gnused
         killall
+        rename
+        openssl
 
         # nix tools
         niv
