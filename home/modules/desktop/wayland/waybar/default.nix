@@ -53,8 +53,8 @@ in
             "memory"
             "idle_inhibitor"
             "sway/mode"
-            "hyprland/submap"
             "tray"
+            "hyprland/submap"
           ];
           modules-center = [ "sway/workspaces" "wlr/workspaces" ];
           modules-right =
