@@ -122,12 +122,12 @@ in
           };
           "cpu" = {
             interval = 10;
-            format = " {}%";
+            format = "  {}%";
             max-length = 10;
           };
           "memory" = {
             interval = 10;
-            format = " {}%";
+            format = "  {}%";
             max-length = 10;
           };
           "idle_inhibitor" = {
