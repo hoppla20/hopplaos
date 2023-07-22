@@ -21,6 +21,5 @@ in {
 
   config = mkIf cfg.enable {
     services.syncthing.enable = true;
-    systemd.user.services.syncthing.Unit.Requires = ["tray.target"];
   };
 }
