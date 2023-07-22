@@ -26,6 +26,11 @@ in
         gnome-keyring.enable = true;
       };
 
+      hardware = {
+        securitykeys.enable = true;
+      };
+
+      server-management.enable = true;
       android.enable = true;
     };
   };
