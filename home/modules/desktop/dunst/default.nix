@@ -40,7 +40,7 @@ in
           frame_width = 1;
           idle_threshold = 120;
 
-          font = "FiraCode Nerd Font 10";
+          font = "${config.gtk.font.name} 10";
 
           show_age_threshold = 60;
           icon_position = "left";

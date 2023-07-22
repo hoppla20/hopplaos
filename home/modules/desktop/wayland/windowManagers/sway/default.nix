@@ -29,7 +29,7 @@ in
         modifier = "Mod4";
 
         fonts = {
-          names = [ "FiraCode Nerd Font" ];
+          names = [ config.gtk.font.name ];
           style = "Regular";
           size = 12.0;
         };

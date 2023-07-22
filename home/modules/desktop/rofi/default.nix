@@ -24,7 +24,7 @@ in
     programs.rofi = {
       enable = true;
       package = if cfg.wayland then pkgs.rofi-wayland else pkgs.rofi;
-      font = "FiraCode Nerd Font 10";
+      font = "${config.gtk.font.name} 10";
       cycle = true;
       terminal = desktopCfg.terminalCommand;
 

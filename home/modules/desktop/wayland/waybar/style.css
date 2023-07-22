@@ -7,7 +7,6 @@
 window#waybar {
   background: transparent;
   color: @base00;
-  font-family: FiraCode Nerd Font;
   font-size: 12px;
 }
 

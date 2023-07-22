@@ -35,6 +35,11 @@ in
 
       style = pkgs.writeText "style.css"
         (builtins.readFile (config.scheme inputs.base16-waybar)
+          + ''
+            window#waybar {
+              font-family: ${config.gtk.font.name};
+            }
+          ''
           + builtins.readFile ./style.css);
 
       settings = {

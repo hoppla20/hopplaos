@@ -121,7 +121,7 @@ in
     gtk = {
       enable = true;
       font = {
-        name = "FiraCode Nerd Font";
+        name = "Iosevka Nerd Font";
         package = pkgs.custom-nerdfonts;
       };
       theme = {
