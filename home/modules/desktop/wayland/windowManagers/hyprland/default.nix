@@ -139,7 +139,7 @@ in
 
           rounding = 10
           blur = true
-          blur_size = 3
+          blur_size = 8
           blur_passes = 1
           blur_new_optimizations = true
 
@@ -147,6 +147,10 @@ in
           shadow_range = 4
           shadow_render_power = 3
           col.shadow = rgba(1a1a1aee)
+
+          dim_inactive = true
+          dim_strength = 0.05
+          dim_around = 0.2 # for floating windows with `dimaround`
         }
 
         animations {
@@ -158,10 +162,10 @@ in
 
           animation = windows, 1, 4, myBezier
           animation = windowsOut, 1, 4, default, popin 80%
-          animation = border, 1, 10, default
-          animation = borderangle, 1, 8, default
           animation = fade, 1, 4, default
           animation = workspaces, 1, 3, default
+          animation = border, 1, 10, default
+          animation = borderangle, 1, 8, default
         }
 
         dwindle {
@@ -183,6 +187,9 @@ in
         binds {
           allow_workspace_cycles = true
         }
+
+        windowrulev2 = workspace 9, class:^(Spotify)$
+        windowrulev2 = opacity 0.96 0.96, class:^(Alacritty|VSCodium|Spotify)$
 
         submap = resize
         binde = , LEFT, resizeactive, 10 0
