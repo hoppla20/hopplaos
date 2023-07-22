@@ -25,6 +25,8 @@ in
       services = {
         gnome-keyring.enable = true;
       };
+
+      android.enable = true;
     };
   };
 }
