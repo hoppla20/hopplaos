@@ -15,6 +15,7 @@
       vscode.enable = true;
       keepassxc.enable = true;
       office.enable = true;
+      messangers.enable = true;
     };
 
     services = {
