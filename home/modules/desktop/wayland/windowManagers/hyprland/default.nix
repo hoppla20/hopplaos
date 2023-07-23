@@ -194,14 +194,14 @@ in
         windowrulev2 = opacity 0.96 0.96, class:^(Alacritty|VSCodium|Spotify)$
 
         submap = resize
-        binde = , LEFT, resizeactive, 10 0
-        binde = , RIGHT, resizeactive, -10 0
-        binde = , UP, resizeactive, 0 -10
-        binde = , DOWN, resizeactive, 0 10
-        binde = , H, resizeactive, -10 0
-        binde = , L, resizeactive, 10 0
-        binde = , K, resizeactive, 0 10
-        binde = , J, resizeactive, 0 -10
+        binde = , LEFT, resizeactive, 20 0
+        binde = , RIGHT, resizeactive, -20 0
+        binde = , UP, resizeactive, 0 -20
+        binde = , DOWN, resizeactive, 0 20
+        binde = , H, resizeactive, -20 0
+        binde = , L, resizeactive, 20 0
+        binde = , K, resizeactive, 0 20
+        binde = , J, resizeactive, 0 -20
         bind = , RETURN, submap, reset
         bind = , ESCAPE, submap, reset
         bind = CONTROL, C, submap, reset
