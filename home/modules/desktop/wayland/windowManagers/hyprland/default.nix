@@ -189,6 +189,7 @@ in
           allow_workspace_cycles = true
         }
 
+        windowrulev2 = workspace 8, class:^(Signal|whatsapp-for-linux)$
         windowrulev2 = workspace 9, class:^(Spotify)$
         windowrulev2 = opacity 0.96 0.96, class:^(Alacritty|VSCodium|Spotify)$
 
@@ -320,6 +321,10 @@ in
         bind = SUPER_CONTROL, 7, movetoworkspacesilent, 7
         bind = SUPER_CONTROL, 8, movetoworkspacesilent, 8
         bind = SUPER_CONTROL, 9, movetoworkspacesilent, 9
+
+        # Special workspaces
+        bind = SUPER, MINUS, movetoworkspace, special
+        bind = SUPER_SHIFT, MINUS, togglespecialworkspace,
 
         # Move/resize windows with mouse buttons
         bindm = SUPER, mouse:272, movewindow
