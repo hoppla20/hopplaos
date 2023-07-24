@@ -86,7 +86,7 @@ in
             tooltip = false;
             format = "{ifname} {ipaddr}/{cidr}";
             format-wifi = "  {essid:5}";
-            format-ethernet = "󰈀 {ipaddr}/{cidr}";
+            format-ethernet = "󰈀  {ipaddr}/{cidr}";
             format-disconnected = "";
             max-length = 50;
           };
