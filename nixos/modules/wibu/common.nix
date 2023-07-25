@@ -21,6 +21,6 @@ in
       })
     ];
 
-    environment.systemPackages = [ pkgs.vmware-workstation ];
+    virtualisation.vmware.host.enable = true;
   };
 }
