@@ -80,7 +80,6 @@
 
         # nix tools
         niv
-        nixpkgs-fmt
         ;
     } ++ [
       (pkgs.writeShellScriptBin "nix-specialisation-switcher" ''
