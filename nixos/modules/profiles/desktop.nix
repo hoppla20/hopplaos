@@ -24,6 +24,11 @@ in
 
       services = {
         gnome-keyring.enable = true;
+        openssh.enable = true;
+      };
+
+      virtualisation = {
+        containers.enable = true;
       };
 
       hardware = {
