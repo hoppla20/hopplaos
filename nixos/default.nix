@@ -3,13 +3,13 @@ let nixosModules = self.lib.exportModulesRecursive ./modules;
 in {
   flake = {
     nixosConfigurations = withSystem "x86_64-linux"
-      ({ config, self', inputs', system, ... }:
+      ({ config, self', inputs', unstable, system, ... }:
         let
           mkHost = name: dir:
             inputs.nixpkgs.lib.nixosSystem {
               inherit system;
               specialArgs = {
-                inherit inputs inputs' self self';
+                inherit inputs inputs' self self' unstable;
                 homeUsers = self.homeConfigurations;
               };
               modules = builtins.attrValues nixosModules ++ [

@@ -49,6 +49,11 @@
         , system
         , ...
         }: {
+          _module.args.unstable = import inputs.unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
+
           devshells.default =
             let
               build-installer = pkgs.writeShellScriptBin "build-installer" ''
