@@ -79,13 +79,13 @@ in
             on-click-right = audio.managerCommand;
 
             format = "{icon}  {volume}%";
-            format-muted = "󰝟 muted";
+            format-muted = "󰝟  muted";
             format-icons = [ "" "" "" ];
           };
           "network" = {
             tooltip = false;
             format = "{ifname} {ipaddr}/{cidr}";
-            format-wifi = "  {essid:5}";
+            format-wifi = "   {essid:5}";
             format-ethernet = "󰈀  {ipaddr}/{cidr}";
             format-disconnected = "";
             max-length = 50;
