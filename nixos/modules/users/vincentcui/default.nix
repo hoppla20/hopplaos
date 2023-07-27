@@ -51,8 +51,8 @@ in
         ];
       }];
     }
-    (mkIf config.hopplaos.virtualisation.docker.enable {
-      users.users.vincentcui.extraGroups = ["docker"];
+    (mkIf config.hopplaos.virtualisation.containers.enable {
+      users.users.vincentcui.extraGroups = ["docker" "podman"];
     })
   ]);
 }
