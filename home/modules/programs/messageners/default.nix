@@ -25,6 +25,7 @@ in {
         (pkgs)
         signal-desktop
         whatsapp-for-linux
+        element-desktop
         ;
     };
   };
