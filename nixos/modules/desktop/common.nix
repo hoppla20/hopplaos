@@ -14,6 +14,13 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     {
+      environment.systemPackages = builtins.attrValues {
+        inherit
+          (pkgs)
+          trashy
+          ;
+      };
+
       services = {
         printing = {
           enable = true;

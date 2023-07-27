@@ -16,6 +16,7 @@
       keepassxc.enable = true;
       office.enable = true;
       messangers.enable = true;
+      lf.enable = true;
     };
 
     services = {
