@@ -77,6 +77,7 @@
         killall
         rename
         openssl
+        tldr
 
         # nix tools
         niv
