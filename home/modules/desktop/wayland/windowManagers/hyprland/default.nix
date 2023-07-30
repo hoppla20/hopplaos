@@ -1,9 +1,9 @@
-{ pkgs
-, config
-, lib
-, ...
-}:
-let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   inherit (builtins) listToAttrs;
   inherit
     (lib)
@@ -45,21 +45,21 @@ let
   monitors = concatStringsSep "\n" (mapAttrsToList
     (name: monitorCfg:
       concatStringsSep ", " ([
-        "monitor = ${name}"
-        (monitorCfg.resolution
-          + (optionalString (!(isNull monitorCfg.refreshRate))
-          "@${toString monitorCfg.refreshRate}"))
-        (
-          if (isNull monitorCfg.position)
-          then "auto"
-          else "${toString monitorCfg.position.x}x${toString monitorCfg.position.y}"
-        )
-        (toString monitorCfg.scale)
-      ]
-      ++ optionals (!(isNull monitorCfg.transform)) [
-        "transform"
-        "${toString transformList.${monitorCfg.transform}}"
-      ]))
+          "monitor = ${name}"
+          (monitorCfg.resolution
+            + (optionalString (!(isNull monitorCfg.refreshRate))
+              "@${toString monitorCfg.refreshRate}"))
+          (
+            if (isNull monitorCfg.position)
+            then "auto"
+            else "${toString monitorCfg.position.x}x${toString monitorCfg.position.y}"
+          )
+          (toString monitorCfg.scale)
+        ]
+        ++ optionals (!(isNull monitorCfg.transform)) [
+          "transform"
+          "${toString transformList.${monitorCfg.transform}}"
+        ]))
     (listToAttrs config.hopplaos.hardware.monitors));
 
   wallpapers = unique (map
@@ -73,8 +73,7 @@ let
     while ${pkgs.procps}/bin/pgrep -u $UID -x hyprpaper >/dev/null; do sleep 1; done
     ${pkgs.hyprpaper}/bin/hyprpaper
   '';
-in
-{
+in {
   options = {
     hopplaos.desktop.wayland.hyprland = {
       enable = mkEnableOption "Wayland - Hyprland";
@@ -341,7 +340,8 @@ in
 
         ${lib.optionalString (builtins.length hardwareCfg.monitors > 0) (let
           monitor0 = (builtins.elemAt hardwareCfg.monitors 0).name;
-          monitor1 = if (builtins.length hardwareCfg.monitors > 1)
+          monitor1 =
+            if (builtins.length hardwareCfg.monitors > 1)
             then (builtins.elemAt hardwareCfg.monitors 1).name
             else monitor0;
         in ''
@@ -358,8 +358,8 @@ in
       '';
     };
 
-    home.packages = [ pkgs.hyprpaper ];
-    xdg.configFile."hypr/hyprpaper.conf"= {
+    home.packages = [pkgs.hyprpaper];
+    xdg.configFile."hypr/hyprpaper.conf" = {
       text = ''
         ${concatStringsSep "\n" (map (wallpaper: "preload = ${wallpaper}") wallpapers)}
         ${concatStringsSep "\n" (map
@@ -367,7 +367,8 @@ in
           config.hopplaos.hardware.monitors)}
         ${desktopCfg.defaultWallpaper}
       '';
-      onChange = mkIf (!config.wayland.windowManager.hyprland.disableAutoreload)
+      onChange =
+        mkIf (!config.wayland.windowManager.hyprland.disableAutoreload)
         "bash ${launchHyprpaper}&!";
     };
   };

@@ -1,10 +1,14 @@
-{ pkgs, config, lib, modulesPath, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  modulesPath,
+  ...
+}: let
   cfg = config.hopplaos.generators.test-vm;
 
   inherit (lib) types mkOption mkEnableOption;
-in
-{
+in {
   options = {
     hopplaos.generators.test-vm = {
       headless = mkEnableOption "Test VM headless";
@@ -16,7 +20,7 @@ in
   };
 
   config = {
-    formatConfigs.vm-bootloader = { config, ... }: {
+    formatConfigs.vm-bootloader = {config, ...}: {
       virtualisation = {
         cores = 4;
         memorySize = 4096;

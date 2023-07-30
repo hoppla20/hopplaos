@@ -1,17 +1,21 @@
-{ pkgs, config, lib, inputs, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  inputs,
+  ...
+}: let
   inherit (lib) types mkOption mkEnableOption mkIf;
 
   cfg = config.hopplaos.hardware;
-in
-{
+in {
   options.hopplaos.hardware = {
     enable = mkEnableOption "Hardware";
 
     bluetooth = mkEnableOption "Bluetooth";
-    cpu.manufacturer = mkOption { type = types.enum [ "intel" "amd" ]; };
+    cpu.manufacturer = mkOption {type = types.enum ["intel" "amd"];};
     gpu.manufacturer =
-      mkOption { type = types.enum [ "intel" "amd" "nvidia" ]; };
+      mkOption {type = types.enum ["intel" "amd" "nvidia"];};
   };
 
   config = mkIf cfg.enable {

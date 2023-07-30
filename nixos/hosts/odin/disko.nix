@@ -17,7 +17,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "defaults" ];
+                mountOptions = ["defaults"];
               };
             }
             {
@@ -27,7 +27,7 @@
               content = {
                 type = "luks";
                 name = "crypted";
-                extraOpenArgs = [ "--allow-discards" ];
+                extraOpenArgs = ["--allow-discards"];
                 content = {
                   type = "lvm_pv";
                   vg = "pool";
@@ -48,7 +48,7 @@
               type = "filesystem";
               format = "ext4";
               mountpoint = "/";
-              mountOptions = [ "defaults" ];
+              mountOptions = ["defaults"];
             };
           };
           swap = {

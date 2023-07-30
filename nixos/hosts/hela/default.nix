@@ -1,6 +1,6 @@
 {
   hopplaos = {
-    profiles = { desktop = true; };
+    profiles = {desktop = true;};
     users.vincentcui.enable = true;
     wibu = {
       enable = true;
@@ -14,8 +14,7 @@
     };
   };
 
-  boot.initrd.availableKernelModules =
-    [ "vmd" "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = ["vmd" "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
 
   networking.interfaces.enp0s31f6.useDHCP = true;
 
@@ -30,5 +29,5 @@
     };
   };
 
-  swapDevices = [{ label = "swap"; }];
+  swapDevices = [{label = "swap";}];
 }

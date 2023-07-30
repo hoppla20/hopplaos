@@ -1,10 +1,13 @@
-{ pkgs, config, lib, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   cfg = config.hopplaos.programs.gpg;
 
   inherit (lib) mkEnableOption mkIf mkMerge;
-in
-{
+in {
   options = {
     hopplaos.programs.gpg = {
       enable = mkEnableOption "Programs - gpg";
@@ -13,7 +16,7 @@ in
   };
 
   config = mkMerge [
-    (mkIf cfg.enable { programs.gpg.enable = true; })
+    (mkIf cfg.enable {programs.gpg.enable = true;})
     (mkIf cfg.gpg-agent.enable {
       programs.gpg.scdaemonSettings.disable-ccid = true;
       services.gpg-agent = {

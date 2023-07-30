@@ -1,4 +1,8 @@
-{ pkgs, inputs', ... }:
+{
+  pkgs,
+  inputs',
+  ...
+}:
 pkgs.writeShellScriptBin "install-system" ''
   set -o errexit
   set -o nounset

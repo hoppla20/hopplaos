@@ -1,13 +1,16 @@
-{ pkgs, config, lib, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   cfg = config.hopplaos.networking;
 
   inherit (lib) types mkIf mkOption mkEnableOption;
-in
-{
+in {
   options = {
     hopplaos.networking = {
-      enable = mkEnableOption "HopplaOS Networking" // { default = true; };
+      enable = mkEnableOption "HopplaOS Networking" // {default = true;};
 
       timeServers = mkOption {
         type = types.listOf types.str;
@@ -21,7 +24,8 @@ in
 
       hostId = mkOption {
         type = types.str;
-        default = builtins.substring 0 8
+        default =
+          builtins.substring 0 8
           (builtins.hashString "md5" config.networking.hostName);
       };
 
@@ -30,7 +34,7 @@ in
 
         allowedTCPPorts = mkOption {
           type = types.listOf types.int;
-          default = [ ];
+          default = [];
         };
       };
     };

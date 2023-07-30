@@ -1,11 +1,14 @@
-{ pkgs, config, lib, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   inherit (lib) types mkOption mkEnableOption mkIf mkMerge;
 
   bootCfg = config.hopplaos.boot;
   cfg = bootCfg.plymouth;
-in
-{
+in {
   options.hopplaos.boot.plymouth = {
     enable = mkEnableOption "Plymouth boot splashscreen";
   };

@@ -1,17 +1,16 @@
-{ pkgs
-, config
-, lib
-, inputs
-, ...
-}:
-let
+{
+  pkgs,
+  config,
+  lib,
+  inputs,
+  ...
+}: let
   cfg = config.hopplaos.desktop;
 
   inherit (lib) types mkOption mkEnableOption mkIf;
 
   brightnessStep = 10;
-in
-{
+in {
   options = {
     hopplaos.desktop = {
       enable = mkEnableOption "HopplaOS Desktop";
@@ -22,7 +21,8 @@ in
         };
       defaultWallpaper = mkOption {
         type = types.str;
-        default = if cfg.darkTheme
+        default =
+          if cfg.darkTheme
           then "~/.config/wallpapers/wallpaper-dark.jpg"
           else "~/.config/wallpapers/wallpaper-light.jpg";
       };
@@ -94,10 +94,9 @@ in
 
   config = mkIf cfg.enable {
     scheme =
-      if cfg.darkTheme then
-        "${inputs.base16-schemes}/catppuccin-macchiato.yaml"
-      else
-        "${inputs.base16-schemes}/catppuccin-latte.yaml";
+      if cfg.darkTheme
+      then "${inputs.base16-schemes}/catppuccin-macchiato.yaml"
+      else "${inputs.base16-schemes}/catppuccin-latte.yaml";
 
     xsession.enable = true;
 
@@ -109,7 +108,11 @@ in
       };
 
       pointerCursor = {
-        name = "Bibata-Modern-${if cfg.darkTheme then "Ice" else "Classic"}";
+        name = "Bibata-Modern-${
+          if cfg.darkTheme
+          then "Ice"
+          else "Classic"
+        }";
         size = 16;
         package = pkgs.bibata-cursors;
         gtk.enable = true;
@@ -125,11 +128,19 @@ in
         package = pkgs.custom-nerdfonts;
       };
       theme = {
-        name = "Catppuccin-${if cfg.darkTheme then "Macchiato" else "Latte"}-Standard-Mauve-${if cfg.darkTheme then "Dark" else "Light"}";
+        name = "Catppuccin-${
+          if cfg.darkTheme
+          then "Macchiato"
+          else "Latte"
+        }-Standard-Mauve-${
+          if cfg.darkTheme
+          then "Dark"
+          else "Light"
+        }";
         package = pkgs.catppuccin-gtk.override {
-          accents = [ "mauve" ];
+          accents = ["mauve"];
           size = "standard";
-          tweaks = [ ];
+          tweaks = [];
           variant =
             if cfg.darkTheme
             then "macchiato"

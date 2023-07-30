@@ -1,5 +1,10 @@
-{ pkgs, config, lib, self, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  self,
+  ...
+}: let
   inherit (builtins) attrNames attrValues pathExists readDir any;
   inherit (lib) filterAttrs mkIf mkEnableOption findFirst;
   inherit (self.lib) listDirectoryModules;
@@ -8,13 +13,14 @@ let
   cfg = desktopCfg.wayland;
 
   wms = attrNames (listDirectoryModules ./windowManagers);
-in
-{
+in {
   options = {
-    hopplaos.desktop.wayland.enable = mkEnableOption "Wayland" // {
-      readOnly = true;
-      default = any (wm: cfg.${wm}.enable) wms;
-    };
+    hopplaos.desktop.wayland.enable =
+      mkEnableOption "Wayland"
+      // {
+        readOnly = true;
+        default = any (wm: cfg.${wm}.enable) wms;
+      };
   };
 
   config = mkIf cfg.enable {

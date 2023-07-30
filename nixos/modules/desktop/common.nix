@@ -1,10 +1,13 @@
-{ pkgs, config, lib, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   inherit (lib) mkEnableOption mkMerge mkIf;
 
   cfg = config.hopplaos.desktop;
-in
-{
+in {
   options = {
     hopplaos.desktop = {
       enable = mkEnableOption "HopplaOS Desktop";
@@ -24,7 +27,7 @@ in
       services = {
         printing = {
           enable = true;
-          drivers = [ pkgs.gutenprint pkgs.canon-cups-ufr2 ];
+          drivers = [pkgs.gutenprint pkgs.canon-cups-ufr2];
         };
 
         blueman.enable = config.hopplaos.hardware.bluetooth;
@@ -41,7 +44,7 @@ in
           displayManager.gdm.enable = true;
         };
       };
-      xdg.portal = { xdgOpenUsePortal = true; };
+      xdg.portal = {xdgOpenUsePortal = true;};
 
       specialisation = {
         dark.configuration = {

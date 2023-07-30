@@ -1,11 +1,14 @@
-{ pkgs, config, lib, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   inherit (lib) mkOption mkEnableOption mkIf mkMerge;
 
   cfg = config.hopplaos.boot.grub;
   bootCfg = config.hopplaos.boot;
-in
-{
+in {
   options.hopplaos.boot.grub = {
     enable = mkEnableOption "Grub";
     osProber = mkEnableOption "OS Prober";

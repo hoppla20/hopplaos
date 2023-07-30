@@ -1,9 +1,9 @@
-{ pkgs
-, config
-, lib
-, ...
-}:
-let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   inherit
     (lib)
     types
@@ -32,12 +32,13 @@ let
         ;;
     esac
   '';
-in
-{
+in {
   options.hopplaos.programs.theme-switcher = {
-    enable = mkEnableOption "Theme switcher" // {
-      default = desktopCfg.enable;
-    };
+    enable =
+      mkEnableOption "Theme switcher"
+      // {
+        default = desktopCfg.enable;
+      };
     package = mkOption {
       type = types.package;
       default = pkgs.writeShellScriptBin "theme-switcher" ''
@@ -48,6 +49,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ cfg.package ];
+    home.packages = [cfg.package];
   };
 }

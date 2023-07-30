@@ -1,13 +1,16 @@
-{ pkgs, config, lib, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   inherit (lib) types mkOption mkEnableOption mkIf mkMerge;
 
   inherit (pkgs) fetchurl;
 
   cfg = config.hopplaos.wibu;
-in
-{
-  options.hopplaos.wibu = { enable = mkEnableOption "WIBU"; };
+in {
+  options.hopplaos.wibu = {enable = mkEnableOption "WIBU";};
 
   config = mkIf cfg.enable {
     security.pki.certificateFiles = [

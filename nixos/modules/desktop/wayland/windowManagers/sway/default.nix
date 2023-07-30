@@ -1,11 +1,15 @@
-{ pkgs, config, lib, options, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  options,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
 
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.wayland.sway;
-in
-{
+in {
   options = {
     hopplaos.desktop.wayland.sway = {
       enable = mkEnableOption "Wayland - Sway";

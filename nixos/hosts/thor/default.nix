@@ -1,8 +1,8 @@
 {
-  imports = [ ./disko.nix ];
+  imports = [./disko.nix];
 
   hopplaos = {
-    profiles = { desktop = true; };
+    profiles = {desktop = true;};
     users.vincentcui.enable = true;
     boot.grub.osProber = true;
     hardware = {
@@ -13,7 +13,7 @@
     };
   };
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "sd_mod"];
 
   networking.interfaces.enp4s0.useDHCP = true;
 }

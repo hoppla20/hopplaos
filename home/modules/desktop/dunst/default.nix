@@ -1,14 +1,18 @@
-{ pkgs, config, lib, inputs, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  inputs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
 
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.dunst;
-in
-{
+in {
   options = {
     hopplaos.desktop.dunst = {
-      enable = mkEnableOption "Dunst" // { default = desktopCfg.enable; };
+      enable = mkEnableOption "Dunst" // {default = desktopCfg.enable;};
     };
   };
 

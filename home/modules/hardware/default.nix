@@ -1,7 +1,8 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib; let
   cfg = config.hopplaos.hardware;
@@ -70,8 +71,7 @@ with lib; let
       };
     };
   };
-in
-{
+in {
   options = {
     hopplaos.hardware = {
       monitors = mkOption {
@@ -83,11 +83,11 @@ in
             };
             value = mkOption {
               type = monitorModule;
-              default = { };
+              default = {};
             };
           };
         });
-        default = [ ];
+        default = [];
       };
     };
   };

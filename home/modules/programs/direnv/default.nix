@@ -1,10 +1,13 @@
-{ pkgs, config, lib, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.hopplaos.programs.direnv;
-in
-{
+in {
   options.hopplaos.programs.direnv.enable = mkEnableOption "Direnv";
 
   config = {

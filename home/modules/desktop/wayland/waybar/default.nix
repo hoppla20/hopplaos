@@ -1,19 +1,30 @@
-{ pkgs, config, lib, inputs, ... }:
-let
-  inherit (lib)
-    types mkOption mkEnableOption mkIf
-    mkForce;
+{
+  pkgs,
+  config,
+  lib,
+  inputs,
+  ...
+}: let
+  inherit
+    (lib)
+    types
+    mkOption
+    mkEnableOption
+    mkIf
+    mkForce
+    ;
   inherit (desktopCfg) audio brightnessControlCommands;
 
   desktopCfg = config.hopplaos.desktop;
   cfg = desktopCfg.wayland.waybar;
-in
-{
+in {
   options = {
     hopplaos.desktop.wayland.waybar = {
-      enable = mkEnableOption "Waybar" // {
-        default = desktopCfg.wayland.enable;
-      };
+      enable =
+        mkEnableOption "Waybar"
+        // {
+          default = desktopCfg.wayland.enable;
+        };
 
       launchCommand = mkOption {
         type = types.package;
@@ -33,7 +44,8 @@ in
       package = pkgs.waybar-experimental;
       systemd.enable = false;
 
-      style = pkgs.writeText "style.css"
+      style =
+        pkgs.writeText "style.css"
         (builtins.readFile (config.scheme inputs.base16-waybar)
           + ''
             window#waybar {
@@ -61,11 +73,10 @@ in
             "tray"
             "hyprland/submap"
           ];
-          modules-center = [ "sway/workspaces" "wlr/workspaces" ];
-          modules-right =
-            [ "backlight" "network" "wireplumber" "clock" "battery" ];
+          modules-center = ["sway/workspaces" "wlr/workspaces"];
+          modules-right = ["backlight" "network" "wireplumber" "clock" "battery"];
 
-          "sway/workspaces" = { disable-scroll = true; };
+          "sway/workspaces" = {disable-scroll = true;};
           "wlr/workspaces" = {
             format = "{name}";
             on-click = "activate";
@@ -80,7 +91,7 @@ in
 
             format = "{icon}  {volume}%";
             format-muted = "󰝟  muted";
-            format-icons = [ "" "" "" ];
+            format-icons = ["" "" ""];
           };
           "network" = {
             tooltip = false;
@@ -108,7 +119,7 @@ in
             format = "{icon}  {capacity}%";
             format-charging = "  {capacity}%";
             format-plugged = "  {capacity}%";
-            format-icons = [ "" "" "" "" "" ];
+            format-icons = ["" "" "" "" ""];
           };
           "tray" = {
             tooltip = false;
