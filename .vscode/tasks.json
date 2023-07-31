@@ -3,7 +3,7 @@
     "tasks": [
       {
         "command": "sudo nixos-rebuild switch",
-        "label": "nixos-rebuild switch",
+        "label": "git add . && nixos-rebuild switch",
         "type": "shell",
         "problemMatcher": [],
         "group": {

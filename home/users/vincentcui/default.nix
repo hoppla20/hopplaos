@@ -1,4 +1,4 @@
-{...}: {
+{self', ...}: {
   hopplaos = {
     programs = {
       gpg = {
@@ -11,7 +11,6 @@
       };
       zsh.enable = true;
       direnv.enable = true;
-      neovim.enable = true;
       vscode.enable = true;
       keepassxc.enable = true;
       office.enable = true;

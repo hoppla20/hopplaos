@@ -73,6 +73,9 @@ in {
         "terminal.integrated.commandsToSkipShell" = ["-workbench.action.quickOpen"];
 
         # plugin settings
+        "extensions.experimental.affinity" = {
+          "asvetliakov.vscode-neovim" = 1;
+        };
         "vscode-neovim.neovimExecutablePaths.linux" = "/run/current-system/sw/bin/nvim";
         "redhat.telemetry.enabled" = false;
         "latex-workshop.view.pdf.viewer" = "tab";
