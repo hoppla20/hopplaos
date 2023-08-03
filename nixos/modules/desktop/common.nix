@@ -24,6 +24,8 @@ in {
           ;
       };
 
+      programs.light.enable = true;
+
       services = {
         printing = {
           enable = true;
