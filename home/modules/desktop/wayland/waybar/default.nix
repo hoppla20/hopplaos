@@ -104,9 +104,8 @@ in {
           "backlight" = {
             tooltip = false;
             format = " {}%";
-            interval = 1;
-            on-scroll-up = brightnessControlCommands.raise;
-            on-scroll-down = brightnessControlCommands.lower;
+            on-scroll-up = brightnessControlCommands.lower;
+            on-scroll-down = brightnessControlCommands.raise;
           };
           "battery" = {
             states = {
