@@ -331,9 +331,7 @@
     },
     "flake-utils-plus_2": {
       "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ]
+        "flake-utils": "flake-utils_2"
       },
       "locked": {
         "lastModified": 1657226504,
@@ -828,7 +826,6 @@
         "digga": "digga",
         "disko": "disko",
         "flake-parts": "flake-parts",
-        "flake-utils": "flake-utils_2",
         "flake-utils-plus": "flake-utils-plus_2",
         "home-manager": "home-manager_2",
         "hyprland": "hyprland",

@@ -120,11 +120,7 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
-    flake-utils.url = "github:numtide/flake-utils";
-    flake-utils-plus = {
-      url = "github:gytis-ivaskevicius/flake-utils-plus";
-      inputs.flake-utils.follows = "flake-utils";
-    };
+    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
     digga = {
       url = "github:divnix/digga/v0.11.0";
