@@ -86,7 +86,7 @@
               name = "nixos-diff";
               command = ''
                 #!/usr/bin/env bash
-                ${pkgs.nix-output-monitor}/bin/nom build ".#nixosConfigurations.$(hostname).config.system.build.toplevel" && ${pkgs.nvd}/bin/nvd diff /run/current-system result
+                ${pkgs.nixos-rebuild}/bin/nixos-rebuild build --flake ".#$(hostname)" && ${pkgs.nvd}/bin/nvd diff /run/current-system result
               '';
             }
             {
