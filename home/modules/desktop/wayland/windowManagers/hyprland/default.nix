@@ -152,10 +152,13 @@ in {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
           rounding = 10
-          blur = true
-          blur_size = 8
-          blur_passes = 1
-          blur_new_optimizations = true
+
+          #blur {
+          #  enable = true
+          #  size = 8
+          #  passes = 1
+          #  new_optimizations = true
+          #}
 
           drop_shadow = true
           shadow_range = 4
