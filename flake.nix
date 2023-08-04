@@ -53,7 +53,7 @@
           config.allowUnfree = true;
         };
 
-        apps.default.program = "${pkgs.hello}/bin/hello";
+        apps.default.program = "${self'.packages.install-system}/bin/install-system";
 
         devshells.default = let
           build-installer = pkgs.writeShellScriptBin "build-installer" ''
@@ -116,7 +116,7 @@
                 git add .
                 sudo nixos-rebuild switch |& nom
               '';
-              help = "run 'sudo nix run' to accept flake extra nix configs";
+              help = "run 'sudo nix run . -- -h' to accept flake extra nix configs";
             }
           ];
         };
