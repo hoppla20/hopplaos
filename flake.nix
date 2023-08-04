@@ -53,6 +53,8 @@
           config.allowUnfree = true;
         };
 
+        apps.default.program = "${pkgs.hello}/bin/hello";
+
         devshells.default = let
           build-installer = pkgs.writeShellScriptBin "build-installer" ''
             nix build .#nixosConfigurations.installer.config.formats.custom-iso
@@ -61,6 +63,7 @@
           name = "hopplaos";
           packages = [
             pkgs.nil
+            pkgs.nvd
             pkgs.nix-output-monitor
             inputs'.disko.packages.default
           ];
@@ -86,7 +89,7 @@
               name = "nixos-diff";
               command = ''
                 #!/usr/bin/env bash
-                ${pkgs.nixos-rebuild}/bin/nixos-rebuild build --flake ".#$(hostname)" && ${pkgs.nvd}/bin/nvd diff /run/current-system result
+                nixos-rebuild build --flake ".#$(hostname)" && nvd diff /run/current-system result
               '';
             }
             {
@@ -103,6 +106,17 @@
               package = pkgs.hello;
               help = ''
                 nix build ".#nixosConfigurations.$CONFIGURATION_NAME.config.system.build.{format,mount,disko}Script"'';
+            }
+            {
+              name = "nom-rebuild-switch";
+              command = ''
+                #!/usr/bin/env bash
+                set -o errexit
+                set -o pipefail
+                git add .
+                sudo nixos-rebuild switch |& nom
+              '';
+              help = "run 'sudo nix run' to accept flake extra nix configs";
             }
           ];
         };
@@ -189,10 +203,14 @@
     extra-substituters = [
       "https://cache.nixos.org"
       "https://nix-community.cachix.org"
+      "https://hyprland.cachix.org"
+      "https://nrdxp.cachix.org"
       "https://statix.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      "nrdxp.cachix.org-1:Fc5PSqY2Jm1TrWfm88l6cvGWwz3s93c6IOifQWnhNW4="
       "statix.cachix.org-1:Z9E/g1YjCjU117QOOt07OjhljCoRZddiAm4VVESvais="
     ];
   };
