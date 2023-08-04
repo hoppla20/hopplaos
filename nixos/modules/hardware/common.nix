@@ -21,6 +21,8 @@ in {
 
   config = mkIf cfg.enable {
     hardware = {
+      enableAllFirmware = true;
+      cpu.${cfg.cpu.manufacturer}.updateMicrocode = true;
       bluetooth.enable = cfg.bluetooth;
       enableRedistributableFirmware = true;
       opengl = {
@@ -29,5 +31,7 @@ in {
         driSupport32Bit = true;
       };
     };
+
+    services.fwupd.enable = true;
   };
 }
