@@ -24,7 +24,6 @@ in {
       enableAllFirmware = true;
       cpu.${cfg.cpu.manufacturer}.updateMicrocode = true;
       bluetooth.enable = cfg.bluetooth;
-      enableRedistributableFirmware = true;
       opengl = {
         enable = true;
         driSupport = true;
@@ -33,5 +32,7 @@ in {
     };
 
     services.fwupd.enable = true;
+
+    environment.systemPackages = [pkgs.gnome-firmware];
   };
 }
