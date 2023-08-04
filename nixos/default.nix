@@ -32,6 +32,7 @@ in {
                 inputs.home-manager.nixosModules.default
                 inputs.hyprland.nixosModules.default
                 inputs.disko.nixosModules.default
+                inputs.nixvim.nixosModules.nixvim
                 dir
               ]
               ++ import (dir + "/hardware-modules.nix") {inherit inputs;};

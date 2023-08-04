@@ -30,6 +30,10 @@ in {
         openssh.enable = true;
       };
 
+      programs = {
+        neovim.enable = false;
+      };
+
       virtualisation = {
         containers.enable = true;
       };

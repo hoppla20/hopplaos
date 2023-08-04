@@ -50,22 +50,22 @@
         inherit
           (pkgs)
           # utils
-          
+
           coreutils
           dnsutils
           iputils
           pciutils
           usbutils
           # system monitoring
-          
+
           htop
           bottom
           # partitioning
-          
+
           parted
           gptfdisk
           # useful tools
-          
+
           bat
           curl
           wget
@@ -81,8 +81,9 @@
           rename
           openssl
           tldr
+          fd
           # nix tools
-          
+
           niv
           nil
           alejandra

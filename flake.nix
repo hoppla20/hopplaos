@@ -17,7 +17,7 @@
         };
     };
   in
-    mkFlake {inherit inputs;} {
+    mkFlake {inherit inputs;} ({withSystem, ...}: {
       debug = true;
 
       imports =
@@ -86,11 +86,16 @@
 
         formatter = pkgs.alejandra;
       };
-    };
+    });
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    haumea = {
+      url = "github:nix-community/haumea/v0.2.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -142,7 +147,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixvim.url = "github:nix-community/nixvim/nixos-23.05";
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-23.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     spicetify-nix.url = "github:the-argus/spicetify-nix";
 
