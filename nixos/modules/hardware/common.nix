@@ -14,8 +14,9 @@ in {
 
     bluetooth = mkEnableOption "Bluetooth";
     cpu.manufacturer = mkOption {type = types.enum ["intel" "amd"];};
-    gpu.manufacturer =
-      mkOption {type = types.enum ["intel" "amd" "nvidia"];};
+    gpu.manufacturer = mkOption {
+      type = types.enum ["intel" "amd" "nvidia"];
+    };
   };
 
   config = mkIf cfg.enable {
