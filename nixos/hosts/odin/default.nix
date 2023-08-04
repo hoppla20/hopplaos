@@ -10,7 +10,7 @@
       cpu.manufacturer = "amd";
       gpu.manufacturer = "amd";
     };
-    services.power-management.laptopMode = true;
+    services.power-management.hasBattery = true;
   };
 
   boot.initrd.availableKernelModules = ["nvme" "ehci_pci" "xhci_pci" "rtsx_pci_sdmmc"];
