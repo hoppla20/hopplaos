@@ -50,22 +50,22 @@
         inherit
           (pkgs)
           # utils
-          
+
           coreutils
           dnsutils
           iputils
           pciutils
           usbutils
           # system monitoring
-          
+
           htop
           bottom
           # partitioning
-          
+
           parted
           gptfdisk
           # useful tools
-          
+
           bat
           curl
           wget
@@ -82,10 +82,15 @@
           openssl
           tldr
           # nix tools
-          
+
           niv
           nil
           alejandra
+          nix-output-monitor
+          statix
+          nix-tree
+          nvd
+          nix-diff
           ;
       }
       ++ [

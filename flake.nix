@@ -27,7 +27,7 @@
       systems = ["x86_64-linux"];
 
       flake = {
-        lib = lib;
+        inherit lib;
         diskoConfigurations = let
           hostsDir = ./nixos/hosts;
           hostsWithDisko =
@@ -60,12 +60,35 @@
         in {
           name = "hopplaos";
           packages = [
-            pkgs.alejandra
             pkgs.nil
+            pkgs.nix-output-monitor
             inputs'.disko.packages.default
           ];
           commands = [
             {package = self'.packages.repl;}
+            {
+              package = pkgs.nix-diff;
+              help = "nix-diff <drv path> <drv path> (get drv path with nix-tree)";
+            }
+            {
+              package = pkgs.nvd;
+              help = "nvd diff <drv path> <drv path> (get drv path with nix-tree)";
+            }
+            {
+              package = pkgs.statix;
+              help = "static {check,fix} .";
+            }
+            {
+              package = pkgs.nix-tree;
+              help = "nix-tree --derivation .#nixosConfigurations.$NAME.config.system.build.toplevel";
+            }
+            {
+              name = "nixos-diff";
+              command = ''
+                #!/usr/bin/env bash
+                ${pkgs.nix-output-monitor}/bin/nom build ".#nixosConfigurations.$(hostname).config.system.build.toplevel" && ${pkgs.nvd}/bin/nvd diff /run/current-system result
+              '';
+            }
             {
               package = self'.packages.install-system;
               help = "install-system [-h] [-d] [-m] [name]";
@@ -170,13 +193,11 @@
     extra-substituters = [
       "https://cache.nixos.org"
       "https://nix-community.cachix.org"
-      "https://hyprland.cachix.org"
-      "https://nrdxp.cachix.org"
+      "https://statix.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-      "nrdxp.cachix.org-1:Fc5PSqY2Jm1TrWfm88l6cvGWwz3s93c6IOifQWnhNW4="
+      "statix.cachix.org-1:Z9E/g1YjCjU117QOOt07OjhljCoRZddiAm4VVESvais="
     ];
   };
 }

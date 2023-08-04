@@ -58,19 +58,19 @@ in {
           in {
             size = 10;
             normal = {
-              family = family;
+              inherit family;
               style = "Regular";
             };
             bold = {
-              family = family;
+              inherit family;
               style = "Bold";
             };
             italic = {
-              family = family;
+              inherit family;
               style = "Italic";
             };
             bold_italic = {
-              family = family;
+              inherit family;
               style = "Bold Italic";
             };
           };

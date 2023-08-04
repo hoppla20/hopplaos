@@ -49,7 +49,7 @@ in {
       enableUpdateCheck = false;
       enableExtensionUpdateCheck = false;
       mutableExtensionsDir = false;
-      extensions = extensions;
+      inherit extensions;
       userSettings = {
         # appearance
         "workbench.colorTheme" =

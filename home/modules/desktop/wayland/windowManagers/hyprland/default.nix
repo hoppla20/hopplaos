@@ -47,16 +47,16 @@
       concatStringsSep ", " ([
           "monitor = ${name}"
           (monitorCfg.resolution
-            + (optionalString (!(isNull monitorCfg.refreshRate))
+            + (optionalString (monitorCfg.refreshRate != null)
               "@${toString monitorCfg.refreshRate}"))
           (
-            if (isNull monitorCfg.position)
+            if (monitorCfg.position == null)
             then "auto"
             else "${toString monitorCfg.position.x}x${toString monitorCfg.position.y}"
           )
           (toString monitorCfg.scale)
         ]
-        ++ optionals (!(isNull monitorCfg.transform)) [
+        ++ optionals (monitorCfg.transform != null) [
           "transform"
           "${toString transformList.${monitorCfg.transform}}"
         ]))

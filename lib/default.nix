@@ -4,7 +4,7 @@
   inherit (lib) mapAttrs filterAttrs;
 in {
   exportModulesRecursive = dir:
-    mapAttrs (_: path: import path) (flattenTree (rakeLeaves dir));
+    mapAttrs (_: import) (flattenTree (rakeLeaves dir));
 
   listDirectoryModules = dir: let
     hostDirectories =
