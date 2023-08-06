@@ -25,9 +25,13 @@ in {
 
   config = mkIf cfg.enable {
     security.pam.services.swaylock = {};
-    environment.systemPackages = attrValues {
-      inherit (pkgs) polkit_gnome;
-      inherit (pkgs.qt6) qtwayland;
+    environment.systemPackages = [
+      pkgs.polkit_gnome
+      pkgs.qt5.qtwayland
+      pkgs.qt6.qtwayland
+    ];
+    xdg.portal = {
+      extraPortals = [pkgs.xdg-desktop-portal-gtk];
     };
   };
 }
