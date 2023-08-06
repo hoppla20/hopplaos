@@ -347,13 +347,11 @@ in {
         bindm = SUPER, mouse:273, resizewindow
 
         # Autostart
+        exec = ${pkgs.systemd}/bin/systemctl --user restart graphical-session.target
         exec = bash ${launchHyprpaper}
         exec = bash ${desktopCfg.wayland.waybar.launchCommand}
         exec-once = wl-configure-gtk
         exec-once = ${polkitAgent}
-        exec-once = ${pkgs.systemd}/bin/systemctl start network-manager-applet
-        exec-once = ${pkgs.systemd}/bin/systemctl start blueman-applet
-        exec-once = ${pkgs.systemd}/bin/systemctl start nextcloud-client
 
         ${lib.optionalString (builtins.length hardwareCfg.monitors > 0) (let
           monitor0 = (builtins.elemAt hardwareCfg.monitors 0).name;
