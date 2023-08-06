@@ -207,7 +207,6 @@ in {
 
         windowrulev2 = workspace 8, class:^(Signal|whatsapp-for-linux)$
         windowrulev2 = workspace 9, class:^(Spotify)$
-        windowrulev2 = opacity 0.96 0.96, class:^(Alacritty|VSCodium|Spotify)$
 
         submap = resize
         binde = , LEFT, resizeactive, 20 0
