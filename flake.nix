@@ -27,7 +27,7 @@
       systems = ["x86_64-linux"];
 
       flake = {
-        lib = lib;
+        inherit lib;
         diskoConfigurations = let
           hostsDir = ./nixos/hosts;
           hostsWithDisko =
@@ -53,6 +53,8 @@
           config.allowUnfree = true;
         };
 
+        apps.default.program = "${self'.packages.install-system}/bin/install-system";
+
         devshells.default = let
           build-installer = pkgs.writeShellScriptBin "build-installer" ''
             nix build .#nixosConfigurations.installer.config.formats.custom-iso
@@ -60,12 +62,36 @@
         in {
           name = "hopplaos";
           packages = [
-            pkgs.alejandra
             pkgs.nil
+            pkgs.nvd
+            pkgs.nix-output-monitor
             inputs'.disko.packages.default
           ];
           commands = [
             {package = self'.packages.repl;}
+            {
+              package = pkgs.nix-diff;
+              help = "nix-diff <drv path> <drv path> (get drv path with nix-tree)";
+            }
+            {
+              package = pkgs.nvd;
+              help = "nvd diff <drv path> <drv path> (get drv path with nix-tree)";
+            }
+            {
+              package = pkgs.statix;
+              help = "static {check,fix} .";
+            }
+            {
+              package = pkgs.nix-tree;
+              help = "nix-tree --derivation .#nixosConfigurations.$NAME.config.system.build.toplevel";
+            }
+            {
+              name = "nixos-diff";
+              command = ''
+                #!/usr/bin/env bash
+                nixos-rebuild build --flake ".#$(hostname)" && nvd diff /run/current-system result
+              '';
+            }
             {
               package = self'.packages.install-system;
               help = "install-system [-h] [-d] [-m] [name]";
@@ -80,6 +106,17 @@
               package = pkgs.hello;
               help = ''
                 nix build ".#nixosConfigurations.$CONFIGURATION_NAME.config.system.build.{format,mount,disko}Script"'';
+            }
+            {
+              name = "nom-rebuild-switch";
+              command = ''
+                #!/usr/bin/env bash
+                set -o errexit
+                set -o pipefail
+                git add .
+                sudo nixos-rebuild switch |& nom
+              '';
+              help = "run 'sudo nix run . -- -h' to accept flake extra nix configs";
             }
           ];
         };
@@ -97,11 +134,7 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
-    flake-utils.url = "github:numtide/flake-utils";
-    flake-utils-plus = {
-      url = "github:gytis-ivaskevicius/flake-utils-plus";
-      inputs.flake-utils.follows = "flake-utils";
-    };
+    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
     digga = {
       url = "github:divnix/digga/v0.11.0";
@@ -167,10 +200,18 @@
 
   nixConfig = {
     extra-experimental-features = "nix-command flakes";
-    extra-substituters = ["https://nix-community.cachix.org" "https://hyprland.cachix.org"];
+    extra-substituters = [
+      "https://cache.nixos.org"
+      "https://nix-community.cachix.org"
+      "https://hyprland.cachix.org"
+      "https://nrdxp.cachix.org"
+      "https://statix.cachix.org"
+    ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      "nrdxp.cachix.org-1:Fc5PSqY2Jm1TrWfm88l6cvGWwz3s93c6IOifQWnhNW4="
+      "statix.cachix.org-1:Z9E/g1YjCjU117QOOt07OjhljCoRZddiAm4VVESvais="
     ];
   };
 }

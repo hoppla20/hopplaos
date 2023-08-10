@@ -47,16 +47,16 @@
       concatStringsSep ", " ([
           "monitor = ${name}"
           (monitorCfg.resolution
-            + (optionalString (!(isNull monitorCfg.refreshRate))
+            + (optionalString (monitorCfg.refreshRate != null)
               "@${toString monitorCfg.refreshRate}"))
           (
-            if (isNull monitorCfg.position)
+            if (monitorCfg.position == null)
             then "auto"
             else "${toString monitorCfg.position.x}x${toString monitorCfg.position.y}"
           )
           (toString monitorCfg.scale)
         ]
-        ++ optionals (!(isNull monitorCfg.transform)) [
+        ++ optionals (monitorCfg.transform != null) [
           "transform"
           "${toString transformList.${monitorCfg.transform}}"
         ]))
@@ -104,12 +104,26 @@ in {
           kb_options = caps:escape
 
           follow_mouse = 2
+          mouse_refocus = false
+          float_switch_override_focus = 2
           accel_profile = flat
           sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
 
           touchpad {
+              drag_lock = true
               natural_scroll = true
           }
+        }
+
+        gestures {
+          workspace_swipe = true
+          workspace_swipe_fingers = 3
+          workspace_swipe_distance = 300
+          workspace_swipe_min_speed_to_force = 30
+          workspace_swipe_cancel_ratio = 0.5
+          workspace_swipe_create_new = false
+          workspace_swipe_forever = true
+          workspace_swipe_numbered = true
         }
 
         general {
@@ -138,10 +152,13 @@ in {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
           rounding = 10
-          blur = true
-          blur_size = 8
-          blur_passes = 1
-          blur_new_optimizations = true
+
+          #blur {
+          #  enable = true
+          #  size = 8
+          #  passes = 1
+          #  new_optimizations = true
+          #}
 
           drop_shadow = true
           shadow_range = 4
@@ -190,7 +207,6 @@ in {
 
         windowrulev2 = workspace 8, class:^(Signal|whatsapp-for-linux)$
         windowrulev2 = workspace 9, class:^(Spotify)$
-        windowrulev2 = opacity 0.96 0.96, class:^(Alacritty|VSCodium|Spotify)$
 
         submap = resize
         binde = , LEFT, resizeactive, 20 0
@@ -330,13 +346,11 @@ in {
         bindm = SUPER, mouse:273, resizewindow
 
         # Autostart
+        exec = ${pkgs.systemd}/bin/systemctl --user restart graphical-session.target
         exec = bash ${launchHyprpaper}
         exec = bash ${desktopCfg.wayland.waybar.launchCommand}
         exec-once = wl-configure-gtk
         exec-once = ${polkitAgent}
-        exec-once = ${pkgs.systemd}/bin/systemctl start network-manager-applet
-        exec-once = ${pkgs.systemd}/bin/systemctl start blueman-applet
-        exec-once = ${pkgs.systemd}/bin/systemctl start nextcloud-client
 
         ${lib.optionalString (builtins.length hardwareCfg.monitors > 0) (let
           monitor0 = (builtins.elemAt hardwareCfg.monitors 0).name;

@@ -39,6 +39,6 @@ in {
       in
         inputs.nixpkgs.lib.mapAttrs mkHost
         (self.lib.listDirectoryModules ./hosts));
-    nixosModules = nixosModules;
+    inherit nixosModules;
   };
 }

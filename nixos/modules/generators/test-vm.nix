@@ -24,7 +24,7 @@ in {
       virtualisation = {
         cores = 4;
         memorySize = 4096;
-        diskSize = cfg.diskSize;
+        inherit (cfg) diskSize;
         useEFIBoot = true;
         graphics = !cfg.headless;
         resolution = {

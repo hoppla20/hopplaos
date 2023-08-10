@@ -43,12 +43,12 @@ in {
   config = mkIf cfg.enable {
     networking = {
       networkmanager.enable = true;
-      hostId = cfg.hostId;
-      timeServers = cfg.timeServers;
+      inherit (cfg) hostId;
+      inherit (cfg) timeServers;
       firewall = mkIf cfg.firewall.enable {
         enable = true;
         checkReversePath = true;
-        allowedTCPPorts = cfg.firewall.allowedTCPPorts;
+        inherit (cfg.firewall) allowedTCPPorts;
       };
     };
   };

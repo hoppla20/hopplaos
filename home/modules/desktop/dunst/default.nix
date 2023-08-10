@@ -20,8 +20,8 @@ in {
     services.dunst = {
       enable = true;
       iconTheme = {
-        name = config.gtk.iconTheme.name;
-        package = config.gtk.iconTheme.package;
+        inherit (config.gtk.iconTheme) name;
+        inherit (config.gtk.iconTheme) package;
       };
       settings = {
         global = {

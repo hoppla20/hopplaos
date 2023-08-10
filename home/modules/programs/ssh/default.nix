@@ -21,7 +21,7 @@ in {
   config = mkIf cfg.enable {
     programs.ssh = {
       enable = true;
-      matchBlocks = cfg.matchBlocks;
+      inherit (cfg) matchBlocks;
     };
   };
 }

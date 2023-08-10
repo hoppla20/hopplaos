@@ -35,7 +35,7 @@
     });
 in {
   flake = {
-    homeModules = homeModules;
+    inherit homeModules;
     homeConfigurations = homeConfigs;
   };
 }

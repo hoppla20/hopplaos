@@ -14,19 +14,25 @@ in {
 
     bluetooth = mkEnableOption "Bluetooth";
     cpu.manufacturer = mkOption {type = types.enum ["intel" "amd"];};
-    gpu.manufacturer =
-      mkOption {type = types.enum ["intel" "amd" "nvidia"];};
+    gpu.manufacturer = mkOption {
+      type = types.enum ["intel" "amd" "nvidia"];
+    };
   };
 
   config = mkIf cfg.enable {
     hardware = {
+      enableAllFirmware = true;
+      cpu.${cfg.cpu.manufacturer}.updateMicrocode = true;
       bluetooth.enable = cfg.bluetooth;
-      enableRedistributableFirmware = true;
       opengl = {
         enable = true;
         driSupport = true;
         driSupport32Bit = true;
       };
     };
+
+    services.fwupd.enable = true;
+
+    environment.systemPackages = [pkgs.gnome-firmware];
   };
 }

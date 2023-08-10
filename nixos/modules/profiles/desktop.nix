@@ -35,6 +35,7 @@ in {
       };
 
       hardware = {
+        logitech.enable = true;
         securitykeys.enable = true;
       };
 

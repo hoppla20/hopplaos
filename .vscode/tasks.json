@@ -2,23 +2,13 @@
     "version": "2.0.0",
     "tasks": [
       {
-        "command": "sudo nixos-rebuild switch",
-        "label": "git add . && nixos-rebuild switch",
+        "command": "git add . && sudo nixos-rebuild switch |& nom",
+        "label": "nixos-rebuild switch",
         "type": "shell",
         "problemMatcher": [],
         "group": {
           "kind": "build",
           "isDefault": true
-        }
-      },
-      {
-        "command": "build-installer",
-        "label": "build-installer",
-        "type": "shell",
-        "problemMatcher": [],
-        "group": {
-          "kind": "build",
-          "isDefault": false
         }
       }
     ]
