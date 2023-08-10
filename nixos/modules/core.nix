@@ -44,28 +44,28 @@
   systemd.services.NetworkManager-wait-online.enable = false;
 
   environment = {
-    pathsToLink = ["/share/nix-direnv" "/share/zsh"];
+    pathsToLink = ["/libexec" "/share/nix-direnv" "/share/zsh"];
     systemPackages =
       builtins.attrValues {
         inherit
           (pkgs)
           # utils
-          
+
           coreutils
           dnsutils
           iputils
           pciutils
           usbutils
           # system monitoring
-          
+
           htop
           bottom
           # partitioning
-          
+
           parted
           gptfdisk
           # useful tools
-          
+
           bat
           curl
           wget
@@ -82,7 +82,7 @@
           openssl
           tldr
           # nix tools
-          
+
           niv
           nil
           alejandra
