@@ -1,4 +1,4 @@
-{self', ...}: {
+{self', lib, ...}: {
   hopplaos = {
     programs = {
       gpg = {
@@ -25,8 +25,8 @@
     };
 
     services = {
-      syncthing.enable = true;
-      nextcloud-client.enable = true;
+      syncthing.enable = lib.mkDefault true;
+      nextcloud-client.enable = lib.mkDefault true;
     };
 
     desktop = {
