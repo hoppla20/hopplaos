@@ -30,8 +30,5 @@ in {
       pkgs.qt5.qtwayland
       pkgs.qt6.qtwayland
     ];
-    xdg.portal = {
-      extraPortals = [pkgs.xdg-desktop-portal-gtk];
-    };
   };
 }
