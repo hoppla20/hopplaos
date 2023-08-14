@@ -21,7 +21,7 @@
         userName = "vincent.cui";
         userEmail = "privat@vincentcui.de";
       };
-      thunderbird.enable = true;
+      email.enable = true;
     };
 
     services = {

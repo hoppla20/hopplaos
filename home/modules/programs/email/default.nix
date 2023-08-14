@@ -13,13 +13,13 @@
     mkMerge
     ;
 
-  cfg = config.hopplaos.programs.thunderbird;
+  cfg = config.hopplaos.programs.email;
 in {
-  options.hopplaos.programs.thunderbird = {
+  options.hopplaos.programs.email = {
     enable = mkEnableOption "Thunderbird";
   };
 
   config = mkIf cfg.enable {
-    home.packages = [pkgs.thunderbird];
+    home.packages = [pkgs.thunderbird pkgs.evolution];
   };
 }
