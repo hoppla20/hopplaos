@@ -34,6 +34,7 @@ in {
           "tss"
           "nitrokey"
           "lp"
+          "unpriv_ping"
         ];
         openssh.authorizedKeys.keyFiles = lib.filesystem.listFilesRecursive ./ssh;
       };

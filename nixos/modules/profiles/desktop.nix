@@ -31,6 +31,8 @@ in {
       };
 
       virtualisation = {
+        qemu.enable = true;
+        libvirt.enable = true;
         containers.enable = true;
       };
 

@@ -14,15 +14,19 @@ in {
     kernelModules.kvm.enable =
       mkEnableOption "Enable kvm-amd or kvm-intel respectively"
       // {
-        default = true;
+        default = false;
       };
   };
 
-  config = mkIf cfg.enable {
-    boot = {
-      kernelModules =
-        mkIf cfg.kernelModules.kvm.enable
-        ["kvm-${hardwareCfg.cpu.manufacturer}"];
-    };
-  };
+  config = mkIf cfg.enable (lib.mkMerge [
+    (lib.mkIf cfg.kernelModules.kvm.enable {
+      boot = {
+        kernelModules = ["kvm-${hardwareCfg.cpu.manufacturer}"];
+        extraModprobeConfig = ''
+          options kvm_${hardwareCfg.cpu.manufacturer} nested=1
+          options kvm ignore_msrs=1
+        '';
+      };
+    })
+  ]);
 }
