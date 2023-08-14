@@ -31,6 +31,10 @@ in {
       enable = true;
       diff-so-fancy.enable = true;
 
+      ignores = [
+        "/.direnv/"
+      ];
+
       extraConfig = {
         core.editor = "nvim";
         pull.rebase = "false";
