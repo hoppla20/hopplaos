@@ -102,7 +102,7 @@ in {
 
     home = {
       packages = builtins.attrValues {
-        inherit (pkgs) xdg-utils glib brave evince speedcrunch;
+        inherit (pkgs) xdg-utils glib brave evince speedcrunch remmina;
         inherit (pkgs.xorg) xhost;
         inherit (pkgs.gnome) seahorse;
       };
