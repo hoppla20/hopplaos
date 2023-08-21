@@ -24,6 +24,6 @@ in {
       })
     ];
 
-    virtualisation.vmware.host.enable = true;
+    hopplaos.virtualisation.vmware-workstation.enable = true;
   };
 }
