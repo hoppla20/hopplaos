@@ -43,5 +43,10 @@ in {
 
       inherit (cfg) userName userEmail;
     };
+
+    home.packages = [
+      pkgs.glab # gitlab cli
+      pkgs.gh # github cli
+    ];
   };
 }
