@@ -23,7 +23,5 @@ in {
         sha256 = "16lgib95a7qddanmc6fvf5pxd96a77bfcy67ikfd8271xmjic3hr";
       })
     ];
-
-    hopplaos.virtualisation.vmware-workstation.enable = true;
   };
 }
