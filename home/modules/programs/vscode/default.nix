@@ -89,6 +89,9 @@ in {
             "formatting" = {
               "command" = ["alejandra"];
             };
+            "diagnostics" = {
+              "ignored" = ["unused_binding"];
+            };
           };
         };
         "nix.formatterPath" = "alejandra";
