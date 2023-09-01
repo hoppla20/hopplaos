@@ -21,6 +21,7 @@
         userName = "vincent.cui";
         userEmail = "privat@vincentcui.de";
       };
+      nixvim.enable = true;
     };
 
     services = {

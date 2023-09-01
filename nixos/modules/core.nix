@@ -73,7 +73,6 @@
           git
           jq
           yq
-          neovim
           pv
           ripgrep
           gawk
