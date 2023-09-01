@@ -21,7 +21,6 @@
         userName = "vincent.cui";
         userEmail = "privat@vincentcui.de";
       };
-      email.enable = true;
     };
 
     services = {

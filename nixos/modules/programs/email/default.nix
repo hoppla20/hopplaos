@@ -16,10 +16,13 @@
   cfg = config.hopplaos.programs.email;
 in {
   options.hopplaos.programs.email = {
-    enable = mkEnableOption "Thunderbird";
+    enable = mkEnableOption "Email";
   };
 
   config = mkIf cfg.enable {
-    home.packages = [pkgs.thunderbird pkgs.evolution];
+    programs.evolution = {
+      enable = true;
+      plugins = [pkgs.evolution-ews];
+    };
   };
 }
