@@ -120,15 +120,18 @@
   };
 
   system = {
-    activationScripts.diff = ''
-      if [[ -e /run/current-system ]]; then
-        PATH="${pkgs.nix}/bin:$PATH"
+    activationScripts.diff = {
+      supportsDryActivation = true;
+      text = ''
+        if [[ -e /run/current-system ]]; then
+          PATH="${pkgs.nix}/bin:$PATH"
 
-        echo -e "\n***            ***          ***           ***           ***\n"
-        ${pkgs.nvd}/bin/nvd diff /run/current-system "$systemConfig"
-        echo -e "\n***            ***          ***           ***           ***\n"
-      fi
-    '';
+          echo -e "\n***            ***          ***           ***           ***\n"
+          ${pkgs.nvd}/bin/nvd diff /run/current-system "$systemConfig"
+          echo -e "\n***            ***          ***           ***           ***\n"
+        fi
+      '';
+    };
 
     stateVersion = lib.mkDefault "23.05";
   };

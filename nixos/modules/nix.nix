@@ -9,7 +9,7 @@
   nix = {
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];
     settings = {
-      sandbox = true;
+      experimental-features = ["nix-command" "flakes" "ca-derivations" "repl-flake"];
       auto-optimise-store = true;
       allowed-users = ["@wheel"];
       trusted-users = ["@wheel"];
@@ -26,20 +26,18 @@
         "nrdxp.cachix.org-1:Fc5PSqY2Jm1TrWfm88l6cvGWwz3s93c6IOifQWnhNW4="
         "statix.cachix.org-1:Z9E/g1YjCjU117QOOt07OjhljCoRZddiAm4VVESvais="
       ];
+      connect-timeout = 5;
+      min-free = 5 * 1024 * 1024 * 1024;
     };
     gc.automatic = true;
     optimise.automatic = true;
     extraOptions = ''
-      experimental-features = nix-command flakes
+      experimental-features = nix-command flakes ca-derivations repl-flake
 
-      keep-outputs = true
-      keep-derivations = true
-
-      min-free = 5368709120
       fallback = true
 
       max-jobs = 4
-      cores = 8
+      cores = 4
     '';
   };
 
