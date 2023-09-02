@@ -19,11 +19,8 @@ in {
   config = mkIf (desktopCfg.enable && cfg.enable) {
     programs.hyprland = {
       enable = true;
-      nvidiaPatches = cfg.nvidia;
-      xwayland = {
-        enable = true;
-        hidpi = false;
-      };
+      enableNvidiaPatches = cfg.nvidia;
+      xwayland.enable = true;
     };
 
     environment.sessionVariables.NIXOS_OZONE_WL = "";

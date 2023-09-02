@@ -55,6 +55,12 @@
 
         apps.default.program = "${self'.packages.install-system}/bin/install-system";
 
+        legacyPackages = import inputs.nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+          overlays = builtins.attrValues self.overlays;
+        };
+
         devshells.default = let
           build-installer = pkgs.writeShellScriptBin "build-installer" ''
             nix build .#nixosConfigurations.installer.config.formats.custom-iso
@@ -176,8 +182,8 @@
     };
 
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-23.05";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "unstable";
     };
 
     spicetify-nix.url = "github:the-argus/spicetify-nix";

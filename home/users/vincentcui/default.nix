@@ -1,4 +1,8 @@
-{self', lib, ...}: {
+{
+  self',
+  lib,
+  ...
+}: {
   hopplaos = {
     programs = {
       gpg = {
