@@ -2,6 +2,7 @@
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }: let
   inherit (lib) mkEnableOption mkIf mkMerge;
@@ -19,8 +20,12 @@ in {
   config = mkIf (desktopCfg.enable && cfg.enable) {
     programs.hyprland = {
       enable = true;
-      enableNvidiaPatches = cfg.nvidia;
-      xwayland.enable = true;
+      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+      nvidiaPatches = cfg.nvidia;
+      xwayland = {
+        enable = true;
+        hidpi = false;
+      };
     };
 
     environment.sessionVariables.NIXOS_OZONE_WL = "";

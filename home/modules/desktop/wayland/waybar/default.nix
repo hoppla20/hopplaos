@@ -41,7 +41,7 @@ in {
   config = mkIf (desktopCfg.enable && cfg.enable) {
     programs.waybar = {
       enable = true;
-      package = pkgs.waybar-experimental;
+      package = inputs.nixpkgs-wayland.packages.${pkgs.system}.waybar;
       systemd.enable = false;
 
       style =
@@ -73,14 +73,12 @@ in {
             "tray"
             "hyprland/submap"
           ];
-          modules-center = ["sway/workspaces" "wlr/workspaces"];
+          modules-center = ["sway/workspaces" "hyprland/workspaces"];
           modules-right = ["backlight" "network" "wireplumber" "clock" "battery"];
 
           "sway/workspaces" = {disable-scroll = true;};
-          "wlr/workspaces" = {
+          "hyprland/workspaces" = {
             format = "{name}";
-            on-click = "activate";
-            sort-by-number = true;
           };
           "wireplumber" = {
             tooltip = false;
