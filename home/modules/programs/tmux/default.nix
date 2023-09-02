@@ -16,6 +16,7 @@ in {
       tmux = {
         enable = true;
 
+        prefix = "C-Space";
         terminal = "tmux-256color";
         keyMode = "vi";
         sensibleOnTop = true;
@@ -37,6 +38,14 @@ in {
               set -g @catppuccin_host "on"
               set -g @catppuccin_pill_theme_enabled on
               set -g @catppuccin_window_tabs_enabled on
+            '';
+          }
+          {
+            plugin = pkgs.tmuxPlugins.better-mouse-mode;
+            extraConfig = ''
+              set -g @scroll-down-exit-copy-mode "off"
+              set -g @scroll-without-changing-pane "on"
+              set -g @scroll-in-moused-over-pane "on"
             '';
           }
         ];

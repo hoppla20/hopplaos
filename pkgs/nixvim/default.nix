@@ -47,7 +47,7 @@ in {
     };
 
     globals = {
-      mapleader = ",";
+      mapleader = " ";
     };
 
     editorconfig.enable = true;
