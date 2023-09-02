@@ -14,11 +14,15 @@
     ;
 in {
   imports = [
+    ./plugins/completion.nix
+    ./plugins/dashboard.nix
+    ./plugins/filetree.nix
     ./plugins/git.nix
     ./plugins/lines.nix
     ./plugins/lsp.nix
-    ./plugins/neo-tree.nix
+    ./plugins/session.nix
     ./plugins/telescope.nix
+    ./plugins/tmux.nix
     ./plugins/treesitter.nix
   ];
 
@@ -39,6 +43,7 @@ in {
       number = true;
       shiftwidth = 2;
       foldenable = false;
+      wrap = false;
     };
 
     globals = {
@@ -49,13 +54,18 @@ in {
     clipboard.providers.wl-copy.enable = true;
 
     plugins = {
-      alpha.enable = true;
       comment-nvim.enable = true;
       indent-blankline = {
         enable = true;
         useTreesitter = true;
       };
       nix.enable = true;
+      notify = {
+        enable = true;
+        stages = "slide";
+        timeout = 3000;
+      };
+      nvim-autopairs.enable = true;
       which-key.enable = true;
     };
   };

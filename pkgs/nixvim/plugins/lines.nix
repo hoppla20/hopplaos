@@ -1,6 +1,9 @@
-_: {
+_: let
+  prefix = "<leader>b";
+in {
   plugins = {
     lualine.enable = true;
+
     barbar = {
       enable = true;
       keymaps = {
@@ -21,11 +24,13 @@ _: {
         goTo7 = "<A-7>";
         goTo8 = "<A-8>";
         goTo9 = "<A-9>";
-        orderByBufferNumber = "<leader>bb";
-        orderByDirectory = "<leader>bd";
-        orderByLanguage = "<leader>bl";
-        orderByWindowNumber = "<leader>bw";
+        orderByBufferNumber = "${prefix}b";
+        orderByDirectory = "${prefix}d";
+        orderByLanguage = "${prefix}l";
+        orderByWindowNumber = "${prefix}w";
       };
     };
   };
+
+  maps.normal."${prefix}" = {desc = "barbar";};
 }

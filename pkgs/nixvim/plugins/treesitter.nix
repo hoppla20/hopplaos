@@ -5,7 +5,7 @@ _: {
       indent = true;
       folding = true;
     };
-    treesitter-context.enable = true;
+    #treesitter-context.enable = true;
     rainbow-delimiters.enable = true;
     treesitter-refactor = {
       enable = true;

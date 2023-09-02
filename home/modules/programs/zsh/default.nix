@@ -8,13 +8,33 @@
 
   inherit (lib) mkEnableOption mkIf;
 in {
-  options = {hopplaos.programs.zsh.enable = mkEnableOption "Programs - zsh";};
+  options.hopplaos.programs.zsh.enable = mkEnableOption "Programs - zsh";
 
   config = mkIf cfg.enable {
     programs = {
       zsh = {
         enable = true;
-        defaultKeymap = "emacs";
+
+        prezto = {
+          enable = true;
+          editor = {
+            keymap = "vi";
+            dotExpansion = true;
+          };
+          terminal.autoTitle = true;
+          utility.safeOps = true;
+          pmodules = lib.mkOrder 1000 [
+            "environment"
+            "terminal"
+            "editor"
+            "history"
+            "directory"
+            "spectrum"
+            "utility"
+            "completion"
+            "prompt"
+          ];
+        };
       };
 
       fzf = {

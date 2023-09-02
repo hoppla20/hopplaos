@@ -34,7 +34,6 @@
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
     };
-    starship.enable = true;
     dconf.enable = true;
   };
 
