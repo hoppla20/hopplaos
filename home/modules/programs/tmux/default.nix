@@ -78,14 +78,6 @@ in {
         '';
       };
 
-      zsh.prezto = {
-        pmodules = lib.mkOrder 2000 ["tmux"];
-        tmux = {
-          autoStartLocal = true;
-          autoStartRemote = true;
-        };
-      };
-
       fzf.tmux.enableShellIntegration = true;
     };
 

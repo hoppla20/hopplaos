@@ -97,19 +97,6 @@
           sudo "/nix/var/nix/profiles/system/specialisation/$1/bin/switch-to-configuration" switch
         '')
       ];
-
-    shellAliases = {
-      ".." = "cd ..";
-      "..." = "cd ../..";
-      "...." = "cd ../../..";
-      "....." = "cd ../../../../";
-    };
-
-    interactiveShellInit = ''
-      mkcd() {
-        mkdir -p "$@" && cd "$@"
-      }
-    '';
   };
 
   documentation = {

@@ -6,7 +6,7 @@ windows:
     options:
       main-pane-height: "100%"
     panes:
-      - shell: nvim
+      - shell_command: nvim
         focus: true
       - shell_command:
 

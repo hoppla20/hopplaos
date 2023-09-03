@@ -40,7 +40,7 @@ _: {
           }
           {
             command = "<CMD>:SessionRestore<CR>";
-            desc = "󰦛 Restore Last Session (Project)";
+            desc = "󰦛 Restore Last Session";
             shortcut = "<leader>sr";
           }
           {

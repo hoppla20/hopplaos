@@ -7,10 +7,14 @@ _: {
       enabled = true;
       createEnabled = true;
       useGitBranch = true;
+      suppressDirs = ["/home/*/Workspace"];
       allowedDirs = ["/home/*/Workspace/**" "/etc/nixos"];
     };
     cwdChangeHandling.restoreUpcomingSession = true;
     sessionLens.loadOnSetup = true;
+    extraOptions = {
+      auto_session_enable_last_session = "vim.loop.cwd() == vim.loop.os_homedir() or vim.loop.cwd() == vim.loop.os_homedir() .. \"/Workspace\"";
+    };
   };
   maps.normal = let
     prefix = "<leader>s";

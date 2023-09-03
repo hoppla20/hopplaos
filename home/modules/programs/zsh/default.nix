@@ -31,9 +31,15 @@ in {
             "directory"
             "spectrum"
             "utility"
+            "git"
+            "autosuggestions"
             "completion"
             "prompt"
           ];
+          extraConfig = ''
+            zstyle ':prezto:module:git:alias' skip 'yes'
+            zstyle ':prezto:module:git:log:context' format 'oneline'
+          '';
         };
       };
 
