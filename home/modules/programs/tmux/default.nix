@@ -23,6 +23,7 @@ in {
         baseIndex = 1;
         mouse = true;
         clock24 = true;
+        tmuxp.enable = true;
 
         plugins = [
           {
@@ -48,6 +49,8 @@ in {
               set -g @scroll-in-moused-over-pane "on"
             '';
           }
+          {plugin = pkgs.tmuxPlugins.yank;}
+          {plugin = pkgs.tmuxPlugins.sessionist;}
         ];
 
         extraConfig = ''
@@ -85,5 +88,7 @@ in {
 
       fzf.tmux.enableShellIntegration = true;
     };
+
+    xdg.configFile."tmux/sessions".source = ./sessions;
   };
 }

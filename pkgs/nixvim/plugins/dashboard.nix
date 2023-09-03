@@ -7,11 +7,11 @@ _: {
         val = 2;
       }
       {
+        type = "text";
         opts = {
           hl = "Type";
           position = "center";
         };
-        type = "text";
         val = [
           "  ███╗   ██╗██╗██╗  ██╗██╗   ██╗██╗███╗   ███╗  "
           "  ████╗  ██║██║╚██╗██╔╝██║   ██║██║████╗ ████║  "
@@ -30,13 +30,38 @@ _: {
         val = [
           {
             command = "<CMD>ene <CR>";
-            desc = "  New file";
+            desc = "  New file";
             shortcut = "e";
+          }
+          {
+            command = "<CMD>:lua require('auto-session.session-lens').search_session()<CR>";
+            desc = "  Find Session";
+            shortcut = "<leader>sS";
+          }
+          {
+            command = "<CMD>:SessionRestore<CR>";
+            desc = "󰦛 Restore Last Session (Project)";
+            shortcut = "<leader>sr";
+          }
+          {
+            command = "<CMD>:Telescope git_files<CR>";
+            desc = "󰱽 Find File";
+            shortcut = "<C-p>";
+          }
+          {
+            command = "<CMD>:Telescope live_grep<CR>";
+            desc = " Find in Files (grep)";
+            shortcut = "<leader>fg";
+          }
+          {
+            command = "<CMD>:Neogit<CR>";
+            desc = " Neogit";
+            shortcut = "<leader>gg";
           }
           {
             command = ":qa<CR>";
             desc = "󰗼  Quit Neovim";
-            shortcut = "COMMA q";
+            shortcut = "<leader>q";
           }
         ];
       }
@@ -45,11 +70,11 @@ _: {
         val = 2;
       }
       {
+        type = "text";
         opts = {
           hl = "Keyword";
           position = "center";
         };
-        type = "text";
         val = "Inspiring quote here.";
       }
     ];

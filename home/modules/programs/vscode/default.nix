@@ -41,7 +41,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    hopplaos.desktop.editorCommand = "${config.programs.vscode.package}/bin/codium";
+    #hopplaos.desktop.editorCommand = "${config.programs.vscode.package}/bin/codium";
 
     programs.vscode = {
       enable = true;

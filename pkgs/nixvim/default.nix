@@ -68,5 +68,9 @@ in {
       nvim-autopairs.enable = true;
       which-key.enable = true;
     };
+
+    maps.normal = {
+      "<leader>q" = {action = ":qa<CR>";};
+    };
   };
 }

@@ -1,0 +1,12 @@
+session_name: nvim - ${USER}
+start_directory: ~/Workspace
+windows:
+  - window_name: nvim
+    layout: main-horizontal
+    options:
+      main-pane-height: "100%"
+    panes:
+      - shell: nvim
+        focus: true
+      - shell_command:
+
