@@ -1,0 +1,12 @@
+session_name: nvim - ${USER} - ${PWD}
+start_directory: ${PWD}
+windows:
+  - window_name: nvim
+    layout: main-horizontal
+    options:
+      main-pane-height: "100%"
+    panes:
+      - shell_command: nvim
+        focus: true
+      - shell_command:
+

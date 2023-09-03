@@ -78,9 +78,11 @@ in {
         '';
       };
 
+      zsh.prezto.pmodules = lib.mkOrder 2000 ["tmux"];
       fzf.tmux.enableShellIntegration = true;
     };
 
     xdg.configFile."tmux/sessions".source = ./sessions;
+    home.shellAliases.tmuxe = "tmuxp load ~/.config/tmux/sessions/nvim-current.yaml";
   };
 }
