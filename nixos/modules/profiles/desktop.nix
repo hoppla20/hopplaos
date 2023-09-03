@@ -38,7 +38,7 @@ in {
         qemu.enable = true;
         libvirt.enable = true;
         containers.enable = true;
-        vmware-workstation.enable = true;
+        #vmware-workstation.enable = true;
       };
 
       hardware = {
