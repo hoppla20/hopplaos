@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-unstable,
   config,
   lib,
   inputs,
@@ -10,6 +11,6 @@
 }: {
   home-manager = {
     useGlobalPkgs = true;
-    extraSpecialArgs = {inherit inputs self inputs' self';};
+    extraSpecialArgs = {inherit inputs self inputs' self' pkgs-unstable;};
   };
 }

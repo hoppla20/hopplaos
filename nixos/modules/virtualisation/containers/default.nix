@@ -1,6 +1,6 @@
 {
   pkgs,
-  unstable,
+  pkgs-unstable,
   config,
   lib,
   ...
@@ -24,11 +24,11 @@ in {
     virtualisation = {
       docker = {
         enable = true;
-        package = unstable.docker;
+        package = pkgs-unstable.docker;
       };
       podman = {
         enable = true;
-        package = unstable.podman;
+        package = pkgs-unstable.podman;
       };
     };
   };

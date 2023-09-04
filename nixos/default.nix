@@ -13,7 +13,7 @@ in {
         config,
         self',
         inputs',
-        unstable,
+        pkgs-unstable,
         system,
         ...
       }: let
@@ -21,7 +21,7 @@ in {
           inputs.nixpkgs.lib.nixosSystem {
             inherit system;
             specialArgs = {
-              inherit inputs inputs' self self' unstable;
+              inherit inputs inputs' self self' pkgs-unstable;
               homeUsers = self.homeConfigurations;
             };
             modules =

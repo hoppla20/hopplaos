@@ -16,6 +16,10 @@
           digga = inputs.digga.lib;
         };
     };
+
+    nixpkgsConfig = {
+      allowUnfree = true;
+    };
   in
     mkFlake {inherit inputs;} {
       debug = true;
@@ -48,16 +52,17 @@
         system,
         ...
       }: {
-        _module.args.unstable = import inputs.unstable {
+        _module.args.pkgs-unstable = import inputs.unstable {
           inherit system;
-          config.allowUnfree = true;
+          config = nixpkgsConfig;
+          overlays = builtins.attrValues self.overlays;
         };
 
         apps.default.program = "${self'.packages.install-system}/bin/install-system";
 
         legacyPackages = import inputs.nixpkgs {
           inherit system;
-          config.allowUnfree = true;
+          config = nixpkgsConfig;
           overlays = builtins.attrValues self.overlays;
         };
 

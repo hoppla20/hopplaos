@@ -1,11 +1,17 @@
 {
-  pkgs,
   config,
   lib,
+  self',
   inputs,
-  self,
   ...
-}: {
+}: let
+  pkgs = self'.legacyPackages;
+in {
+  nixpkgs = {
+    inherit pkgs;
+    inherit (pkgs) config;
+  };
+
   nix = {
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];
     settings = {
@@ -42,10 +48,5 @@
       max-jobs = 4
       cores = 4
     '';
-  };
-
-  nixpkgs = {
-    config.allowUnfree = true;
-    overlays = builtins.attrValues self.overlays;
   };
 }
