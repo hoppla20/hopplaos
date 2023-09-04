@@ -17,8 +17,15 @@
         };
     };
 
-    nixpkgsConfig = {
-      allowUnfree = true;
+    nixpkgsArgs = {
+      config = {
+        allowUnfree = true;
+      };
+      overlays =
+        [
+          inputs.emacs-overlay.overlays.default
+        ]
+        ++ builtins.attrValues self.overlays;
     };
   in
     mkFlake {inherit inputs;} {
@@ -52,20 +59,19 @@
         system,
         ...
       }: {
-        _module.args.pkgs-unstable = import inputs.unstable {
-          inherit system;
-          config = nixpkgsConfig;
-          overlays = builtins.attrValues self.overlays;
+        _module.args = {
+          pkgs = import inputs.nixpkgs {
+            inherit system;
+            inherit (nixpkgsArgs) config overlays;
+          };
+          pkgs-unstable = import inputs.unstable {
+            inherit system;
+            inherit (nixpkgsArgs) config overlays;
+          };
         };
 
+        legacyPackages = pkgs;
         apps.default.program = "${self'.packages.install-system}/bin/install-system";
-
-        legacyPackages = import inputs.nixpkgs {
-          inherit system;
-          config = nixpkgsConfig;
-          overlays = builtins.attrValues self.overlays;
-        };
-
         devshells.default = let
           build-installer = pkgs.writeShellScriptBin "build-installer" ''
             nix build .#nixosConfigurations.installer.config.formats.custom-iso
@@ -193,6 +199,13 @@
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "unstable";
+    };
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs = {
+        nixpkgs.follows = "unstable";
+        nixpkgs-stable.follows = "nixpkgs";
+      };
     };
 
     spicetify-nix.url = "github:the-argus/spicetify-nix";

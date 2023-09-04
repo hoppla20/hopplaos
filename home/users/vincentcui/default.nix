@@ -27,6 +27,7 @@
         userEmail = "privat@vincentcui.de";
       };
       nixvim.enable = true;
+      emacs.enable = true;
     };
 
     services = {
