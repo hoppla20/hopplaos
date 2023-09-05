@@ -19,15 +19,15 @@ in {
       enable = true;
       package = self'.packages.emacsWithPackages;
       extraPackages = epkgs: [epkgs.catppuccin-theme];
-      extraConfig = ''
-        (setq hoppla/catppuccin-flavor '${catppuccinTheme})
-      '';
-      # overrides
     };
     services.emacs = {
       enable = true;
       client.enable = true;
       socketActivation.enable = false;
     };
+
+    xdg.configFile."emacs/etc/user.el".text = ''
+      (setq hoppla/catppuccin-flavor '${catppuccinTheme})
+    '';
   };
 }
