@@ -29,7 +29,7 @@
       nixvim-dark = nixvim true;
       nixvim-light = nixvim false;
 
-      emacsWithPackages = pkgs.callPackage ./emacs {};
+      emacsWithPackages = pkgs.callPackage ./emacs {inherit inputs;};
     };
   };
 }

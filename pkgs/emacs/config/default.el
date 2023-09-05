@@ -1,12 +1,34 @@
-;; bootstrap use-package
+;;;; Basic Configuration
+
+;; package archives
+
+(require 'package)
+(setq package-archives
+'(
+   ("melpa" . "https://melpa.org/packages/")
+   ("melpaStable" . "https://stable.melpa.org/packages/")
+   ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+   ("elpa" . "https://elpa.gnu.org/packages/")
+   ("elpaDevel" . "https://elpa.gnu.org/devel/")
+ ))
 (package-initialize)
+
+;; use-package
+
 (setq use-package-always-ensure t)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 (eval-when-compile (require 'use-package))
 
+;;;;;; UI
+
+;;;; Plugins
+
+;;;;;; Essentials
+
 ;; evil
+
 (use-package goto-chg)
 (use-package undo-tree
 	     :config
@@ -26,14 +48,18 @@
 	     (evil-collection-init))
 
 ;; org
+
 (use-package org
 	     :mode (("\\.org$" . org-mode))
 	     :config)
-;;; org-reveal
+
+;;;;;; Misc
+
+;; org-reveal (presentations)
+
+(use-package htmlize)
 (use-package ox-reveal
+	     :after htmlize
 	     :config
 	     (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"))
-
-;; misc
-(use-package htmlize)
 

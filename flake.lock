@@ -239,15 +239,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1693792112,
-        "narHash": "sha256-xGe/hWfD/PEQ6YC0MK1chZLnGRmoY4D16vLA/zqFNik=",
-        "owner": "nix-community",
+        "lastModified": 1693863860,
+        "narHash": "sha256-mfzHfkGHuZVdIk2/SxekGzSuoO1NuQ2AyesElOyxvZA=",
+        "owner": "hoppla20",
         "repo": "emacs-overlay",
-        "rev": "bc5ac6ca9244f20811900632def4e00c6e6ac20e",
+        "rev": "5744d8856b7e14ccabd9daa83405327050b8d00f",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "hoppla20",
+        "ref": "patch-1",
         "repo": "emacs-overlay",
         "type": "github"
       }
@@ -592,6 +593,22 @@
         "ref": "release-23.05",
         "repo": "home-manager",
         "type": "github"
+      }
+    },
+    "hoppla-emacs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1693868482,
+        "narHash": "sha256-r1Tifu0VCdnZxWDrTKiaIH/hFCzdd9++9lBQRV807cc=",
+        "ref": "refs/heads/main",
+        "rev": "5f3a6c4c57b9391c7c74457037903f93bf1e9e7c",
+        "revCount": 15,
+        "type": "git",
+        "url": "https://gitlab.vincentcui.de/vincent.cui/hoppla-emacs"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://gitlab.vincentcui.de/vincent.cui/hoppla-emacs"
       }
     },
     "hyprland": {
@@ -1026,6 +1043,7 @@
         "flake-parts": "flake-parts",
         "flake-utils-plus": "flake-utils-plus_2",
         "home-manager": "home-manager_2",
+        "hoppla-emacs": "hoppla-emacs",
         "hyprland": "hyprland",
         "hyprland-contrib": "hyprland-contrib",
         "nix-index-db": "nix-index-db",

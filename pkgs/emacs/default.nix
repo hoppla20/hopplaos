@@ -1,11 +1,15 @@
-{pkgs, ...}:
+{
+  pkgs,
+  inputs,
+  ...
+}:
 pkgs.emacsWithPackagesFromUsePackage {
-  config = ./config/emacs.el;
   package = pkgs.emacs-pgtk;
 
-  defaultInitFile = true;
+  config = "${inputs.hoppla-emacs}/config.org";
+  defaultInitFile = false;
   alwaysEnsure = true;
-  # alwaysTangle = false;
+  alwaysTangle = false;
 
   extraEmacsPackages = epkgs:
     builtins.attrValues {
@@ -14,5 +18,4 @@ pkgs.emacsWithPackagesFromUsePackage {
         use-package
         ;
     };
-  # override = self: super: {};
 }

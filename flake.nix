@@ -201,11 +201,15 @@
       inputs.nixpkgs.follows = "unstable";
     };
     emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
+      url = "github:hoppla20/emacs-overlay/patch-1";
       inputs = {
         nixpkgs.follows = "unstable";
         nixpkgs-stable.follows = "nixpkgs";
       };
+    };
+    hoppla-emacs = {
+      url = "git+https://gitlab.vincentcui.de/vincent.cui/hoppla-emacs";
+      flake = false;
     };
 
     spicetify-nix.url = "github:the-argus/spicetify-nix";
