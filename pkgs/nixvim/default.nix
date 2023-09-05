@@ -20,6 +20,7 @@ in {
     ./plugins/git.nix
     ./plugins/lines.nix
     ./plugins/lsp.nix
+    ./plugins/orgmode.nix
     ./plugins/session.nix
     ./plugins/telescope.nix
     ./plugins/tmux.nix

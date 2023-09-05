@@ -32,6 +32,10 @@
           groupIndex = 1;
         }
         {
+          name = "orgmode";
+          groupIndex = 1;
+        }
+        {
           name = "treesitter";
           groupIndex = 2;
         }
