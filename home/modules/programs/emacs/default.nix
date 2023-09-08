@@ -29,7 +29,6 @@ in {
       enable = true;
       client.enable = true;
       defaultEditor = true;
-      startWithUserSession = true;
       socketActivation.enable = true;
     };
 
