@@ -33,7 +33,7 @@
         [inputs.devshell.flakeModule ./pkgs ./nixos ./home]
         ++ builtins.attrValues (lib.exportModulesRecursive ./overlays);
 
-      systems = ["x86_64-linux"];
+      systems = ["x86_64-linux" "aarch64-linux"];
 
       flake = {
         inherit lib;

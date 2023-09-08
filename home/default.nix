@@ -1,5 +1,4 @@
 {
-  withSystem,
   inputs,
   self,
   ...
@@ -19,7 +18,7 @@
   users = listDirectoryModules ./users;
   hosts = listDirectoryModules ./hosts;
 
-  homeConfigs =
+  genHomeConfigs =
     genAttrs'
     (combination:
       nameValuePair "${combination.user}@${combination.host}" {
@@ -29,12 +28,21 @@
           ++ extraModules;
       })
     (cartesianProductOfSets {
-      user = builtins.attrNames users;
+      user = builtins.filter (u: u != "vincentcui-nogui") (builtins.attrNames users);
       host = builtins.attrNames hosts;
     });
 in {
   flake = {
     inherit homeModules;
-    homeConfigurations = homeConfigs;
+    homeConfigurations =
+      genHomeConfigs
+      // {
+        nix-on-droid = {
+          imports =
+            [users.vincentcui-nogui]
+            ++ builtins.attrValues homeModules
+            ++ extraModules;
+        };
+      };
   };
 }

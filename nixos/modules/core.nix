@@ -49,7 +49,7 @@
         inherit
           (pkgs)
           # utils
-
+          
           coreutils
           dnsutils
           iputils
@@ -57,15 +57,15 @@
           usbutils
           expect
           # system monitoring
-
+          
           htop
           bottom
           # partitioning
-
+          
           parted
           gptfdisk
           # useful tools
-
+          
           bat
           curl
           wget
@@ -81,7 +81,7 @@
           openssl
           tldr
           # nix tools
-
+          
           niv
           nil
           alejandra
