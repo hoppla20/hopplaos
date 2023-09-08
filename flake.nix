@@ -22,9 +22,7 @@
         allowUnfree = true;
       };
       overlays =
-        [
-          inputs.emacs-overlay.overlays.default
-        ]
+        []
         ++ builtins.attrValues self.overlays;
     };
   in
@@ -200,15 +198,12 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "unstable";
     };
-    emacs-overlay = {
-      url = "github:hoppla20/emacs-overlay/patch-1";
-      inputs = {
-        nixpkgs.follows = "unstable";
-        nixpkgs-stable.follows = "nixpkgs";
-      };
-    };
     hoppla-emacs = {
       url = "git+https://gitlab.vincentcui.de/vincent.cui/hoppla-emacs";
+      inputs.nixpkgs.follows = "unstable";
+    };
+    emacs-libvterm = {
+      url = "github:akermu/emacs-libvterm";
       flake = false;
     };
 

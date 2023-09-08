@@ -18,7 +18,7 @@ in {
         prezto = {
           enable = true;
           editor = {
-            keymap = "vi";
+            keymap = "emacs";
             dotExpansion = true;
           };
           terminal.autoTitle = true;

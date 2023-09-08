@@ -18,7 +18,7 @@ in {
 
         prefix = "C-Space";
         terminal = "tmux-256color";
-        keyMode = "vi";
+        keyMode = "emacs";
         sensibleOnTop = true;
         baseIndex = 1;
         mouse = true;
