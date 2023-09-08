@@ -28,6 +28,7 @@
       };
       nixvim.enable = true;
       emacs.enable = true;
+      notetaking.enable = true;
     };
 
     services = {
