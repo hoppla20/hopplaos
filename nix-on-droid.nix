@@ -24,7 +24,6 @@
               which
               dnsutils
               ripgrep
-              neovim
               openssh
               nix-output-monitor
               ;
