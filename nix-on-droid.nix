@@ -15,12 +15,13 @@
           pathToPubKey = ./nixos/modules/users/vincentcui/ssh/nitrokey.pub;
           sshPort = 8022;
         in {
-          environment.systemPackages = builtins.attrValues {
+          environment.packages = builtins.attrValues {
             inherit
               (pkgs)
               dnsutils
               ripgrep
               neovim
+              git
               openssh
               nix-output-monitor
               ;

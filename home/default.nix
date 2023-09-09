@@ -36,23 +36,7 @@
 in {
   flake = {
     inherit homeModules;
-    homeConfigurations = genHomeConfigs;
-
-    homeManagerConfigurations.aarch64-linux = withSystem "aarch64-linux" ({
-      pkgs,
-      pkgs-unstable,
-      inputs',
-      self',
-      ...
-    }:
-      lib.mapAttrs
-      (_: v:
-        inputs.home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = v.imports;
-          extraSpecialArgs = {inherit pkgs-unstable inputs inputs' self self';};
-        })
-      {
+    homeConfigurations = genHomeConfigs // {
         nix-on-droid = {
           imports =
             [
@@ -71,6 +55,6 @@ in {
             ++ builtins.attrValues homeModules
             ++ extraModules;
         };
-      });
+    };
   };
 }
