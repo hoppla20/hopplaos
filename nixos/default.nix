@@ -22,7 +22,6 @@ in {
             inherit system;
             specialArgs = {
               inherit inputs inputs' self self' pkgs-unstable;
-              homeUsers = self.homeConfigurations;
             };
             modules =
               builtins.attrValues nixosModules

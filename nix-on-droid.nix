@@ -1,4 +1,5 @@
 {
+  self,
   inputs,
   withSystem,
   ...
@@ -6,13 +7,15 @@
   flake.nixOnDroidConfigurations.default =
     withSystem "aarch64-linux" ({
       pkgs,
+      pkgs-unstable,
+      self',
+      inputs',
       ...
     }: inputs.nix-on-droid.lib.nixOnDroidConfiguration {
       modules = [
         ({config, ...}: let
           sshdTmpDirectory = "${config.user.home}/sshd-tmp";
           sshdDirectory = "${config.user.home}/.config/sshd";
-          pathToPubKey = ./nixos/modules/users/vincentcui/ssh/nitrokey.pub;
           sshPort = 8022;
         in {
           environment.packages = builtins.attrValues {
@@ -36,7 +39,6 @@
 
           build.activation.sshd = ''
             $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${config.user.home}/.ssh"
-            $DRY_RUN_CMD cat ${pathToPubKey} > "${config.user.home}/.ssh/authorized_keys"
 
             if [[ ! -d "${sshdDirectory}" ]]; then
               $DRY_RUN_CMD rm $VERBOSE_ARG --recursive --force "${sshdTmpDirectory}"
@@ -51,6 +53,12 @@
               $DRY_RUN_CMD mv $VERBOSE_ARG "${sshdTmpDirectory}" "${sshdDirectory}"
             fi
           '';
+
+          home-manager = {
+            useGlobalPkgs = true;
+            extraSpecialArgs = {inherit inputs self inputs' self' pkgs-unstable;};
+            config = self.homeConfigurations.nix-on-droid;
+          };
 
           nix.extraOptions = ''
             experimental-features = nix-command flakes

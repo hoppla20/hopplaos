@@ -2,7 +2,7 @@
   pkgs,
   config,
   lib,
-  homeUsers,
+  inputs,
   ...
 }: let
   cfg = config.hopplaos.users.vincentcui;
@@ -39,7 +39,7 @@ in {
         openssh.authorizedKeys.keyFiles = lib.filesystem.listFilesRecursive ./ssh;
       };
 
-      home-manager.users.vincentcui = homeUsers.${cfg.hmUser};
+      home-manager.users.vincentcui = inputs.homeConfigurations.${cfg.hmUser};
 
       security.sudo.extraRules = [
         {
