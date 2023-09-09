@@ -1,6 +1,8 @@
 {
+  lib,
   inputs,
   self,
+  withSystem,
   ...
 }: let
   inherit (self.lib) exportModulesRecursive listDirectoryModules;
@@ -34,15 +36,39 @@
 in {
   flake = {
     inherit homeModules;
-    homeConfigurations =
-      genHomeConfigs
-      // {
+    homeConfigurations = genHomeConfigs;
+
+    homeManagerConfigurations.aarch64-linux = withSystem "aarch64-linux" ({
+      pkgs,
+      pkgs-unstable,
+      inputs',
+      self',
+      ...
+    }:
+      lib.mapAttrs
+      (_: v:
+        inputs.home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = v.imports;
+          extraSpecialArgs = {inherit pkgs-unstable inputs inputs' self self';};
+        })
+      {
         nix-on-droid = {
           imports =
-            [users.vincentcui-nogui]
+            [
+              users.vincentcui-nogui
+              {
+                home = {
+                  username = "nix-on-droid";
+                  homeDirectory = "/data/data/com.termux.nix/files/home";
+                };
+
+                services.emacs.enable = lib.mkForce false;
+              }
+            ]
             ++ builtins.attrValues homeModules
             ++ extraModules;
         };
-      };
+      });
   };
 }
