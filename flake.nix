@@ -30,7 +30,7 @@
       debug = true;
 
       imports =
-        [inputs.devshell.flakeModule ./pkgs ./nixos ./home]
+        [inputs.devshell.flakeModule ./pkgs ./nixos ./home ./nix-on-droid.nix]
         ++ builtins.attrValues (lib.exportModulesRecursive ./overlays);
 
       systems = ["x86_64-linux" "aarch64-linux"];
@@ -164,6 +164,11 @@
 
     devshell = {
       url = "github:numtide/devshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-on-droid = {
+      url = "github:t184256/nix-on-droid";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

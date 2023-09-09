@@ -15,8 +15,8 @@ in {
     };
   };
 
-  config = mkMerge [
-    (mkIf cfg.enable {programs.gpg.enable = true;})
+  config = mkIf cfg.enable (mkMerge [
+    {programs.gpg.enable = true;}
     (mkIf cfg.gpg-agent.enable {
       programs.gpg.scdaemonSettings.disable-ccid = true;
       services.gpg-agent = {
@@ -26,5 +26,5 @@ in {
         pinentryFlavor = "gtk2";
       };
     })
-  ];
+  ]);
 }
