@@ -47,7 +47,8 @@ in {
                   homeDirectory = "/data/data/com.termux.nix/files/home";
                 };
 
-                hoppla.programs.gpg.enable = lib.mkForce false;
+                hopplaos.programs.gpg.enable = lib.mkForce false;
+                hopplaos.programs.emacs.enable = lib.mkForce false;
 
                 services.emacs.enable = lib.mkForce false;
               }

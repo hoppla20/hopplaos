@@ -167,11 +167,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-on-droid = {
-      url = "github:t184256/nix-on-droid";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     home-manager = {
       url = "github:hoppla20/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -180,6 +175,14 @@
     #  url = "github:nix-community/home-manager/release-23.05";
     #  inputs.nixpkgs.follows = "nixpkgs";
     #};
+
+    nix-on-droid = {
+      url = "github:t184256/nix-on-droid";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
 
     nixpkgs-wayland = {
       url = "github:nix-community/nixpkgs-wayland";
