@@ -18,10 +18,10 @@
           environment.packages = builtins.attrValues {
             inherit
               (pkgs)
+              which
               dnsutils
               ripgrep
               neovim
-              git
               openssh
               nix-output-monitor
               ;
