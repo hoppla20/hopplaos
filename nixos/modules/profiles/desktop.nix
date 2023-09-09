@@ -46,6 +46,8 @@ in {
         securitykeys.enable = true;
       };
 
+      cross-arch.enable = true;
+
       server-management.enable = true;
       android.enable = true;
     };
