@@ -23,6 +23,7 @@
               (pkgs)
               which
               dnsutils
+              grep
               ripgrep
               openssh
               nix-output-monitor
