@@ -163,8 +163,11 @@ in {
       components = ["pkcs11" "secrets" "ssh"];
     };
 
-    xdg.configFile = {
-      "wallpapers".source = ./wallpapers;
+    xdg = {
+      mime.enable = true;
+      configFile = {
+        "wallpapers".source = ./wallpapers;
+      };
     };
   };
 }
