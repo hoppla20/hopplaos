@@ -46,7 +46,6 @@ in {
           displayManager.gdm.enable = true;
         };
       };
-      xdg.portal = {xdgOpenUsePortal = true;};
 
       specialisation = {
         dark.configuration = {
