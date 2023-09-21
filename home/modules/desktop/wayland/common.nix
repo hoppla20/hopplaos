@@ -60,23 +60,29 @@ in {
         show-failed-attempts = true;
       };
     };
-    services.swayidle = {
+    services.swayidle = let
+      lockCommand = "${config.programs.swaylock.package}/bin/swaylock -f";
+    in {
       enable = true;
       systemdTarget = "hyprland-session.target";
       events = [
         {
           event = "before-sleep";
-          command = "${pkgs.systemd}/bin/loginctl lock-session";
+          command = lockCommand;
         }
         {
           event = "lock";
-          command = "${config.programs.swaylock.package}/bin/swaylock";
+          command = lockCommand;
         }
       ];
       timeouts = [
         {
-          timeout = 240;
+          timeout = 180;
           command = "${pkgs.dunst}/bin/dunstify 'Inactivity Notice' 'This machine will lock in 1 minute due to inactivity.'";
+        }
+        {
+          timeout = 240;
+          command = lockCommand;
         }
         {
           timeout = 300;
