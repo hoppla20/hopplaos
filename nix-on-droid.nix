@@ -4,38 +4,40 @@
   withSystem,
   ...
 }: {
-  flake.nixOnDroidConfigurations.default =
-    withSystem "aarch64-linux" ({
-      pkgs,
-      pkgs-unstable,
-      self',
-      inputs',
-      ...
-    }: inputs.nix-on-droid.lib.nixOnDroidConfiguration {
+  flake.nixOnDroidConfigurations.default = withSystem "aarch64-linux" ({
+    pkgs,
+    pkgs-unstable,
+    self',
+    inputs',
+    ...
+  }:
+    inputs.nix-on-droid.lib.nixOnDroidConfiguration {
       modules = [
         ({config, ...}: let
           sshdTmpDirectory = "${config.user.home}/sshd-tmp";
           sshdDirectory = "${config.user.home}/.config/sshd";
           sshPort = 8022;
         in {
-          environment.packages = builtins.attrValues {
-            inherit
-              (pkgs)
-              which
-              dnsutils
-              grep
-              ripgrep
-              openssh
-              nix-output-monitor
-              ;
-          } ++ [
-            (pkgs.writeScriptBin "sshd-start" ''
-              #!${pkgs.runtimeShell}
+          environment.packages =
+            builtins.attrValues {
+              inherit
+                (pkgs)
+                which
+                dnsutils
+                grep
+                ripgrep
+                openssh
+                nix-output-monitor
+                ;
+            }
+            ++ [
+              (pkgs.writeScriptBin "sshd-start" ''
+                #!${pkgs.runtimeShell}
 
-              echo "Starting sshd in non-daemonized way on port ${toString sshPort}"
-              ${pkgs.openssh}/bin/sshd -f "${sshdDirectory}/sshd_config" -D
-            '')
-          ];
+                echo "Starting sshd in non-daemonized way on port ${toString sshPort}"
+                ${pkgs.openssh}/bin/sshd -f "${sshdDirectory}/sshd_config" -D
+              '')
+            ];
 
           build.activation.sshd = ''
             $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${config.user.home}/.ssh"

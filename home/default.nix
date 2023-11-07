@@ -36,7 +36,9 @@
 in {
   flake = {
     inherit homeModules;
-    homeConfigurations = genHomeConfigs // {
+    homeConfigurations =
+      genHomeConfigs
+      // {
         nix-on-droid = {
           imports =
             [
@@ -56,6 +58,6 @@ in {
             ++ builtins.attrValues homeModules
             ++ extraModules;
         };
-    };
+      };
   };
 }
