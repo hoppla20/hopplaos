@@ -7,7 +7,6 @@
       keepassxc.enable = true;
       office.enable = true;
       messangers.enable = true;
-      notetaking.enable = true;
     };
 
     services = {
