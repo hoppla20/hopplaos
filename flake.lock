@@ -702,11 +702,11 @@
         "std": "std"
       },
       "locked": {
-        "lastModified": 1695298993,
-        "narHash": "sha256-3qwd5RqgMGgoCSy3wqs7YKxN20D9zUe03m+sjEostE8=",
+        "lastModified": 1699351780,
+        "narHash": "sha256-cfa0+XmbQhM12s3XQumaBIGiwVVa/ySF5zPFYFLd7w0=",
         "ref": "refs/heads/main",
-        "rev": "dae7067b61f6ac3ebe8388ef0cdca9e885cfda55",
-        "revCount": 101,
+        "rev": "77c52a6e6bd5dd6c9f9a4d76f300758ce7ae9cac",
+        "revCount": 107,
         "type": "git",
         "url": "https://gitlab.vincentcui.de/vincent.cui/hoppla-emacs"
       },
@@ -1114,11 +1114,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1694753796,
-        "narHash": "sha256-QPE7dqcicQH/nq9aywVXJWWtci4FvxHaM+BSIEbGBvA=",
+        "lastModified": 1698846319,
+        "narHash": "sha256-4jyW/dqFBVpWFnhl0nvP6EN4lP7/ZqPxYRjl6var0Oc=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "360a7d31c30abefdc490d203f80e3221b7a24af2",
+        "rev": "34bdaaf1f0b7fb6d9091472edc968ff10a8c2857",
         "type": "github"
       },
       "original": {
@@ -1583,11 +1583,11 @@
     },
     "unstable": {
       "locked": {
-        "lastModified": 1694767346,
-        "narHash": "sha256-5uH27SiVFUwsTsqC5rs3kS7pBoNhtoy9QfTP9BmknGk=",
+        "lastModified": 1698611440,
+        "narHash": "sha256-jPjHjrerhYDy3q9+s5EAsuhyhuknNfowY6yt6pjn9pc=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "ace5093e36ab1e95cb9463863491bee90d5a4183",
+        "rev": "0cbe9f69c234a7700596e943bfae7ef27a31b735",
         "type": "github"
       },
       "original": {
