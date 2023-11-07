@@ -61,7 +61,7 @@ in {
           [ -x $SMBCLIENT ] || exit 1
 
           $SMBCLIENT $smbopts -gL $key 2>/dev/null \
-            | /nix/store/49q1zfhkan4k0rqyxfhj512nw2wwngsf-gawk-5.2.1/bin/awk -v key="$key" -v opts="$opts" -F'|' -- '
+            | ${pkgs.gawk}/bin/awk -v key="$key" -v opts="$opts" -F'|' -- '
                 BEGIN   { ORS=""; first=1 }
                 /Disk/  { if (first) { print opts; first=0 };
                           gsub(/ /, "\\ ", $2);
