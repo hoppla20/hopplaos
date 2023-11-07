@@ -22,9 +22,13 @@ in {
   config = mkIf cfg.enable {
     hopplaos.boot.kernelModules.kvm.enable = true;
 
-    virtualisation.libvirtd = {
-      enable = true;
-      onBoot = "ignore";
+    virtualisation = {
+      libvirtd = {
+        enable = true;
+        onBoot = "ignore";
+      };
+
+      multipass.enable = true;
     };
 
     environment.systemPackages = builtins.attrValues {
@@ -34,7 +38,6 @@ in {
         virt-viewer
         virtiofsd
         #libguestfs-with-appliance
-        
         ;
     };
 
