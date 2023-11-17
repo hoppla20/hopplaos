@@ -21,5 +21,9 @@
       nixvim.enable = true;
       emacs.enable = true;
     };
+
+    profiles = {
+      server-management.enable = true;
+    };
   };
 }
