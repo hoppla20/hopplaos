@@ -23,5 +23,14 @@ in {
         sha256 = "16lgib95a7qddanmc6fvf5pxd96a77bfcy67ikfd8271xmjic3hr";
       })
     ];
+
+    services.teamviewer.enable = true;
+
+    environment.systemPackages = builtins.attrValues {
+      inherit
+        (pkgs)
+        zoom-us
+        ;
+    };
   };
 }
