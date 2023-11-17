@@ -19,6 +19,7 @@ in {
         (pkgs-unstable)
         powershell
         yaml-language-server
+        pyright
         ;
     };
   };
