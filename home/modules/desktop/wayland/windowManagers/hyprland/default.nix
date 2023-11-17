@@ -207,6 +207,8 @@ in {
 
         windowrulev2 = workspace 8, class:^(Signal|whatsapp-for-linux)$
         windowrulev2 = workspace 9, class:^(Spotify)$
+        windowrulev2 = workspace special, class:^(org.keepassxc.KeePassXC)$
+        windowrulev2 = tile, title:^(3CX)
 
         submap = resize
         binde = , LEFT, resizeactive, 20 0
