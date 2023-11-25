@@ -201,10 +201,6 @@ in {
           workspace_swipe = false
         }
 
-        binds {
-          allow_workspace_cycles = true
-        }
-
         windowrulev2 = workspace 8, class:^(Signal|whatsapp-for-linux)$
         windowrulev2 = workspace 9, class:^(Spotify)$
         windowrulev2 = workspace special, class:^(org.keepassxc.KeePassXC)$
