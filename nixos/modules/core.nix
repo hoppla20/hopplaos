@@ -5,9 +5,7 @@
   ...
 }: {
   boot = {
-    # TODO Wait for https://github.com/NixOS/nixpkgs/pull/224990
-    #kernelPackages = pkgs.linuxPackages_latest;
-    kernelPackages = pkgs.linuxPackages_6_5;
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
     supportedFilesystems = ["ntfs"];
     kernel.sysctl = {"vm.swappiness" = 10;};
   };

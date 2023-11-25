@@ -1,4 +1,4 @@
-{
+{lib, pkgs, ... }: {
   hopplaos = {
     profiles = {desktop = true;};
     users.vincentcui.enable = true;
@@ -14,7 +14,12 @@
     };
   };
 
-  boot.initrd.availableKernelModules = ["vmd" "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
+  boot = {
+    initrd.availableKernelModules = ["vmd" "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
+
+    # TODO Wait for https://github.com/NixOS/nixpkgs/pull/224990
+    kernelPackages = lib.mkForce pkgs.linuxPackages_6_5;
+  };
 
   networking.interfaces.enp0s31f6.useDHCP = true;
 
