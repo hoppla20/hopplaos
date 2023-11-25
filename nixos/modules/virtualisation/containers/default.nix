@@ -25,11 +25,24 @@ in {
       docker = {
         enable = true;
         package = pkgs-unstable.docker;
+        rootless = {
+          enable = true;
+          package = pkgs-unstable.docker;
+        };
       };
       podman = {
         enable = true;
         package = pkgs-unstable.podman;
       };
+    };
+
+    environment.systemPackages = builtins.attrValues {
+      inherit
+        (pkgs-unstable)
+        skopeo
+        docker-compose
+        podman-compose
+        ;
     };
   };
 }

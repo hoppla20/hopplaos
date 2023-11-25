@@ -1,7 +1,15 @@
-{lib, pkgs, ... }: {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: {
   hopplaos = {
     profiles = {desktop = true;};
-    users.vincentcui.enable = true;
+    users.vincentcui = {
+      enable = true;
+      hmUser = "vincentcui-wibu@${config.networking.hostName}";
+    };
     wibu = {
       enable = true;
       share.enable = true;

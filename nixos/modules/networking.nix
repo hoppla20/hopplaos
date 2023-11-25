@@ -45,8 +45,8 @@ in {
       networkmanager.enable = true;
       inherit (cfg) hostId;
       inherit (cfg) timeServers;
-      firewall = mkIf cfg.firewall.enable {
-        enable = true;
+      firewall = {
+        enable = cfg.firewall.enable;
         checkReversePath = true;
         inherit (cfg.firewall) allowedTCPPorts;
       };

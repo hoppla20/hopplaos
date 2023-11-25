@@ -15,11 +15,15 @@
       lf.enable = true;
       git = {
         enable = true;
-        userName = "vincent.cui";
-        userEmail = "privat@vincentcui.de";
+        userName = lib.mkDefault "vincent.cui";
+        userEmail = lib.mkDefault "privat@vincentcui.de";
       };
       nixvim.enable = true;
       emacs.enable = true;
+    };
+
+    profiles = {
+      server-management.enable = true;
     };
   };
 }
