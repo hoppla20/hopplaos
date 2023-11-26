@@ -42,7 +42,10 @@ in {
 
   config = mkIf cfg.enable {
     networking = {
-      networkmanager.enable = true;
+      networkmanager = {
+        enable = true;
+        dns = "systemd-resolved";
+      };
       inherit (cfg) hostId;
       inherit (cfg) timeServers;
       firewall = {
@@ -50,6 +53,11 @@ in {
         checkReversePath = true;
         inherit (cfg.firewall) allowedTCPPorts;
       };
+    };
+
+    services.resolved = {
+      enable = true;
+      fallbackDns = ["1.1.1.1" "1.0.0.1"];
     };
   };
 }
