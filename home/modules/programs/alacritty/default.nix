@@ -1,5 +1,5 @@
 {
-  pkgs,
+  pkgs-unstable,
   config,
   lib,
   inputs,
@@ -30,6 +30,7 @@ in {
     programs.alacritty = {
       enable = true;
 
+      package = pkgs-unstable.alacritty;
       settings = {
         import = [
           "~/.config/alacritty/colorscheme.yaml"
