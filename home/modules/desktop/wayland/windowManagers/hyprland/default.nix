@@ -131,21 +131,27 @@ in {
           gaps_in = 5
           gaps_out = 5
           border_size = 1
-          col.inactive_border = rgba(${config.scheme.base02}ee)
-          col.active_border = rgba(${config.scheme.base0E}ee)
-          col.group_border = rgba(${config.scheme.base02}ee)
-          col.group_border_active = rgba(${config.scheme.base0E}ee)
           layout = master
           resize_on_border = true
+          col.inactive_border = rgba(${config.scheme.base02}ee)
+          col.active_border = rgba(${config.scheme.base0E}ee)
         }
 
         misc {
           disable_hyprland_logo = true;
           disable_autoreload = true
-          groupbar_gradients = false
-          groupbar_titles_font_size = 10
-          groupbar_text_color = rgb(${config.scheme.base05})
           vrr = 1
+        }
+
+        group {
+          col.border_active = rgba(${config.scheme.base0E}ee)
+          col.border_inactive = rgba(${config.scheme.base02}ee)
+
+          groupbar {
+            gradients = false
+            font_size = 10
+            text_color = rgb(${config.scheme.base05})
+          }
         }
 
         decoration {
@@ -199,6 +205,10 @@ in {
         gestures {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
           workspace_swipe = false
+        }
+
+        binds {
+          movefocus_cycles_fullscreen = false
         }
 
         windowrulev2 = workspace 8, class:^(Signal|whatsapp-for-linux)$
