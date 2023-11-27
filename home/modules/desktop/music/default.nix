@@ -66,17 +66,11 @@ in {
       spicePkgs = inputs'.spicetify-nix.packages.default;
     in {
       enable = true;
-      theme =
-        spicePkgs
-        .themes
-        .${
-          "catppuccin-"
-          + (
-            if config.hopplaos.desktop.darkTheme
-            then "macchiato"
-            else "latte"
-          )
-        };
+      theme = spicePkgs.themes.catppuccin;
+      colorScheme =
+        if config.hopplaos.desktop.darkTheme
+        then "macchiato"
+        else "latte";
       enabledExtensions = builtins.attrValues {
         inherit
           (spicePkgs.extensions)

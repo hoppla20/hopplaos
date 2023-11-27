@@ -56,10 +56,7 @@ in {
 
     plugins = {
       comment-nvim.enable = true;
-      indent-blankline = {
-        enable = true;
-        useTreesitter = true;
-      };
+      indent-blankline.enable = true;
       nix.enable = true;
       notify = {
         enable = true;
