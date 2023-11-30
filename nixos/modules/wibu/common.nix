@@ -14,6 +14,7 @@ in {
 
   config = mkIf cfg.enable {
     security.pki.certificateFiles = [
+      ./certificates/gsrsaovsslca2018.crt
       (fetchurl {
         url = "https://intranet.wibu.local/WIBU_Root_CA_II.crt";
         sha256 = "0vql98m89jhxm1lgm0hx2zw8x0dqnbi69ynv17hlrw99d9i4gdr5";
