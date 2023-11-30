@@ -49,7 +49,7 @@ in {
       inherit (cfg) hostId;
       inherit (cfg) timeServers;
       firewall = {
-        enable = cfg.firewall.enable;
+        inherit (cfg.firewall) enable;
         checkReversePath = true;
         inherit (cfg.firewall) allowedTCPPorts;
       };
