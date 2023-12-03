@@ -705,11 +705,11 @@
         "std": "std"
       },
       "locked": {
-        "lastModified": 1700832401,
-        "narHash": "sha256-sscvjutPf3oPQ0vCxGdr43y04fgp2l8hReyEsdrf8+w=",
+        "lastModified": 1701618347,
+        "narHash": "sha256-vn+knryw3IGxtOWeQzbf8wbjqltzZLfrF4a9WIicT2Y=",
         "ref": "refs/heads/main",
-        "rev": "231691663a43674294524a9fe571b0c3cd472782",
-        "revCount": 118,
+        "rev": "5439299664236327c63b5a5dd777580306b78118",
+        "revCount": 119,
         "type": "git",
         "url": "https://gitlab.vincentcui.de/vincent.cui/hoppla-emacs"
       },
