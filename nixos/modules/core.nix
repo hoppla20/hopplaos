@@ -48,30 +48,28 @@
       builtins.attrValues {
         inherit
           (pkgs)
-          # utils
-          
           coreutils
           dnsutils
           iputils
           pciutils
           usbutils
           expect
-          # system monitoring
-          
+          # utils
+
           htop
           bottom
-          # partitioning
-          
+          # system monitoring
+
           parted
           gptfdisk
-          # useful tools
-          
+          # partitioning
+
           zip
           unzip
           gzip
           gnutar
           # archives
-          
+
           bat
           curl
           wget
@@ -87,7 +85,7 @@
           openssl
           tldr
           # nix tools
-          
+
           niv
           nil
           alejandra
@@ -96,6 +94,9 @@
           nix-tree
           nvd
           nix-diff
+          neovim
+          # useful tools
+
           ;
       }
       ++ [
