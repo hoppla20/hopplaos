@@ -24,6 +24,7 @@ in {
         inherit (config.gtk.iconTheme) package;
       };
       settings =
+        lib.recursiveUpdate
         {
           global = {
             follow = "keyboard";
@@ -70,7 +71,7 @@ in {
           urgency_normal.timeout = 6;
           urgency_critical.timeout = 0;
         }
-        // builtins.fromTOML (builtins.readFile (config.scheme inputs.base16-dunst));
+        (builtins.fromTOML (builtins.readFile (config.scheme inputs.base16-dunst)));
     };
   };
 }
