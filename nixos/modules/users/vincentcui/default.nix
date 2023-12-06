@@ -36,8 +36,6 @@ in {
         "unpriv_ping"
         "docker"
         "podman"
-        "lxd"
-        "incus-admin"
       ];
       openssh.authorizedKeys.keyFiles = lib.filesystem.listFilesRecursive ./ssh;
     };

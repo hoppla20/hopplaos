@@ -38,7 +38,6 @@ in {
         qemu.enable = true;
         libvirt.enable = true;
         containers.enable = true;
-        lxd.enable = true;
         #vmware-workstation.enable = true;
       };
 
