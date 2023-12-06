@@ -200,6 +200,7 @@ in {
         master {
           # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
           new_is_master = false
+          special_scale_factor = 0.8
         }
 
         gestures {
@@ -208,13 +209,17 @@ in {
         }
 
         binds {
+          allow_workspace_cycles = true
           movefocus_cycles_fullscreen = false
         }
 
+        # tile brave PWAs
+        windowrulev2 = tile, class:^(Brave-browser)
+
+        windowrulev2 = workspace 8, title:^(3CX)
         windowrulev2 = workspace 8, class:^(Signal|whatsapp-for-linux)$
         windowrulev2 = workspace 9, class:^(Spotify)$
         windowrulev2 = workspace special, class:^(org.keepassxc.KeePassXC)$
-        windowrulev2 = tile, title:^(3CX)
 
         submap = resize
         binde = , LEFT, resizeactive, 20 0

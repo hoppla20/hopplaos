@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-unstable,
   config,
   lib,
   inputs,
@@ -41,7 +42,7 @@ in {
   config = mkIf (desktopCfg.enable && cfg.enable) {
     programs.waybar = {
       enable = true;
-      package = inputs.nixpkgs-wayland.packages.${pkgs.system}.waybar;
+      package = pkgs-unstable.waybar;
       systemd.enable = false;
 
       style =
