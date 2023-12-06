@@ -7,10 +7,7 @@
 }: let
   pkgs = self'.legacyPackages;
 in {
-  nixpkgs = {
-    inherit pkgs;
-    inherit (pkgs) config;
-  };
+  nixpkgs.pkgs = pkgs;
 
   nix = {
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];

@@ -141,7 +141,7 @@
     };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     flake-parts = {
@@ -168,13 +168,9 @@
     };
 
     home-manager = {
-      url = "github:hoppla20/home-manager/release-23.05";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    #home-manager = {
-    #  url = "github:nix-community/home-manager/release-23.05";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
 
     nix-on-droid = {
       url = "github:t184256/nix-on-droid";
@@ -198,10 +194,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "unstable";
-    };
     hoppla-emacs = {
       url = "git+https://gitlab.vincentcui.de/vincent.cui/hoppla-emacs";
       inputs.nixpkgs.follows = "unstable";
@@ -219,7 +211,7 @@
       flake = false;
     };
     base16-dunst = {
-      url = "github:tinted-theming/base16-dunst";
+      url = "github:hoppla20/base16-dunst";
       flake = false;
     };
     base16-waybar = {

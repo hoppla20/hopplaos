@@ -40,11 +40,8 @@ in {
         enable = true;
         settings =
           {
-            CPU_SCALING_GOVERNOR_ON_AC =
-              if cfg.pstate
-              then "active"
-              else "schedutil";
-            CPU_ENERGY_PERF_POLICY_ON_AC = lib.mkIf cfg.pstate "performance";
+            CPU_SCALING_GOVERNOR_ON_AC = "performance";
+            CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
             CPU_BOOST_ON_AC = 1;
             PLATFORM_PROFILE_ON_AC = "performance";
             DISK_DEVICES = "nvme0n1 sda";
@@ -56,7 +53,7 @@ in {
               if cfg.pstate
               then "active"
               else "schedutil";
-            CPU_ENERGY_PERF_POLICY_ON_BAT = lib.mkIf cfg.pstate "balance_power";
+            CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
             CPU_BOOST_ON_BAT = 0;
             PLATFORM_PROFILE_ON_BAT = "low-power";
             START_CHARGE_THRESH_BAT0 = 75;
