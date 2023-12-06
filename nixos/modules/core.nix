@@ -66,6 +66,12 @@
           gptfdisk
           # useful tools
           
+          zip
+          unzip
+          gzip
+          gnutar
+          # archives
+          
           bat
           curl
           wget

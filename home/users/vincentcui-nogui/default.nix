@@ -18,7 +18,6 @@
         userName = lib.mkDefault "vincent.cui";
         userEmail = lib.mkDefault "privat@vincentcui.de";
       };
-      nixvim.enable = true;
       emacs.enable = true;
     };
 

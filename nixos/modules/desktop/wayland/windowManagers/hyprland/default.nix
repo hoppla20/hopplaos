@@ -21,11 +21,8 @@ in {
     programs.hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-      nvidiaPatches = cfg.nvidia;
-      xwayland = {
-        enable = true;
-        hidpi = false;
-      };
+      enableNvidiaPatches = cfg.nvidia;
+      xwayland.enable = true;
     };
 
     environment.sessionVariables.NIXOS_OZONE_WL = "";
