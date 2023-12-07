@@ -45,7 +45,10 @@ in {
           libinput.enable = true;
           displayManager.gdm.enable = true;
         };
+        gnome.at-spi2-core.enable = true;
       };
+
+      security.rtkit.enable = true;
 
       specialisation = {
         dark.configuration = {

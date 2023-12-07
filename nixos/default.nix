@@ -30,6 +30,7 @@ in {
                 inputs.nixos-generators.nixosModules.all-formats
                 inputs.home-manager.nixosModules.default
                 inputs.disko.nixosModules.default
+                inputs.hyprland.nixosModules.default
                 dir
               ]
               ++ import (dir + "/hardware-modules.nix") {inherit inputs;};

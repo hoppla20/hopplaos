@@ -84,7 +84,7 @@ in {
     wayland.windowManager.hyprland = {
       enable = true;
       systemdIntegration = true;
-      recommendedEnvironment = false;
+      recommendedEnvironment = true;
 
       # use system package
       package = null;
@@ -359,7 +359,6 @@ in {
         bindm = SUPER, mouse:273, resizewindow
 
         # Autostart
-        exec = ${pkgs.systemd}/bin/systemctl --user restart graphical-session.target
         exec = bash ${launchHyprpaper}
         exec = bash ${desktopCfg.wayland.waybar.launchCommand}
         exec-once = wl-configure-gtk

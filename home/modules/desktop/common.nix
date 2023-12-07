@@ -164,7 +164,7 @@ in {
 
     qt = {
       enable = true;
-      platformTheme = "gtk";
+      platformTheme = "gtk3";
     };
 
     services.gnome-keyring = {

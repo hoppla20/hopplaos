@@ -31,6 +31,27 @@ in {
       pkgs.qt6.qtwayland
     ];
 
-    xdg.portal.extraPortals = lib.mkOrder 2000 [pkgs.xdg-desktop-portal-gtk];
+    xdg.portal = {
+      extraPortals = lib.mkOrder 2000 [pkgs.xdg-desktop-portal-gtk];
+      config = {
+        common = {
+          default = [
+            "gtk"
+          ];
+          "org.freedesktop.impl.portal.Secret" = [
+            "gnome-keyring"
+          ];
+        };
+        Hyprland = {
+          default = [
+            "hyprland"
+            "gtk"
+          ];
+          "org.freedesktop.impl.portal.Secret" = [
+            "gnome-keyring"
+          ];
+        };
+      };
+    };
   };
 }

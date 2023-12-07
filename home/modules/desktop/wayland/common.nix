@@ -36,7 +36,7 @@ in {
         (pkgs.writeShellScriptBin "wl-configure-gtk" ''
           export XDG_DATA_DIRS=${gtkDataDir}:$XDG_DATA_DIRS
           gnome_schema=org.gnome.desktop.interface
-          gsettings set $gnome_schema font '${config.gtk.font.name}'
+          gsettings set $gnome_schema font-name '${config.gtk.font.name}'
           gsettings set $gnome_schema gtk-theme '${config.gtk.theme.name}'
           gsettings set $gnome_schema icon-theme '${config.gtk.iconTheme.name}'
           gsettings set $gnome_schema cursor-theme '${config.gtk.cursorTheme.name}'

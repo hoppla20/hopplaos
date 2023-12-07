@@ -21,9 +21,9 @@ in {
 
   config = mkIf cfg.enable {
     services.gnome.gnome-keyring.enable = true;
-    security.pam.services.gdm-launch-environment.text = ''
-      auth optional ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so
-      session optional ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so auto_start
-    '';
+    #security.pam.services.gdm-launch-environment.text = ''
+    #  auth optional ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so
+    #  session optional ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so auto_start
+    #'';
   };
 }

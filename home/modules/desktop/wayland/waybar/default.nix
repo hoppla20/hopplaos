@@ -42,7 +42,6 @@ in {
   config = mkIf (desktopCfg.enable && cfg.enable) {
     programs.waybar = {
       enable = true;
-      package = pkgs-unstable.waybar;
       systemd.enable = false;
 
       style =
