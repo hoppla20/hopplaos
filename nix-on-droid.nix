@@ -66,7 +66,7 @@
             experimental-features = nix-command flakes
           '';
           time.timeZone = "Europe/Amsterdam";
-          system.stateVersion = "23.05";
+          system.stateVersion = "23.11";
         })
       ];
     });
