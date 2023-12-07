@@ -29,7 +29,7 @@ in {
     #];
 
     services = {
-      upower = lib.mkIf cfg.hasBattery {
+      upower = {
         enable = true;
         criticalPowerAction = "HybridSleep";
         usePercentageForPolicy = true;
