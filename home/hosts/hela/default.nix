@@ -6,6 +6,7 @@
     };
 
     hardware = {
+      bluetooth.enable = false;
       monitors = [
         {
           name = "DP-2";

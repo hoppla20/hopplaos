@@ -152,7 +152,7 @@ in {
 
     services = {
       network-manager-applet.enable = true;
-      blueman-applet.enable = true;
+      blueman-applet.enable = config.hopplaos.hardware.bluetooth.enable;
     };
 
     systemd.user.services.network-manager-applet.Service = {

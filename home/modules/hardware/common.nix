@@ -3,9 +3,15 @@
   config,
   lib,
   ...
-}:
-with lib; let
+}: let
   cfg = config.hopplaos.hardware;
+
+  inherit
+    (lib)
+    types
+    mkOption
+    mkEnableOption
+    ;
 
   monitorModule = types.submodule {
     options = {
@@ -74,6 +80,7 @@ with lib; let
 in {
   options = {
     hopplaos.hardware = {
+      bluetooth.enable = mkEnableOption "Bluetooth" // {default = true;};
       monitors = mkOption {
         type = types.listOf (types.submodule {
           options = {
