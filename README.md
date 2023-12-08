@@ -7,6 +7,9 @@
 mkdir -p ~/.config/nix
 echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
 nix run "git+https://gitlab.vincentcui.de/vincent.cui/hopplaos -- -h
+
+# if something went wrong and the repo has to be pulled with new changes
+nix run --refresh "..." -- -h
 ```
 
 When using the provided installer, the package is included:
@@ -29,12 +32,6 @@ direnv allow # requires nix-direnv
 
 ```bash
 run-test-vm $CONFIGURATION_NAME
-```
-
-## Disko usage
-
-```bash
-nix run github:nix-community/disko -- -m {format,mount,disko} -f "git+https://gitlab.vincentcui.de/vincent.cui/hopplaos#$CONFIGURATION_NAME"
 ```
 
 ## Troubleshooting
