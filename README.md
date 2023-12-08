@@ -34,12 +34,7 @@ run-test-vm $CONFIGURATION_NAME
 ## Disko usage
 
 ```bash
-# SCRIPT: formatScript, mountScript, diskoScript (format + mount)
-
-nix build ./nixos/hosts/$CONFIGURATION_NAME/disko.nix
-./result
-# or
-disko -m {format,mount,disko} "git+https://gitlab.vincentcui.de/vincent.cui/hopplaos#$CONFIGURATION_NAME"
+nix run github:nix-community/disko -- -m {format,mount,disko} -f "git+https://gitlab.vincentcui.de/vincent.cui/hopplaos#$CONFIGURATION_NAME"
 ```
 
 ## Troubleshooting
