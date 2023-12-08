@@ -20,6 +20,7 @@ in {
         powershell
         yaml-language-server
         pyright
+        insomnia
         ;
     };
   };
