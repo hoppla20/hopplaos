@@ -4,6 +4,8 @@
   lib,
   ...
 }: {
+  imports = [./disko.nix];
+
   hopplaos = {
     profiles = {desktop = true;};
     users.vincentcui = {
