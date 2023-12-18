@@ -149,18 +149,29 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
-    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
+    flake-utils-plus = {
+      url = "github:gytis-ivaskevicius/flake-utils-plus";
+    };
 
     digga = {
       url = "github:divnix/digga/v0.11.0";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.latest.follows = "unstable";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        latest.follows = "unstable";
+        devshell.follows = "devshell";
+      };
     };
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    nixos-generators.url = "github:nix-community/nixos-generators";
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    disko.url = "github:nix-community/disko";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     devshell = {
       url = "github:numtide/devshell";
