@@ -92,6 +92,7 @@
           nix-output-monitor
           statix
           nix-tree
+          nix-melt
           nvd
           nix-diff
           neovim
