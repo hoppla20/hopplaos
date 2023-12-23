@@ -205,10 +205,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hoppla-emacs = {
-      url = "git+https://gitlab.vincentcui.de/vincent.cui/hoppla-emacs";
-      inputs.nixpkgs.follows = "unstable";
-    };
+    hoppla-emacs.url = "git+https://gitlab.vincentcui.de/vincent.cui/hoppla-emacs";
     emacs-libvterm = {
       url = "github:akermu/emacs-libvterm";
       flake = false;
