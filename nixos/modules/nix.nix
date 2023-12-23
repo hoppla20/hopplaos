@@ -10,9 +10,10 @@ in {
   nixpkgs.pkgs = pkgs;
 
   nix = {
+    package = pkgs.nixFlakes;
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];
     settings = {
-      experimental-features = ["nix-command" "flakes" "ca-derivations" "repl-flake"];
+      experimental-features = ["nix-command" "flakes" "repl-flake"];
       auto-optimise-store = true;
       allowed-users = ["@wheel"];
       trusted-users = ["@wheel"];
