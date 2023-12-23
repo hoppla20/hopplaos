@@ -83,11 +83,8 @@ in {
   config = mkIf (desktopCfg.enable && cfg.enable) {
     wayland.windowManager.hyprland = {
       enable = true;
-      systemdIntegration = true;
-      recommendedEnvironment = true;
+      systemd.enable = true;
 
-      # use system package
-      package = null;
       extraConfig = ''
         # Set cursor
         exec-once = hyprctl setcursor ${cursor.name} ${toString cursor.size}
@@ -401,9 +398,6 @@ in {
           config.hopplaos.hardware.monitors)}
         ${desktopCfg.defaultWallpaper}
       '';
-      onChange =
-        mkIf (!config.wayland.windowManager.hyprland.disableAutoreload)
-        "bash ${launchHyprpaper}&!";
     };
   };
 }
