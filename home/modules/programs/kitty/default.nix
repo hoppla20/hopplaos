@@ -40,6 +40,7 @@ in {
         "alt+k" = "kitten pass_keys.py top alt+k";
         "alt+h" = "kitten pass_keys.py left alt+h";
         "alt+l" = "kitten pass_keys.py right alt+l";
+        "ctrl+shift+enter" = "new_window_with_cwd";
       };
       shellIntegration.enableZshIntegration = config.programs.zsh.enable;
       theme = "Catppuccin-${
