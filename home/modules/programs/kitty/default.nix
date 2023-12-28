@@ -31,8 +31,10 @@ in {
         window_padding_width = 5;
         disable_ligatures = "always";
 
+        tab_bar_min_tabs = 1;
         tab_bar_style = "powerline";
-        tab_powerline_style = "round";
+        tab_powerline_style = "slanted";
+        tab_title_template = "{title}{' [{}]'.format(num_windows) if num_windows > 1 else ''}";
 
         enabled_layouts = "splits:split_axis=vertical,fat:bias=62,tall:bias=62,stack";
       };
