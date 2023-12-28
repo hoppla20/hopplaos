@@ -1,4 +1,5 @@
 {
+  inputs',
   pkgs,
   config,
   lib,
@@ -95,12 +96,12 @@
           nix-melt
           nvd
           nix-diff
-          neovim
           # useful tools
 
           ;
       }
       ++ [
+        inputs'.hoppla-nixvim.packages.default
         (pkgs.writeShellScriptBin "nix-specialisation-switcher" ''
           sudo "/nix/var/nix/profiles/system/specialisation/$1/bin/switch-to-configuration" switch
         '')

@@ -7,6 +7,9 @@
       keepassxc.enable = true;
       office.enable = true;
       messangers.enable = true;
+
+      # alacritty.enable = true;
+      kitty.enable = true;
     };
 
     services = {

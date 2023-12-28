@@ -11,11 +11,7 @@
 in {
   options = {
     hopplaos.programs.alacritty = {
-      enable =
-        mkEnableOption "Alacritty"
-        // {
-          default = config.hopplaos.desktop.enable;
-        };
+      enable = mkEnableOption "Alacritty";
     };
   };
 

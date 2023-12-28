@@ -211,6 +211,16 @@
       flake = false;
     };
 
+    hoppla-nixvim = {
+      url = "github:hoppla20/hoppla-nixvim";
+      inputs.nixpkgs.follows = "unstable";
+    };
+
+    vim-kitty-navigator = {
+      url = "github:knubie/vim-kitty-navigator";
+      flake = false;
+    };
+
     spicetify-nix.url = "github:the-argus/spicetify-nix";
 
     base16.url = "github:SenchoPens/base16.nix";

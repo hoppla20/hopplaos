@@ -57,11 +57,9 @@ in {
       };
       appLauncherCommand = mkOption {
         type = types.str;
-        readOnly = true;
       };
       terminalCommand = mkOption {
         type = types.str;
-        readOnly = true;
       };
       browserCommand = mkOption {
         type = types.str;
@@ -70,7 +68,6 @@ in {
       };
       editorCommand = mkOption {
         type = types.str;
-        readOnly = true;
       };
       fileManagerCommand = mkOption {
         type = types.str;
