@@ -269,7 +269,6 @@ in {
 
         bind = CONTROL_SHIFT, PERIOD, exec, dunstctl context
         bind = CONTROL_SHIFT, COMMA, exec, dunstctl close
-        bind = CONTROL_SHIFT, MINUS, exec, dunstctl history-pop
 
         bind = , PRINT, exec, screenshot
         bind = CONTROL, PRINT, exec, screenshot-select
