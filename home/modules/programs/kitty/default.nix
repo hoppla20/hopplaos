@@ -34,7 +34,7 @@ in {
         tab_bar_style = "powerline";
         tab_powerline_style = "round";
 
-        enabled_layouts = "splits:split_axis=vertical,fat:bias=62,tall:bias=62";
+        enabled_layouts = "splits:split_axis=vertical,fat:bias=62,tall:bias=62,stack";
       };
       keybindings = {
         "alt+j" = "kitten pass_keys.py bottom alt+j";
@@ -42,8 +42,9 @@ in {
         "alt+h" = "kitten pass_keys.py left alt+h";
         "alt+l" = "kitten pass_keys.py right alt+l";
         "ctrl+shift+enter" = "new_window_with_cwd";
-        "ctrl+shift+." = "layout_action bias 50 62 70";
-        "ctrl+shift+," = "layout_action bias 62";
+        "ctrl+shift+f" = "toggle_layout stack";
+        "ctrl+." = "layout_action bias 50 62 70";
+        "ctrl+," = "layout_action bias 62";
         "ctrl+alt+v" = "launch --location=vsplit --cwd=current";
         "ctrl+alt+s" = "launch --location=hsplit --cwd=current";
         "ctrl+alt+j" = "move_window down";
