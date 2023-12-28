@@ -113,6 +113,10 @@ in {
         inherit (pkgs.gnome) seahorse;
       };
 
+      sessionVariables = {
+        EDITOR = "nvim";
+      };
+
       pointerCursor = {
         name = "Bibata-Modern-${
           if cfg.darkTheme
