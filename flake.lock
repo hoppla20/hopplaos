@@ -831,11 +831,11 @@
         "std": "std_2"
       },
       "locked": {
-        "lastModified": 1703797382,
-        "narHash": "sha256-Tc0ICcLesVIKnBqavlLTjkgSpartU0EjxJPxN+ZNjMU=",
+        "lastModified": 1703879283,
+        "narHash": "sha256-CpSGgxmZxpg26OtXq12wYh4yc6vqgaiB1dPOTb5UeRQ=",
         "owner": "hoppla20",
         "repo": "hoppla-nixvim",
-        "rev": "5ae23ad1cc62ca1e2f31c34d98d62a103118d66d",
+        "rev": "4772f7eaf2c219540055659d40571c808b5ce651",
         "type": "github"
       },
       "original": {
@@ -1353,17 +1353,16 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1703260550,
-        "narHash": "sha256-wPe+0oCgzvf9Ixscme+NUS4iRX0n/alJvt3msnu9vPA=",
-        "owner": "nix-community",
-        "repo": "nixvim",
-        "rev": "e0521dde87825e4ed16e1ac5b6df9f1b7e60af05",
-        "type": "github"
+        "dirtyRev": "4d0ba688a628a74d1a0a4dbbd194aefd9f2b063e-dirty",
+        "dirtyShortRev": "4d0ba688-dirty",
+        "lastModified": 1703786836,
+        "narHash": "sha256-tDkw/HSEUuFOsRErd2o8lwQaNbofhhhz0AldCGb/WNY=",
+        "type": "git",
+        "url": "file:///home/vincentcui/Workspace/neovim/nixvim"
       },
       "original": {
-        "owner": "nix-community",
-        "repo": "nixvim",
-        "type": "github"
+        "type": "git",
+        "url": "file:///home/vincentcui/Workspace/neovim/nixvim"
       }
     },
     "nmd": {
