@@ -15,14 +15,21 @@ in {
       zsh = {
         enable = true;
 
+        initExtra = ''
+          [[ -f "${./p10k.zsh}" ]] && source "${./p10k.zsh}"
+        '';
+
         prezto = {
           enable = true;
+
           editor = {
             keymap = "emacs";
             dotExpansion = true;
           };
           terminal.autoTitle = true;
           utility.safeOps = true;
+          prompt.theme = "powerlevel10k";
+
           pmodules = lib.mkOrder 1000 [
             "environment"
             "terminal"
@@ -31,15 +38,19 @@ in {
             "directory"
             "spectrum"
             "utility"
-            "git"
+            "syntax-highlighting"
             "autosuggestions"
-            "completion"
+            "git"
+            "archive"
             "prompt"
           ];
+
           extraConfig = ''
             zstyle ':prezto:module:git:alias' skip 'yes'
             zstyle ':prezto:module:git:log:context' format 'oneline'
           '';
+
+          extraModules = ["zprof"];
         };
       };
 

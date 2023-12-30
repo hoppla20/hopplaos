@@ -21,7 +21,7 @@ in {
     programs.kitty = {
       enable = true;
       font = {
-        name = "JetBrainsMono Nerd Font";
+        name = "MesloLGS Nerd Font";
         size = 10;
       };
       settings = {
@@ -36,7 +36,7 @@ in {
         tab_powerline_style = "slanted";
         tab_title_template = "{title}{' [{}]'.format(num_windows) if num_windows > 1 else ''}";
 
-        enabled_layouts = "splits:split_axis=vertical,fat:bias=62,tall:bias=62,stack";
+        enabled_layouts = "fat:bias=70,tall:bias=70,splits:split_axis=vertical,stack";
       };
       keybindings = {
         "alt+j" = "kitten pass_keys.py bottom alt+j";
