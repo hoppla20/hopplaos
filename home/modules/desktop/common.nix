@@ -68,6 +68,7 @@ in {
       };
       editorCommand = mkOption {
         type = types.str;
+        default = "${cfg.terminalCommand} -e nvim";
       };
       fileManagerCommand = mkOption {
         type = types.str;

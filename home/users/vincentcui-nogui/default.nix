@@ -10,7 +10,7 @@
         matchBlocks = {"gitlab-ssh.vincentcui.de" = {port = 9022;};};
       };
       zsh.enable = true;
-      tmux.enable = true;
+      #tmux.enable = true;
       direnv.enable = true;
       lf.enable = true;
       git = {
@@ -18,7 +18,7 @@
         userName = lib.mkDefault "vincent.cui";
         userEmail = lib.mkDefault "privat@vincentcui.de";
       };
-      emacs.enable = true;
+      #emacs.enable = true;
     };
 
     profiles = {

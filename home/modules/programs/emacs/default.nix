@@ -20,9 +20,13 @@ in {
   config = lib.mkIf cfg.enable {
     hopplaos.desktop.editorCommand = "${config.programs.emacs.finalPackage}/bin/emacsclient --create-frame";
 
-    programs.emacs = {
-      enable = true;
-      package = inputs'.hoppla-emacs.packages.hoppla-emacs;
+    programs = {
+      emacs = {
+        enable = true;
+        package = inputs'.hoppla-emacs.packages.hoppla-emacs;
+      };
+      bash.initExtra = l.readFile "${inputs.emacs-libvterm}/etc/emacs-vterm-bash.sh";
+      zsh.initExtra = l.readFile "${inputs.emacs-libvterm}/etc/emacs-vterm-zsh.sh";
     };
 
     services.emacs = {
@@ -39,8 +43,5 @@ in {
       (setq hoppla/extra-workspace-dirs '(("/etc/nixos" . 0)
                                           ("~/.config/emacs" . 0)))
     '';
-
-    programs.bash.initExtra = l.readFile "${inputs.emacs-libvterm}/etc/emacs-vterm-bash.sh";
-    programs.zsh.initExtra = l.readFile "${inputs.emacs-libvterm}/etc/emacs-vterm-zsh.sh";
   };
 }
