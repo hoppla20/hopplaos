@@ -64,7 +64,7 @@ in {
       browserCommand = mkOption {
         type = types.str;
         readOnly = true;
-        default = "${pkgs.brave}/bin/brave --use-angle=vulkan --use-cmd-decoder=passthrough --enable-webrtc-pipewire-capturer";
+        default = "${pkgs.brave}/bin/brave --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer --enable-features=VaapiVideoDecodeLinuxGL";
       };
       editorCommand = mkOption {
         type = types.str;
