@@ -831,11 +831,11 @@
         "std": "std_2"
       },
       "locked": {
-        "lastModified": 1703879283,
-        "narHash": "sha256-CpSGgxmZxpg26OtXq12wYh4yc6vqgaiB1dPOTb5UeRQ=",
+        "lastModified": 1704030484,
+        "narHash": "sha256-sBKXUY2dvlFb5iIdqHoI+o45uZN9fL8kueALPODsHfA=",
         "owner": "hoppla20",
         "repo": "hoppla-nixvim",
-        "rev": "4772f7eaf2c219540055659d40571c808b5ce651",
+        "rev": "29171e9ae2a99cab29eb15be2c4fb78bd6b94ff1",
         "type": "github"
       },
       "original": {
