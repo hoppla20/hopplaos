@@ -11,6 +11,10 @@
       cpu.manufacturer = "amd";
       gpu.manufacturer = "amd";
     };
+    networking.wakeOnLan = {
+      enable = true;
+      interface = "enp4s0";
+    };
   };
 
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "sd_mod"];

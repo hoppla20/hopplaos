@@ -43,7 +43,10 @@ in {
         xserver = {
           enable = true;
           libinput.enable = true;
-          displayManager.gdm.enable = true;
+          displayManager.gdm = {
+            enable = true;
+            autoSuspend = false;
+          };
         };
         gnome.at-spi2-core.enable = true;
       };

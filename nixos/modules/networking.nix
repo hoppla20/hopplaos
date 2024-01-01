@@ -37,6 +37,18 @@ in {
           default = [];
         };
       };
+
+      wakeOnLan = mkOption {
+        type = types.submodule {
+          options = {
+            enable = mkEnableOption "HopplaOS Networking - WakeOnLan";
+            interface = mkOption {
+              type = types.str;
+              example = "enp4s0";
+            };
+          };
+        };
+      };
     };
   };
 
@@ -58,6 +70,17 @@ in {
     services.resolved = {
       enable = true;
       fallbackDns = ["1.1.1.1" "1.0.0.1"];
+    };
+
+    systemd.services.wakeonlan = mkIf cfg.wakeOnLan.enable {
+      description = "WakeOnLan";
+      after = ["network.target"];
+      requires = ["network.target"];
+      wantedBy = ["multi-user.target"];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.ethtool}/sbin/ethtool -s ${cfg.wakeOnLan.interface} wol g";
+      };
     };
   };
 }
