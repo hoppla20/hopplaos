@@ -38,21 +38,20 @@ in {
         };
       };
 
-      wakeOnLan = mkOption {
-        type = types.submodule {
-          options = {
-            enable = mkEnableOption "HopplaOS Networking - WakeOnLan";
-            interface = mkOption {
-              type = types.str;
-              example = "enp4s0";
-            };
-          };
+      wakeOnLan = {
+        enable = mkEnableOption "HopplaOS Networking - WakeOnLan";
+        interface = mkOption {
+          type = types.str;
+          example = "enp4s0";
         };
       };
     };
   };
 
   config = mkIf cfg.enable {
+    # allow temporary changes to /etc/hosts
+    environment.etc.hosts.mode = "0644";
+
     networking = {
       networkmanager = {
         enable = true;
