@@ -357,13 +357,13 @@ in {
         # Autostart
         exec = bash ${launchHyprpaper}
         exec = bash ${desktopCfg.wayland.waybar.launchCommand}
-        exec = sleep 3; ${pkgs.systemd}/bin/systemctl --user restart swayidle.service
-        exec = sleep 3; ${pkgs.systemd}/bin/systemctl --user restart network-manager-applet.service
+        exec = sleep 5; ${pkgs.systemd}/bin/systemctl --user restart swayidle.service
+        exec = sleep 5; ${pkgs.systemd}/bin/systemctl --user restart network-manager-applet.service
         ${lib.optionalString config.hopplaos.hardware.bluetooth.enable ''
-          exec = sleep 3; ${pkgs.systemd}/bin/systemctl --user restart blueman-applet.service
+          exec = sleep 5; ${pkgs.systemd}/bin/systemctl --user restart blueman-applet.service
         ''}
         ${lib.optionalString config.hopplaos.services.nextcloud-client.enable ''
-          exec = sleep 3; ${pkgs.systemd}/bin/systemctl --user restart nextcloud-client.service
+          exec = sleep 5; ${pkgs.systemd}/bin/systemctl --user restart nextcloud-client.service
         ''}
         exec-once = wl-configure-gtk
         exec-once = ${polkitAgent}
