@@ -240,6 +240,11 @@
       url = "github:aarowill/base16-alacritty";
       flake = false;
     };
+
+    kmonad = {
+      url = "github:kmonad/kmonad?dir=nix";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   nixConfig = {

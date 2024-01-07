@@ -1140,6 +1140,28 @@
         "type": "github"
       }
     },
+    "kmonad": {
+      "inputs": {
+        "nixpkgs": [
+          "unstable"
+        ]
+      },
+      "locked": {
+        "dir": "nix",
+        "lastModified": 1703250206,
+        "narHash": "sha256-YxtVaXb1wq9x1/PFlbHHmxZuEB14+5v0urNwZDEsocQ=",
+        "owner": "kmonad",
+        "repo": "kmonad",
+        "rev": "1c4641f063130165516789e842629e437082c5b8",
+        "type": "github"
+      },
+      "original": {
+        "dir": "nix",
+        "owner": "kmonad",
+        "repo": "kmonad",
+        "type": "github"
+      }
+    },
     "lib": {
       "locked": {
         "lastModified": 1694306727,
@@ -1970,6 +1992,7 @@
         "hoppla-nixvim": "hoppla-nixvim",
         "hyprland": "hyprland",
         "hyprland-contrib": "hyprland-contrib",
+        "kmonad": "kmonad",
         "nix-index-db": "nix-index-db",
         "nix-on-droid": "nix-on-droid",
         "nixos-generators": "nixos-generators",

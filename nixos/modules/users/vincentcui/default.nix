@@ -36,6 +36,8 @@ in {
         "unpriv_ping"
         "docker"
         "podman"
+        "input"
+        "uinput"
       ];
       openssh.authorizedKeys.keyFiles = lib.filesystem.listFilesRecursive ./ssh;
     };
