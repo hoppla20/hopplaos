@@ -44,8 +44,10 @@ in {
         "alt+h" = "kitten pass_keys.py left alt+h";
         "alt+l" = "kitten pass_keys.py right alt+l";
         "ctrl+shift+enter" = "new_window_with_cwd";
+        "f2" = "detach_window ask";
+        "f3" = "detach_tab ask";
         "ctrl+shift+f" = "toggle_layout stack";
-        "ctrl+." = "layout_action bias 50 62 70";
+        "ctrl+." = "layout_action bias 62 70 85";
         "ctrl+," = "layout_action bias 62";
         "ctrl+alt+v" = "launch --location=vsplit --cwd=current";
         "ctrl+alt+s" = "launch --location=hsplit --cwd=current";
