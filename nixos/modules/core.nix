@@ -17,9 +17,11 @@
   };
 
   services.xserver = {
-    layout = "us";
-    xkbVariant = "altgr-intl";
-    xkbOptions = "caps:escape";
+    xkb = {
+      layout = "us";
+      variant = "altgr-intl";
+      options = "caps:escape,compose:ralt";
+    };
   };
 
   time.timeZone = lib.mkDefault "Europe/Berlin";
