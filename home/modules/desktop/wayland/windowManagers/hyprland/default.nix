@@ -267,8 +267,8 @@ in {
         bindle = , XF86MonBrightnessDown, exec, ${brightnessControlCommands.lower}
         bindle = , XF86MonBrightnessUp, exec, ${brightnessControlCommands.raise}
 
-        bind = CONTROL_SHIFT, PERIOD, exec, dunstctl context
-        bind = CONTROL_SHIFT, COMMA, exec, dunstctl close
+        bind = SUPER_SHIFT, PERIOD, exec, dunstctl context
+        bind = SUPER_SHIFT, COMMA, exec, dunstctl close
 
         bind = , PRINT, exec, screenshot
         bind = CONTROL, PRINT, exec, screenshot-select
