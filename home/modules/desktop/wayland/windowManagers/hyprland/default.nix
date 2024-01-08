@@ -135,9 +135,9 @@ in {
         }
 
         misc {
-          disable_hyprland_logo = true;
-          disable_autoreload = true
           vrr = 1
+          disable_hyprland_logo = true
+          new_window_takes_over_fullscreen = 2
         }
 
         group {
@@ -249,7 +249,9 @@ in {
         bind = SUPER, RETURN, exec, ${terminalCommand}
         bind = SUPER_SHIFT, Q, killactive,
         bind = SUPER_SHIFT, SPACE, togglefloating,
-        bind = SUPER, F, fullscreen,
+        bind = SUPER, F, fullscreen, 1
+        bind = SUPER_SHIFT, F, fullscreen, 0
+        bind = SUPER_CONTROL, F, fakefullscreen,
         bind = SUPER, 0, submap, system
         bind = SUPER, R, submap, resize
         bind = SUPER, SEMICOLON, layoutmsg, orientationnext
