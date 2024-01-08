@@ -22,6 +22,8 @@ in {
   config = mkIf cfg.enable {
     hopplaos.boot.kernelModules.kvm.enable = true;
 
+    hardware.ksm.enable = true;
+
     virtualisation = {
       libvirtd = {
         enable = true;
@@ -37,7 +39,6 @@ in {
         virt-manager
         virt-viewer
         virtiofsd
-        libguestfs-with-appliance
         ;
     };
 
