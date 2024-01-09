@@ -19,10 +19,11 @@
 
     desktop = {
       enable = true;
+      wayland.hyprland.enable = true;
       audio.enable = true;
       rofi.enable = true;
       development.enable = true;
-      wayland.hyprland.enable = true;
+      image-editing.enable = true;
     };
   };
 }
