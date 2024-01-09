@@ -1,9 +1,6 @@
 {
   hopplaos = {
-    services = {
-      syncthing.enable = false;
-      nextcloud-client.enable = false;
-    };
+    services.nextcloud-client.enable = false;
 
     hardware = {
       bluetooth.enable = false;
