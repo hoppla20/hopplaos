@@ -2,6 +2,7 @@
   imports = [../vincentcui];
 
   hopplaos = {
+    desktop.video-editing.enable = true;
     programs = {
       git = {
         userName = lib.mkForce "Vincent Cui";

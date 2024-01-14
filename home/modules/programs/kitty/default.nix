@@ -61,7 +61,10 @@ in {
         "ctrl+shift+alt+l" = "layout_action move_to_screen_edge right";
         "ctrl+alt+r" = "layout_action rotate";
       };
-      shellIntegration.enableZshIntegration = config.programs.zsh.enable;
+      shellIntegration = {
+        enableBashIntegration = true;
+        enableZshIntegration = config.programs.zsh.enable;
+      };
       theme = "Catppuccin-${
         if config.hopplaos.desktop.darkTheme
         then "Macchiato"

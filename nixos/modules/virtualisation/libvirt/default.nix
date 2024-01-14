@@ -39,6 +39,7 @@ in {
         virt-manager
         virt-viewer
         virtiofsd
+        guestfs-tools
         ;
     };
 

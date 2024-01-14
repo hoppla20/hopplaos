@@ -20,6 +20,10 @@ in {
   };
 
   config = mkIf cfg.enable {
+    programs.wireshark = {
+      enable = true;
+      package = pkgs.wireshark;
+    };
     services.tailscale = {
       enable = true;
       useRoutingFeatures = "client";
