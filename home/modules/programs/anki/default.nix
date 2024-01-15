@@ -17,7 +17,6 @@ in {
     home.packages = [
       pkgs.anki
       pkgs.markdown-anki-decks
-      pkgs.markdown2anki
     ];
   };
 }
