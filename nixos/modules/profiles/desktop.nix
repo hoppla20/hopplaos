@@ -44,6 +44,7 @@ in {
       hardware = {
         logitech.enable = true;
         securitykeys.enable = true;
+        zsa.enable = true;
       };
 
       cross-arch.enable = true;

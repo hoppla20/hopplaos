@@ -269,8 +269,8 @@ in {
         bindle = , XF86MonBrightnessDown, exec, ${brightnessControlCommands.lower}
         bindle = , XF86MonBrightnessUp, exec, ${brightnessControlCommands.raise}
 
-        bind = SUPER_SHIFT, PERIOD, exec, dunstctl context
-        bind = SUPER_SHIFT, COMMA, exec, dunstctl close
+        bind = CONTROL_ALT_SHIFT, PERIOD, exec, dunstctl context
+        bind = CONTROL_ALT_SHIFT, COMMA, exec, dunstctl close
 
         bind = , PRINT, exec, screenshot
         bind = CONTROL, PRINT, exec, screenshot-select
@@ -296,6 +296,10 @@ in {
         bind = SUPER, L, movefocus, r
         bind = SUPER, K, movefocus, u
         bind = SUPER, J, movefocus, d
+        bind = CONTROL_ALT_SHIFT, H, movefocus, l
+        bind = CONTROL_ALT_SHIFT, L, movefocus, r
+        bind = CONTROL_ALT_SHIFT, K, movefocus, u
+        bind = CONTROL_ALT_SHIFT, J, movefocus, d
 
         # Move focused window
         bind = SUPER_SHIFT, LEFT, movewindow, l
@@ -306,6 +310,10 @@ in {
         bind = SUPER_SHIFT, L, movewindow, r
         bind = SUPER_SHIFT, K, movewindow, u
         bind = SUPER_SHIFT, J, movewindow, d
+        bind = CONTROL_ALT_SHIFT, S, movewindow, l
+        bind = CONTROL_ALT_SHIFT, G, movewindow, r
+        bind = CONTROL_ALT_SHIFT, D, movewindow, u
+        bind = CONTROL_ALT_SHIFT, F, movewindow, d
 
         # Move focused window into/outo group
         bind = SUPER, G, togglegroup,
@@ -313,7 +321,6 @@ in {
         bind = SUPER_CONTROL, RIGHT, changegroupactive, f
         bind = ALT, TAB, changegroupactive, f
         bind = ALT_SHIFT, TAB, changegroupactive, b
-
         # Switch workspaces
         bind = SUPER, TAB, workspace, previous
         bind = SUPER, 1, workspace, 1
@@ -325,6 +332,15 @@ in {
         bind = SUPER, 7, workspace, 7
         bind = SUPER, 8, workspace, 8
         bind = SUPER, 9, workspace, 9
+        bind = CONTROL_ALT_SHIFT, 1, workspace, 1
+        bind = CONTROL_ALT_SHIFT, 2, workspace, 2
+        bind = CONTROL_ALT_SHIFT, 3, workspace, 3
+        bind = CONTROL_ALT_SHIFT, 4, workspace, 4
+        bind = CONTROL_ALT_SHIFT, 5, workspace, 5
+        bind = CONTROL_ALT_SHIFT, 6, workspace, 6
+        bind = CONTROL_ALT_SHIFT, 7, workspace, 7
+        bind = CONTROL_ALT_SHIFT, 8, workspace, 8
+        bind = CONTROL_ALT_SHIFT, 9, workspace, 9
 
         # Move active window to a workspace
         bind = SUPER_SHIFT, 1, movetoworkspace, 1

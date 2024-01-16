@@ -1,5 +1,5 @@
 {inputs, ...}: {
-  flake.overlays.tmuxPlugins = final: prev: {
-    inherit (inputs.unstable.legacyPackages.${final.system}) tmuxPlugins;
+  flake.overlays.zsa = final: prev: {
+    inherit (inputs.unstable.legacyPackages.${final.system}) zsa-udev-rules;
   };
 }
