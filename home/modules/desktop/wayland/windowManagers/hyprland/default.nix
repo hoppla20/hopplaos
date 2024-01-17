@@ -73,6 +73,8 @@
     while ${pkgs.procps}/bin/pgrep -u $UID -x hyprpaper >/dev/null; do sleep 1; done
     ${pkgs.hyprpaper}/bin/hyprpaper
   '';
+
+  MEH = "CONTROL_ALT_SHIFT";
 in {
   options = {
     hopplaos.desktop.wayland.hyprland = {
@@ -248,16 +250,19 @@ in {
 
         bind = SUPER, RETURN, exec, ${terminalCommand}
         bind = SUPER_SHIFT, Q, killactive,
+        bind = ${MEH}, Q, killactive,
         bind = SUPER_SHIFT, SPACE, togglefloating,
-        bind = SUPER, F, fullscreen, 1
-        bind = SUPER_SHIFT, F, fullscreen, 0
-        bind = SUPER_CONTROL, F, fakefullscreen,
+        bind = SUPER, F, fullscreen, 0
+        bind = ${MEH}, F, fullscreen, 0
+        bind = SUPER_SHIFT, F, fakefullscreen,
         bind = SUPER, 0, submap, system
+        bind = ${MEH}, S, submap, system
         bind = SUPER, R, submap, resize
-        bind = SUPER, SEMICOLON, layoutmsg, orientationnext
-        bind = SUPER_SHIFT, SEMICOLON, layoutmsg, orientationprev
-        bind = SUPER_SHIFT, R, exec, hyprctl reload
-        bind = SUPER, T, exec, ${config.hopplaos.programs.theme-switcher.package}/bin/theme-switcher
+        bind = ${MEH}, R, submap, resize
+        bind = ${MEH}, SEMICOLON, layoutmsg, orientationnext
+        bind = SUPER_${MEH}, SEMICOLON, layoutmsg, orientationprev
+        bind = ${MEH}_SHIFT, R, exec, hyprctl reload
+        bind = ${MEH}_SHIFT, T, exec, ${config.hopplaos.programs.theme-switcher.package}/bin/theme-switcher
 
         bindle = , XF86AudioRaiseVolume, exec, ${audio.controlCommands.raise}
         bindle = , XF86AudioLowerVolume, exec, ${audio.controlCommands.lower}
@@ -269,8 +274,8 @@ in {
         bindle = , XF86MonBrightnessDown, exec, ${brightnessControlCommands.lower}
         bindle = , XF86MonBrightnessUp, exec, ${brightnessControlCommands.raise}
 
-        bind = CONTROL_ALT_SHIFT, PERIOD, exec, dunstctl context
-        bind = CONTROL_ALT_SHIFT, COMMA, exec, dunstctl close
+        bind = ${MEH}, PERIOD, exec, dunstctl context
+        bind = ${MEH}, COMMA, exec, dunstctl close
 
         bind = , PRINT, exec, screenshot
         bind = CONTROL, PRINT, exec, screenshot-select
@@ -281,11 +286,17 @@ in {
 
         # Application bindings
         bind = SUPER, F1, exec, ${editorCommand}
+        bind = ${MEH}, 1, exec, ${editorCommand}
         bind = SUPER, F2, exec, ${browserCommand}
+        bind = ${MEH}, 2, exec, ${browserCommand}
         bind = SUPER, F3, exec, ${fileManagerCommand}
+        bind = ${MEH}, 3, exec, ${fileManagerCommand}
         bind = SUPER, F10, exec, ${audio.playerCommand}
+        bind = ${MEH}, 0, exec, ${audio.playerCommand}
         bind = SUPER_SHIFT, M, exec, ${audio.managerCommand}
+        bind = ${MEH}, M, exec, ${audio.managerCommand}
         bind = SUPER, W, exec, ${appLauncherCommand}
+        bind = ${MEH}, W, exec, ${appLauncherCommand}
 
         # Move focus
         bind = SUPER, LEFT, movefocus, l
@@ -296,24 +307,16 @@ in {
         bind = SUPER, L, movefocus, r
         bind = SUPER, K, movefocus, u
         bind = SUPER, J, movefocus, d
-        bind = CONTROL_ALT_SHIFT, H, movefocus, l
-        bind = CONTROL_ALT_SHIFT, L, movefocus, r
-        bind = CONTROL_ALT_SHIFT, K, movefocus, u
-        bind = CONTROL_ALT_SHIFT, J, movefocus, d
+        bind = ${MEH}, H, movefocus, l
+        bind = ${MEH}, L, movefocus, r
+        bind = ${MEH}, K, movefocus, u
+        bind = ${MEH}, J, movefocus, d
 
         # Move focused window
-        bind = SUPER_SHIFT, LEFT, movewindow, l
-        bind = SUPER_SHIFT, RIGHT, movewindow, r
-        bind = SUPER_SHIFT, UP, movewindow, u
-        bind = SUPER_SHIFT, DOWN, movewindow, d
-        bind = SUPER_SHIFT, H, movewindow, l
-        bind = SUPER_SHIFT, L, movewindow, r
-        bind = SUPER_SHIFT, K, movewindow, u
-        bind = SUPER_SHIFT, J, movewindow, d
-        bind = CONTROL_ALT_SHIFT, S, movewindow, l
-        bind = CONTROL_ALT_SHIFT, G, movewindow, r
-        bind = CONTROL_ALT_SHIFT, D, movewindow, u
-        bind = CONTROL_ALT_SHIFT, F, movewindow, d
+        bind = SUPER_CONTROL, H, movewindow, l
+        bind = SUPER_CONTROL, L, movewindow, r
+        bind = SUPER_CONTROL, K, movewindow, u
+        bind = SUPER_CONTROL, J, movewindow, d
 
         # Move focused window into/outo group
         bind = SUPER, G, togglegroup,
@@ -332,15 +335,6 @@ in {
         bind = SUPER, 7, workspace, 7
         bind = SUPER, 8, workspace, 8
         bind = SUPER, 9, workspace, 9
-        bind = CONTROL_ALT_SHIFT, 1, workspace, 1
-        bind = CONTROL_ALT_SHIFT, 2, workspace, 2
-        bind = CONTROL_ALT_SHIFT, 3, workspace, 3
-        bind = CONTROL_ALT_SHIFT, 4, workspace, 4
-        bind = CONTROL_ALT_SHIFT, 5, workspace, 5
-        bind = CONTROL_ALT_SHIFT, 6, workspace, 6
-        bind = CONTROL_ALT_SHIFT, 7, workspace, 7
-        bind = CONTROL_ALT_SHIFT, 8, workspace, 8
-        bind = CONTROL_ALT_SHIFT, 9, workspace, 9
 
         # Move active window to a workspace
         bind = SUPER_SHIFT, 1, movetoworkspace, 1
@@ -365,8 +359,8 @@ in {
         bind = SUPER_CONTROL, 9, movetoworkspacesilent, 9
 
         # Special workspaces
-        bind = SUPER, MINUS, movetoworkspace, special
-        bind = SUPER_SHIFT, MINUS, togglespecialworkspace,
+        bind = SUPER_${MEH}, F, movetoworkspace, special
+        bind = SUPER_${MEH}, J, togglespecialworkspace,
 
         # Move/resize windows with mouse buttons
         bindm = SUPER, mouse:272, movewindow
