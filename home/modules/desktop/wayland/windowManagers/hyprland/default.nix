@@ -249,6 +249,7 @@ in {
         submap = reset
 
         bind = SUPER, RETURN, exec, ${terminalCommand}
+        bind = ${MEH}, RETURN, exec, ${terminalCommand}
         bind = SUPER_SHIFT, Q, killactive,
         bind = ${MEH}, Q, killactive,
         bind = SUPER_SHIFT, SPACE, togglefloating,
@@ -256,7 +257,7 @@ in {
         bind = ${MEH}, F, fullscreen, 0
         bind = SUPER_SHIFT, F, fakefullscreen,
         bind = SUPER, 0, submap, system
-        bind = ${MEH}, S, submap, system
+        bind = ${MEH}, F12, submap, system
         bind = SUPER, R, submap, resize
         bind = ${MEH}, R, submap, resize
         bind = ${MEH}, SEMICOLON, layoutmsg, orientationnext
@@ -286,15 +287,10 @@ in {
 
         # Application bindings
         bind = SUPER, F1, exec, ${editorCommand}
-        bind = ${MEH}, 1, exec, ${editorCommand}
         bind = SUPER, F2, exec, ${browserCommand}
-        bind = ${MEH}, 2, exec, ${browserCommand}
         bind = SUPER, F3, exec, ${fileManagerCommand}
-        bind = ${MEH}, 3, exec, ${fileManagerCommand}
         bind = SUPER, F10, exec, ${audio.playerCommand}
-        bind = ${MEH}, 0, exec, ${audio.playerCommand}
         bind = SUPER_SHIFT, M, exec, ${audio.managerCommand}
-        bind = ${MEH}, M, exec, ${audio.managerCommand}
         bind = SUPER, W, exec, ${appLauncherCommand}
         bind = ${MEH}, W, exec, ${appLauncherCommand}
 
@@ -320,6 +316,7 @@ in {
 
         # Move focused window into/outo group
         bind = SUPER, G, togglegroup,
+        bind = ${MEH}, G, togglegroup,
         bind = SUPER_CONTROL, LEFT, changegroupactive, b
         bind = SUPER_CONTROL, RIGHT, changegroupactive, f
         bind = ALT, TAB, changegroupactive, f
@@ -335,28 +332,26 @@ in {
         bind = SUPER, 7, workspace, 7
         bind = SUPER, 8, workspace, 8
         bind = SUPER, 9, workspace, 9
+        bind = ${MEH}, 1, workspace, 1
+        bind = ${MEH}, 2, workspace, 2
+        bind = ${MEH}, 3, workspace, 3
+        bind = ${MEH}, 4, workspace, 4
+        bind = ${MEH}, 5, workspace, 5
+        bind = ${MEH}, 6, workspace, 6
+        bind = ${MEH}, 7, workspace, 7
+        bind = ${MEH}, 8, workspace, 8
+        bind = ${MEH}, 9, workspace, 9
 
         # Move active window to a workspace
-        bind = SUPER_SHIFT, 1, movetoworkspace, 1
-        bind = SUPER_SHIFT, 2, movetoworkspace, 2
-        bind = SUPER_SHIFT, 3, movetoworkspace, 3
-        bind = SUPER_SHIFT, 4, movetoworkspace, 4
-        bind = SUPER_SHIFT, 5, movetoworkspace, 5
-        bind = SUPER_SHIFT, 6, movetoworkspace, 6
-        bind = SUPER_SHIFT, 7, movetoworkspace, 7
-        bind = SUPER_SHIFT, 8, movetoworkspace, 8
-        bind = SUPER_SHIFT, 9, movetoworkspace, 9
-
-        # Move active window to a workspace without switching workspace
-        bind = SUPER_CONTROL, 1, movetoworkspacesilent, 1
-        bind = SUPER_CONTROL, 2, movetoworkspacesilent, 2
-        bind = SUPER_CONTROL, 3, movetoworkspacesilent, 3
-        bind = SUPER_CONTROL, 4, movetoworkspacesilent, 4
-        bind = SUPER_CONTROL, 5, movetoworkspacesilent, 5
-        bind = SUPER_CONTROL, 6, movetoworkspacesilent, 6
-        bind = SUPER_CONTROL, 7, movetoworkspacesilent, 7
-        bind = SUPER_CONTROL, 8, movetoworkspacesilent, 8
-        bind = SUPER_CONTROL, 9, movetoworkspacesilent, 9
+        bind = SUPER_CONTROL, 1, movetoworkspace, 1
+        bind = SUPER_CONTROL, 2, movetoworkspace, 2
+        bind = SUPER_CONTROL, 3, movetoworkspace, 3
+        bind = SUPER_CONTROL, 4, movetoworkspace, 4
+        bind = SUPER_CONTROL, 5, movetoworkspace, 5
+        bind = SUPER_CONTROL, 6, movetoworkspace, 6
+        bind = SUPER_CONTROL, 7, movetoworkspace, 7
+        bind = SUPER_CONTROL, 8, movetoworkspace, 8
+        bind = SUPER_CONTROL, 9, movetoworkspace, 9
 
         # Special workspaces
         bind = SUPER_${MEH}, F, movetoworkspace, special
