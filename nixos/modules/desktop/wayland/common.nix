@@ -29,6 +29,7 @@ in {
       pkgs.polkit_gnome
       pkgs.qt5.qtwayland
       pkgs.qt6.qtwayland
+      pkgs.waypipe
     ];
 
     xdg.portal = {
