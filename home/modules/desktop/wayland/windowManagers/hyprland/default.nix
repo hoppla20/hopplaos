@@ -223,6 +223,10 @@ in {
         binde = , RIGHT, resizeactive, -20 0
         binde = , UP, resizeactive, 0 -20
         binde = , DOWN, resizeactive, 0 20
+        binde = , P, resizeactive, -20 0
+        binde = , A, resizeactive, 20 0
+        binde = , E, resizeactive, 0 20
+        binde = , N, resizeactive, 0 -20
         binde = , H, resizeactive, -20 0
         binde = , L, resizeactive, 20 0
         binde = , K, resizeactive, 0 20
@@ -237,20 +241,21 @@ in {
         bind = , L, submap, reset
         bind = , S, exec, ${systemCommands.suspend}
         bind = , S, submap, reset
-        bind = , H, exec, ${systemCommands.hibernate}
-        bind = , H, submap, reset
+        bind = , V, exec, ${systemCommands.hibernate}
+        bind = , V, submap, reset
         bind = , E, exit,
         bind = , R, exec, ${systemCommands.reboot}
+        bind = , R, submap, reset
         bind = SHIFT, S, exec, ${systemCommands.poweroff}
+        bind = SHIFT, S, submap, reset
         bind = , ESCAPE, submap, reset
-        bind = CONTROL, C, submap, reset
+        bind = CONTROL, G, submap, reset
         submap = reset
 
         bind = SUPER, RETURN, exec, ${terminalCommand}
         bind = SUPER, Q, killactive,
-        bind = SUPER, SPACE, togglefloating,
+        bind = SUPER_SHIFT, F, togglefloating,
         bind = SUPER, F, fullscreen, 0
-        bind = SUPER_SHIFT, F, fakefullscreen,
         bind = SUPER, 0, submap, system
         bind = SUPER, F12, submap, system
         bind = SUPER, R, submap, resize
@@ -292,12 +297,20 @@ in {
         bind = SUPER, RIGHT, movefocus, r
         bind = SUPER, UP, movefocus, u
         bind = SUPER, DOWN, movefocus, d
+        bind = SUPER, P, movefocus, l
+        bind = SUPER, A, movefocus, r
+        bind = SUPER, E, movefocus, u
+        bind = SUPER, N, movefocus, d
         bind = SUPER, H, movefocus, l
         bind = SUPER, L, movefocus, r
         bind = SUPER, K, movefocus, u
         bind = SUPER, J, movefocus, d
 
         # Move focused window
+        bind = SUPER_SHIFT, P, movewindow, l
+        bind = SUPER_SHIFT, A, movewindow, r
+        bind = SUPER_SHIFT, E, movewindow, u
+        bind = SUPER_SHIFT, N, movewindow, d
         bind = SUPER_SHIFT, H, movewindow, l
         bind = SUPER_SHIFT, L, movewindow, r
         bind = SUPER_SHIFT, K, movewindow, u
@@ -305,8 +318,8 @@ in {
 
         # Move focused window into/outo group
         bind = SUPER, G, togglegroup,
-        bind = SUPER_SHIFT, TAB, changegroupactive, b
-        bind = SUPER_SHIFT, RIGHT, changegroupactive, f
+        bind = SUPER, COMMA, changegroupactive, b
+        bind = SUPER, PERIOD, changegroupactive, f
         # Switch workspaces
         bind = SUPER, ESCAPE, workspace, previous
         bind = SUPER, 1, workspace, 1
@@ -342,8 +355,8 @@ in {
         bind = CONTROL_SHIFT, 9, movetoworkspacesilent, 9
 
         # Special workspaces
-        bind = SUPER_SHIFT, D, movetoworkspace, special
-        bind = SUPER_SHIFT, K, togglespecialworkspace,
+        bind = SUPER, APOSTROPHE, movetoworkspace, special
+        bind = SUPER, SLASH, togglespecialworkspace,
 
         # Move/resize windows with mouse buttons
         bindm = SUPER, mouse:272, movewindow
