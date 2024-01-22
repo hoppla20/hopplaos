@@ -64,6 +64,7 @@ in {
         "ctrl+shift+alt+p" = "layout_action move_to_screen_edge left";
         "ctrl+shift+alt+a" = "layout_action move_to_screen_edge right";
         "ctrl+alt+r" = "layout_action rotate";
+        "ctrl+backspace" = "send_text all \\x17";
       };
       shellIntegration = {
         enableBashIntegration = true;
