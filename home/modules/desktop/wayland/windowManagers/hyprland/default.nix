@@ -261,7 +261,7 @@ in {
         bind = SUPER, R, submap, resize
         bind = SUPER, SEMICOLON, layoutmsg, orientationnext
         bind = SUPER_SHIFT, SEMICOLON, layoutmsg, orientationprev
-        bind = SUPER, R, exec, hyprctl reload
+        bind = SUPER_SHIFT, R, exec, hyprctl reload
         bind = SUPER, T, exec, ${config.hopplaos.programs.theme-switcher.package}/bin/theme-switcher
 
         bindle = , XF86AudioRaiseVolume, exec, ${audio.controlCommands.raise}
@@ -344,15 +344,15 @@ in {
         bind = SUPER_SHIFT, 9, movetoworkspace, 9
 
         # Move active window to a workspace without switching workspace
-        bind = CONTROL_SHIFT, 1, movetoworkspacesilent, 1
-        bind = CONTROL_SHIFT, 2, movetoworkspacesilent, 2
-        bind = CONTROL_SHIFT, 3, movetoworkspacesilent, 3
-        bind = CONTROL_SHIFT, 4, movetoworkspacesilent, 4
-        bind = CONTROL_SHIFT, 5, movetoworkspacesilent, 5
-        bind = CONTROL_SHIFT, 6, movetoworkspacesilent, 6
-        bind = CONTROL_SHIFT, 7, movetoworkspacesilent, 7
-        bind = CONTROL_SHIFT, 8, movetoworkspacesilent, 8
-        bind = CONTROL_SHIFT, 9, movetoworkspacesilent, 9
+        bind = SUPER_CONTROL, 1, movetoworkspacesilent, 1
+        bind = SUPER_CONTROL, 2, movetoworkspacesilent, 2
+        bind = SUPER_CONTROL, 3, movetoworkspacesilent, 3
+        bind = SUPER_CONTROL, 4, movetoworkspacesilent, 4
+        bind = SUPER_CONTROL, 5, movetoworkspacesilent, 5
+        bind = SUPER_CONTROL, 6, movetoworkspacesilent, 6
+        bind = SUPER_CONTROL, 7, movetoworkspacesilent, 7
+        bind = SUPER_CONTROL, 8, movetoworkspacesilent, 8
+        bind = SUPER_CONTROL, 9, movetoworkspacesilent, 9
 
         # Special workspaces
         bind = SUPER, APOSTROPHE, movetoworkspace, special
