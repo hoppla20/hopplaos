@@ -26,7 +26,7 @@ in {
       };
       settings = {
         allow_remote_control = true;
-        listen_on = "unix:@mykitty";
+        listen_on = "unix:/tmp/kitty";
 
         window_padding_width = 5;
         disable_ligatures = "always";
@@ -48,6 +48,8 @@ in {
         "alt+p" = "kitten pass_keys.py left alt+p";
         "alt+a" = "kitten pass_keys.py right alt+a";
         "ctrl+shift+enter" = "new_window_with_cwd";
+        "ctrl+shift+q" = "close_window";
+        "ctrl+shift+w" = "close_tab";
         "f2" = "detach_window ask";
         "f3" = "detach_tab ask";
         "ctrl+shift+f" = "toggle_layout stack";
@@ -66,10 +68,7 @@ in {
         "ctrl+alt+r" = "layout_action rotate";
         "ctrl+backspace" = "send_text all \\x17";
       };
-      shellIntegration = {
-        enableBashIntegration = true;
-        enableZshIntegration = config.programs.zsh.enable;
-      };
+      shellIntegration.mode = "enabled";
       theme = "Catppuccin-${
         if config.hopplaos.desktop.darkTheme
         then "Macchiato"

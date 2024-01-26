@@ -245,6 +245,11 @@
       url = "github:kmonad/kmonad?dir=nix";
       inputs.nixpkgs.follows = "unstable";
     };
+
+    ranger-zoxide = {
+      url = "github:jchook/ranger-zoxide";
+      flake = false;
+    };
   };
 
   nixConfig = {

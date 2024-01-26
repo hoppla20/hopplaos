@@ -2013,6 +2013,22 @@
         "type": "github"
       }
     },
+    "ranger-zoxide": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1631323401,
+        "narHash": "sha256-HFCGuAektrSHF7GJsoKv1TJ/T/dwkYK1eUcw8nEjJII=",
+        "owner": "jchook",
+        "repo": "ranger-zoxide",
+        "rev": "363df97af34c96ea873c5b13b035413f56b12ead",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jchook",
+        "repo": "ranger-zoxide",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "base16": "base16",
@@ -2037,6 +2053,7 @@
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_6",
+        "ranger-zoxide": "ranger-zoxide",
         "spicetify-nix": "spicetify-nix",
         "unstable": "unstable",
         "vim-kitty-navigator": "vim-kitty-navigator"

@@ -11,8 +11,10 @@
       };
       zsh.enable = true;
       #tmux.enable = true;
+      zoxide.enable = true;
       direnv.enable = true;
       lf.enable = true;
+      ranger.enable = true;
       git = {
         enable = true;
         userName = lib.mkDefault "vincent.cui";
