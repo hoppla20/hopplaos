@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-unstable,
   config,
   lib,
   inputs,
@@ -110,12 +111,18 @@ in {
           speedcrunch
           remmina
           ;
+        inherit
+          (pkgs-unstable)
+          anytype
+          logseq
+          ;
         inherit (pkgs.xorg) xhost;
         inherit (pkgs.gnome) seahorse;
       };
 
       sessionVariables = {
         EDITOR = "nvim";
+        VISUAL = "nvim";
       };
 
       pointerCursor = {
