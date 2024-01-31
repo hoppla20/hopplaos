@@ -114,7 +114,6 @@ in {
         inherit
           (pkgs-unstable)
           anytype
-          logseq
           ;
         inherit (pkgs.xorg) xhost;
         inherit (pkgs.gnome) seahorse;
