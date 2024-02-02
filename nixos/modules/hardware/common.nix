@@ -28,6 +28,9 @@ in {
         enable = true;
         driSupport = true;
         driSupport32Bit = true;
+        extraPackages = lib.optionals (cfg.gpu.manufacturer == "intel") [
+          pkgs.intel-media-driver
+        ];
       };
     };
 
