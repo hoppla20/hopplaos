@@ -14,7 +14,7 @@
     };
     wibu = {
       enable = true;
-      share.enable = false;
+      share.enable = true;
     };
     boot.grub.osProber = false;
     hardware = {
@@ -25,7 +25,14 @@
     };
   };
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
+  boot = {
+    initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
+    kernelParams = [
+      # fix flicker
+      # source https://wiki.archlinux.org/index.php/Intel_graphics#Screen_flickering
+      "i915.enable_psr=0"
+    ];
+  };
 
   networking.interfaces.enp0s31f6.useDHCP = true;
   networking.interfaces.wlp0s20f3.useDHCP = true;
