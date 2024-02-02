@@ -255,7 +255,7 @@ in {
         bind = SUPER, RETURN, exec, ${terminalCommand}
         bind = SUPER_SHIFT, Q, killactive,
         bind = SUPER_SHIFT, F, togglefloating,
-        bind = SUPER, F, fullscreen, 0
+        bind = SUPER, F, fullscreen, 1
         bind = SUPER, 0, submap, system
         bind = SUPER, F12, submap, system
         bind = SUPER, R, submap, resize
