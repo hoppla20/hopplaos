@@ -253,7 +253,7 @@ in {
         submap = reset
 
         bind = SUPER, RETURN, exec, ${terminalCommand}
-        bind = SUPER, Q, killactive,
+        bind = SUPER_SHIFT, Q, killactive,
         bind = SUPER_SHIFT, F, togglefloating,
         bind = SUPER, F, fullscreen, 0
         bind = SUPER, 0, submap, system
