@@ -22,11 +22,11 @@ in {
   };
 
   config = {
-    #boot.kernelModules = lib.mkIf (! cfg.pstate) [
-    #  "cpufreq_ondemand"
-    #  "cpufreq_powersave"
-    #  "cpufreq_performance"
-    #];
+    boot.kernelModules = [
+      "cpufreq_ondemand"
+      "cpufreq_powersave"
+      "cpufreq_performance"
+    ];
 
     services = {
       upower = {
@@ -45,21 +45,17 @@ in {
             CPU_BOOST_ON_AC = 1;
             PLATFORM_PROFILE_ON_AC = "performance";
             DISK_DEVICES = "nvme0n1 sda";
-            DISK_APM_LEVEL_ON_AC = "254 254";
-            MAX_LOST_WORK_SECS_ON_AC = 15;
+            START_CHARGE_THRESH_BAT0 = 75;
+            STOP_CHARGE_THRESH_BAT0 = 80;
           }
           // lib.mkIf cfg.hasBattery {
             CPU_SCALING_GOVERNOR_ON_BAT =
               if cfg.pstate
               then "active"
-              else "schedutil";
+              else "ondemand";
             CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
             CPU_BOOST_ON_BAT = 0;
-            PLATFORM_PROFILE_ON_BAT = "low-power";
-            START_CHARGE_THRESH_BAT0 = 75;
-            STOP_CHARGE_THRESH_BAT0 = 80;
-            DISK_APM_LEVEL_ON_BAT = "128 128";
-            MAX_LOST_WORK_SECS_ON_BAT = 15;
+            PLATFORM_PROFILE_ON_BAT = "balanced";
           };
       };
     };
