@@ -256,6 +256,7 @@ in {
         bind = SUPER_SHIFT, Q, killactive,
         bind = SUPER_SHIFT, F, togglefloating,
         bind = SUPER, F, fullscreen, 1
+        bind = SUPER_CONTROL, F, fakefullscreen,
         bind = SUPER, 0, submap, system
         bind = SUPER, F12, submap, system
         bind = SUPER, R, submap, resize
