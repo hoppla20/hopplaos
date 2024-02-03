@@ -8,6 +8,7 @@
       office.enable = true;
       messangers.enable = true;
       anki.enable = true;
+      nixvim-desktop.enable = true;
 
       # alacritty.enable = true;
       kitty.enable = true;
