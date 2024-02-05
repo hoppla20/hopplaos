@@ -13,6 +13,7 @@
     wibu = {
       enable = true;
       share.enable = true;
+      backup.enable = true;
     };
     boot.grub.osProber = true;
     hardware = {
@@ -40,6 +41,11 @@
     "/boot" = {
       label = "ESP";
       fsType = "vfat";
+    };
+    "/backup" = {
+      label = "Backup";
+      fsType = "ntfs";
+      options = ["defaults" "nofail"];
     };
   };
 
