@@ -47,6 +47,7 @@ in {
             enable = true;
             autoSuspend = false;
           };
+          excludePackages = [pkgs.xterm];
         };
         gnome.at-spi2-core.enable = true;
       };

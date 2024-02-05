@@ -1,7 +1,6 @@
 {
   hopplaos = {
     services = {
-      syncthing.enable = false;
       nextcloud-client.enable = false;
     };
 
