@@ -364,7 +364,9 @@ in {
         bindm = SUPER, mouse:273, resizewindow
 
         # Autostart
+        exec-once = ${polkitAgent}
         exec = bash ${launchHyprpaper}
+        exec = wl-configure-gtk
         exec = bash ${desktopCfg.wayland.waybar.launchCommand}
         exec = sleep 5; ${pkgs.systemd}/bin/systemctl --user restart swayidle.service
         exec = sleep 5; ${pkgs.systemd}/bin/systemctl --user restart network-manager-applet.service
@@ -374,8 +376,6 @@ in {
         ${lib.optionalString config.hopplaos.services.nextcloud-client.enable ''
           exec = sleep 5; ${pkgs.systemd}/bin/systemctl --user restart nextcloud-client.service
         ''}
-        exec-once = wl-configure-gtk
-        exec-once = ${polkitAgent}
 
         ${lib.optionalString (builtins.length hardwareCfg.monitors > 0) (let
           monitor0 = (builtins.elemAt hardwareCfg.monitors 0).name;

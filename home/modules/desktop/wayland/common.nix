@@ -40,6 +40,11 @@ in {
           gsettings set $gnome_schema gtk-theme '${config.gtk.theme.name}'
           gsettings set $gnome_schema icon-theme '${config.gtk.iconTheme.name}'
           gsettings set $gnome_schema cursor-theme '${config.gtk.cursorTheme.name}'
+          gsettings set $gnome_schema color-scheme 'prefer-${
+            if desktopCfg.darkTheme
+            then "dark"
+            else "light"
+          }'
         '')
         (pkgs.writeShellScriptBin "screenshot-select" ''
             mkdir -p ~/Pictures/Screenshots && grim -g "$(slurp)" ~/Pictures/Screenshots/$(date -u +"%Y-%m-%d_%H-%M-%S_grim.png")'')
