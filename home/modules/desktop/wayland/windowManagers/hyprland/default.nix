@@ -86,13 +86,13 @@ in {
       systemd.enable = true;
 
       extraConfig = ''
-        # Set cursor
-        exec-once = hyprctl setcursor ${cursor.name} ${toString cursor.size}
-
-        # Host specific monitors
-        ${monitors}
+        source = ~/.config/hypr/monitors.conf
+        source = ~/.config/hypr/workspaces.conf
         # Automatically add new monitors to the RIGHT
         monitor=,preferred,auto,1
+
+        # Set cursor
+        exec-once = hyprctl setcursor ${cursor.name} ${toString cursor.size}
 
         # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
         input {
@@ -257,7 +257,6 @@ in {
         bind = SUPER_SHIFT, F, togglefloating,
         bind = SUPER, F, fullscreen, 1
         bind = SUPER_CONTROL, F, fakefullscreen,
-        bind = SUPER, 0, submap, system
         bind = SUPER, F12, submap, system
         bind = SUPER, R, submap, resize
         bind = SUPER, SEMICOLON, layoutmsg, orientationnext
@@ -332,6 +331,7 @@ in {
         bind = SUPER, 7, workspace, 7
         bind = SUPER, 8, workspace, 8
         bind = SUPER, 9, workspace, 9
+        bind = SUPER, 0, workspace, 10
 
         # Move active window to a workspace
         bind = SUPER_SHIFT, 1, movetoworkspace, 1
@@ -343,6 +343,7 @@ in {
         bind = SUPER_SHIFT, 7, movetoworkspace, 7
         bind = SUPER_SHIFT, 8, movetoworkspace, 8
         bind = SUPER_SHIFT, 9, movetoworkspace, 9
+        bind = SUPER_SHIFT, 0, movetoworkspace, 10
 
         # Move active window to a workspace without switching workspace
         bind = SUPER_CONTROL, 1, movetoworkspacesilent, 1
@@ -354,6 +355,7 @@ in {
         bind = SUPER_CONTROL, 7, movetoworkspacesilent, 7
         bind = SUPER_CONTROL, 8, movetoworkspacesilent, 8
         bind = SUPER_CONTROL, 9, movetoworkspacesilent, 9
+        bind = SUPER_CONTROL, 0, movetoworkspacesilent, 10
 
         # Special workspaces
         bind = SUPER, APOSTROPHE, movetoworkspace, special
@@ -376,36 +378,55 @@ in {
         ${lib.optionalString config.hopplaos.services.nextcloud-client.enable ''
           exec = sleep 5; ${pkgs.systemd}/bin/systemctl --user restart nextcloud-client.service
         ''}
+      '';
+    };
 
-        ${lib.optionalString (builtins.length hardwareCfg.monitors > 0) (let
+    home.packages = [pkgs.hyprpaper];
+    xdg.configFile = {
+      "hypr/hyprpaper.conf".text = ''
+        ${concatStringsSep "\n" (map (wallpaper: "preload = ${wallpaper}") wallpapers)}
+        ${concatStringsSep "\n" (map
+          (monitor: "wallpaper = ${monitor.name}, ${monitor.value.background.file}")
+          config.hopplaos.hardware.monitors)}
+        wallpaper = , ${desktopCfg.defaultWallpaper}
+      '';
+    };
+
+    home.activation = {
+      copyMonAndWsConfig = let
+        monitorsConfig = pkgs.writeText "monitors.conf" ''
+          ${monitors}
+        '';
+        workspacesConfig = let
+          pred = builtins.length hardwareCfg.monitors > 0;
           monitor0 = (builtins.elemAt hardwareCfg.monitors 0).name;
           monitor1 =
             if (builtins.length hardwareCfg.monitors > 1)
             then (builtins.elemAt hardwareCfg.monitors 1).name
             else monitor0;
-        in ''
-          workspace = 1, monitor:${monitor0}
-          workspace = 2, monitor:${monitor0}
-          workspace = 3, monitor:${monitor0}
-          workspace = 4, monitor:${monitor0}
-          workspace = 5, monitor:${monitor0}
-          workspace = 6, monitor:${monitor1}
-          workspace = 7, monitor:${monitor1}
-          workspace = 8, monitor:${monitor1}
-          workspace = 9, monitor:${monitor1}
-        '')}
-      '';
-    };
+        in
+          pkgs.writeText "workspaces.conf" ''
+            workspace = 1${lib.optionalString pred ", monitor:${monitor0}"}
+            workspace = 2${lib.optionalString pred ", monitor:${monitor0}"}
+            workspace = 3${lib.optionalString pred ", monitor:${monitor0}"}
+            workspace = 4${lib.optionalString pred ", monitor:${monitor0}"}
+            workspace = 5${lib.optionalString pred ", monitor:${monitor0}"}
+            workspace = 6${lib.optionalString pred ", monitor:${monitor1}"}
+            workspace = 7${lib.optionalString pred ", monitor:${monitor1}"}
+            workspace = 8${lib.optionalString pred ", monitor:${monitor1}"}
+            workspace = 9${lib.optionalString pred ", monitor:${monitor1}"}
+            workspace = 10${lib.optionalString pred ", monitor:${monitor1}"}
+          '';
+      in
+        lib.hm.dag.entryAfter ["linkGeneration"] ''
+          rm -f "${config.xdg.configHome}/hypr/monitors.conf"
+          cp ${monitorsConfig} "${config.xdg.configHome}/hypr/monitors.conf"
+          chmod 0644 "${config.xdg.configHome}/hypr/monitors.conf"
 
-    home.packages = [pkgs.hyprpaper];
-    xdg.configFile."hypr/hyprpaper.conf" = {
-      text = ''
-        ${concatStringsSep "\n" (map (wallpaper: "preload = ${wallpaper}") wallpapers)}
-        ${concatStringsSep "\n" (map
-          (monitor: "wallpaper = ${monitor.name}, ${monitor.value.background.file}")
-          config.hopplaos.hardware.monitors)}
-        ${desktopCfg.defaultWallpaper}
-      '';
+          rm -f "${config.xdg.configHome}/hypr/workspaces.conf"
+          cp ${workspacesConfig} "${config.xdg.configHome}/hypr/workspaces.conf"
+          chmod 0644 "${config.xdg.configHome}/hypr/workspaces.conf"
+        '';
     };
   };
 }

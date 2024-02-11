@@ -30,7 +30,7 @@ in {
   config = mkIf (desktopCfg.enable && cfg.enable) {
     home.packages =
       (attrValues {
-        inherit (pkgs) xwayland wl-clipboard grim slurp wdisplays;
+        inherit (pkgs) xwayland wl-clipboard grim slurp wlr-randr nwg-displays;
       })
       ++ [
         (pkgs.writeShellScriptBin "wl-configure-gtk" ''

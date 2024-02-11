@@ -18,9 +18,10 @@ in {
       inherit
         (pkgs-unstable)
         powershell
+        insomnia
         yaml-language-server
         pyright
-        insomnia
+        shellcheck
         ;
     };
   };
