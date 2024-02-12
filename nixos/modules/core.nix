@@ -37,6 +37,10 @@
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
     };
+    screen.screenrc = ''
+      defscrollback 10000
+      startup_message off
+    '';
     dconf.enable = true;
   };
 
