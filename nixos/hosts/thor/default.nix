@@ -20,4 +20,9 @@
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "sd_mod"];
 
   networking.interfaces.enp4s0.useDHCP = true;
+
+  fileSystems."/var/lib/libvirt/images" = {
+    device = "/storage/libvirt/images";
+    options = ["bind"];
+  };
 }
