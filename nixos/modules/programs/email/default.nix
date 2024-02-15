@@ -20,6 +20,7 @@ in {
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = [pkgs.thunderbird];
     programs.evolution = {
       enable = true;
       plugins = [pkgs.evolution-ews];
