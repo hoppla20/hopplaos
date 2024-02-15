@@ -12,7 +12,7 @@ in {
   options.hopplaos.hardware = {
     enable = mkEnableOption "Hardware";
 
-    bluetooth = mkEnableOption "Bluetooth";
+    bluetooth = mkEnableOption "Bluetooth" // {default = true;};
     cpu.manufacturer = mkOption {type = types.enum ["intel" "amd"];};
     gpu.manufacturer = mkOption {
       type = types.enum ["intel" "amd" "nvidia"];
