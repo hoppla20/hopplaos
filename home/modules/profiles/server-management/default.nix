@@ -17,6 +17,7 @@ in {
         kubectl
         kubernetes-helm
         kubeswitch
+        openlens
         ;
     };
   };
