@@ -22,11 +22,13 @@ in {
       enable = true;
       font = {
         name = "MesloLGS Nerd Font";
-        size = 10;
+        size = 12;
       };
       settings = {
         allow_remote_control = true;
         listen_on = "unix:/tmp/kitty";
+
+        text_composition_strategy = "1.7 0";
 
         window_padding_width = 5;
         disable_ligatures = "always";
