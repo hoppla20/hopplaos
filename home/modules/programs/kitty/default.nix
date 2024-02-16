@@ -21,15 +21,42 @@ in {
     programs.kitty = {
       enable = true;
       font = {
-        name = "MesloLGS Nerd Font";
-        size = 10;
+        name = "JetBrainsMono Nerd Font Mono";
+        size = 12;
       };
+      extraConfig = let
+        features = "+ss02 +ss19 +cv14";
+      in ''
+        font_features JetBrainsMonoNFM-Regular ${features}
+        font_features JetBrainsMonoNFM-Italic ${features}
+
+        font_features JetBrainsMonoNFM-Thin ${features}
+        font_features JetBrainsMonoNFM-ThinItalic ${features}
+
+        font_features JetBrainsMonoNFM-Light ${features}
+        font_features JetBrainsMonoNFM-LightItalic ${features}
+        font_features JetBrainsMonoNFM-ExtraLight ${features}
+        font_features JetBrainsMonoNFM-ExtraLightItalic ${features}
+
+        font_features JetBrainsMonoNFM-Medium ${features}
+        font_features JetBrainsMonoNFM-MediumItalic ${features}
+
+        font_features JetBrainsMonoNFM-Bold ${features}
+        font_features JetBrainsMonoNFM-BoldItalic ${features}
+        font_features JetBrainsMonoNFM-ExtraBold ${features}
+        font_features JetBrainsMonoNFM-ExtraBoldItalic ${features}
+
+        font_features JetBrainsMonoNFM-SemiBold ${features}
+        font_features JetBrainsMonoNFM-SemiBoldItalic ${features}
+      '';
       settings = {
+        text_composition_strategy = "2.5 0";
+
         allow_remote_control = true;
         listen_on = "unix:/tmp/kitty";
 
         window_padding_width = 5;
-        disable_ligatures = "always";
+        disable_ligatures = "cursor";
 
         tab_bar_min_tabs = 1;
         tab_bar_style = "powerline";
@@ -68,7 +95,7 @@ in {
         "ctrl+alt+r" = "layout_action rotate";
         "ctrl+backspace" = "send_text all \\x17";
       };
-      shellIntegration.mode = "enabled";
+      shellIntegration.mode = "no-title";
       theme = "Catppuccin-${
         if config.hopplaos.desktop.darkTheme
         then "Macchiato"

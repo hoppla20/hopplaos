@@ -56,7 +56,7 @@ in {
           if config.hopplaos.desktop.darkTheme
           then "Catppuccin Macchiato"
           else "Catppuccin Latte";
-        "editor.fontFamily" = "'JetBrainsMono Nerd Font'";
+        "editor.fontFamily" = "'JetBrainsMono Nerd Font Mono'";
         "editor.minimap.enabled" = false;
         "editor.rulers" = [80];
         "editor.stickyScroll.enabled" = true;
