@@ -24,12 +24,15 @@ in {
           ;
       };
 
-      programs.light.enable = true;
+      programs = {
+        light.enable = true;
+        system-config-printer.enable = true;
+      };
 
       services = {
         printing = {
           enable = true;
-          drivers = [pkgs.gutenprint pkgs.canon-cups-ufr2];
+          drivers = [pkgs.gutenprint pkgs.canon-cups-ufr2 pkgs.hplipWithPlugin];
         };
 
         blueman.enable = config.hopplaos.hardware.bluetooth;
