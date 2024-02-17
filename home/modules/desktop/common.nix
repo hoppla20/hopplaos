@@ -65,7 +65,7 @@ in {
       browserCommand = mkOption {
         type = types.str;
         readOnly = true;
-        default = "${pkgs.brave}/bin/brave --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer --enable-features=VaapiVideoDecodeLinuxGL --enable-features=VaapiVideoEncoder";
+        default = "${pkgs.brave}/bin/brave --ozone-platform-hint=wayland --enable-webrtc-pipewire-capturer --enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder";
       };
       editorCommand = mkOption {
         type = types.str;

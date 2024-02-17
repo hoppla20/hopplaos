@@ -21,7 +21,7 @@ in {
     xdg.dataFile."applications/logseq-wayland.desktop".text = ''
       [Desktop Entry]
       Name=Logseq Wayland
-      Exec=logseq --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --enable-wayland-ime %u
+      Exec=logseq --ozone-platform-hint=wayland --enable-wayland-ime --enable-features=WaylandWindowDecorations %u
       Terminal=false
       Type=Application
       Icon=logseq

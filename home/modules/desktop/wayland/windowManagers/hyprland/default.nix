@@ -101,7 +101,6 @@ in {
           kb_options = caps:escape
 
           follow_mouse = 2
-          mouse_refocus = false
           float_switch_override_focus = 2
           accel_profile = flat
           sensitivity = 0 # -1.0 - 1.0, 0 means no modification.

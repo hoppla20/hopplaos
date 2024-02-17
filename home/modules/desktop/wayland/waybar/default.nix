@@ -106,6 +106,8 @@ in {
             on-scroll-down = brightnessControlCommands.raise;
           };
           "battery" = {
+            interval = 10;
+
             states = {
               good = 75;
               warning = 20;
