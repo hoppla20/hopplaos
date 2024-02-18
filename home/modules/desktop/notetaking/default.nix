@@ -7,16 +7,17 @@
 }: let
   inherit (lib) mkEnableOption mkIf mkMerge;
 
-  cfg = config.hopplaos.programs.logseq;
+  cfg = config.hopplaos.programs.notetaking;
 
-  pkg = pkgs-unstable.logseq;
+  logseqPkg = pkgs-unstable.logseq;
+  obsidianPkg = pkgs-unstable.obsidian;
 in {
-  options.hopplaos.programs.logseq = {
-    enable = mkEnableOption "LogSeq";
+  options.hopplaos.programs.notetaking = {
+    enable = mkEnableOption "Note Taking";
   };
 
   config = mkIf (config.hopplaos.desktop.enable && cfg.enable) {
-    home.packages = [pkg];
+    home.packages = [logseqPkg obsidianPkg];
 
     xdg.dataFile."applications/logseq-wayland.desktop".text = ''
       [Desktop Entry]
@@ -26,7 +27,7 @@ in {
       Type=Application
       Icon=logseq
       StartupWMClass=Logseq
-      X-AppImage-Version=${pkg.version}
+      X-AppImage-Version=${logseqPkg.version}
       Comment=A privacy-first, open-source platform for knowledge management and collaboration.
       MimeType=x-scheme-handler/logseq
       Categories=Utility

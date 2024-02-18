@@ -20,10 +20,12 @@
     nixpkgsArgs = {
       config = {
         allowUnfree = true;
+        # required by obsidian
+        permittedInsecurePackages = [
+          "electron-25.9.0"
+        ];
       };
-      overlays =
-        []
-        ++ builtins.attrValues self.overlays;
+      overlays = builtins.attrValues self.overlays;
     };
   in
     mkFlake {inherit inputs;} {
