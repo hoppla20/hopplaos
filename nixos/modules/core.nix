@@ -38,6 +38,7 @@
       syntaxHighlighting.enable = true;
     };
     dconf.enable = true;
+    nix-ld.enable = true;
   };
 
   users.defaultUserShell = pkgs.zsh;
