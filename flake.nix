@@ -213,10 +213,7 @@
       flake = false;
     };
 
-    hoppla-nixvim = {
-      url = "github:hoppla20/hoppla-nixvim";
-      inputs.nixpkgs.follows = "unstable";
-    };
+    hoppla-nixvim.url = "github:hoppla20/hoppla-nixvim";
 
     vim-kitty-navigator = {
       url = "github:knubie/vim-kitty-navigator";
