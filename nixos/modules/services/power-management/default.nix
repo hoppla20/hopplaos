@@ -44,7 +44,7 @@ in {
             PLATFORM_PROFILE_ON_BAT = "balanced";
 
             CPU_SCALING_GOVERNOR_ON_AC = "performance";
-            CPU_SCALING_GOVERNOR_ON_BAT = "ondemand";
+            CPU_SCALING_GOVERNOR_ON_BAT = lib.mkDefault "ondemand";
 
             CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
             CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
