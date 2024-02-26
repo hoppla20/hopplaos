@@ -141,7 +141,7 @@ in {
     gtk = {
       enable = true;
       font = {
-        name = "Iosevka Nerd Font";
+        name = "Ubuntu Nerd Font Propo";
         package = pkgs.custom-nerdfonts;
       };
       theme = {

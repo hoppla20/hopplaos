@@ -1,7 +1,7 @@
 * {
 	border: none;
 	border-radius: 10px;
-	min-height: 0;
+	min-height: 18px;
 }
 
 window#waybar {
@@ -27,6 +27,7 @@ window#waybar {
 }
 
 #workspaces {
+	color: @base0E;
 	background: @base02;
 }
 
