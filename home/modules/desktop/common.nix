@@ -110,6 +110,7 @@ in {
           evince
           speedcrunch
           remmina
+          thunderbird
           ;
         inherit
           (pkgs-unstable)
