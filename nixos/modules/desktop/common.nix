@@ -22,6 +22,11 @@ in {
           (pkgs)
           trashy
           ;
+
+        inherit
+          (pkgs.gnomeExtensions)
+          appindicator
+          ;
       };
 
       programs = {
@@ -53,6 +58,8 @@ in {
           excludePackages = [pkgs.xterm];
         };
         gnome.at-spi2-core.enable = true;
+
+        udev.packages = with pkgs; [gnome.gnome-settings-daemon];
       };
 
       security.rtkit.enable = true;

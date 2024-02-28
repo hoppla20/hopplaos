@@ -21,6 +21,7 @@ in {
       logseqPkg
       self'.packages.obsidianWaylandFix
       pkgs-unstable.zotero_7
+      pkgs-unstable.todoist-electron
     ];
 
     xdg.dataFile."applications/logseq-wayland.desktop".text = ''
