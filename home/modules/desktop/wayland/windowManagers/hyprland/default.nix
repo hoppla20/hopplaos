@@ -196,7 +196,7 @@ in {
         master {
           # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
           new_is_master = false
-          special_scale_factor = 0.8
+          special_scale_factor = 0.88
         }
 
         gestures {
