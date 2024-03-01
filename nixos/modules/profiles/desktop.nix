@@ -28,7 +28,6 @@ in {
       services = {
         gnome-keyring.enable = true;
         openssh.enable = true;
-        kmonad.enable = false;
       };
 
       virtualisation = {

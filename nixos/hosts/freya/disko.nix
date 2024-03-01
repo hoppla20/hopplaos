@@ -5,36 +5,31 @@
         type = "disk";
         device = "/dev/nvme0n1";
         content = {
-          type = "table";
-          format = "gpt";
-          partitions = [
-            {
-              name = "ESP";
-              start = "1MiB";
-              end = "2GiB";
-              bootable = true;
+          type = "gpt";
+          partitions = {
+            ESP = {
+              type = "EF00";
+              size = "2GiB";
               content = {
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
                 mountOptions = ["defaults"];
               };
-            }
-            {
-              name = "luks";
-              start = "2GiB";
-              end = "100%";
+            };
+            luks = {
+              size = "100%";
               content = {
                 type = "luks";
                 name = "crypted";
-                extraOpenArgs = ["--allow-discards"];
+                settings.allowDiscards = true;
                 content = {
                   type = "lvm_pv";
                   vg = "pool";
                 };
               };
-            }
-          ];
+            };
+          };
         };
       };
     };

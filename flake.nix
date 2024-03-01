@@ -32,7 +32,7 @@
       debug = true;
 
       imports =
-        [inputs.devshell.flakeModule ./pkgs ./nixos ./home ./nix-on-droid.nix]
+        [inputs.devshell.flakeModule ./pkgs ./nixos ./home]
         ++ builtins.attrValues (lib.exportModulesRecursive ./overlays);
 
       systems = ["x86_64-linux" "aarch64-linux"];
@@ -185,14 +185,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-on-droid = {
-      url = "github:t184256/nix-on-droid";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
-    };
-
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "unstable";
@@ -207,14 +199,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hoppla-emacs.url = "git+https://gitlab.vincentcui.de/vincent.cui/hoppla-emacs";
-    emacs-libvterm = {
-      url = "github:akermu/emacs-libvterm";
-      flake = false;
-    };
-
     hoppla-nixvim.url = "github:hoppla20/hoppla-nixvim";
-
     vim-kitty-navigator = {
       url = "github:knubie/vim-kitty-navigator";
       flake = false;
@@ -238,11 +223,6 @@
     base16-alacritty = {
       url = "github:aarowill/base16-alacritty";
       flake = false;
-    };
-
-    kmonad = {
-      url = "github:kmonad/kmonad?dir=nix";
-      inputs.nixpkgs.follows = "unstable";
     };
 
     ranger-zoxide = {
