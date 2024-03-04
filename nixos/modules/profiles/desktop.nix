@@ -25,14 +25,9 @@ in {
         wayland.hyprland.enable = true;
       };
 
-      programs = {
-        email.enable = true;
-      };
-
       services = {
         gnome-keyring.enable = true;
         openssh.enable = true;
-        kmonad.enable = false;
       };
 
       virtualisation = {

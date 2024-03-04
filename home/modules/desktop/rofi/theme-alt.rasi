@@ -28,14 +28,14 @@ configuration {
     }
 
     /* configuration block from theme */
-	modi:                       "drun,run";
+    modi:                       "drun,run";
     show-icons:                 false;
-    display-drun:               "";
+    display-drun:               "";
     display-run:                "";
     display-filebrowser:        "";
     display-window:             "";
-	drun-display-format:        "{name}";
-	window-format:              "{w} · {c} · {t}";
+    drun-display-format:        "{name}";
+    window-format:              "{w} · {c} · {t}";
 }
 
 /*****----- Global Properties -----*****/
@@ -149,7 +149,7 @@ entry {
     background-color:            inherit;
     text-color:                  inherit;
     cursor:                      text;
-    placeholder:                 "search...";
+    placeholder:                 "Search...";
     placeholder-color:           inherit;
 }
 num-filtered-rows {

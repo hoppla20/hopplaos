@@ -65,7 +65,7 @@ in {
       browserCommand = mkOption {
         type = types.str;
         readOnly = true;
-        default = "${pkgs.brave}/bin/brave --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer --enable-features=VaapiVideoDecodeLinuxGL";
+        default = "${pkgs.brave}/bin/brave --ozone-platform-hint=wayland --enable-webrtc-pipewire-capturer --enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder";
       };
       editorCommand = mkOption {
         type = types.str;
@@ -110,6 +110,7 @@ in {
           evince
           speedcrunch
           remmina
+          thunderbird
           ;
         inherit
           (pkgs-unstable)
@@ -141,7 +142,7 @@ in {
     gtk = {
       enable = true;
       font = {
-        name = "Iosevka Nerd Font";
+        name = "Ubuntu Nerd Font Propo";
         package = pkgs.custom-nerdfonts;
       };
       theme = {
@@ -184,6 +185,9 @@ in {
       mime.enable = true;
       configFile = {
         "wallpapers".source = ./wallpapers;
+        "gtk-4.0/assets".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/assets";
+        "gtk-4.0/gtk.css".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk.css";
+        "gtk-4.0/gtk-dark.css".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk-dark.css";
       };
     };
   };

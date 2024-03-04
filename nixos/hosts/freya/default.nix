@@ -19,7 +19,7 @@
     boot.grub.osProber = false;
     hardware = {
       enable = true;
-      bluetooth = false;
+      bluetooth = true;
       cpu.manufacturer = "intel";
       gpu.manufacturer = "intel";
     };

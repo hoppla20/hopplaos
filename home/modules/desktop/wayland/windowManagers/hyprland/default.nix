@@ -101,7 +101,6 @@ in {
           kb_options = caps:escape
 
           follow_mouse = 2
-          mouse_refocus = false
           float_switch_override_focus = 2
           accel_profile = flat
           sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
@@ -197,7 +196,7 @@ in {
         master {
           # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
           new_is_master = false
-          special_scale_factor = 0.8
+          special_scale_factor = 0.88
         }
 
         gestures {
@@ -217,6 +216,7 @@ in {
         windowrulev2 = workspace 8, class:^(Signal|whatsapp-for-linux)$
         windowrulev2 = workspace 9, class:^(Spotify)$
         windowrulev2 = workspace special, class:^(org.keepassxc.KeePassXC)$
+        windowrulev2 = workspace special, class:^(Todoist)$
 
         submap = resize
         binde = , LEFT, resizeactive, 20 0
@@ -255,7 +255,7 @@ in {
         bind = SUPER, RETURN, exec, ${terminalCommand}
         bind = SUPER_SHIFT, Q, killactive,
         bind = SUPER_SHIFT, F, togglefloating,
-        bind = SUPER, F, fullscreen, 1
+        bind = SUPER, F, fullscreen, 0
         bind = SUPER_CONTROL, F, fakefullscreen,
         bind = SUPER, F12, submap, system
         bind = SUPER, R, submap, resize

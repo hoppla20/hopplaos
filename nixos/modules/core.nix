@@ -42,6 +42,7 @@
       startup_message off
     '';
     dconf.enable = true;
+    nix-ld.enable = true;
   };
 
   users.defaultUserShell = pkgs.zsh;

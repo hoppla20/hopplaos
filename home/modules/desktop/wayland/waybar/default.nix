@@ -94,7 +94,7 @@ in {
           "network" = {
             tooltip = false;
             format = "{ifname} {ipaddr}/{cidr}";
-            format-wifi = "   {essid:5}";
+            format-wifi = "  {essid:5}";
             format-ethernet = "󰈀  {ipaddr}/{cidr}";
             format-disconnected = "";
             max-length = 50;
@@ -102,10 +102,12 @@ in {
           "backlight" = {
             tooltip = false;
             format = " {}%";
-            on-scroll-up = brightnessControlCommands.lower;
-            on-scroll-down = brightnessControlCommands.raise;
+            on-scroll-up = brightnessControlCommands.raise;
+            on-scroll-down = brightnessControlCommands.lower;
           };
           "battery" = {
+            interval = 10;
+
             states = {
               good = 75;
               warning = 20;
@@ -130,12 +132,12 @@ in {
           };
           "cpu" = {
             interval = 10;
-            format = "  {}%";
+            format = "  {usage}%";
             max-length = 10;
           };
           "memory" = {
             interval = 10;
-            format = "  {}%";
+            format = "  {percentage}% {swapPercentage}%";
             max-length = 10;
           };
           "idle_inhibitor" = {
@@ -144,6 +146,7 @@ in {
               deactivated = "󱠛";
               activated = "󱤱";
             };
+            tooltip = false;
           };
         };
       };

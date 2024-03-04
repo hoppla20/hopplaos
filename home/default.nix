@@ -36,28 +36,6 @@
 in {
   flake = {
     inherit homeModules;
-    homeConfigurations =
-      genHomeConfigs
-      // {
-        nix-on-droid = {
-          imports =
-            [
-              users.vincentcui-nogui
-              {
-                home = {
-                  username = "nix-on-droid";
-                  homeDirectory = "/data/data/com.termux.nix/files/home";
-                };
-
-                hopplaos.programs.gpg.enable = lib.mkForce false;
-                hopplaos.programs.emacs.enable = lib.mkForce false;
-
-                services.emacs.enable = lib.mkForce false;
-              }
-            ]
-            ++ builtins.attrValues homeModules
-            ++ extraModules;
-        };
-      };
+    homeConfigurations = genHomeConfigs;
   };
 }

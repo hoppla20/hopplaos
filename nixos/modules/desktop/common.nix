@@ -22,14 +22,22 @@ in {
           (pkgs)
           trashy
           ;
+
+        inherit
+          (pkgs.gnomeExtensions)
+          appindicator
+          ;
       };
 
-      programs.light.enable = true;
+      programs = {
+        light.enable = true;
+        system-config-printer.enable = true;
+      };
 
       services = {
         printing = {
           enable = true;
-          drivers = [pkgs.gutenprint pkgs.canon-cups-ufr2];
+          drivers = [pkgs.gutenprint pkgs.canon-cups-ufr2 pkgs.hplipWithPlugin];
         };
 
         blueman.enable = config.hopplaos.hardware.bluetooth;
@@ -50,6 +58,8 @@ in {
           excludePackages = [pkgs.xterm];
         };
         gnome.at-spi2-core.enable = true;
+
+        udev.packages = with pkgs; [gnome.gnome-settings-daemon];
       };
 
       security.rtkit.enable = true;

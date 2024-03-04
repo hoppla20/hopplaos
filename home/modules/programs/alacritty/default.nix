@@ -53,7 +53,7 @@ in {
         ];
 
         font = let
-          family = "JetBrainsMono Nerd Font";
+          family = "JetBrainsMono Nerd Font Mono";
         in {
           size = 10;
           normal = {

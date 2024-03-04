@@ -12,7 +12,7 @@
 
       # alacritty.enable = true;
       kitty.enable = true;
-      logseq.enable = true;
+      notetaking.enable = true;
     };
 
     services = {

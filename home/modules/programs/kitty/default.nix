@@ -5,7 +5,7 @@
   inputs,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf mkMerge;
+  inherit (lib) mkEnableOption mkIf mkMerge concatStringsSep;
 
   cfg = config.hopplaos.programs.kitty;
 in {
@@ -21,24 +21,63 @@ in {
     programs.kitty = {
       enable = true;
       font = {
-        name = "MesloLGS Nerd Font";
+        name = "JetBrainsMono Nerd Font Mono";
         size = 12;
       };
+      extraConfig = let
+        features = "+ss02 +ss19 +cv14";
+      in ''
+        font_features JetBrainsMonoNFM-Regular ${features}
+        font_features JetBrainsMonoNFM-Italic ${features}
+
+        font_features JetBrainsMonoNFM-Thin ${features}
+        font_features JetBrainsMonoNFM-ThinItalic ${features}
+
+        font_features JetBrainsMonoNFM-Light ${features}
+        font_features JetBrainsMonoNFM-LightItalic ${features}
+        font_features JetBrainsMonoNFM-ExtraLight ${features}
+        font_features JetBrainsMonoNFM-ExtraLightItalic ${features}
+
+        font_features JetBrainsMonoNFM-Medium ${features}
+        font_features JetBrainsMonoNFM-MediumItalic ${features}
+
+        font_features JetBrainsMonoNFM-Bold ${features}
+        font_features JetBrainsMonoNFM-BoldItalic ${features}
+        font_features JetBrainsMonoNFM-ExtraBold ${features}
+        font_features JetBrainsMonoNFM-ExtraBoldItalic ${features}
+
+        font_features JetBrainsMonoNFM-SemiBold ${features}
+        font_features JetBrainsMonoNFM-SemiBoldItalic ${features}
+      '';
       settings = {
+        text_composition_strategy = "2.7 0";
+
         allow_remote_control = true;
         listen_on = "unix:/tmp/kitty";
 
         text_composition_strategy = "1.7 0";
 
         window_padding_width = 5;
-        disable_ligatures = "always";
+        disable_ligatures = "cursor";
 
         tab_bar_min_tabs = 1;
         tab_bar_style = "powerline";
         tab_powerline_style = "slanted";
-        tab_title_template = "{title}{' [{}]'.format(num_windows) if num_windows > 1 else ''}";
+        tab_title_template = "{index}: {tab.active_wd}{' [{}]'.format(num_windows) if num_windows > 1 else ''}";
 
-        enabled_layouts = "fat:bias=70,tall:bias=70,splits:split_axis=vertical,stack";
+        enabled_layouts = let
+          default_bias = 70;
+          layouts = [
+            "fat:mirrored=false;bias=${toString default_bias}"
+            "fat:mirrored=true;bias=${toString default_bias}"
+            "tall:mirrored=false;bias=${toString default_bias}"
+            "tall:mirrored=true;bias=${toString default_bias}"
+            "splits:split_axis=vertical"
+            "splits:split_axis=horizontal"
+            "stack"
+          ];
+        in
+          concatStringsSep "," layouts;
       };
       keybindings = {
         "alt+j" = "kitten pass_keys.py bottom alt+j";
@@ -52,23 +91,23 @@ in {
         "ctrl+shift+enter" = "new_window_with_cwd";
         "ctrl+shift+q" = "close_window";
         "ctrl+shift+w" = "close_tab";
-        "f2" = "detach_window ask";
-        "f3" = "detach_tab ask";
+        "ctrl+shift+f2" = "detach_window ask";
+        "ctrl+shift+f3" = "detach_tab ask";
         "ctrl+shift+f" = "toggle_layout stack";
         "ctrl+shift+." = "layout_action bias 62 70 85";
         "ctrl+shift+," = "layout_action bias 62";
         "ctrl+alt+v" = "launch --location=vsplit --cwd=current";
         "ctrl+alt+s" = "launch --location=hsplit --cwd=current";
+        "ctrl+alt+j" = "move_window down";
+        "ctrl+alt+k" = "move_window up";
+        "ctrl+alt+h" = "move_window left";
+        "ctrl+alt+l" = "move_window right";
         "ctrl+alt+n" = "move_window down";
         "ctrl+alt+e" = "move_window up";
         "ctrl+alt+p" = "move_window left";
         "ctrl+alt+a" = "move_window right";
-        "ctrl+shift+alt+n" = "layout_action move_to_screen_edge bottom";
-        "ctrl+shift+alt+e" = "layout_action move_to_screen_edge top";
-        "ctrl+shift+alt+p" = "layout_action move_to_screen_edge left";
-        "ctrl+shift+alt+a" = "layout_action move_to_screen_edge right";
         "ctrl+alt+r" = "layout_action rotate";
-        "ctrl+backspace" = "send_text all \\x17";
+        "ctrl+backspace" = "send_text all \\x17"; # ctrl+w
       };
       shellIntegration.mode = "enabled";
       theme = "Catppuccin-${
