@@ -30,6 +30,7 @@ in {
       pkgs.qt5.qtwayland
       pkgs.qt6.qtwayland
       pkgs.waypipe
+      pkgs.cage
     ];
 
     xdg.portal = {
