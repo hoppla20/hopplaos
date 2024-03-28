@@ -55,8 +55,6 @@ in {
         allow_remote_control = true;
         listen_on = "unix:/tmp/kitty";
 
-        text_composition_strategy = "1.7 0";
-
         window_padding_width = 5;
         disable_ligatures = "cursor";
 
@@ -94,8 +92,7 @@ in {
         "ctrl+shift+f2" = "detach_window ask";
         "ctrl+shift+f3" = "detach_tab ask";
         "ctrl+shift+f" = "toggle_layout stack";
-        "ctrl+shift+." = "layout_action bias 62 70 85";
-        "ctrl+shift+," = "layout_action bias 62";
+        "ctrl+alt+." = "layout_action bias 62 70 85";
         "ctrl+alt+v" = "launch --location=vsplit --cwd=current";
         "ctrl+alt+s" = "launch --location=hsplit --cwd=current";
         "ctrl+alt+j" = "move_window down";
