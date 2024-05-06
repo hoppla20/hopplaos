@@ -21,12 +21,9 @@ in {
 
       desktop = {
         enable = true;
-        thunar.enable = true;
-        wayland.hyprland.enable = true;
       };
 
       services = {
-        gnome-keyring.enable = true;
         openssh.enable = true;
       };
 

@@ -28,12 +28,6 @@ in {
           else "~/.config/wallpapers/wallpaper-light.jpg";
       };
 
-      polkitAgent = mkOption {
-        type = types.str;
-        readOnly = true;
-        default = "/run/current-system/sw/libexec/polkit-gnome-authentication-agent-1";
-      };
-
       systemCommands = {
         lock = mkOption {
           type = types.str;
@@ -56,9 +50,7 @@ in {
           default = "${pkgs.systemd}/bin/systemctl poweroff";
         };
       };
-      appLauncherCommand = mkOption {
-        type = types.str;
-      };
+
       terminalCommand = mkOption {
         type = types.str;
       };
@@ -70,23 +62,6 @@ in {
       editorCommand = mkOption {
         type = types.str;
         default = "${cfg.terminalCommand} -e nvim";
-      };
-      fileManagerCommand = mkOption {
-        type = types.str;
-        readOnly = true;
-        default = "thunar";
-      };
-      brightnessControlCommands = {
-        raise = mkOption {
-          type = types.str;
-          readOnly = true;
-          default = "light -A ${toString brightnessStep}";
-        };
-        lower = mkOption {
-          type = types.str;
-          readOnly = true;
-          default = "light -U ${toString brightnessStep}";
-        };
       };
     };
   };
@@ -104,7 +79,6 @@ in {
         inherit
           (pkgs)
           xdg-utils
-          glib
           brave
           firefox
           evince
@@ -112,12 +86,7 @@ in {
           remmina
           thunderbird
           ;
-        inherit
-          (pkgs-unstable)
-          anytype
-          ;
         inherit (pkgs.xorg) xhost;
-        inherit (pkgs.gnome) seahorse;
       };
 
       sessionVariables = {
@@ -143,6 +112,7 @@ in {
       enable = true;
       font = {
         name = "Ubuntu Nerd Font Propo";
+        size = 11;
         package = pkgs.custom-nerdfonts;
       };
       theme = {
@@ -185,9 +155,6 @@ in {
       mime.enable = true;
       configFile = {
         "wallpapers".source = ./wallpapers;
-        "gtk-4.0/assets".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/assets";
-        "gtk-4.0/gtk.css".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk.css";
-        "gtk-4.0/gtk-dark.css".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk-dark.css";
       };
     };
   };

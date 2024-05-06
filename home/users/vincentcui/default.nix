@@ -3,14 +3,11 @@
 
   hopplaos = {
     programs = {
-      vscode.enable = true;
       keepassxc.enable = true;
       office.enable = true;
       messangers.enable = true;
       anki.enable = true;
       nixvim-desktop.enable = true;
-
-      # alacritty.enable = true;
       kitty.enable = true;
       notetaking.enable = true;
     };
@@ -22,9 +19,7 @@
 
     desktop = {
       enable = true;
-      wayland.hyprland.enable = true;
-      audio.enable = true;
-      rofi.enable = true;
+      music.enable = true;
       development.enable = true;
       image-editing.enable = true;
     };
