@@ -21,6 +21,8 @@ in {
 
       desktop = {
         enable = true;
+        # cosmic.enable = true;
+        gnome.enable = true;
       };
 
       services = {

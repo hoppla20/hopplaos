@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-unstable,
   config,
   lib,
   inputs,
@@ -20,48 +19,8 @@ in {
         // {
           default = true;
         };
-      defaultWallpaper = mkOption {
-        type = types.str;
-        default =
-          if cfg.darkTheme
-          then "~/.config/wallpapers/wallpaper-dark.jpg"
-          else "~/.config/wallpapers/wallpaper-light.jpg";
-      };
-
-      systemCommands = {
-        lock = mkOption {
-          type = types.str;
-          default = "${pkgs.systemd}/bin/loginctl lock-session";
-        };
-        suspend = mkOption {
-          type = types.str;
-          default = "${pkgs.systemd}/bin/systemctl suspend";
-        };
-        hibernate = mkOption {
-          type = types.str;
-          default = "${pkgs.systemd}/bin/systemctl hibernate";
-        };
-        reboot = mkOption {
-          type = types.str;
-          default = "${pkgs.systemd}/bin/systemctl reboot";
-        };
-        poweroff = mkOption {
-          type = types.str;
-          default = "${pkgs.systemd}/bin/systemctl poweroff";
-        };
-      };
-
       terminalCommand = mkOption {
         type = types.str;
-      };
-      browserCommand = mkOption {
-        type = types.str;
-        readOnly = true;
-        default = "${pkgs.brave}/bin/brave --ozone-platform-hint=wayland --enable-webrtc-pipewire-capturer --enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder";
-      };
-      editorCommand = mkOption {
-        type = types.str;
-        default = "${cfg.terminalCommand} -e nvim";
       };
     };
   };
@@ -141,9 +100,21 @@ in {
       };
     };
 
+    dconf.settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme =
+          if cfg.darkTheme
+          then "prefer-dark"
+          else "default";
+      };
+    };
+
     qt = {
       enable = true;
-      platformTheme = "gtk3";
+      platformTheme.name =
+        if cfg.gnome
+        then "gnome"
+        else "gtk3";
     };
 
     services.gnome-keyring = {
@@ -151,11 +122,13 @@ in {
       components = ["pkcs11" "secrets" "ssh"];
     };
 
-    xdg = {
-      mime.enable = true;
-      configFile = {
-        "wallpapers".source = ./wallpapers;
-      };
+    xdg.configFile = let
+      gtk4Dir = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0";
+    in {
+      "wallpapers".source = ./wallpapers;
+      "gtk-4.0/assets".source = "${gtk4Dir}/assets";
+      "gtk-4.0/gtk.css".source = "${gtk4Dir}/gtk.css";
+      "gtk-4.0/gtk-dark.css".source = "${gtk4Dir}/gtk-dark.css";
     };
   };
 }

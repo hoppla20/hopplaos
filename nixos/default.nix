@@ -13,7 +13,6 @@ in {
         config,
         self',
         inputs',
-        pkgs-unstable,
         system,
         ...
       }: let
@@ -21,7 +20,7 @@ in {
           inputs.nixpkgs.lib.nixosSystem {
             inherit system;
             specialArgs = {
-              inherit inputs inputs' self self' pkgs-unstable;
+              inherit inputs inputs' self self';
             };
             modules =
               builtins.attrValues nixosModules
@@ -30,7 +29,7 @@ in {
                 inputs.nixos-generators.nixosModules.all-formats
                 inputs.home-manager.nixosModules.default
                 inputs.disko.nixosModules.default
-                inputs.hyprland.nixosModules.default
+                inputs.nixos-cosmic.nixosModules.default
                 dir
               ]
               ++ import (dir + "/hardware-modules.nix") {inherit inputs;};

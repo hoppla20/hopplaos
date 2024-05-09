@@ -6,29 +6,17 @@
 }: let
   inherit (lib) mkEnableOption mkMerge mkIf;
 
-  cfg = config.hopplaos.desktop;
+  cfg = config.hopplaos.desktop.gnome;
 in {
   options = {
-    hopplaos.desktop = {
-      enable = mkEnableOption "HopplaOS Desktop";
+    hopplaos.desktop.gnome = {
+      enable = mkEnableOption "Gnome DE";
     };
   };
 
   config = mkIf cfg.enable {
     hardware.pulseaudio.enable = false;
     services = {
-      printing = {
-        enable = true;
-        drivers = [pkgs.gutenprint pkgs.canon-cups-ufr2 pkgs.hplipWithPlugin];
-      };
-
-      pipewire = {
-        enable = true;
-        alsa.enable = true;
-        pulse.enable = true;
-        wireplumber.enable = true;
-      };
-
       xserver = {
         enable = true;
         displayManager.gdm = {
@@ -36,21 +24,41 @@ in {
           autoSuspend = false;
         };
         desktopManager.gnome.enable = true;
-        excludePackages = [pkgs.xterm];
       };
     };
-    security.rtkit.enable = true;
 
-    environment.systemPackages = builtins.attrValues {
-      inherit
-        (pkgs)
-        wl-clipboard
-        ;
+    environment = {
+      gnome.excludePackages = builtins.attrValues {
+        inherit
+          (pkgs)
+          gedit
+          gnome-tour
+          gnome-console
+          snapshot # camera
+          ;
 
-      inherit
-        (pkgs.gnome)
-        gnome-tweaks
-        ;
+        inherit
+          (pkgs.gnome)
+          cheese # camera
+          gnome-music
+          epiphany # web browser
+          geary # email
+          gnome-characters
+          tali # game
+          iagno # game
+          hitori # game
+          gnome-contacts
+          gnome-initial-setup
+          gnome-terminal
+          ;
+      };
+
+      systemPackages = builtins.attrValues {
+        inherit
+          (pkgs.gnome)
+          gnome-tweaks
+          ;
+      };
     };
   };
 }

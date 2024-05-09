@@ -1,5 +1,5 @@
 {
-  pkgs-unstable,
+  pkgs,
   config,
   lib,
   ...
@@ -16,7 +16,7 @@ in {
   config = lib.mkIf (desktopCfg.enable && cfg.enable) {
     home.packages = builtins.attrValues {
       inherit
-        (pkgs-unstable)
+        (pkgs)
         powershell
         insomnia
         yaml-language-server

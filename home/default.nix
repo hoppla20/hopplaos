@@ -12,7 +12,6 @@
   homeModules = exportModulesRecursive ./modules;
   extraModules = [
     inputs.nix-index-db.hmModules.nix-index
-    inputs.hyprland.homeManagerModules.default
     inputs.base16.homeManagerModule
     inputs.spicetify-nix.homeManagerModules.default
   ];

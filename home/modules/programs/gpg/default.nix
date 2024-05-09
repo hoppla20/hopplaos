@@ -23,7 +23,7 @@ in {
         enable = true;
         enableSshSupport = true;
         enableScDaemon = true;
-        pinentryFlavor = "gtk2";
+        pinentryPackage = pkgs.pinentry-gnome3;
       };
     })
   ]);

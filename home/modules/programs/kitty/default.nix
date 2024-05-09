@@ -1,5 +1,5 @@
 {
-  pkgs-unstable,
+  pkgs,
   config,
   lib,
   inputs,

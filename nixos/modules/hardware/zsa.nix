@@ -1,5 +1,5 @@
 {
-  pkgs-unstable,
+  pkgs,
   config,
   lib,
   ...
@@ -16,8 +16,8 @@ in {
     hardware.keyboard.zsa.enable = true;
 
     environment.systemPackages = [
-      pkgs-unstable.wally-cli
-      pkgs-unstable.keymapp
+      pkgs.wally-cli
+      pkgs.keymapp
     ];
   };
 }

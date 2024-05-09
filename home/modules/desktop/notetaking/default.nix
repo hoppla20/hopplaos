@@ -1,6 +1,6 @@
 {
   self',
-  pkgs-unstable,
+  pkgs,
   config,
   lib,
   inputs,
@@ -10,7 +10,7 @@
 
   cfg = config.hopplaos.programs.notetaking;
 
-  logseqPkg = pkgs-unstable.logseq;
+  logseqPkg = pkgs.logseq;
 in {
   options.hopplaos.programs.notetaking = {
     enable = mkEnableOption "Note Taking";
@@ -19,9 +19,9 @@ in {
   config = mkIf (config.hopplaos.desktop.enable && cfg.enable) {
     home.packages = [
       logseqPkg
-      self'.packages.obsidianWaylandFix
-      pkgs-unstable.zotero_7
-      pkgs-unstable.todoist-electron
+      pkgs.obsidian
+      pkgs.zotero_7
+      pkgs.todoist-electron
     ];
 
     xdg.dataFile."applications/logseq-wayland.desktop".text = ''

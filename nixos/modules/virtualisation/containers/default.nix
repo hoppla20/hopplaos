@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-unstable,
   config,
   lib,
   ...
@@ -24,21 +23,18 @@ in {
     virtualisation = {
       docker = {
         enable = true;
-        package = pkgs-unstable.docker;
         rootless = {
           enable = true;
-          package = pkgs-unstable.docker;
         };
       };
       podman = {
         enable = true;
-        package = pkgs-unstable.podman;
       };
     };
 
     environment.systemPackages = builtins.attrValues {
       inherit
-        (pkgs-unstable)
+        (pkgs)
         skopeo
         docker-compose
         podman-compose

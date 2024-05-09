@@ -1,5 +1,5 @@
 {
-  pkgs-unstable,
+  pkgs,
   config,
   lib,
   ...
@@ -13,7 +13,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = builtins.attrValues {
       inherit
-        (pkgs-unstable)
+        (pkgs)
         kubectl
         kubernetes-helm
         kubeswitch
