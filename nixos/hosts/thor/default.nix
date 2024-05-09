@@ -15,6 +15,7 @@
       enable = true;
       interface = "enp4s0";
     };
+    services.cache.serve = true;
   };
 
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "sd_mod"];
