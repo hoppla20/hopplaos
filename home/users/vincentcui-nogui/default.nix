@@ -25,6 +25,7 @@
 
     profiles = {
       server-management.enable = true;
+      turing-pi.enable = true;
     };
   };
 }
