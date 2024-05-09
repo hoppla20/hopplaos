@@ -62,9 +62,61 @@ in {
         show-workspace-indicator = false;
         show-window-position-bar = false;
       };
+      "org/gnome/settings-daemon/plugins/media-keys" = {
+        screensaver = ["<Super>F12"];
+      };
+      "org/gnome/desktop/wm/keybindings" = {
+        maximize = [];
+        minimize = [];
+        move-to-monitor-down = [];
+        move-to-monitor-left = [];
+        move-to-monitor-right = [];
+        move-to-monitor-up = [];
+        move-to-workspace-down = [];
+        move-to-workspace-left = [];
+        move-to-workspace-right = [];
+        move-to-workspace-up = [];
+        switch-applications = [];
+        switch-applications-backward = [];
+        switch-group = [];
+        switch-group-backward = [];
+        switch-panels = [];
+        switch-panels-backward = [];
+        switch-to-workspace-1 = [];
+        switch-to-workspace-last = [];
+        switch-to-workspace-left = [];
+        switch-to-workspace-right = [];
+        unmaximize = [];
+      };
       "org/gnome/shell/extensions/paperwm/keybindings" = {
-        new-window = [""];
         close-window = ["<Super>q"];
+        move-down = ["<Shift><Super>Down" "<Shift><Super>j"];
+        move-left = ["<Control><Super>comma" "<Shift><Super>comma" "<Shift><Super>Left" "<Shift><Super>h"];
+        move-monitor-above = ["<Shift><Control><Super>Up" "<Shift><Control><Super>k"];
+        move-monitor-below = ["<Shift><Control><Super>Down" "<Shift><Control><Super>j"];
+        move-monitor-left = ["<Shift><Control><Super>Left" "<Shift><Control><Super>h"];
+        move-monitor-right = ["<Shift><Control><Super>Right" "<Shift><Control><Super>l"];
+        move-right = ["<Control><Super>period" "<Shift><Super>period" "<Shift><Super>Right" "<Shift><Super>l"];
+        move-space-monitor-above = ["<Shift><Control><Alt>Up" "<Shift><Control><Alt>k"];
+        move-space-monitor-below = ["<Shift><Control><Alt>Down" "<Shift><Control><Alt>j"];
+        move-space-monitor-left = ["<Shift><Control><Alt>Left" "<Shift><Control><Alt>h"];
+        move-space-monitor-right = ["<Shift><Control><Alt>Right" "<Shift><Control><Alt>l"];
+        move-up = ["<Shift><Super>Up" "<Shift><Super>k"];
+        new-window = [""];
+        switch-down = ["<Super>Down" "<Super>j"];
+        switch-left = ["<Super>Left" "<Super>h"];
+        switch-monitor-above = ["<Control><Super>Up" "<Control><Super>k"];
+        switch-monitor-below = ["<Control><Super>Down" "<Control><Super>j"];
+        switch-monitor-left = ["<Control><Super>Left" "<Control><Super>h"];
+        switch-monitor-right = ["<Control><Super>Right" "<Control><Super>l"];
+        switch-right = ["<Super>Right" "<Super>l"];
+        switch-up = ["<Super>Up" "<Super>k"];
+      };
+
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+        binding = "<Super>Return";
+        command = cfg.terminalCommand;
+        name = "terminal";
       };
     };
   };
