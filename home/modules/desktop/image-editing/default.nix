@@ -20,6 +20,6 @@ in {
   };
 
   config = mkIf (desktopCfg.enable && cfg.enable) {
-    home.packages = [pkgs.gimp];
+    home.packages = [pkgs.gimp pkgs.darktable];
   };
 }
