@@ -18,8 +18,23 @@
   };
 
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "sd_mod"];
+  boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
 
-  networking.interfaces.enp4s0.useDHCP = true;
+  networking = {
+    useDHCP = false;
+    bridges = {
+      "vmbr0" = {
+        interfaces = ["enp4s0"];
+      };
+    };
+    interfaces = {
+      enp4s0 = {
+        useDHCP = false;
+        proxyARP = true;
+      };
+      vmbr0.useDHCP = true;
+    };
+  };
 
   fileSystems."/var/lib/libvirt/images" = {
     device = "/storage/libvirt/images";
