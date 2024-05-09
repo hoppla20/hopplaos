@@ -59,6 +59,7 @@ in {
         disable_ligatures = "cursor";
 
         tab_bar_min_tabs = 1;
+        tab_bar_edge = "top";
         tab_bar_style = "powerline";
         tab_powerline_style = "slanted";
         tab_title_template = "{index}: {tab.active_wd}{' [{}]'.format(num_windows) if num_windows > 1 else ''}";
@@ -92,8 +93,7 @@ in {
         "ctrl+shift+f2" = "detach_window ask";
         "ctrl+shift+f3" = "detach_tab ask";
         "ctrl+shift+f" = "toggle_layout stack";
-        "ctrl+shift+." = "layout_action bias 62 70 85";
-        "ctrl+shift+," = "layout_action bias 62";
+        "ctrl+alt+." = "layout_action bias 62 70 85";
         "ctrl+alt+v" = "launch --location=vsplit --cwd=current";
         "ctrl+alt+s" = "launch --location=hsplit --cwd=current";
         "ctrl+alt+j" = "move_window down";

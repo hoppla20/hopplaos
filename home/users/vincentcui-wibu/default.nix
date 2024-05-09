@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [../vincentcui];
 
   hopplaos = {
@@ -9,5 +13,12 @@
         userEmail = lib.mkForce "vincent.cui@wibu.com";
       };
     };
+  };
+
+  home.packages = builtins.attrValues {
+    inherit
+      (pkgs)
+      mattermost-desktop
+      ;
   };
 }

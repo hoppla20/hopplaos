@@ -20,9 +20,10 @@ in {
       after = ["backup.mount"];
       requires = ["backup.mount"];
       wantedBy = ["multi-user.target"];
+      path = [pkgs.rsync];
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${pkgs.lsyncd}/bin/lsyncd -rsync /home/vincentcui/Workspace/ /backup/Workspace/";
+        ExecStart = "${pkgs.lsyncd}/bin/lsyncd -nodaemon --pidfile /run/lsyncd.pid -rsync /home/vincentcui/Workspace/ /backup/Workspace/";
       };
     };
   };
