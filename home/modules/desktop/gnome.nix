@@ -20,7 +20,6 @@ in {
         (pkgs.gnomeExtensions)
         dash-to-dock
         paperwm
-        tray-icons-reloaded
         ;
     };
 
@@ -31,7 +30,6 @@ in {
         enabled-extensions = [
           "dash-to-dock@micxgx.gmail.com"
           "paperwm@paperwm.github.com"
-          "trayIconsReloaded@selfmade.pl"
         ];
       };
       "org/gnome/desktop/interface" = {
@@ -65,6 +63,9 @@ in {
       "org/gnome/settings-daemon/plugins/media-keys" = {
         screensaver = ["<Super>F12"];
       };
+      "org/gnome/shell/extensions/dash-to-dock" = {
+        hot-keys = false;
+      };
       "org/gnome/desktop/wm/keybindings" = {
         maximize = [];
         minimize = [];
@@ -96,7 +97,7 @@ in {
         switch-to-workspace-4 = ["<Super>4"];
       };
       "org/gnome/shell/extensions/paperwm/keybindings" = {
-        close-window = ["<Super>q"];
+        close-window = ["<Super><Shift>q"];
         move-down = ["<Shift><Super>Down" "<Shift><Super>j"];
         move-left = ["<Control><Super>comma" "<Shift><Super>comma" "<Shift><Super>Left" "<Shift><Super>h"];
         move-monitor-above = ["<Shift><Control><Super>Up" "<Shift><Control><Super>k"];
