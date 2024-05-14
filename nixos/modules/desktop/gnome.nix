@@ -55,6 +55,11 @@ in {
 
       systemPackages = builtins.attrValues {
         inherit
+          (pkgs)
+          gparted
+          ;
+
+        inherit
           (pkgs.gnome)
           gnome-tweaks
           ;
