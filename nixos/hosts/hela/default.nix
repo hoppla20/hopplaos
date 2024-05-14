@@ -47,6 +47,11 @@
       fsType = "ntfs";
       options = ["defaults" "nofail"];
     };
+    "/storage" = {
+      label = "data";
+      fsType = "ext4";
+      options = ["defaults" "nofail"];
+    };
   };
 
   swapDevices = [{label = "swap";}];
