@@ -65,6 +65,13 @@ in {
       };
       "org/gnome/shell/extensions/dash-to-dock" = {
         hot-keys = false;
+        intellihide-mode = "ALL_WINDOWS";
+      };
+      "org/gnome/shell/keybindings" = {
+        switch-to-application-1 = [];
+        switch-to-application-2 = [];
+        switch-to-application-3 = [];
+        switch-to-application-4 = [];
       };
       "org/gnome/desktop/wm/keybindings" = {
         maximize = [];
@@ -119,12 +126,6 @@ in {
         switch-monitor-right = ["<Control><Super>Right" "<Control><Super>l"];
         switch-right = ["<Super>Right" "<Super>l"];
         switch-up = ["<Super>Up" "<Super>k"];
-      };
-
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-        binding = "<Super>Return";
-        command = cfg.terminalCommand;
-        name = "terminal";
       };
     };
   };
