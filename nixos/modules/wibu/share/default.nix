@@ -18,7 +18,7 @@ in {
       enable = mkEnableOption "AutoFS";
       host = mkOption {
         type = types.str;
-        default = "srv-ka-file";
+        default = "srv-ka-file01";
       };
     };
   };
@@ -35,7 +35,7 @@ in {
           # $Id$
           # This file must be executable to work! chmod 755!
           key="$1"
-          valid_keys=("srv-ka-file")
+          valid_keys=("${cfg.host}")
           if [[ ! " ''${valid_keys[*]} " =~ " $key " ]]; then
             exit 0
           fi
@@ -48,7 +48,7 @@ in {
           #       Please don't use blank spaces to separate the equal sign from the
           #       user account name or password.
           creds=${shareCredentialsFile}
-          mountopts="-fstype=cifs,persistenthandles,handletimeout=10,file_mode=0644,dir_mode=0755,uid=${toString ownerUid},gid=${toString groupUid}"
+          mountopts="-fstype=cifs,file_mode=0644,dir_mode=0755,uid=${toString ownerUid},gid=${toString groupUid}"
           if [ -f "$creds" ]; then
               opts="$mountopts,credentials=$creds"
               smbopts="-A $creds"
