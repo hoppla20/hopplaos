@@ -20,6 +20,7 @@ in {
         (pkgs.gnomeExtensions)
         dash-to-dock
         paperwm
+        caffeine
         ;
     };
 
@@ -30,6 +31,7 @@ in {
         enabled-extensions = [
           "dash-to-dock@micxgx.gmail.com"
           "paperwm@paperwm.github.com"
+          "caffeine@patapon.info"
         ];
       };
       "org/gnome/desktop/interface" = {
