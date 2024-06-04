@@ -129,6 +129,11 @@ in {
         switch-right = ["<Super>Right" "<Super>l"];
         switch-up = ["<Super>Up" "<Super>k"];
       };
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+        binding = "<Super>Return";
+        command = cfg.terminalCommand;
+        name = "terminal";
+      };
     };
   };
 }
